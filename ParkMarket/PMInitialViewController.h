@@ -1,0 +1,36 @@
+//
+//  PMInitialViewController.h
+//  ParkMarket
+//
+//  Created by Ariel Scott-Dicker on 5/24/16.
+//  Copyright © 2016 Ariel Scott-Dicker. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import "PMMapViewController.h"
+
+@class PMInitialViewController;
+
+@protocol PMInitialViewControllerDelegate <NSObject>
+
+@required
+
+-(void)PMInitialViewController:(PMInitialViewController *)PMInitialViewController
+     didReceiveCurrentLocation:(CLLocation *)currentLocation;
+
+@end
+
+@interface PMInitialViewController : UIViewController <CLLocationManagerDelegate>
+
+@property (weak, nonatomic) id <PMInitialViewControllerDelegate> delegate;
+
+@property (strong, nonatomic) UIButton *postButton;
+@property (strong, nonatomic) UIButton *parkButton;
+
+-(void)configurePostButton;
+-(void)configureParkButton;
+
+-(void)postButtonTapped;
+
+@end

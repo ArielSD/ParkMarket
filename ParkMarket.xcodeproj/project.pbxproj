@@ -1,0 +1,612 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		53DFDF1762652542AC7474A2 /* libPods-ParkMarket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34B90F8E429F882B24E728DD /* libPods-ParkMarket.a */; };
+		B05AECAB1CF4AB4200A5660A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECAA1CF4AB4200A5660A /* main.m */; };
+		B05AECAE1CF4AB4200A5660A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECAD1CF4AB4200A5660A /* AppDelegate.m */; };
+		B05AECB41CF4AB4200A5660A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B05AECB21CF4AB4200A5660A /* Main.storyboard */; };
+		B05AECB61CF4AB4300A5660A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B05AECB51CF4AB4300A5660A /* Assets.xcassets */; };
+		B05AECB91CF4AB4300A5660A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B05AECB71CF4AB4300A5660A /* LaunchScreen.storyboard */; };
+		B05AECC41CF4AB4300A5660A /* ParkMarketTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECC31CF4AB4300A5660A /* ParkMarketTests.m */; };
+		B05AECCF1CF4AB4300A5660A /* ParkMarketUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECCE1CF4AB4300A5660A /* ParkMarketUITests.m */; };
+		B09ED25A1CF507A70054D0FC /* PMInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09ED2591CF507A70054D0FC /* PMInitialViewController.m */; };
+		B09ED25D1CF612180054D0FC /* PMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09ED25C1CF612180054D0FC /* PMMapViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B05AECC01CF4AB4300A5660A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B05AEC9E1CF4AB4200A5660A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B05AECA51CF4AB4200A5660A;
+			remoteInfo = ParkMarket;
+		};
+		B05AECCB1CF4AB4300A5660A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B05AEC9E1CF4AB4200A5660A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B05AECA51CF4AB4200A5660A;
+			remoteInfo = ParkMarket;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		34B90F8E429F882B24E728DD /* libPods-ParkMarket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ParkMarket.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B2B4B26D070EFEF83541101 /* Pods-ParkMarket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarket.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket.debug.xcconfig"; sourceTree = "<group>"; };
+		B05AECA61CF4AB4200A5660A /* ParkMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParkMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B05AECAA1CF4AB4200A5660A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B05AECAC1CF4AB4200A5660A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B05AECAD1CF4AB4200A5660A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B05AECB31CF4AB4200A5660A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B05AECB51CF4AB4300A5660A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B05AECB81CF4AB4300A5660A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B05AECBA1CF4AB4300A5660A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B05AECBF1CF4AB4300A5660A /* ParkMarketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParkMarketTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B05AECC31CF4AB4300A5660A /* ParkMarketTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParkMarketTests.m; sourceTree = "<group>"; };
+		B05AECC51CF4AB4300A5660A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B05AECCA1CF4AB4300A5660A /* ParkMarketUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParkMarketUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B05AECCE1CF4AB4300A5660A /* ParkMarketUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParkMarketUITests.m; sourceTree = "<group>"; };
+		B05AECD01CF4AB4300A5660A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B09ED2581CF507A70054D0FC /* PMInitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMInitialViewController.h; sourceTree = "<group>"; };
+		B09ED2591CF507A70054D0FC /* PMInitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMInitialViewController.m; sourceTree = "<group>"; };
+		B09ED25B1CF612180054D0FC /* PMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMMapViewController.h; sourceTree = "<group>"; };
+		B09ED25C1CF612180054D0FC /* PMMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMMapViewController.m; sourceTree = "<group>"; };
+		F07AA50B8F5A1E3305FA77B7 /* Pods-ParkMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarket.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B05AECA31CF4AB4200A5660A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53DFDF1762652542AC7474A2 /* libPods-ParkMarket.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B05AECBC1CF4AB4300A5660A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B05AECC71CF4AB4300A5660A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		53C3584C5CB58A1F73CAFC93 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				34B90F8E429F882B24E728DD /* libPods-ParkMarket.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B05AEC9D1CF4AB4200A5660A = {
+			isa = PBXGroup;
+			children = (
+				B05AECA81CF4AB4200A5660A /* ParkMarket */,
+				B05AECC21CF4AB4300A5660A /* ParkMarketTests */,
+				B05AECCD1CF4AB4300A5660A /* ParkMarketUITests */,
+				B05AECA71CF4AB4200A5660A /* Products */,
+				F697AC925DD4D681C646122C /* Pods */,
+				53C3584C5CB58A1F73CAFC93 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B05AECA71CF4AB4200A5660A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B05AECA61CF4AB4200A5660A /* ParkMarket.app */,
+				B05AECBF1CF4AB4300A5660A /* ParkMarketTests.xctest */,
+				B05AECCA1CF4AB4300A5660A /* ParkMarketUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B05AECA81CF4AB4200A5660A /* ParkMarket */ = {
+			isa = PBXGroup;
+			children = (
+				B05AECAC1CF4AB4200A5660A /* AppDelegate.h */,
+				B05AECAD1CF4AB4200A5660A /* AppDelegate.m */,
+				B09ED2581CF507A70054D0FC /* PMInitialViewController.h */,
+				B09ED2591CF507A70054D0FC /* PMInitialViewController.m */,
+				B09ED25B1CF612180054D0FC /* PMMapViewController.h */,
+				B09ED25C1CF612180054D0FC /* PMMapViewController.m */,
+				B05AECB21CF4AB4200A5660A /* Main.storyboard */,
+				B05AECB51CF4AB4300A5660A /* Assets.xcassets */,
+				B05AECB71CF4AB4300A5660A /* LaunchScreen.storyboard */,
+				B05AECBA1CF4AB4300A5660A /* Info.plist */,
+				B05AECA91CF4AB4200A5660A /* Supporting Files */,
+			);
+			path = ParkMarket;
+			sourceTree = "<group>";
+		};
+		B05AECA91CF4AB4200A5660A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B05AECAA1CF4AB4200A5660A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B05AECC21CF4AB4300A5660A /* ParkMarketTests */ = {
+			isa = PBXGroup;
+			children = (
+				B05AECC31CF4AB4300A5660A /* ParkMarketTests.m */,
+				B05AECC51CF4AB4300A5660A /* Info.plist */,
+			);
+			path = ParkMarketTests;
+			sourceTree = "<group>";
+		};
+		B05AECCD1CF4AB4300A5660A /* ParkMarketUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B05AECCE1CF4AB4300A5660A /* ParkMarketUITests.m */,
+				B05AECD01CF4AB4300A5660A /* Info.plist */,
+			);
+			path = ParkMarketUITests;
+			sourceTree = "<group>";
+		};
+		F697AC925DD4D681C646122C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9B2B4B26D070EFEF83541101 /* Pods-ParkMarket.debug.xcconfig */,
+				F07AA50B8F5A1E3305FA77B7 /* Pods-ParkMarket.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B05AECA51CF4AB4200A5660A /* ParkMarket */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B05AECD31CF4AB4300A5660A /* Build configuration list for PBXNativeTarget "ParkMarket" */;
+			buildPhases = (
+				6525A03A899B7DF8BA33ECAF /* Check Pods Manifest.lock */,
+				B05AECA21CF4AB4200A5660A /* Sources */,
+				B05AECA31CF4AB4200A5660A /* Frameworks */,
+				B05AECA41CF4AB4200A5660A /* Resources */,
+				EAB532686FC9C2A00EF0CB09 /* Embed Pods Frameworks */,
+				0B08D74DF16C755CF48032D7 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ParkMarket;
+			productName = ParkMarket;
+			productReference = B05AECA61CF4AB4200A5660A /* ParkMarket.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B05AECBE1CF4AB4300A5660A /* ParkMarketTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B05AECD61CF4AB4300A5660A /* Build configuration list for PBXNativeTarget "ParkMarketTests" */;
+			buildPhases = (
+				B05AECBB1CF4AB4300A5660A /* Sources */,
+				B05AECBC1CF4AB4300A5660A /* Frameworks */,
+				B05AECBD1CF4AB4300A5660A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B05AECC11CF4AB4300A5660A /* PBXTargetDependency */,
+			);
+			name = ParkMarketTests;
+			productName = ParkMarketTests;
+			productReference = B05AECBF1CF4AB4300A5660A /* ParkMarketTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B05AECC91CF4AB4300A5660A /* ParkMarketUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B05AECD91CF4AB4300A5660A /* Build configuration list for PBXNativeTarget "ParkMarketUITests" */;
+			buildPhases = (
+				B05AECC61CF4AB4300A5660A /* Sources */,
+				B05AECC71CF4AB4300A5660A /* Frameworks */,
+				B05AECC81CF4AB4300A5660A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B05AECCC1CF4AB4300A5660A /* PBXTargetDependency */,
+			);
+			name = ParkMarketUITests;
+			productName = ParkMarketUITests;
+			productReference = B05AECCA1CF4AB4300A5660A /* ParkMarketUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B05AEC9E1CF4AB4200A5660A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Ariel Scott-Dicker";
+				TargetAttributes = {
+					B05AECA51CF4AB4200A5660A = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 7LA77DS2EA;
+					};
+					B05AECBE1CF4AB4300A5660A = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 7LA77DS2EA;
+						TestTargetID = B05AECA51CF4AB4200A5660A;
+					};
+					B05AECC91CF4AB4300A5660A = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 7LA77DS2EA;
+						TestTargetID = B05AECA51CF4AB4200A5660A;
+					};
+				};
+			};
+			buildConfigurationList = B05AECA11CF4AB4200A5660A /* Build configuration list for PBXProject "ParkMarket" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B05AEC9D1CF4AB4200A5660A;
+			productRefGroup = B05AECA71CF4AB4200A5660A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B05AECA51CF4AB4200A5660A /* ParkMarket */,
+				B05AECBE1CF4AB4300A5660A /* ParkMarketTests */,
+				B05AECC91CF4AB4300A5660A /* ParkMarketUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B05AECA41CF4AB4200A5660A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B05AECB91CF4AB4300A5660A /* LaunchScreen.storyboard in Resources */,
+				B05AECB61CF4AB4300A5660A /* Assets.xcassets in Resources */,
+				B05AECB41CF4AB4200A5660A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B05AECBD1CF4AB4300A5660A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B05AECC81CF4AB4300A5660A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0B08D74DF16C755CF48032D7 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6525A03A899B7DF8BA33ECAF /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EAB532686FC9C2A00EF0CB09 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B05AECA21CF4AB4200A5660A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B05AECAE1CF4AB4200A5660A /* AppDelegate.m in Sources */,
+				B09ED25A1CF507A70054D0FC /* PMInitialViewController.m in Sources */,
+				B09ED25D1CF612180054D0FC /* PMMapViewController.m in Sources */,
+				B05AECAB1CF4AB4200A5660A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B05AECBB1CF4AB4300A5660A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B05AECC41CF4AB4300A5660A /* ParkMarketTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B05AECC61CF4AB4300A5660A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B05AECCF1CF4AB4300A5660A /* ParkMarketUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B05AECC11CF4AB4300A5660A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B05AECA51CF4AB4200A5660A /* ParkMarket */;
+			targetProxy = B05AECC01CF4AB4300A5660A /* PBXContainerItemProxy */;
+		};
+		B05AECCC1CF4AB4300A5660A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B05AECA51CF4AB4200A5660A /* ParkMarket */;
+			targetProxy = B05AECCB1CF4AB4300A5660A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B05AECB21CF4AB4200A5660A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B05AECB31CF4AB4200A5660A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B05AECB71CF4AB4300A5660A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B05AECB81CF4AB4300A5660A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B05AECD11CF4AB4300A5660A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B05AECD21CF4AB4300A5660A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B05AECD41CF4AB4300A5660A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B2B4B26D070EFEF83541101 /* Pods-ParkMarket.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ParkMarket/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ParkMarket;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B05AECD51CF4AB4300A5660A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F07AA50B8F5A1E3305FA77B7 /* Pods-ParkMarket.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ParkMarket/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ParkMarket;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B05AECD71CF4AB4300A5660A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ParkMarketTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ParkMarketTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ParkMarket.app/ParkMarket";
+			};
+			name = Debug;
+		};
+		B05AECD81CF4AB4300A5660A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ParkMarketTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ParkMarketTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ParkMarket.app/ParkMarket";
+			};
+			name = Release;
+		};
+		B05AECDA1CF4AB4300A5660A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ParkMarketUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ParkMarketUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ParkMarket;
+			};
+			name = Debug;
+		};
+		B05AECDB1CF4AB4300A5660A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ParkMarketUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ParkMarketUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ParkMarket;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B05AECA11CF4AB4200A5660A /* Build configuration list for PBXProject "ParkMarket" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B05AECD11CF4AB4300A5660A /* Debug */,
+				B05AECD21CF4AB4300A5660A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B05AECD31CF4AB4300A5660A /* Build configuration list for PBXNativeTarget "ParkMarket" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B05AECD41CF4AB4300A5660A /* Debug */,
+				B05AECD51CF4AB4300A5660A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B05AECD61CF4AB4300A5660A /* Build configuration list for PBXNativeTarget "ParkMarketTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B05AECD71CF4AB4300A5660A /* Debug */,
+				B05AECD81CF4AB4300A5660A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B05AECD91CF4AB4300A5660A /* Build configuration list for PBXNativeTarget "ParkMarketUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B05AECDA1CF4AB4300A5660A /* Debug */,
+				B05AECDB1CF4AB4300A5660A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B05AEC9E1CF4AB4200A5660A /* Project object */;
+}
