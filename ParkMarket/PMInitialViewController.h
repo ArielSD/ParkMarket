@@ -8,16 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "PMMapViewController.h"
+#import "PMPostViewController.h"
 
 @interface PMInitialViewController : UIViewController
 
 @property (strong, nonatomic) UIButton *postButton;
 @property (strong, nonatomic) UIButton *parkButton;
-
--(void)configurePostButton;
--(void)configureParkButton;
-
--(void)postButtonTapped;
 
 @end

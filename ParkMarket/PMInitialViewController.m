@@ -68,7 +68,7 @@
 }
 
 -(void)postButtonTapped {
-    PMMapViewController *mapViewController = [PMMapViewController new];
+    PMPostViewController *mapViewController = [PMPostViewController new];
     [self.navigationController pushViewController:mapViewController
                                          animated:YES];
 }
