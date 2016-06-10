@@ -6,6 +6,8 @@ platform :ios, '8.0'
 target 'ParkMarket' do
 
 pod ‘GoogleMaps’
+pod 'Firebase'
+pod 'Firebase/Database'
 
 end
 

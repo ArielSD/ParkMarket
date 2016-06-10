@@ -10,20 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "PMMapViewController.h"
 
-@class PMInitialViewController;
-
-@protocol PMInitialViewControllerDelegate <NSObject>
-
-@required
-
--(void)PMInitialViewController:(PMInitialViewController *)PMInitialViewController
-     didReceiveCurrentLocation:(CLLocation *)currentLocation;
-
-@end
-
-@interface PMInitialViewController : UIViewController <CLLocationManagerDelegate>
-
-@property (weak, nonatomic) id <PMInitialViewControllerDelegate> delegate;
+@interface PMInitialViewController : UIViewController
 
 @property (strong, nonatomic) UIButton *postButton;
 @property (strong, nonatomic) UIButton *parkButton;

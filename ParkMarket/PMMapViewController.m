@@ -17,7 +17,6 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     [self configureLocationManager];
-    [self configureMapView];
 }
 
 -(void)didReceiveMemoryWarning {
@@ -29,13 +28,9 @@
 #pragma mark - UI Layout
 
 -(void)configureMapView {
-    
-    NSLog(@"Configure Map View Called");
-    
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.currentLocation.coordinate.latitude
                                                             longitude:self.currentLocation.coordinate.longitude
                                                                  zoom:15];
-
     CGFloat viewHeight = self.view.frame.size.height;
     CGFloat viewWidth = self.view.frame.size.width;
     
@@ -70,35 +65,18 @@
 #pragma mark - CLLocationManagerDelegate Methods
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    
-    NSLog(@"Did update locations called");
-    
     CLLocation *mostRecentLocation = [locations lastObject];
     NSDate *locationCaptureTime = mostRecentLocation.timestamp;
     NSTimeInterval timeSinceLocationCapture = [locationCaptureTime timeIntervalSinceNow];
     
     if (timeSinceLocationCapture <= 2) {
         self.currentLocation = mostRecentLocation;
-        
-        NSLog(@"Current location in the if: %@", self.currentLocation);
-        NSLog(@"Current location latitude: %f   ", self.currentLocation.coordinate.latitude);
-        
-//        [GMSCameraUpdate setCamera:[GMSCameraPosition cameraWithLatitude:self.currentLocation.coordinate.latitude
-//                                                               longitude:self.currentLocation.coordinate.longitude
-//                                                                    zoom:15]];
-        
-        
+        [self configureMapView];
         [self.locationManager stopUpdatingLocation];
-        
-        NSLog(@"Current Location: %@", self.currentLocation);
-        
     }
 }
 
 -(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    
-    NSLog(@"Did change authorization status called");
-    
     if ([CLLocationManager authorizationStatus] == 4) {
         [self.locationManager startUpdatingLocation];
     }

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
+#import <Firebase.h>
 #import "PMInitialViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

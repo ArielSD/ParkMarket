@@ -17,6 +17,9 @@
 		B05AECCF1CF4AB4300A5660A /* ParkMarketUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECCE1CF4AB4300A5660A /* ParkMarketUITests.m */; };
 		B09ED25A1CF507A70054D0FC /* PMInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09ED2591CF507A70054D0FC /* PMInitialViewController.m */; };
 		B09ED25D1CF612180054D0FC /* PMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09ED25C1CF612180054D0FC /* PMMapViewController.m */; };
+		B0B2F4671D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
+		B0B2F4681D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
+		B0B2F4691D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,7 @@
 		B09ED2591CF507A70054D0FC /* PMInitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMInitialViewController.m; sourceTree = "<group>"; };
 		B09ED25B1CF612180054D0FC /* PMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMMapViewController.h; sourceTree = "<group>"; };
 		B09ED25C1CF612180054D0FC /* PMMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMMapViewController.m; sourceTree = "<group>"; };
+		B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F07AA50B8F5A1E3305FA77B7 /* Pods-ParkMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarket.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,6 +133,7 @@
 				B05AECB51CF4AB4300A5660A /* Assets.xcassets */,
 				B05AECB71CF4AB4300A5660A /* LaunchScreen.storyboard */,
 				B05AECBA1CF4AB4300A5660A /* Info.plist */,
+				B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */,
 				B05AECA91CF4AB4200A5660A /* Supporting Files */,
 			);
 			path = ParkMarket;
@@ -279,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B05AECB91CF4AB4300A5660A /* LaunchScreen.storyboard in Resources */,
+				B0B2F4671D0760E100E57E03 /* GoogleService-Info.plist in Resources */,
 				B05AECB61CF4AB4300A5660A /* Assets.xcassets in Resources */,
 				B05AECB41CF4AB4200A5660A /* Main.storyboard in Resources */,
 			);
@@ -288,6 +294,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0B2F4681D0760E100E57E03 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +302,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0B2F4691D0760E100E57E03 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
