@@ -15,9 +15,6 @@
 @implementation PMPostViewController
 
 -(void)viewDidLoad {
-    
-    NSLog(@"View did load");
-    
     [super viewDidLoad];
     [self configureLocationManager];
     
