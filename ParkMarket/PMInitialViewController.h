@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "PMPostViewController.h"
+#import "PMParkViewController.h"
 
 @interface PMInitialViewController : UIViewController
 

@@ -15,6 +15,7 @@
 		B05AECB91CF4AB4300A5660A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B05AECB71CF4AB4300A5660A /* LaunchScreen.storyboard */; };
 		B05AECC41CF4AB4300A5660A /* ParkMarketTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECC31CF4AB4300A5660A /* ParkMarketTests.m */; };
 		B05AECCF1CF4AB4300A5660A /* ParkMarketUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECCE1CF4AB4300A5660A /* ParkMarketUITests.m */; };
+		B063C3021D0B6CD7002BA9D0 /* PMParkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */; };
 		B09ED25A1CF507A70054D0FC /* PMInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09ED2591CF507A70054D0FC /* PMInitialViewController.m */; };
 		B09ED25D1CF612180054D0FC /* PMPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09ED25C1CF612180054D0FC /* PMPostViewController.m */; };
 		B0B2F4671D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
@@ -56,6 +57,8 @@
 		B05AECCA1CF4AB4300A5660A /* ParkMarketUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParkMarketUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B05AECCE1CF4AB4300A5660A /* ParkMarketUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParkMarketUITests.m; sourceTree = "<group>"; };
 		B05AECD01CF4AB4300A5660A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B063C3001D0B6CD7002BA9D0 /* PMParkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMParkViewController.h; sourceTree = "<group>"; };
+		B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMParkViewController.m; sourceTree = "<group>"; };
 		B09ED2581CF507A70054D0FC /* PMInitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMInitialViewController.h; sourceTree = "<group>"; };
 		B09ED2591CF507A70054D0FC /* PMInitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMInitialViewController.m; sourceTree = "<group>"; };
 		B09ED25B1CF612180054D0FC /* PMPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMPostViewController.h; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 				B09ED2591CF507A70054D0FC /* PMInitialViewController.m */,
 				B09ED25B1CF612180054D0FC /* PMPostViewController.h */,
 				B09ED25C1CF612180054D0FC /* PMPostViewController.m */,
+				B063C3001D0B6CD7002BA9D0 /* PMParkViewController.h */,
+				B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */,
 				B05AECB21CF4AB4200A5660A /* Main.storyboard */,
 				B05AECB51CF4AB4300A5660A /* Assets.xcassets */,
 				B05AECB71CF4AB4300A5660A /* LaunchScreen.storyboard */,
@@ -361,6 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B063C3021D0B6CD7002BA9D0 /* PMParkViewController.m in Sources */,
 				B05AECAE1CF4AB4200A5660A /* AppDelegate.m in Sources */,
 				B09ED25A1CF507A70054D0FC /* PMInitialViewController.m in Sources */,
 				B09ED25D1CF612180054D0FC /* PMPostViewController.m in Sources */,

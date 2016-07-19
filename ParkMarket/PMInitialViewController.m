@@ -65,10 +65,20 @@
     [self.parkButton.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
     [self.parkButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor
                                              constant:(self.view.frame.size.width / 4)].active = YES;
+    
+    [self.parkButton addTarget:self
+                        action:@selector(parkButtonTapped)
+              forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)postButtonTapped {
     PMPostViewController *mapViewController = [PMPostViewController new];
+    [self.navigationController pushViewController:mapViewController
+                                         animated:YES];
+}
+
+-(void)parkButtonTapped {
+    PMParkViewController *mapViewController = [PMParkViewController new];
     [self.navigationController pushViewController:mapViewController
                                          animated:YES];
 }
