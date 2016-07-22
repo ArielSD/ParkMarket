@@ -123,6 +123,21 @@
     FIRDatabaseReference *postedSpotReference = [self.rootReference childByAutoId];
     [postedSpotReference setValue:@{@"Latitude" : currentLocationLatitude,
                                     @"Longitude" : currentLocationLongitude}];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Posted!"
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertController
+                       animated:YES
+                     completion:^{
+                         [UIView animateWithDuration:0.8
+                                          animations:^{
+                                              alertController.view.alpha = 0.0;
+                                          } completion:^(BOOL finished) {
+                                              [self dismissViewControllerAnimated:YES
+                                                                       completion:nil];
+                                          }];
+                     }];
 }
 
 @end
