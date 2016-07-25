@@ -17,15 +17,22 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
+    // The below method is for testing only
+    [self presentViewController:[PMLoginViewController new]
+                       animated:YES
+                     completion:nil];
+    // The above method is for testing only
+    
     [self configurePostButton];
     [self configureParkButton];
 }
 
 -(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
     NSLog(@"Did receive memory warning");
 }
+
+#pragma mark - UI Layout
 
 -(void)configurePostButton {
     UIImage *postButtonImage = [UIImage imageNamed:@"postButton"];
@@ -70,6 +77,8 @@
                         action:@selector(parkButtonTapped)
               forControlEvents:UIControlEventTouchUpInside];
 }
+
+#pragma mark - Responder Methods
 
 -(void)postButtonTapped {
     PMPostViewController *mapViewController = [PMPostViewController new];

@@ -21,6 +21,7 @@
 		B0B2F4671D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
 		B0B2F4681D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
 		B0B2F4691D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
+		B0EB86D11D46901D001A0F6D /* PMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		B09ED25B1CF612180054D0FC /* PMPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMPostViewController.h; sourceTree = "<group>"; };
 		B09ED25C1CF612180054D0FC /* PMPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMPostViewController.m; sourceTree = "<group>"; };
 		B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMLoginViewController.h; sourceTree = "<group>"; };
+		B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMLoginViewController.m; sourceTree = "<group>"; };
 		F07AA50B8F5A1E3305FA77B7 /* Pods-ParkMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarket.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +131,8 @@
 			children = (
 				B05AECAC1CF4AB4200A5660A /* AppDelegate.h */,
 				B05AECAD1CF4AB4200A5660A /* AppDelegate.m */,
+				B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */,
+				B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */,
 				B09ED2581CF507A70054D0FC /* PMInitialViewController.h */,
 				B09ED2591CF507A70054D0FC /* PMInitialViewController.m */,
 				B09ED25B1CF612180054D0FC /* PMPostViewController.h */,
@@ -367,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B063C3021D0B6CD7002BA9D0 /* PMParkViewController.m in Sources */,
+				B0EB86D11D46901D001A0F6D /* PMLoginViewController.m in Sources */,
 				B05AECAE1CF4AB4200A5660A /* AppDelegate.m in Sources */,
 				B09ED25A1CF507A70054D0FC /* PMInitialViewController.m in Sources */,
 				B09ED25D1CF612180054D0FC /* PMPostViewController.m in Sources */,
