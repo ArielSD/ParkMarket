@@ -15,7 +15,5 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-- (void)configureNavigationController;
-
 @end
 
