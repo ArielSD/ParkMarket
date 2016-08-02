@@ -14,6 +14,7 @@
 @property (strong, nonatomic) UITextField *emailTextField;
 @property (strong, nonatomic) UITextField *passwordTextField;
 @property (strong, nonatomic) UIButton *loginButton;
+@property (strong, nonatomic) UIButton *signUpButton;
 
 @end
 
@@ -25,6 +26,7 @@
     [self configureEmailTextField];
     [self configurePasswordTextField];
     [self configureLoginButton];
+    [self configureSignUpButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,10 +88,22 @@
     [self.loginButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
     [self.loginButton.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor
                                                   constant:-self.view.frame.size.height / 4].active = YES;
-    [self.loginButton.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
     
     [self.loginButton setTitle:@"Log In"
                       forState:UIControlStateNormal];
+}
+
+- (void)configureSignUpButton {
+    self.signUpButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.view addSubview:self.signUpButton];
+    
+    self.signUpButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.signUpButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.signUpButton.topAnchor constraintEqualToAnchor:self.loginButton.bottomAnchor
+                                                constant:self.view.frame.size.height / 25].active = YES;
+    
+    [self.signUpButton setTitle:@"Sign Up"
+                       forState:UIControlStateNormal];
 }
 
 @end
