@@ -43,7 +43,7 @@
     self.welcomeLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self.welcomeLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
     [self.welcomeLabel.topAnchor constraintEqualToAnchor:self.view.topAnchor
-                                                constant:self.view.frame.size.height / 3.0].active = YES;
+                                                constant:self.view.frame.size.height / 15.0].active = YES;
     [self.welcomeLabel.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
     
     self.welcomeLabel.textAlignment = NSTextAlignmentCenter;
@@ -56,7 +56,8 @@
     
     self.emailTextField.translatesAutoresizingMaskIntoConstraints = NO;
     [self.emailTextField.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [self.emailTextField.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
+    [self.emailTextField.topAnchor constraintEqualToAnchor:self.welcomeLabel.bottomAnchor
+                                                  constant:self.view.frame.size.height / 33].active = YES;
     [self.emailTextField.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
                                                   multiplier:0.5].active = YES;
     
@@ -86,8 +87,8 @@
     
     self.loginButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.loginButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [self.loginButton.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor
-                                                  constant:-self.view.frame.size.height / 4].active = YES;
+    [self.loginButton.bottomAnchor constraintEqualToAnchor:self.passwordTextField.bottomAnchor
+                                                  constant:self.view.frame.size.height / 15].active = YES;
     
     [self.loginButton setTitle:@"Log In"
                       forState:UIControlStateNormal];
@@ -100,10 +101,20 @@
     self.signUpButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.signUpButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
     [self.signUpButton.topAnchor constraintEqualToAnchor:self.loginButton.bottomAnchor
-                                                constant:self.view.frame.size.height / 25].active = YES;
+                                                constant:self.view.frame.size.height / 50].active = YES;
     
     [self.signUpButton setTitle:@"Sign Up"
                        forState:UIControlStateNormal];
+    
+    [self.signUpButton addTarget:self
+                          action:@selector(signUpButtonTapped)
+                forControlEvents:UIControlEventTouchUpInside];
+}
+
+#pragma  mark - Responder Methods
+
+- (void)signUpButtonTapped {
+    //
 }
 
 @end
