@@ -114,7 +114,12 @@
 #pragma  mark - Responder Methods
 
 - (void)signUpButtonTapped {
-    //
+    [[FIRAuth auth] createUserWithEmail:self.emailTextField.text
+                               password:self.passwordTextField.text
+                             completion:^(FIRUser *user, NSError *error) {
+                                 NSLog(@"User's ID: %@", user.uid);
+                                 NSLog(@"Error: %@", error);
+                             }];
 }
 
 @end
