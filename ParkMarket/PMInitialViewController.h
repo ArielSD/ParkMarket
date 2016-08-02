@@ -11,10 +11,7 @@
 #import "PMPostViewController.h"
 #import "PMParkViewController.h"
 
-// The below import is for testing only
-#import "PMLoginViewController.h"
-
-@interface PMInitialViewController : UIViewController
+@interface PMInitialViewController : UINavigationController
 
 @property (strong, nonatomic) UIButton *postButton;
 @property (strong, nonatomic) UIButton *parkButton;

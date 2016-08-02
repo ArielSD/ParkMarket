@@ -8,6 +8,7 @@ target 'ParkMarket' do
 pod ‘GoogleMaps’
 pod 'Firebase'
 pod 'Firebase/Database'
+pod 'Firebase/Auth'
 
 end
 

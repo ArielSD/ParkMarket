@@ -16,12 +16,7 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    
-    // The below method is for testing only
-    [self presentViewController:[PMLoginViewController new]
-                       animated:YES
-                     completion:nil];
-    // The above method is for testing only
+    self.view.backgroundColor = [UIColor whiteColor];
     
     [self configurePostButton];
     [self configureParkButton];
@@ -82,14 +77,14 @@
 
 -(void)postButtonTapped {
     PMPostViewController *mapViewController = [PMPostViewController new];
-    [self.navigationController pushViewController:mapViewController
-                                         animated:YES];
+    [self pushViewController:mapViewController
+                    animated:YES];
 }
 
 -(void)parkButtonTapped {
     PMParkViewController *mapViewController = [PMParkViewController new];
-    [self.navigationController pushViewController:mapViewController
-                                         animated:YES];
+    [self pushViewController:mapViewController
+                    animated:YES];
 }
 
 @end

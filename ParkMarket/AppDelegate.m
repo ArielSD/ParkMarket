@@ -19,7 +19,7 @@
     [GMSServices provideAPIKey:@"AIzaSyDqktqpxE5X23pzv8pmS3DtWS3HaLpHTyQ"];
     
     [FIRApp configure];
-    [self configureNavigationController];
+//    [self configureNavigationController];
     return YES;
 }
 
