@@ -111,15 +111,11 @@
                 forControlEvents:UIControlEventTouchUpInside];
 }
 
-#pragma  mark - Responder Methods
+#pragma  mark - Firebase Methods
 
 - (void)signUpButtonTapped {
-    [[FIRAuth auth] createUserWithEmail:self.emailTextField.text
-                               password:self.passwordTextField.text
-                             completion:^(FIRUser *user, NSError *error) {
-                                 NSLog(@"User's ID: %@", user.uid);
-                                 NSLog(@"Error: %@", error);
-                             }];
+    [PMFirebaseClient createUserWithEmail:self.emailTextField.text
+                                 password:self.passwordTextField.text];
 }
 
 @end

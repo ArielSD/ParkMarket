@@ -1,0 +1,18 @@
+//
+//  PMFirebaseClient.h
+//  ParkMarket
+//
+//  Created by Ariel Scott-Dicker on 8/2/16.
+//  Copyright © 2016 Ariel Scott-Dicker. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <FirebaseDatabase/FirebaseDatabase.h>
+#import <FirebaseAuth/FirebaseAuth.h>
+
+@interface PMFirebaseClient : NSObject
+
++ (void)createUserWithEmail:(NSString *)email
+                   password:(NSString *)password;
+
+@end

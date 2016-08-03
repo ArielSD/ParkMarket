@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		53DFDF1762652542AC7474A2 /* libPods-ParkMarket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34B90F8E429F882B24E728DD /* libPods-ParkMarket.a */; };
 		B020F59A1D496FD300847684 /* PMApplicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B020F5991D496FD300847684 /* PMApplicationViewController.m */; };
+		B020F5A31D519F6F00847684 /* PMFirebaseClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B020F5A21D519F6F00847684 /* PMFirebaseClient.m */; };
 		B05AECAB1CF4AB4200A5660A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECAA1CF4AB4200A5660A /* main.m */; };
 		B05AECAE1CF4AB4200A5660A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECAD1CF4AB4200A5660A /* AppDelegate.m */; };
 		B05AECB41CF4AB4200A5660A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B05AECB21CF4AB4200A5660A /* Main.storyboard */; };
@@ -47,6 +48,8 @@
 		9B2B4B26D070EFEF83541101 /* Pods-ParkMarket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarket.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket.debug.xcconfig"; sourceTree = "<group>"; };
 		B020F5981D496FD300847684 /* PMApplicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMApplicationViewController.h; sourceTree = "<group>"; };
 		B020F5991D496FD300847684 /* PMApplicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMApplicationViewController.m; sourceTree = "<group>"; };
+		B020F5A11D519F6F00847684 /* PMFirebaseClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMFirebaseClient.h; sourceTree = "<group>"; };
+		B020F5A21D519F6F00847684 /* PMFirebaseClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMFirebaseClient.m; sourceTree = "<group>"; };
 		B05AECA61CF4AB4200A5660A /* ParkMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParkMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B05AECAA1CF4AB4200A5660A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B05AECAC1CF4AB4200A5660A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -144,6 +147,8 @@
 				B09ED25C1CF612180054D0FC /* PMPostViewController.m */,
 				B063C3001D0B6CD7002BA9D0 /* PMParkViewController.h */,
 				B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */,
+				B020F5A11D519F6F00847684 /* PMFirebaseClient.h */,
+				B020F5A21D519F6F00847684 /* PMFirebaseClient.m */,
 				B05AECB21CF4AB4200A5660A /* Main.storyboard */,
 				B05AECB51CF4AB4300A5660A /* Assets.xcassets */,
 				B05AECB71CF4AB4300A5660A /* LaunchScreen.storyboard */,
@@ -378,6 +383,7 @@
 			files = (
 				B063C3021D0B6CD7002BA9D0 /* PMParkViewController.m in Sources */,
 				B0EB86D11D46901D001A0F6D /* PMLoginViewController.m in Sources */,
+				B020F5A31D519F6F00847684 /* PMFirebaseClient.m in Sources */,
 				B020F59A1D496FD300847684 /* PMApplicationViewController.m in Sources */,
 				B05AECAE1CF4AB4200A5660A /* AppDelegate.m in Sources */,
 				B09ED25A1CF507A70054D0FC /* PMInitialViewController.m in Sources */,

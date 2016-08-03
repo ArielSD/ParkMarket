@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <FirebaseAuth/FirebaseAuth.h>
+#import "PMFirebaseClient.h"
 
 @interface PMLoginViewController : UIViewController
 
