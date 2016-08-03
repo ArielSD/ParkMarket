@@ -19,7 +19,6 @@
     [GMSServices provideAPIKey:@"AIzaSyDqktqpxE5X23pzv8pmS3DtWS3HaLpHTyQ"];
     
     [FIRApp configure];
-//    [self configureNavigationController];
     return YES;
 }
 
@@ -43,14 +42,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-- (void)configureNavigationController {
-    PMInitialViewController *initialViewController = [PMInitialViewController new];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
-    self.window.rootViewController = navigationController;
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
 }
 
 @end
