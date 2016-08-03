@@ -77,12 +77,14 @@
 
 -(void)postButtonTapped {
     PMPostViewController *mapViewController = [PMPostViewController new];
+    mapViewController.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController pushViewController:mapViewController
                                          animated:YES];
 }
 
 -(void)parkButtonTapped {
     PMParkViewController *mapViewController = [PMParkViewController new];
+    mapViewController.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController pushViewController:mapViewController
                                          animated:YES];
 }
