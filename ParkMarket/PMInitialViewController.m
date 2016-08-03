@@ -77,14 +77,14 @@
 
 -(void)postButtonTapped {
     PMPostViewController *mapViewController = [PMPostViewController new];
-    [self pushViewController:mapViewController
-                    animated:YES];
+    [self.navigationController pushViewController:mapViewController
+                                         animated:YES];
 }
 
 -(void)parkButtonTapped {
     PMParkViewController *mapViewController = [PMParkViewController new];
-    [self pushViewController:mapViewController
-                    animated:YES];
+    [self.navigationController pushViewController:mapViewController
+                                         animated:YES];
 }
 
 @end
