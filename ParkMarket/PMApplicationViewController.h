@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FirebaseAuth/FirebaseAuth.h>
+#import "PMInitialViewController.h"
+#import "PMLoginViewController.h"
 
 @interface PMApplicationViewController : UIViewController
 
