@@ -16,12 +16,11 @@
                              completion:^(FIRUser *user, NSError *error) {
                                  NSLog(@"User's ID: %@", user.uid);
                                  
-                                 NSDictionary *userInformation = @{@"uid" : user.uid,
-                                                                   @"email" : email};
+                                 NSDictionary *userInformation = @{@"email" : email};
                                  
                                  FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
                                  FIRDatabaseReference *usersReference = [rootReference child:@"users"];
-                                 FIRDatabaseReference *newUserReference = [usersReference childByAutoId];
+                                 FIRDatabaseReference *newUserReference = [usersReference child:user.uid];
                                  [newUserReference setValue:userInformation];
                              }];
 }

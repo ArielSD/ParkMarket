@@ -17,11 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    NSError *error;
-//    [[FIRAuth auth] signOut:&error];
-//    if (!error) {
-//        NSLog(@"A user has been signed out");
-//    }
+    // Comment out to sign in a new user.
+    NSError *error;
+    [[FIRAuth auth] signOut:&error];
+    if (!error) {
+        NSLog(@"A user has been signed out");
+    }
     
     if ([FIRAuth auth].currentUser) {
         NSLog(@"There is a current user: %@", [FIRAuth auth].currentUser.uid);
