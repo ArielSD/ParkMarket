@@ -10,6 +10,16 @@
 
 @interface PMPostViewController ()
 
+@property CGFloat viewHeight;
+@property CGFloat viewWidth;
+
+@property (strong, nonatomic) GMSMapView *mapView;
+@property (strong, nonatomic) UILabel *questionLabel;
+@property (strong, nonatomic) UIButton *postButton;
+
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) CLLocation *currentLocation;
+
 @end
 
 @implementation PMPostViewController

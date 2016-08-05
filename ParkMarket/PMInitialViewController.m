@@ -10,6 +10,9 @@
 
 @interface PMInitialViewController ()
 
+@property (strong, nonatomic) UIButton *postButton;
+@property (strong, nonatomic) UIButton *parkButton;
+
 @end
 
 @implementation PMInitialViewController

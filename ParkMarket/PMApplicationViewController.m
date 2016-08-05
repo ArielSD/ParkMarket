@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Comment out to sign in a new user.
+    // Comment out to keep a user signed in
 //    NSError *error;
 //    [[FIRAuth auth] signOut:&error];
 //    if (!error) {
