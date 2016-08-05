@@ -34,13 +34,15 @@
     FIRDatabaseReference *newParkingSpotReference = [parkingSpotsReference childByAutoId];
     [newParkingSpotReference setValue:parkingSpotCoordinates];
     
+    NSString *newParkingSpotKey = newParkingSpotReference.key;
+    
     // Posting a spot to the currently logged in user
     FIRUser *currentUser = [FIRAuth auth].currentUser;
     NSString *currentUserUID = currentUser.uid;
     FIRDatabaseReference *usersReference = [rootReference child:@"users"];
     FIRDatabaseReference *currentUserReference = [usersReference child:currentUserUID];
     FIRDatabaseReference *postedParkingSpotsReference = [currentUserReference child:@"postedParkingSpots"];
-    FIRDatabaseReference *newPostedParkingSpotReference = [postedParkingSpotsReference childByAutoId];
+    FIRDatabaseReference *newPostedParkingSpotReference = [postedParkingSpotsReference child:newParkingSpotKey];
     [newPostedParkingSpotReference setValue:parkingSpotCoordinates];
 }
 
