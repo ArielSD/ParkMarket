@@ -15,10 +15,8 @@
 @implementation PMParkViewController
 
 - (void)viewDidLoad {
-    
-    NSLog(@"Parking View did load");
-    
     [super viewDidLoad];
+    
     [self configureLocationManager];
     [self showParkingSpotMarkers];
     
@@ -105,54 +103,28 @@
     }
 }
 
-#pragma mark - Firebase Methods
+#pragma mark - Network Call
 
 - (void)showParkingSpotMarkers {
-    
-    NSLog(@"Show parking spot markers called");
-    
-    self.rootReference = [[FIRDatabase database] reference];
-    
-    [self.rootReference observeSingleEventOfType:FIRDataEventTypeValue
-                                       withBlock:^(FIRDataSnapshot *snapshot) {
-                                           
-                                           NSDictionary *parkingSpots = snapshot.value;
-                                           
-                                           for (NSString *parkingSpotKey in parkingSpots) {
-                                               NSDictionary *parkingSpot = parkingSpots[parkingSpotKey];
-                                               
-                                               NSString *parkingSpotLatitudeString = parkingSpot[@"Latitude"];
-                                               NSString *parkingSpotLongitudeString = parkingSpot[@"Longitude"];
-                                               
-                                               double parkingSpotLatitudeDouble = parkingSpotLatitudeString.doubleValue;
-                                               double parkingSpotLongitudeDouble = parkingSpotLongitudeString.doubleValue;
-                                               
-                                               CLLocationCoordinate2D parkingSpotLocation = CLLocationCoordinate2DMake(parkingSpotLatitudeDouble, parkingSpotLongitudeDouble);
-                                               
-                                               GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpotLocation];
-                                               marker.appearAnimation = kGMSMarkerAnimationPop;
-                                               marker.title = @"Test";
-                                               marker.map = self.mapView;
-                                           }
-                                       }];
-    
-//    [self.rootReference observeEventType:FIRDataEventTypeChildAdded
-//                               withBlock:^(FIRDataSnapshot *snapshot) {
-//                                   NSString *parkingSpotLatitudeString = snapshot.value[@"Latitude"];
-//                                   NSString *parkingSpotLongitudeString = snapshot.value[@"Longitude"];
-//                                   double parkingSpotLatitudeDouble = parkingSpotLatitudeString.doubleValue;
-//                                   double parkingSpotLongitudeDouble = parkingSpotLongitudeString.doubleValue;
-//                                   
-//                                   CLLocationCoordinate2D parkingSpot = CLLocationCoordinate2DMake(parkingSpotLatitudeDouble, parkingSpotLongitudeDouble);
-//                                   GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpot];
-//                                   
-//                                   marker.appearAnimation = kGMSMarkerAnimationPop;
-//                                   marker.title = @"Test";
-//                                   marker.map = self.mapView;
-//                                   
-//                                   NSLog(@"Marker's map: %@", marker.map);
-//
-//                               }];
+    [PMFirebaseClient getAvailableParkingSpotsWithCompletion:^(NSDictionary *parkingSpots) {
+        
+        for (NSString *parkingSpotKey in parkingSpots) {
+            NSDictionary *parkingSpot = parkingSpots[parkingSpotKey];
+            
+            NSString *parkingSpotLatitudeString = parkingSpot[@"latitude"];
+            NSString *parkingSpotLongitudeString = parkingSpot[@"longitude"];
+            
+            double parkingSpotLatitudeDouble = parkingSpotLatitudeString.doubleValue;
+            double parkingSpotLongitudeDouble = parkingSpotLongitudeString.doubleValue;
+            
+            CLLocationCoordinate2D parkingSpotLocation = CLLocationCoordinate2DMake(parkingSpotLatitudeDouble, parkingSpotLongitudeDouble);
+            
+            GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpotLocation];
+            marker.appearAnimation = kGMSMarkerAnimationPop;
+            marker.title = @"Test";
+            marker.map = self.mapView;
+        }
+    }];
 }
 
 @end

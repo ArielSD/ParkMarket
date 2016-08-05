@@ -115,7 +115,12 @@
     
     [PMFirebaseClient postParkingSpotWithLatitude:currentLocationLatitude
                                         longitute:currentLocationLongitude];
-    
+    [self confirmPostedParkingSpot];
+}
+
+#pragma mark - Helper Methods
+
+- (void)confirmPostedParkingSpot {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Posted!"
                                                                              message:nil
                                                                       preferredStyle:UIAlertControllerStyleAlert];

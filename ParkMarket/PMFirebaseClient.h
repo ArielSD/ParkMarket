@@ -18,4 +18,6 @@
 + (void)postParkingSpotWithLatitude:(NSString *)latitude
                           longitute:(NSString *)longitude;
 
++ (void)getAvailableParkingSpotsWithCompletion:(void (^)(NSDictionary *parkingSpots))completionBlock;
+
 @end

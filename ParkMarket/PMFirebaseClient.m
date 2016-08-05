@@ -34,4 +34,14 @@
     [newParkingSpotReference setValue:parkingSpotCoordinates];
 }
 
++ (void)getAvailableParkingSpotsWithCompletion:(void (^)(NSDictionary *parkingSpots))completionBlock {
+    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+    FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
+    [parkingSpotsReference observeSingleEventOfType:FIRDataEventTypeValue
+                                  withBlock:^(FIRDataSnapshot *snapshot) {
+                                      NSDictionary *parkingSpots = snapshot.value;
+                                      completionBlock(parkingSpots);
+                                  }];
+}
+
 @end
