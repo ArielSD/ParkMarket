@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import <FirebaseDatabase/FirebaseDatabase.h>
-#import <CoreLocation/CoreLocation.h>
+#import "PMFirebaseClient.h"
 
 @interface PMPostViewController : UIViewController <CLLocationManagerDelegate>
 

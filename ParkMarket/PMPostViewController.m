@@ -44,12 +44,6 @@
     
     [self configureQuestionLabel];
     [self configurePostButton];
-    
-//    GMSMarker *marker = [GMSMarker new];
-//    marker.position = CLLocationCoordinate2DMake(40.858632, -74.276822);
-//    marker.title = @"1 Sunset Road";
-//    marker.snippet = @"West Caldwell, New Jersey";
-//    marker.map = self.mapView;
 }
 
 -(void)configureQuestionLabel {
@@ -115,32 +109,27 @@
 
 #pragma mark - Firebase Methods
 
-// Moving this to the FirebaseClient Class:
-
-
-//-(void)postButtonTapped {
-//    NSString *currentLocationLatitude = [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.latitude];
-//    NSString *currentLocationLongitude = [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.longitude];
-//    
-//    self.rootReference = [[FIRDatabase database] reference];
-//    FIRDatabaseReference *postedSpotReference = [self.rootReference childByAutoId];
-//    [postedSpotReference setValue:@{@"Latitude" : currentLocationLatitude,
-//                                    @"Longitude" : currentLocationLongitude}];
-//    
-//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Posted!"
-//                                                                             message:nil
-//                                                                      preferredStyle:UIAlertControllerStyleAlert];
-//    [self presentViewController:alertController
-//                       animated:YES
-//                     completion:^{
-//                         [UIView animateWithDuration:0.8
-//                                          animations:^{
-//                                              alertController.view.alpha = 0.0;
-//                                          } completion:^(BOOL finished) {
-//                                              [self dismissViewControllerAnimated:YES
-//                                                                       completion:nil];
-//                                          }];
-//                     }];
-//}
+-(void)postButtonTapped {
+    NSString *currentLocationLatitude = [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.latitude];
+    NSString *currentLocationLongitude = [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.longitude];
+    
+    [PMFirebaseClient postParkingSpotWithLatitude:currentLocationLatitude
+                                        longitute:currentLocationLongitude];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Posted!"
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertController
+                       animated:YES
+                     completion:^{
+                         [UIView animateWithDuration:0.8
+                                          animations:^{
+                                              alertController.view.alpha = 0.0;
+                                          } completion:^(BOOL finished) {
+                                              [self dismissViewControllerAnimated:YES
+                                                                       completion:nil];
+                                          }];
+                     }];
+}
 
 @end

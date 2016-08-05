@@ -18,15 +18,13 @@
     [super viewDidLoad];
     
     // Comment out to sign in a new user.
-    NSError *error;
-    [[FIRAuth auth] signOut:&error];
-    if (!error) {
-        NSLog(@"A user has been signed out");
-    }
+//    NSError *error;
+//    [[FIRAuth auth] signOut:&error];
+//    if (!error) {
+//        NSLog(@"A user has been signed out");
+//    }
     
     if ([FIRAuth auth].currentUser) {
-        NSLog(@"There is a current user: %@", [FIRAuth auth].currentUser.uid);
-        
         PMInitialViewController *initialViewController = [PMInitialViewController new];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
         [self addChildViewController:navigationController];
@@ -35,8 +33,6 @@
         [navigationController didMoveToParentViewController:self];
     }
     else {
-        NSLog(@"No User");
-        
         PMLoginViewController *loginViewController = [PMLoginViewController new];
         [self addChildViewController:loginViewController];
         loginViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
