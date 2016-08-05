@@ -18,6 +18,7 @@
 		B05AECC41CF4AB4300A5660A /* ParkMarketTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECC31CF4AB4300A5660A /* ParkMarketTests.m */; };
 		B05AECCF1CF4AB4300A5660A /* ParkMarketUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECCE1CF4AB4300A5660A /* ParkMarketUITests.m */; };
 		B063C3021D0B6CD7002BA9D0 /* PMParkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */; };
+		B06F140A1D553A5600197AC5 /* PMParkingSpot.m in Sources */ = {isa = PBXBuildFile; fileRef = B06F14091D553A5600197AC5 /* PMParkingSpot.m */; };
 		B09ED25A1CF507A70054D0FC /* PMInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09ED2591CF507A70054D0FC /* PMInitialViewController.m */; };
 		B09ED25D1CF612180054D0FC /* PMPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09ED25C1CF612180054D0FC /* PMPostViewController.m */; };
 		B0B2F4671D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
@@ -66,6 +67,8 @@
 		B05AECD01CF4AB4300A5660A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B063C3001D0B6CD7002BA9D0 /* PMParkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMParkViewController.h; sourceTree = "<group>"; };
 		B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMParkViewController.m; sourceTree = "<group>"; };
+		B06F14081D553A5600197AC5 /* PMParkingSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMParkingSpot.h; sourceTree = "<group>"; };
+		B06F14091D553A5600197AC5 /* PMParkingSpot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMParkingSpot.m; sourceTree = "<group>"; };
 		B09ED2581CF507A70054D0FC /* PMInitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMInitialViewController.h; sourceTree = "<group>"; };
 		B09ED2591CF507A70054D0FC /* PMInitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMInitialViewController.m; sourceTree = "<group>"; };
 		B09ED25B1CF612180054D0FC /* PMPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMPostViewController.h; sourceTree = "<group>"; };
@@ -137,18 +140,11 @@
 			children = (
 				B05AECAC1CF4AB4200A5660A /* AppDelegate.h */,
 				B05AECAD1CF4AB4200A5660A /* AppDelegate.m */,
-				B020F5981D496FD300847684 /* PMApplicationViewController.h */,
-				B020F5991D496FD300847684 /* PMApplicationViewController.m */,
-				B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */,
-				B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */,
-				B09ED2581CF507A70054D0FC /* PMInitialViewController.h */,
-				B09ED2591CF507A70054D0FC /* PMInitialViewController.m */,
-				B09ED25B1CF612180054D0FC /* PMPostViewController.h */,
-				B09ED25C1CF612180054D0FC /* PMPostViewController.m */,
-				B063C3001D0B6CD7002BA9D0 /* PMParkViewController.h */,
-				B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */,
+				B06F140C1D553A9600197AC5 /* ViewControllers */,
 				B020F5A11D519F6F00847684 /* PMFirebaseClient.h */,
 				B020F5A21D519F6F00847684 /* PMFirebaseClient.m */,
+				B06F14081D553A5600197AC5 /* PMParkingSpot.h */,
+				B06F14091D553A5600197AC5 /* PMParkingSpot.m */,
 				B05AECB21CF4AB4200A5660A /* Main.storyboard */,
 				B05AECB51CF4AB4300A5660A /* Assets.xcassets */,
 				B05AECB71CF4AB4300A5660A /* LaunchScreen.storyboard */,
@@ -183,6 +179,23 @@
 				B05AECD01CF4AB4300A5660A /* Info.plist */,
 			);
 			path = ParkMarketUITests;
+			sourceTree = "<group>";
+		};
+		B06F140C1D553A9600197AC5 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B020F5981D496FD300847684 /* PMApplicationViewController.h */,
+				B020F5991D496FD300847684 /* PMApplicationViewController.m */,
+				B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */,
+				B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */,
+				B09ED2581CF507A70054D0FC /* PMInitialViewController.h */,
+				B09ED2591CF507A70054D0FC /* PMInitialViewController.m */,
+				B09ED25B1CF612180054D0FC /* PMPostViewController.h */,
+				B09ED25C1CF612180054D0FC /* PMPostViewController.m */,
+				B063C3001D0B6CD7002BA9D0 /* PMParkViewController.h */,
+				B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		F697AC925DD4D681C646122C /* Pods */ = {
@@ -385,6 +398,7 @@
 				B0EB86D11D46901D001A0F6D /* PMLoginViewController.m in Sources */,
 				B020F5A31D519F6F00847684 /* PMFirebaseClient.m in Sources */,
 				B020F59A1D496FD300847684 /* PMApplicationViewController.m in Sources */,
+				B06F140A1D553A5600197AC5 /* PMParkingSpot.m in Sources */,
 				B05AECAE1CF4AB4200A5660A /* AppDelegate.m in Sources */,
 				B09ED25A1CF507A70054D0FC /* PMInitialViewController.m in Sources */,
 				B09ED25D1CF612180054D0FC /* PMPostViewController.m in Sources */,
