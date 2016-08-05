@@ -28,10 +28,20 @@
     NSDictionary *parkingSpotCoordinates = @{@"latitude" : latitude,
                                              @"longitude" : longitude};
     
+    // Posting a spot to the 'parkingSpots' node
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
     FIRDatabaseReference *newParkingSpotReference = [parkingSpotsReference childByAutoId];
     [newParkingSpotReference setValue:parkingSpotCoordinates];
+    
+    // Posting a spot to the currently logged in user
+    FIRUser *currentUser = [FIRAuth auth].currentUser;
+    NSString *currentUserUID = currentUser.uid;
+    FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+    FIRDatabaseReference *currentUserReference = [usersReference child:currentUserUID];
+    FIRDatabaseReference *postedParkingSpotsReference = [currentUserReference child:@"postedParkingSpots"];
+    FIRDatabaseReference *newPostedParkingSpotReference = [postedParkingSpotsReference childByAutoId];
+    [newPostedParkingSpotReference setValue:parkingSpotCoordinates];
 }
 
 + (void)getAvailableParkingSpotsWithCompletion:(void (^)(NSDictionary *parkingSpots))completionBlock {
