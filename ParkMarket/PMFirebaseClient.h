@@ -15,4 +15,7 @@
 + (void)createUserWithEmail:(NSString *)email
                    password:(NSString *)password;
 
++ (void)postParkingSpotWithLatitude:(NSString *)latitude
+                          longitute:(NSString *)longitude;
+
 @end

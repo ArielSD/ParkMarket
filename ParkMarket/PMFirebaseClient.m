@@ -14,7 +14,6 @@
     [[FIRAuth auth] createUserWithEmail:email
                                password:password
                              completion:^(FIRUser *user, NSError *error) {
-                                 NSLog(@"User's ID: %@", user.uid);
                                  
                                  NSDictionary *userInformation = @{@"email" : email};
                                  
@@ -24,5 +23,9 @@
                                  [newUserReference setValue:userInformation];
                              }];
 }
+
+//+ (void)postParkingSpotWithLatitude:(NSString *)latitude longitute:(NSString *)longitude {
+//    FIRDatabaseReference *rootReference = [[FIRDatabase database] re]
+//}
 
 @end
