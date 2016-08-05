@@ -11,10 +11,6 @@
 #import "PMInitialViewController.h"
 #import "PMLoginViewController.h"
 
-// Testing
-#import <FirebaseDatabase/FirebaseDatabase.h>
-// Testing
-
 @interface PMApplicationViewController : UIViewController
 
 @end
