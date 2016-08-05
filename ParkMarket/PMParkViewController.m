@@ -115,6 +115,8 @@
 
 #pragma mark - Network Call
 
+#warning Try making the markers on the main queue in this method.
+
 - (void)showParkingSpotMarkers {
     [PMFirebaseClient getAvailableParkingSpotsWithCompletion:^(NSDictionary *parkingSpots) {
         
