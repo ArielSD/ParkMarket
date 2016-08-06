@@ -15,4 +15,6 @@
 @property (strong, nonatomic) NSString *latitude;
 @property (strong, nonatomic) NSString *longitude;
 
++ (instancetype)parkingSpotFromDictionary:(NSDictionary *)dictionary;
+
 @end

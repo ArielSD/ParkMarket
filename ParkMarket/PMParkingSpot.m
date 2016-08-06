@@ -10,4 +10,12 @@
 
 @implementation PMParkingSpot
 
+#warning Finishe the initializer
+
+/*+ (instancetype)parkingSpotFromDictionary:(NSDictionary *)dictionary {
+    PMParkingSpot *parkingSpot = [PMParkingSpot new];
+    parkingSpot.owner = dictionary.
+}
+ */
+
 @end

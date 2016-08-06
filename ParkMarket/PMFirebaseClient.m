@@ -52,7 +52,10 @@
     [parkingSpotsReference observeSingleEventOfType:FIRDataEventTypeValue
                                   withBlock:^(FIRDataSnapshot *snapshot) {
                                       NSDictionary *parkingSpots = snapshot.value;
-                                      completionBlock(parkingSpots);
+                                      
+                                      NSLog(@"API call: %@", parkingSpots);
+                                      
+//                                      completionBlock(parkingSpots);
                                   }];
 }
 
