@@ -115,8 +115,6 @@
 
 #pragma mark - Network Call
 
-#warning Try making the markers on the main queue in this method.
-
 - (void)showParkingSpotMarkers {
     [PMFirebaseClient getAvailableParkingSpotsWithCompletion:^(NSDictionary *parkingSpots) {
         
@@ -132,10 +130,12 @@
             
             CLLocationCoordinate2D parkingSpotLocation = CLLocationCoordinate2DMake(parkingSpotLatitudeDouble, parkingSpotLongitudeDouble);
             
+            dispatch_async(dispatch_get_main_queue(), ^ {
             GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpotLocation];
             marker.appearAnimation = kGMSMarkerAnimationPop;
             marker.title = parkingSpotOwner;
             marker.map = self.mapView;
+            });
         }
     }];
 }

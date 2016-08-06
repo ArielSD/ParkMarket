@@ -137,7 +137,7 @@
     [self presentViewController:alertController
                        animated:YES
                      completion:^{
-                         [UIView animateWithDuration:0.8
+                         [UIView animateWithDuration:0.4
                                           animations:^{
                                               alertController.view.alpha = 0.0;
                                           } completion:^(BOOL finished) {
