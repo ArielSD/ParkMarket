@@ -18,11 +18,11 @@
     [super viewDidLoad];
     
     // Comment out to keep a user signed in
-    NSError *error;
-    [[FIRAuth auth] signOut:&error];
-    if (!error) {
-        NSLog(@"A user has been signed out");
-    }
+//    NSError *error;
+//    [[FIRAuth auth] signOut:&error];
+//    if (!error) {
+//        NSLog(@"A user has been signed out");
+//    }
     
     if ([FIRAuth auth].currentUser) {
         [self showInitialViewController];
@@ -41,6 +41,7 @@
 
 - (void)showLoginViewController {
     PMLoginViewController *loginViewController = [PMLoginViewController new];
+    loginViewController.delegate = self;
     [self addChildViewController:loginViewController];
     loginViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     [self.view addSubview:loginViewController.view];
@@ -54,6 +55,12 @@
     navigationController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     [self.view addSubview:navigationController.view];
     [navigationController didMoveToParentViewController:self];
+}
+
+#pragma mark - Delegate Methods
+
+- (void)didLogInUser {
+    [self showInitialViewController];
 }
 
 @end

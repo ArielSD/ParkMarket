@@ -118,6 +118,8 @@
 - (void)showParkingSpotMarkers {
     [PMFirebaseClient getAvailableParkingSpotsWithCompletion:^(NSDictionary *parkingSpots) {
         
+        NSLog(@"Returned Object: %@", parkingSpots);
+        
         for (NSString *parkingSpotKey in parkingSpots) {
             NSDictionary *parkingSpot = parkingSpots[parkingSpotKey];
             

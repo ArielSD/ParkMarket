@@ -116,6 +116,9 @@
 - (void)signUpButtonTapped {
     [PMFirebaseClient createUserWithEmail:self.emailTextField.text
                                  password:self.passwordTextField.text];
+    
+    [self.delegate didLogInUser];
+    [self.passwordTextField resignFirstResponder];
 }
 
 @end

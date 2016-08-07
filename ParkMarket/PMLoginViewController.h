@@ -9,6 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "PMFirebaseClient.h"
 
+@class PMLoginViewController;
+
+@protocol PMLoginViewControllerDelegate <NSObject>
+
+@required
+
+- (void)didLogInUser;
+
+@end
+
 @interface PMLoginViewController : UIViewController
+
+@property (weak, nonatomic) id <PMLoginViewControllerDelegate> delegate;
 
 @end
