@@ -115,6 +115,8 @@
 
 #pragma mark - Network Call
 
+#warning Make a conditional for the case that there are no available spots. (Later, it will be in the chosen radius)
+
 - (void)showParkingSpotMarkers {
     [PMFirebaseClient getAvailableParkingSpotsWithCompletion:^(NSDictionary *parkingSpots) {
         
