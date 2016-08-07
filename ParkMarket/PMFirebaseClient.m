@@ -52,17 +52,12 @@
 
 + (void)getAvailableParkingSpotsWithCompletion:(void (^)(NSDictionary *parkingSpots))completionBlock {
     
-    NSLog(@"Get Available Spots With Completion");
-    
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
     [parkingSpotsReference observeSingleEventOfType:FIRDataEventTypeValue
                                   withBlock:^(FIRDataSnapshot *snapshot) {
                                       NSDictionary *parkingSpots = snapshot.value;
                                       completionBlock(parkingSpots);
-                                      
-                                      NSLog(@"API Call being made");
-                                      
                                   }];
 }
 
