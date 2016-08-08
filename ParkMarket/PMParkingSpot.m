@@ -10,12 +10,12 @@
 
 @implementation PMParkingSpot
 
-#warning Finishe the initializer
-
-/*+ (instancetype)parkingSpotFromDictionary:(NSDictionary *)dictionary {
++ (instancetype)parkingSpotFromDictionary:(NSDictionary *)dictionary {
     PMParkingSpot *parkingSpot = [PMParkingSpot new];
-    parkingSpot.owner = dictionary.
+    parkingSpot.owner = dictionary[@"owner"];
+    parkingSpot.latitude = dictionary[@"latitude"];
+    parkingSpot.longitude = dictionary[@"longitude"];
+    return parkingSpot;
 }
- */
 
 @end
