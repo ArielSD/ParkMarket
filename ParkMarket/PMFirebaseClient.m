@@ -58,9 +58,6 @@
                                   withBlock:^(FIRDataSnapshot *snapshot) {
                                       NSDictionary *parkingSpots = snapshot.value;
                                       
-                                      NSLog(@"API call: %@", parkingSpots);
-                                      
-//                                      completionBlock(parkingSpots);
                                       if ([parkingSpots isKindOfClass:[NSNull class]]) {
                                           completionBlock(nil);
                                       }
