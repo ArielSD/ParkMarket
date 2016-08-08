@@ -57,7 +57,13 @@
     [parkingSpotsReference observeSingleEventOfType:FIRDataEventTypeValue
                                   withBlock:^(FIRDataSnapshot *snapshot) {
                                       NSDictionary *parkingSpots = snapshot.value;
-                                      completionBlock(parkingSpots);
+                                      
+                                      if ([parkingSpots isKindOfClass:[NSNull class]]) {
+                                          completionBlock(nil);
+                                      }
+                                      else {
+                                          completionBlock(parkingSpots);
+                                      }
                                   }];
 }
 
