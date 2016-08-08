@@ -115,28 +115,51 @@
 
 #pragma mark - Network Call
 
-#warning Try making the markers on the main queue in this method.
-
 - (void)showParkingSpotMarkers {
     [PMFirebaseClient getAvailableParkingSpotsWithCompletion:^(NSDictionary *parkingSpots) {
         
-        for (NSString *parkingSpotKey in parkingSpots) {
-            NSDictionary *parkingSpot = parkingSpots[parkingSpotKey];
-            
-            NSString *parkingSpotLatitudeString = parkingSpot[@"latitude"];
-            NSString *parkingSpotLongitudeString = parkingSpot[@"longitude"];
-            
-            double parkingSpotLatitudeDouble = parkingSpotLatitudeString.doubleValue;
-            double parkingSpotLongitudeDouble = parkingSpotLongitudeString.doubleValue;
-            
-            CLLocationCoordinate2D parkingSpotLocation = CLLocationCoordinate2DMake(parkingSpotLatitudeDouble, parkingSpotLongitudeDouble);
-            
-            GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpotLocation];
-            marker.appearAnimation = kGMSMarkerAnimationPop;
-            marker.title = @"Test";
-            marker.map = self.mapView;
+        if (parkingSpots == nil) {
+            [self noAvailableSpots];
+        }
+        else {
+            for (NSString *parkingSpotKey in parkingSpots) {
+                NSDictionary *parkingSpot = parkingSpots[parkingSpotKey];
+                
+                NSString *parkingSpotOwner = parkingSpot[@"owner"];
+                NSString *parkingSpotLatitudeString = parkingSpot[@"latitude"];
+                NSString *parkingSpotLongitudeString = parkingSpot[@"longitude"];
+                
+                double parkingSpotLatitudeDouble = parkingSpotLatitudeString.doubleValue;
+                double parkingSpotLongitudeDouble = parkingSpotLongitudeString.doubleValue;
+                
+                CLLocationCoordinate2D parkingSpotLocation = CLLocationCoordinate2DMake(parkingSpotLatitudeDouble, parkingSpotLongitudeDouble);
+                
+                dispatch_async(dispatch_get_main_queue(), ^ {
+                    GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpotLocation];
+                    marker.appearAnimation = kGMSMarkerAnimationPop;
+                    marker.title = parkingSpotOwner;
+                    marker.map = self.mapView;
+                });
+            }
         }
     }];
+}
+
+#pragma mark - Helper Methods
+
+- (void)noAvailableSpots {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Hmmm..."
+                                                                             message:@"There are currently no available spots"
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:nil];
+    
+    [alertController addAction:action];
+    [self presentViewController:alertController
+                       animated:YES
+                     completion:nil];
 }
 
 @end

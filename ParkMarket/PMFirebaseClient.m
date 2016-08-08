@@ -25,6 +25,10 @@
 }
 
 + (void)postParkingSpotWithLatitude:(NSString *)latitude longitute:(NSString *)longitude {
+    NSDictionary *parkingSpotInformation = @{@"owner" : [FIRAuth auth].currentUser.uid,
+                                             @"latitude" : latitude,
+                                             @"longitude" : longitude};
+    
     NSDictionary *parkingSpotCoordinates = @{@"latitude" : latitude,
                                              @"longitude" : longitude};
     
@@ -32,7 +36,7 @@
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
     FIRDatabaseReference *newParkingSpotReference = [parkingSpotsReference childByAutoId];
-    [newParkingSpotReference setValue:parkingSpotCoordinates];
+    [newParkingSpotReference setValue:parkingSpotInformation];
     
     NSString *newParkingSpotKey = newParkingSpotReference.key;
     
@@ -47,6 +51,7 @@
 }
 
 + (void)getAvailableParkingSpotsWithCompletion:(void (^)(NSDictionary *parkingSpots))completionBlock {
+    
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
     [parkingSpotsReference observeSingleEventOfType:FIRDataEventTypeValue
@@ -56,6 +61,12 @@
                                       NSLog(@"API call: %@", parkingSpots);
                                       
 //                                      completionBlock(parkingSpots);
+                                      if ([parkingSpots isKindOfClass:[NSNull class]]) {
+                                          completionBlock(nil);
+                                      }
+                                      else {
+                                          completionBlock(parkingSpots);
+                                      }
                                   }];
 }
 

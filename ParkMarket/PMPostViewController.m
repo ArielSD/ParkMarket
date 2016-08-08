@@ -64,9 +64,6 @@
 }
 
 -(void)configurePostButton {
-    
-    NSLog(@"Configure post button called");
-    
     self.postButton = [UIButton buttonWithType: UIButtonTypeSystem];
     [self.view addSubview:self.postButton];
     
@@ -97,9 +94,6 @@
 #pragma mark - CLLocationManagerDelegate Methods
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    
-    NSLog(@"Did update locations called");
-    
     CLLocation *mostRecentLocation = [locations lastObject];
     NSDate *locationCaptureTime = mostRecentLocation.timestamp;
     NSTimeInterval timeSinceLocationCapture = [locationCaptureTime timeIntervalSinceNow];
@@ -137,7 +131,7 @@
     [self presentViewController:alertController
                        animated:YES
                      completion:^{
-                         [UIView animateWithDuration:0.8
+                         [UIView animateWithDuration:0.4
                                           animations:^{
                                               alertController.view.alpha = 0.0;
                                           } completion:^(BOOL finished) {
