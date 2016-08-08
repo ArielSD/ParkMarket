@@ -10,8 +10,7 @@
 
 @interface PMParkViewController ()
 
-@property CGFloat viewHeight;
-@property CGFloat viewWidth;
+@property (strong, nonatomic) NSDictionary *parkingSpots;
 
 @property (strong, nonatomic) GMSMapView *mapView;
 @property (strong, nonatomic) UILabel *questionLabel;
@@ -19,6 +18,9 @@
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *currentLocation;
+
+@property CGFloat viewHeight;
+@property CGFloat viewWidth;
 
 @end
 
