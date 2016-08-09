@@ -12,6 +12,6 @@
 #import <FirebaseDatabase/FirebaseDatabase.h>
 #import "PMFirebaseClient.h"
 
-@interface PMParkViewController : UIViewController <CLLocationManagerDelegate>
+@interface PMParkViewController : UIViewController <CLLocationManagerDelegate, GMSMapViewDelegate>
 
 @end

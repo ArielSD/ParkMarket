@@ -11,6 +11,8 @@
 @interface PMParkViewController ()
 
 @property (strong, nonatomic) NSMutableDictionary *parkingSpots;
+@property (strong, nonatomic) NSMutableArray *parkingSpotMarkers;
+@property (strong, nonatomic) GMSMarker *selectedMarker;
 
 @property (strong, nonatomic) GMSMapView *mapView;
 @property (strong, nonatomic) UILabel *questionLabel;
@@ -53,6 +55,7 @@
     self.mapView.settings.compassButton = YES;
     self.mapView.settings.myLocationButton = YES;
     self.mapView.myLocationEnabled = YES;
+    self.mapView.delegate = self;
     
     [self.view addSubview:self.mapView];
     
@@ -131,22 +134,9 @@
 
 #pragma mark - Helper Methods
 
-- (void)noAvailableSpots {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Hmmm..."
-                                                                             message:@"There are currently no available spots"
-                                                                      preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
-                                                     style:UIAlertActionStyleDefault
-                                                   handler:nil];
-    
-    [alertController addAction:action];
-    [self presentViewController:alertController
-                       animated:YES
-                     completion:nil];
-}
-
 - (void)populateMapWithMarkersForParkingSpotsFromDictionary:(NSDictionary *)dictionary {
+    self.parkingSpotMarkers = [NSMutableArray new];
+    
     for (NSString *parkingSpotKey in dictionary) {
         NSDictionary *parkingSpot = dictionary[parkingSpotKey];
         
@@ -165,13 +155,53 @@
             marker.userData = parkingSpotIdentifier;
             marker.appearAnimation = kGMSMarkerAnimationPop;
             marker.title = parkingSpotOwner;
-            marker.map = self.mapView;            
+            marker.snippet = parkingSpotIdentifier;
+            marker.map = self.mapView;
+            
+            [self.parkingSpotMarkers addObject:marker];
         });
     }
 }
 
+- (void)noAvailableSpots {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Hmmm..."
+                                                                             message:@"There are currently no available spots"
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:nil];
+    
+    [alertController addAction:action];
+    [self presentViewController:alertController
+                       animated:YES
+                     completion:nil];
+}
+
 - (void)parkButtonTapped {
     NSLog(@"Park button tapped");
+}
+
+#pragma mark - Map View Delegate Methods
+
+- (void)mapView:(GMSMapView *)mapView didLongPressInfoWindowOfMarker:(GMSMarker *)marker {
+    
+    if (marker.opacity == 1) {
+        self.selectedMarker = marker;
+        
+        for (GMSMarker *marker in self.parkingSpotMarkers) {
+            marker.icon = nil;
+            marker.opacity = 1;
+        }
+        
+        marker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
+        marker.opacity = 0.5;
+    }
+    else {
+        self.selectedMarker = nil;
+        marker.icon = nil;
+        marker.opacity = 1;
+    }
 }
 
 @end
