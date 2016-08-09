@@ -83,7 +83,7 @@
                                               multiplier:0.5].active = YES;
     
     [self.parkButton addTarget:self
-                        action:@selector(postButtonTapped)
+                        action:@selector(parkButtonTapped)
               forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -165,9 +165,13 @@
             marker.userData = parkingSpotIdentifier;
             marker.appearAnimation = kGMSMarkerAnimationPop;
             marker.title = parkingSpotOwner;
-            marker.map = self.mapView;
+            marker.map = self.mapView;            
         });
     }
+}
+
+- (void)parkButtonTapped {
+    NSLog(@"Park button tapped");
 }
 
 @end
