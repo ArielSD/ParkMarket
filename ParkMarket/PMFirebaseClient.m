@@ -25,20 +25,18 @@
 }
 
 + (void)postParkingSpotWithLatitude:(NSString *)latitude longitute:(NSString *)longitude {
-    NSDictionary *parkingSpotInformation = @{@"owner" : [FIRAuth auth].currentUser.uid,
-                                             @"latitude" : latitude,
-                                             @"longitude" : longitude};
-    
-    NSDictionary *parkingSpotCoordinates = @{@"latitude" : latitude,
-                                             @"longitude" : longitude};
     
     // Posting a spot to the 'parkingSpots' node
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
     FIRDatabaseReference *newParkingSpotReference = [parkingSpotsReference childByAutoId];
-    [newParkingSpotReference setValue:parkingSpotInformation];
     
-    NSString *newParkingSpotKey = newParkingSpotReference.key;
+    NSDictionary *parkingSpotInformation = @{@"owner" : [FIRAuth auth].currentUser.uid,
+                                             @"identifier" : newParkingSpotReference.key,
+                                             @"latitude" : latitude,
+                                             @"longitude" : longitude};
+    
+    [newParkingSpotReference setValue:parkingSpotInformation];
     
     // Posting a spot to the currently logged in user
     FIRUser *currentUser = [FIRAuth auth].currentUser;
@@ -46,7 +44,12 @@
     FIRDatabaseReference *usersReference = [rootReference child:@"users"];
     FIRDatabaseReference *currentUserReference = [usersReference child:currentUserUID];
     FIRDatabaseReference *postedParkingSpotsReference = [currentUserReference child:@"postedParkingSpots"];
-    FIRDatabaseReference *newPostedParkingSpotReference = [postedParkingSpotsReference child:newParkingSpotKey];
+    FIRDatabaseReference *newPostedParkingSpotReference = [postedParkingSpotsReference child:newParkingSpotReference.key];
+    
+    NSDictionary *parkingSpotCoordinates = @{@"identifier" : newParkingSpotReference.key,
+                                             @"latitude" : latitude,
+                                             @"longitude" : longitude};
+    
     [newPostedParkingSpotReference setValue:parkingSpotCoordinates];
 }
 
