@@ -150,6 +150,7 @@
     for (NSString *parkingSpotKey in dictionary) {
         NSDictionary *parkingSpot = dictionary[parkingSpotKey];
         
+        NSString *parkingSpotIdentifier = parkingSpot[@"identifier"];
         NSString *parkingSpotOwner = parkingSpot[@"owner"];
         NSString *parkingSpotLatitudeString = parkingSpot[@"latitude"];
         NSString *parkingSpotLongitudeString = parkingSpot[@"longitude"];
@@ -161,6 +162,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^ {
             GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpotLocation];
+            marker.userData = parkingSpotIdentifier;
             marker.appearAnimation = kGMSMarkerAnimationPop;
             marker.title = parkingSpotOwner;
             marker.map = self.mapView;
