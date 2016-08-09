@@ -10,7 +10,7 @@
 
 @interface PMParkViewController ()
 
-@property (strong, nonatomic) NSDictionary *parkingSpots;
+@property (strong, nonatomic) NSMutableDictionary *parkingSpots;
 
 @property (strong, nonatomic) GMSMapView *mapView;
 @property (strong, nonatomic) UILabel *questionLabel;
@@ -30,7 +30,7 @@
     [super viewDidLoad];
     
     [self configureLocationManager];
-    [self showParkingSpotMarkers];
+    [self getAllAvailableParkingSpots];
     
     self.viewHeight = self.view.frame.size.height;
     self.viewWidth = self.view.frame.size.width;
@@ -117,32 +117,14 @@
 
 #pragma mark - Network Call
 
-- (void)showParkingSpotMarkers {
+- (void)getAllAvailableParkingSpots {
     [PMFirebaseClient getAvailableParkingSpotsWithCompletion:^(NSDictionary *parkingSpots) {
-        
         if (parkingSpots == nil) {
             [self noAvailableSpots];
         }
         else {
-            for (NSString *parkingSpotKey in parkingSpots) {
-                NSDictionary *parkingSpot = parkingSpots[parkingSpotKey];
-                
-                NSString *parkingSpotOwner = parkingSpot[@"owner"];
-                NSString *parkingSpotLatitudeString = parkingSpot[@"latitude"];
-                NSString *parkingSpotLongitudeString = parkingSpot[@"longitude"];
-                
-                double parkingSpotLatitudeDouble = parkingSpotLatitudeString.doubleValue;
-                double parkingSpotLongitudeDouble = parkingSpotLongitudeString.doubleValue;
-                
-                CLLocationCoordinate2D parkingSpotLocation = CLLocationCoordinate2DMake(parkingSpotLatitudeDouble, parkingSpotLongitudeDouble);
-                
-                dispatch_async(dispatch_get_main_queue(), ^ {
-                    GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpotLocation];
-                    marker.appearAnimation = kGMSMarkerAnimationPop;
-                    marker.title = parkingSpotOwner;
-                    marker.map = self.mapView;
-                });
-            }
+            self.parkingSpots = [NSMutableDictionary dictionaryWithDictionary:parkingSpots];
+            [self populateMapWithMarkersForParkingSpotsFromDictionary:self.parkingSpots];
         }
     }];
 }
@@ -162,6 +144,28 @@
     [self presentViewController:alertController
                        animated:YES
                      completion:nil];
+}
+
+- (void)populateMapWithMarkersForParkingSpotsFromDictionary:(NSDictionary *)dictionary {
+    for (NSString *parkingSpotKey in dictionary) {
+        NSDictionary *parkingSpot = dictionary[parkingSpotKey];
+        
+        NSString *parkingSpotOwner = parkingSpot[@"owner"];
+        NSString *parkingSpotLatitudeString = parkingSpot[@"latitude"];
+        NSString *parkingSpotLongitudeString = parkingSpot[@"longitude"];
+        
+        double parkingSpotLatitudeDouble = parkingSpotLatitudeString.doubleValue;
+        double parkingSpotLongitudeDouble = parkingSpotLongitudeString.doubleValue;
+        
+        CLLocationCoordinate2D parkingSpotLocation = CLLocationCoordinate2DMake(parkingSpotLatitudeDouble, parkingSpotLongitudeDouble);
+        
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpotLocation];
+            marker.appearAnimation = kGMSMarkerAnimationPop;
+            marker.title = parkingSpotOwner;
+            marker.map = self.mapView;
+        });
+    }
 }
 
 @end
