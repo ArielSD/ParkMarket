@@ -178,6 +178,7 @@
                      completion:nil];
 }
 
+#warning Delete the corresponding spot from the api when this is pressed. 
 - (void)parkButtonTapped {
     NSLog(@"Park button tapped");
 }
