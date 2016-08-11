@@ -178,9 +178,33 @@
                      completion:nil];
 }
 
-#warning Delete the corresponding spot from the api when this is pressed. 
+- (void)noParkingSpotSelected {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Not so fast!"
+                                                                             message:@"You haven't selected a parking spot to take."
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:nil];
+    
+    [alertController addAction:action];
+    [self presentViewController:alertController
+                       animated:YES
+                     completion:nil];
+}
+
 - (void)parkButtonTapped {
-    NSLog(@"Park button tapped");
+    if (self.selectedMarker == nil) {
+        [self noParkingSpotSelected];
+    }
+    else {
+    GMSMarker *markerToDelete = self.selectedMarker;
+    [self.parkingSpots removeObjectForKey:self.selectedMarker.userData];
+    [PMFirebaseClient removeClaimedParkingSpotWithIdentifier:self.selectedMarker.userData];
+    [PMFirebaseClient removeClaimedParkingSpotFromOwner:self.selectedMarker.title
+                                         withIdentifier:self.selectedMarker.userData];
+    markerToDelete.map = nil;
+    }
 }
 
 #pragma mark - Map View Delegate Methods

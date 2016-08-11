@@ -70,4 +70,21 @@
                                   }];
 }
 
+// Remove a spot from the 'parkingSpots' node
++ (void)removeClaimedParkingSpotWithIdentifier:(NSString *)identifier {
+    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+    FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
+    FIRDatabaseReference *parkingSpotToRemoveReference = [parkingSpotsReference child:identifier];
+    [parkingSpotToRemoveReference removeValue];
+}
+
++ (void)removeClaimedParkingSpotFromOwner:(NSString *)owner withIdentifier:(NSString *)identifier {
+    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+    FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+    FIRDatabaseReference *parkingSpotOwnerReference = [usersReference child:owner];
+    FIRDatabaseReference *ownersParkingSpotsReference = [parkingSpotOwnerReference child:@"postedParkingSpots"];
+    FIRDatabaseReference *parkingSpotToRemoveReference = [ownersParkingSpotsReference child:identifier];
+    [parkingSpotToRemoveReference removeValue];
+}
+
 @end

@@ -20,4 +20,9 @@
 
 + (void)getAvailableParkingSpotsWithCompletion:(void (^)(NSDictionary *parkingSpots))completionBlock;
 
++ (void)removeClaimedParkingSpotWithIdentifier:(NSString *)identifier;
+
++ (void)removeClaimedParkingSpotFromOwner:(NSString *)owner
+                           withIdentifier:(NSString *)identifier;
+
 @end
