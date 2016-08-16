@@ -194,6 +194,9 @@
 }
 
 - (void)parkButtonTapped {
+    
+    NSLog(@"Selected Marker: %@", self.selectedMarker);
+    
     if (self.selectedMarker == nil) {
         [self noParkingSpotSelected];
     }
@@ -205,6 +208,8 @@
                                          withIdentifier:self.selectedMarker.userData];
     markerToDelete.map = nil;
     }
+    
+    NSLog(@"Selected Marker: %@", self.selectedMarker);
 }
 
 #pragma mark - Map View Delegate Methods
