@@ -31,6 +31,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"View Did Load");
+    
     [self configureLocationManager];
     [self getAllAvailableParkingSpots];
     
@@ -128,6 +130,13 @@
         else {
             self.parkingSpots = [NSMutableDictionary dictionaryWithDictionary:parkingSpots];
             [self populateMapWithMarkersForParkingSpotsFromDictionary:self.parkingSpots];
+            
+            // For a blog article
+            
+            NSLog(@"%@", self.parkingSpots);
+            
+            // For a blog article
+            
         }
     }];
 }
