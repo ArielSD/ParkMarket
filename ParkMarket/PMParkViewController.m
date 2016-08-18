@@ -31,8 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"View Did Load");
-    
     [self configureLocationManager];
     [self getAllAvailableParkingSpots];
     

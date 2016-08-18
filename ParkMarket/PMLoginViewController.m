@@ -151,10 +151,22 @@
 - (void)signUpButtonTapped {
     [PMFirebaseClient createUserWithFirstName:self.firstNameTextField.text
                                         email:self.emailTextField.text
-                                     password:self.passwordTextField.text];
-    
-    [self.delegate didLogInUser];
-    [self.passwordTextField resignFirstResponder];
+                                     password:self.passwordTextField.text
+                                   completion:^(NSError *error) {
+                                       
+                                       if (error) {
+                                           
+                                           NSLog(@"There is some error, in sign in button");
+                                           
+                                           if (error.code == 17007) {
+                                               NSLog(@"This email account is already being used!");
+                                           }
+                                       }
+                                       else {
+                                           [self.delegate didLogInUser];
+                                           [self.passwordTextField resignFirstResponder];
+                                       }
+                                   }];
 }
 
 @end

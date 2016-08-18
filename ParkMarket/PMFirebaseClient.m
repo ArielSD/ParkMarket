@@ -10,18 +10,25 @@
 
 @implementation PMFirebaseClient
 
-+ (void)createUserWithFirstName:(NSString *)firstName email:(NSString *)email password:(NSString *)password {
++ (void)createUserWithFirstName:(NSString *)firstName email:(NSString *)email password:(NSString *)password completion:(void (^)(NSError *))completionBlock {
     [[FIRAuth auth] createUserWithEmail:email
                                password:password
                              completion:^(FIRUser *user, NSError *error) {
                                  
-                                 NSDictionary *userInformation = @{@"first name" : firstName,
-                                                                   @"email" : email};
-                                 
-                                 FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
-                                 FIRDatabaseReference *usersReference = [rootReference child:@"users"];
-                                 FIRDatabaseReference *newUserReference = [usersReference child:user.uid];
-                                 [newUserReference setValue:userInformation];
+                                 if (error) {
+                                     completionBlock(error);
+                                 }
+                                 else{
+                                     NSDictionary *userInformation = @{@"first name" : firstName,
+                                                                       @"email" : email};
+                                     
+                                     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+                                     FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+                                     FIRDatabaseReference *newUserReference = [usersReference child:user.uid];
+                                     [newUserReference setValue:userInformation];
+                                     
+                                     completionBlock(nil);
+                                 }
                              }];
 }
 
