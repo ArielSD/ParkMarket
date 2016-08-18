@@ -11,6 +11,7 @@
 @interface PMLoginViewController ()
 
 @property (strong, nonatomic) UILabel *welcomeLabel;
+@property (strong, nonatomic) UITextField *firstNameTextField;
 @property (strong, nonatomic) UITextField *emailTextField;
 @property (strong, nonatomic) UITextField *passwordTextField;
 @property (strong, nonatomic) UIButton *loginButton;
@@ -23,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureWelcomeLabel];
+    [self configureFirstNameTextField];
     [self configureEmailTextField];
     [self configurePasswordTextField];
     [self configureLoginButton];
@@ -50,14 +52,29 @@
     self.welcomeLabel.text = @"Welcome!";
 }
 
+- (void)configureFirstNameTextField {
+    self.firstNameTextField = [UITextField new];
+    [self.view addSubview:self.firstNameTextField];
+    
+    self.firstNameTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.firstNameTextField.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.firstNameTextField.topAnchor constraintEqualToAnchor:self.welcomeLabel.bottomAnchor
+                                                      constant:self.view.frame.size.height / 33].active = YES;
+    [self.firstNameTextField.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
+                                                      multiplier:0.5].active = YES;
+    
+    self.firstNameTextField.borderStyle = UITextBorderStyleRoundedRect;
+    self.firstNameTextField.placeholder = @"First Name";
+}
+
 - (void)configureEmailTextField {
     self.emailTextField = [UITextField new];
     [self.view addSubview:self.emailTextField];
     
     self.emailTextField.translatesAutoresizingMaskIntoConstraints = NO;
     [self.emailTextField.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [self.emailTextField.topAnchor constraintEqualToAnchor:self.welcomeLabel.bottomAnchor
-                                                  constant:self.view.frame.size.height / 33].active = YES;
+    [self.emailTextField.topAnchor constraintEqualToAnchor:self.firstNameTextField.bottomAnchor
+                                                  constant:self.view.frame.size.height / 50.0].active = YES;
     [self.emailTextField.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
                                                   multiplier:0.5].active = YES;
     
