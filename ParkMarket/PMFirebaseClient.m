@@ -10,12 +10,13 @@
 
 @implementation PMFirebaseClient
 
-+ (void)createUserWithEmail:(NSString *)email password:(NSString *)password {
++ (void)createUserWithFirstName:(NSString *)firstName email:(NSString *)email password:(NSString *)password {
     [[FIRAuth auth] createUserWithEmail:email
                                password:password
                              completion:^(FIRUser *user, NSError *error) {
                                  
-                                 NSDictionary *userInformation = @{@"email" : email};
+                                 NSDictionary *userInformation = @{@"first name" : firstName,
+                                                                   @"email" : email};
                                  
                                  FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
                                  FIRDatabaseReference *usersReference = [rootReference child:@"users"];

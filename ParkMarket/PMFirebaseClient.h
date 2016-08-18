@@ -12,8 +12,9 @@
 
 @interface PMFirebaseClient : NSObject
 
-+ (void)createUserWithEmail:(NSString *)email
-                   password:(NSString *)password;
++ (void)createUserWithFirstName:(NSString *)firstName
+                          email:(NSString *)email
+                       password:(NSString *)password;
 
 + (void)postParkingSpotWithLatitude:(NSString *)latitude
                           longitute:(NSString *)longitude;

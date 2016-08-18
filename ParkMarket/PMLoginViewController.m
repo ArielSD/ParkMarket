@@ -14,6 +14,7 @@
 @property (strong, nonatomic) UITextField *firstNameTextField;
 @property (strong, nonatomic) UITextField *emailTextField;
 @property (strong, nonatomic) UITextField *passwordTextField;
+@property (strong, nonatomic) UITextField *confirmPasswordTextField;
 @property (strong, nonatomic) UIButton *loginButton;
 @property (strong, nonatomic) UIButton *signUpButton;
 
@@ -27,6 +28,7 @@
     [self configureFirstNameTextField];
     [self configureEmailTextField];
     [self configurePasswordTextField];
+    [self configureConfirmPasswordTextField];
     [self configureLoginButton];
     [self configureSignUpButton];
 }
@@ -98,13 +100,29 @@
     self.passwordTextField.placeholder = @"Password";
 }
 
+- (void)configureConfirmPasswordTextField {
+    self.confirmPasswordTextField = [UITextField new];
+    [self.view addSubview:self.confirmPasswordTextField];
+    
+    self.confirmPasswordTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.confirmPasswordTextField.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.confirmPasswordTextField.topAnchor constraintEqualToAnchor:self.passwordTextField.bottomAnchor
+                                                            constant:self.view.frame.size.height / 50.0].active = YES;
+    [self.confirmPasswordTextField.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
+                                                            multiplier:0.5].active = YES;
+    
+    self.confirmPasswordTextField.borderStyle = UITextBorderStyleRoundedRect;
+    self.confirmPasswordTextField.secureTextEntry = YES;
+    self.confirmPasswordTextField.placeholder = @"Confirm Password";
+}
+
 - (void)configureLoginButton {
     self.loginButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.view addSubview:self.loginButton];
     
     self.loginButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.loginButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [self.loginButton.bottomAnchor constraintEqualToAnchor:self.passwordTextField.bottomAnchor
+    [self.loginButton.bottomAnchor constraintEqualToAnchor:self.confirmPasswordTextField.bottomAnchor
                                                   constant:self.view.frame.size.height / 15].active = YES;
     
     [self.loginButton setTitle:@"Log In"
@@ -131,8 +149,9 @@
 #pragma  mark - Firebase Methods
 
 - (void)signUpButtonTapped {
-    [PMFirebaseClient createUserWithEmail:self.emailTextField.text
-                                 password:self.passwordTextField.text];
+    [PMFirebaseClient createUserWithFirstName:self.firstNameTextField.text
+                                        email:self.emailTextField.text
+                                     password:self.passwordTextField.text];
     
     [self.delegate didLogInUser];
     [self.passwordTextField resignFirstResponder];
