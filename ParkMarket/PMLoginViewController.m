@@ -89,6 +89,8 @@
     
     self.emailTextField.borderStyle = UITextBorderStyleRoundedRect;
     self.emailTextField.placeholder = @"Email";
+    
+    self.emailTextField.delegate = self;
 }
 
 - (void)configurePasswordTextField {
@@ -163,14 +165,29 @@
     [self.emailAlreadyTakenLabel.topAnchor constraintEqualToAnchor:self.emailTextField.bottomAnchor
                                                           constant:self.view.frame.size.height / 50.0].active = YES;
     [self.emailAlreadyTakenLabel.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
-
+    
     self.passwordTextFieldTopConstraint.active = NO;
-    [self.passwordTextField.topAnchor constraintEqualToAnchor:self.emailAlreadyTakenLabel.bottomAnchor
-                                                     constant:self.view.frame.size.height / 50.0].active = YES;
+    self.passwordTextFieldTopConstraint = [self.passwordTextField.topAnchor constraintEqualToAnchor:self.emailAlreadyTakenLabel.bottomAnchor
+                                                                                           constant:self.view.frame.size.height / 50.0];
+    self.passwordTextFieldTopConstraint.active = YES;
     
     self.emailAlreadyTakenLabel.text = @"Email is already taken";
     self.emailAlreadyTakenLabel.textAlignment = NSTextAlignmentCenter;
     self.emailAlreadyTakenLabel.textColor = [UIColor redColor];
+}
+
+#pragma mark - UITextField Delegate Methods
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (textField.backgroundColor == [UIColor redColor]) {
+        textField.backgroundColor = [UIColor whiteColor];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if ((textField == self.emailTextField) && (textField.text.length > 0)) {
+        textField.backgroundColor = [UIColor whiteColor];
+    }
 }
 
 #pragma  mark - Firebase Methods
@@ -181,9 +198,26 @@
                                      password:self.passwordTextField.text
                                    completion:^(NSError *error) {
                                        
-                                       if (error.code == 17007) {
-                                           [self configureEmailAlreadyTakenLabel];
-                                           self.passwordTextField.text = @"";
+                                       if (error) {
+                                           
+                                           NSLog(@"Error Code: %lu", error.code);
+                                           
+                                           // Check if an email is already taken
+                                           if (error.code == 17007) {
+                                               [self configureEmailAlreadyTakenLabel];
+                                               self.passwordTextField.text = @"";
+                                               self.confirmPasswordTextField.text = @"";
+                                           }
+                                           // Check if the 'email' field is left blank
+                                           if (error.code == 17999) {
+                                               self.emailTextField.backgroundColor = [UIColor redColor];
+                                               
+                                               self.passwordTextFieldTopConstraint.active = NO;
+                                               self.passwordTextFieldTopConstraint = [self.passwordTextField.topAnchor constraintEqualToAnchor:self.emailTextField.bottomAnchor
+                                                                                                                                      constant:self.view.frame.size.height / 50.0];
+                                               self.passwordTextFieldTopConstraint.active = YES;
+                                               [self.emailAlreadyTakenLabel removeFromSuperview];
+                                           }
                                        }
                                        else {
                                            [self.delegate didLogInUser];

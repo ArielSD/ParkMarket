@@ -19,7 +19,7 @@
 
 @end
 
-@interface PMLoginViewController : UIViewController
+@interface PMLoginViewController : UIViewController <UITextFieldDelegate>
 
 @property (weak, nonatomic) id <PMLoginViewControllerDelegate> delegate;
 
