@@ -13,10 +13,14 @@
 @property (strong, nonatomic) UILabel *welcomeLabel;
 @property (strong, nonatomic) UITextField *firstNameTextField;
 @property (strong, nonatomic) UITextField *emailTextField;
+@property (strong, nonatomic) UILabel *emailAlreadyTakenLabel;
 @property (strong, nonatomic) UITextField *passwordTextField;
 @property (strong, nonatomic) UITextField *confirmPasswordTextField;
 @property (strong, nonatomic) UIButton *loginButton;
 @property (strong, nonatomic) UIButton *signUpButton;
+
+// Constraints that can change
+@property (strong, nonatomic) NSLayoutConstraint *passwordTextFieldTopConstraint;
 
 @end
 
@@ -80,6 +84,9 @@
     [self.emailTextField.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
                                                   multiplier:0.5].active = YES;
     
+    self.emailTextField.adjustsFontSizeToFitWidth = YES;
+    self.emailTextField.minimumFontSize = 6.0;
+    
     self.emailTextField.borderStyle = UITextBorderStyleRoundedRect;
     self.emailTextField.placeholder = @"Email";
 }
@@ -90,8 +97,9 @@
     
     self.passwordTextField.translatesAutoresizingMaskIntoConstraints = NO;
     [self.passwordTextField.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [self.passwordTextField.topAnchor constraintEqualToAnchor:self.emailTextField.bottomAnchor
-                                                     constant:self.view.frame.size.height / 50.0].active = YES;
+    self.passwordTextFieldTopConstraint = [self.passwordTextField.topAnchor constraintEqualToAnchor:self.emailTextField.bottomAnchor
+                                                                                           constant:self.view.frame.size.height / 50.0];
+    self.passwordTextFieldTopConstraint.active = YES;
     [self.passwordTextField.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
                                                   multiplier:0.5].active = YES;
     
@@ -146,6 +154,28 @@
                 forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)configureEmailAlreadyTakenLabel {
+    
+    NSLog(@"Calling configure email already taken");
+    
+    self.emailAlreadyTakenLabel = [UILabel new];
+    [self.view addSubview:self.emailAlreadyTakenLabel];
+    
+    self.emailAlreadyTakenLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.emailAlreadyTakenLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.emailAlreadyTakenLabel.topAnchor constraintEqualToAnchor:self.emailTextField.bottomAnchor
+                                                          constant:self.view.frame.size.height / 50.0].active = YES;
+    [self.emailAlreadyTakenLabel.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+
+    self.passwordTextFieldTopConstraint.active = NO;
+    [self.passwordTextField.topAnchor constraintEqualToAnchor:self.emailAlreadyTakenLabel.bottomAnchor
+                                                     constant:self.view.frame.size.height / 50.0].active = YES;
+    
+    self.emailAlreadyTakenLabel.text = @"Email is already taken";
+    self.emailAlreadyTakenLabel.textAlignment = NSTextAlignmentCenter;
+    self.emailAlreadyTakenLabel.textColor = [UIColor redColor];
+}
+
 #pragma  mark - Firebase Methods
 
 - (void)signUpButtonTapped {
@@ -154,13 +184,11 @@
                                      password:self.passwordTextField.text
                                    completion:^(NSError *error) {
                                        
-                                       if (error) {
+                                       if (error.code == 17007) {
                                            
-                                           NSLog(@"There is some error, in sign in button");
-                                           
-                                           if (error.code == 17007) {
-                                               NSLog(@"This email account is already being used!");
-                                           }
+                                           NSLog(@"This email is already taken");
+                                           [self configureEmailAlreadyTakenLabel];
+                                           self.passwordTextField.text = @"";
                                        }
                                        else {
                                            [self.delegate didLogInUser];
