@@ -218,6 +218,8 @@
                                                self.passwordTextFieldTopConstraint.active = YES;
                                                [self.emailAlreadyTakenLabel removeFromSuperview];
                                            }
+#warning Pick up here!
+                                           // Check if the email address is valid
                                        }
                                        else {
                                            [self.delegate didLogInUser];
