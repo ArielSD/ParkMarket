@@ -155,9 +155,6 @@
 }
 
 - (void)configureEmailAlreadyTakenLabel {
-    
-    NSLog(@"Calling configure email already taken");
-    
     self.emailAlreadyTakenLabel = [UILabel new];
     [self.view addSubview:self.emailAlreadyTakenLabel];
     
@@ -185,8 +182,6 @@
                                    completion:^(NSError *error) {
                                        
                                        if (error.code == 17007) {
-                                           
-                                           NSLog(@"This email is already taken");
                                            [self configureEmailAlreadyTakenLabel];
                                            self.passwordTextField.text = @"";
                                        }

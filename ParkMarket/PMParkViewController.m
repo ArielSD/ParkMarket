@@ -128,13 +128,6 @@
         else {
             self.parkingSpots = [NSMutableDictionary dictionaryWithDictionary:parkingSpots];
             [self populateMapWithMarkersForParkingSpotsFromDictionary:self.parkingSpots];
-            
-            // For a blog article
-            
-            NSLog(@"%@", self.parkingSpots);
-            
-            // For a blog article
-            
         }
     }];
 }
@@ -201,9 +194,6 @@
 }
 
 - (void)parkButtonTapped {
-    
-    NSLog(@"Selected Marker: %@", self.selectedMarker);
-    
     if (self.selectedMarker == nil) {
         [self noParkingSpotSelected];
     }
@@ -215,8 +205,6 @@
                                          withIdentifier:self.selectedMarker.userData];
     markerToDelete.map = nil;
     }
-    
-    NSLog(@"Selected Marker: %@", self.selectedMarker);
 }
 
 #pragma mark - Map View Delegate Methods
