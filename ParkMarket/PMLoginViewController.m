@@ -85,7 +85,7 @@
                                                   multiplier:0.5].active = YES;
     
     self.emailTextField.adjustsFontSizeToFitWidth = YES;
-    self.emailTextField.minimumFontSize = 6.0;
+    self.emailTextField.minimumFontSize = 4.0;
     
     self.emailTextField.borderStyle = UITextBorderStyleRoundedRect;
     self.emailTextField.placeholder = @"Email";
@@ -108,6 +108,8 @@
     self.passwordTextField.borderStyle = UITextBorderStyleRoundedRect;
     self.passwordTextField.secureTextEntry = YES;
     self.passwordTextField.placeholder = @"Password";
+    
+    self.passwordTextField.delegate = self;
 }
 
 - (void)configureConfirmPasswordTextField {
@@ -124,6 +126,8 @@
     self.confirmPasswordTextField.borderStyle = UITextBorderStyleRoundedRect;
     self.confirmPasswordTextField.secureTextEntry = YES;
     self.confirmPasswordTextField.placeholder = @"Confirm Password";
+    
+    self.confirmPasswordTextField.delegate = self;
 }
 
 - (void)configureLoginButton {
@@ -193,6 +197,14 @@
 #pragma  mark - Firebase Methods
 
 - (void)signUpButtonTapped {
+    
+    // Check if the two password fields don't match
+    if (self.passwordTextField.text != self.confirmPasswordTextField.text) {
+        self.passwordTextField.backgroundColor = [UIColor redColor];
+        self.confirmPasswordTextField.backgroundColor = [UIColor redColor];
+    }
+    
+    else {
     [PMFirebaseClient createUserWithFirstName:self.firstNameTextField.text
                                         email:self.emailTextField.text
                                      password:self.passwordTextField.text
@@ -200,6 +212,7 @@
                                        
                                        if (error) {
                                            
+                                           NSLog(@"Error: %@", error.localizedDescription);
                                            NSLog(@"Error Code: %lu", error.code);
                                            
                                            // Check if an email is already taken
@@ -208,24 +221,29 @@
                                                self.passwordTextField.text = @"";
                                                self.confirmPasswordTextField.text = @"";
                                            }
-                                           // Check if the 'email' field is left blank
+                                           
+                                           // Check if the 'email' field is invalid or left blank
                                            if (error.code == 17999) {
                                                self.emailTextField.backgroundColor = [UIColor redColor];
                                                
                                                self.passwordTextFieldTopConstraint.active = NO;
                                                self.passwordTextFieldTopConstraint = [self.passwordTextField.topAnchor constraintEqualToAnchor:self.emailTextField.bottomAnchor
                                                                                                                                       constant:self.view.frame.size.height / 50.0];
+                                               
+                                               self.passwordTextField.text = @"";
+                                               self.confirmPasswordTextField.text = @"";
+                                               
                                                self.passwordTextFieldTopConstraint.active = YES;
                                                [self.emailAlreadyTakenLabel removeFromSuperview];
                                            }
-#warning Pick up here!
-                                           // Check if the email address is valid
                                        }
+                                       
                                        else {
                                            [self.delegate didLogInUser];
                                            [self.passwordTextField resignFirstResponder];
                                        }
                                    }];
+    }
 }
 
 @end
