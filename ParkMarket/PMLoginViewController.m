@@ -202,6 +202,9 @@
     if (self.passwordTextField.text != self.confirmPasswordTextField.text) {
         self.passwordTextField.backgroundColor = [UIColor redColor];
         self.confirmPasswordTextField.backgroundColor = [UIColor redColor];
+        
+        self.passwordTextField.text = @"";
+        self.confirmPasswordTextField.text = @"";
     }
     
     else {
