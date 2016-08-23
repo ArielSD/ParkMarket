@@ -11,6 +11,7 @@ pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'Firebase/Core'
 pod 'Firebase/Messaging'
+pod 'AFNetworking', '~> 3.0'
 
 end
 
