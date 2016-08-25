@@ -242,6 +242,7 @@
                                        }
                                        
                                        else {
+                                           NSLog(@"Resigning first responder");
                                            [self.delegate didLogInUser];
                                            [self.passwordTextField resignFirstResponder];
                                        }

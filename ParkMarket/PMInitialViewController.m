@@ -12,6 +12,9 @@
 
 @property (strong, nonatomic) UIButton *postButton;
 @property (strong, nonatomic) UIButton *parkButton;
+// For testing only
+@property (strong, nonatomic) UIButton *scanButton;
+// For testing only
 
 @end
 
@@ -23,6 +26,14 @@
     
     [self configurePostButton];
     [self configureParkButton];
+    // For testing only
+    [self configureScanCardButton];
+    // For testing only
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    [CardIOUtilities preload];
 }
 
 -(void)didReceiveMemoryWarning {
@@ -75,6 +86,46 @@
                         action:@selector(parkButtonTapped)
               forControlEvents:UIControlEventTouchUpInside];
 }
+
+// For Testing Only!
+- (void)configureScanCardButton {
+    self.scanButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.view addSubview:self.scanButton];
+    
+    [self.scanButton setTitle:@"Scan"
+                     forState:UIControlStateNormal];
+    
+    self.scanButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.scanButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.scanButton.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor
+                                                 constant:-50.0].active = YES;
+    [self.scanButton.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+    
+    [self.scanButton addTarget:self
+                        action:@selector(showCardIOController)
+              forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)showCardIOController {
+    NSLog(@"Showing Card IO controller");
+    CardIOPaymentViewController *scanViewController = [[CardIOPaymentViewController alloc] initWithPaymentDelegate:self];
+    [self presentViewController:scanViewController
+                       animated:YES
+                     completion:nil];
+}
+
+- (void)userDidCancelPaymentViewController:(CardIOPaymentViewController *)paymentViewController {
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
+}
+
+- (void)userDidProvideCreditCardInfo:(CardIOCreditCardInfo *)cardInfo
+             inPaymentViewController:(CardIOPaymentViewController *)paymentViewController {
+    NSLog(@"Info: %@", cardInfo);
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
+}
+// For Testing Only!
 
 #pragma mark - Responder Methods
 

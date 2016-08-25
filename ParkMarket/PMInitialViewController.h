@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <CardIO.h>
+#import "PMCardIOViewController.h"
 #import "PMPostViewController.h"
 #import "PMParkViewController.h"
 
-@interface PMInitialViewController : UIViewController
+@interface PMInitialViewController : UIViewController <CardIOPaymentViewControllerDelegate>
 
 @end

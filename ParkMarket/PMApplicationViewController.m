@@ -18,11 +18,11 @@
     [super viewDidLoad];
     
     // Comment out to keep a user signed in
-    NSError *error;
-    [[FIRAuth auth] signOut:&error];
-    if (!error) {
-        NSLog(@"A user has been signed out");
-    }
+//    NSError *error;
+//    [[FIRAuth auth] signOut:&error];
+//    if (!error) {
+//        NSLog(@"A user has been signed out");
+//    }
     
     if ([FIRAuth auth].currentUser) {
         [self showInitialViewController];
