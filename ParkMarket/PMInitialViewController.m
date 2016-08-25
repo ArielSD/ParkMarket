@@ -88,6 +88,9 @@
 }
 
 // For Testing Only!
+//
+//
+//
 - (void)configureScanCardButton {
     self.scanButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.view addSubview:self.scanButton];
@@ -125,6 +128,9 @@
     [self dismissViewControllerAnimated:YES
                              completion:nil];
 }
+//
+//
+//
 // For Testing Only!
 
 #pragma mark - Responder Methods

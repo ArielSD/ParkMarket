@@ -15,6 +15,12 @@
 @implementation PMApplicationViewController
 
 - (void)viewDidLoad {
+    NSLog(@"Application View Controller Did Load");
+    
+    // Testing Only
+    [self testPayPalAPICall];
+    // Testing Only
+    
     [super viewDidLoad];
     
     // Comment out to keep a user signed in
@@ -61,6 +67,46 @@
 
 - (void)didLogInUser {
     [self showInitialViewController];
+}
+
+// Testing Only
+- (void)testPayPalAPICall {
+    
+    NSLog(@"Running Test PayPal API Call");
+    
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    sessionManager.requestSerializer = [AFJSONRequestSerializer new];
+    NSString *payPalURLString = @"https://svcs.sandbox.paypal.com/AdaptivePayments/Pay";
+    
+    NSDictionary *payloadDictionary = @{
+                                        @"actionType" : @"PAY",
+                                        @"currencyCode" : @"USD",
+                                        @"receiverList" : @{
+                                                @"receiver" : @[@{@"amount":@"1.00",
+                                                                            @"email" : @"rec1_1312486368_biz@gmail.com"}]},
+                                        @"returnUrl" : @"http://www.example.com/success.html",
+                                        @"cancelUrl" : @"http://www.example.com/failure.html",
+                                        @"requestEnvelope" : @{
+                                                @"errorLanguage" : @"en_US",
+                                                @"detailLevel" : @"ReturnAll"
+                                            }
+                                        };
+    
+    [sessionManager.requestSerializer setValue:@"caller_1312486258_biz_api1.gmail.com" forHTTPHeaderField:@"X-PAYPAL-SECURITY-USERID"];
+    [sessionManager.requestSerializer setValue:@"1312486294" forHTTPHeaderField:@"X-PAYPAL-SECURITY-PASSWORD"];
+    [sessionManager.requestSerializer setValue:@"AbtI7HV1xB428VygBUcIhARzxch4AL65.T18CTeylixNNxDZUu0iO87e" forHTTPHeaderField:@"X-PAYPAL-SECURITY-SIGNATURE"];
+    [sessionManager.requestSerializer setValue:@"APP-80W284485P519543T" forHTTPHeaderField:@"X-PAYPAL-APPLICATION-ID"];
+    [sessionManager.requestSerializer setValue:@"X-PAYPAL-REQUEST-DATA-FORMAT" forHTTPHeaderField:@"JSON"];
+    [sessionManager.requestSerializer setValue:@"X-PAYPAL-RESPONSE-DATA-FORMAT" forHTTPHeaderField:@"JSON"];
+    
+    [sessionManager POST:payPalURLString
+              parameters:payloadDictionary
+                progress:nil
+                 success:^(NSURLSessionDataTask *task, id responseObject) {
+                     NSLog(@"Response Object: %@", responseObject);
+                 } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                     NSLog(@"Error: %@", error);
+                 }];
 }
 
 @end
