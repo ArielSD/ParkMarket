@@ -13,6 +13,7 @@
 #import "PMPostViewController.h"
 #import "PMParkViewController.h"
 
-@interface PMInitialViewController : UIViewController <CardIOPaymentViewControllerDelegate>
+#warning Make sure to remove all testing code
+@interface PMInitialViewController : UIViewController <CardIOPaymentViewControllerDelegate> // For Testing only!
 
 @end

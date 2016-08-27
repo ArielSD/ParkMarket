@@ -18,7 +18,7 @@
     NSLog(@"Application View Controller Did Load");
     
     // Testing Only
-    [self testPayPalAPICall];
+//    [self testPayPalAPICall];
     // Testing Only
     
     [super viewDidLoad];
