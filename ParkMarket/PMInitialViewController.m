@@ -25,13 +25,16 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:@"Park of Post?"];
-    UIBarButtonItem *editButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                                                                                    target:self
-                                                                                    action:@selector(showMenu)];
-    navigationItem.rightBarButtonItem = editButtonItem;
+    NSLog(@"Navigation Controller In Initial ViewController: %@", self.navigationController);
     
-    self.navigationController.navigationBar.items = @[navigationItem];
+    
+//    UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:@"Park or Post?"];
+//    UIBarButtonItem *editButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+//                                                                                    target:self
+//                                                                                    action:@selector(showMenu)];
+//    navigationItem.rightBarButtonItem = editButtonItem;
+//    
+//    self.navigationController.navigationBar.items = @[navigationItem];
     
     [self configurePostButton];
     [self configureParkButton];

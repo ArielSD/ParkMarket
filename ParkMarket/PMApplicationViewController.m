@@ -61,6 +61,14 @@
     navigationController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     [self.view addSubview:navigationController.view];
     [navigationController didMoveToParentViewController:self];
+    
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:nil
+                                                                  action:nil];
+    
+    initialViewController.navigationItem.title = @"Park Or Post?";
+    initialViewController.navigationItem.rightBarButtonItem = menuButton;
 }
 
 #pragma mark - Delegate Methods
