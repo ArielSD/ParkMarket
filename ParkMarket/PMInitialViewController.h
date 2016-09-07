@@ -13,7 +13,18 @@
 #import "PMPostViewController.h"
 #import "PMParkViewController.h"
 
-#warning Make sure to remove all testing code
+@class PMInitialViewController;
+
+@protocol PMInitialViewControllerDelegate <NSObject>
+
+@required
+
+- (void)didTapMenuButton;
+
+@end
+
 @interface PMInitialViewController : UIViewController <CardIOPaymentViewControllerDelegate> // For Testing only!
+
+@property (weak, nonatomic) id <PMInitialViewControllerDelegate> delegate;
 
 @end

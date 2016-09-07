@@ -25,6 +25,7 @@
     
     NSLog(@"Parent View Controller: %@", self.parentViewController.parentViewController);
     
+    [self configureNavigationBarItems];
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self configurePostButton];
@@ -110,6 +111,24 @@
     [self.scanButton addTarget:self
                         action:@selector(showCardIOController)
               forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)configureNavigationBarItems {
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(menuButtonTapped)];
+    
+    self.navigationItem.title = @"Park Or Post?";
+    self.navigationItem.rightBarButtonItem = menuButton;
+}
+
+- (void)menuButtonTapped {
+    
+    NSLog(@"Menu button tapped in Initial VC");
+    NSLog(@"Delegate: %@", self.delegate);
+    
+    [self.delegate didTapMenuButton];
 }
 
 - (void)showCardIOController {

@@ -57,25 +57,27 @@
 
 - (void)showInitialViewController {
     PMInitialViewController *initialViewController = [PMInitialViewController new];
+    initialViewController.delegate = self;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
     [self addChildViewController:navigationController];
     navigationController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     [self.view addSubview:navigationController.view];
     [navigationController didMoveToParentViewController:self];
-    
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:nil
-                                                                  action:nil];
-    
-    initialViewController.navigationItem.title = @"Park Or Post?";
-    initialViewController.navigationItem.rightBarButtonItem = menuButton;
 }
 
 #pragma mark - Delegate Methods
 
 - (void)didLogInUser {
     [self showInitialViewController];
+}
+
+- (void)didTapMenuButton {
+    
+    NSLog(@"Did tap menu button in application VC");
+    
+    UIView *menu = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width / 3.0, self.view.frame.size.height / 3.0)];
+    menu.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:menu];
 }
 
 // Testing Only

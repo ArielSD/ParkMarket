@@ -14,6 +14,6 @@
 #import "PMInitialViewController.h"
 #import "PMLoginViewController.h"
 
-@interface PMApplicationViewController : UIViewController <PMLoginViewControllerDelegate>
+@interface PMApplicationViewController : UIViewController <PMLoginViewControllerDelegate, PMInitialViewControllerDelegate>
 
 @end
