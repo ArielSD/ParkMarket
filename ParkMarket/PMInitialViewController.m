@@ -23,11 +23,9 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"Parent View Controller: %@", self.parentViewController.parentViewController);
-    
-    [self configureNavigationBarItems];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [self configureNavigationBarItems];
     [self configurePostButton];
     [self configureParkButton];
     // For testing only
@@ -91,6 +89,7 @@
               forControlEvents:UIControlEventTouchUpInside];
 }
 
+#pragma mark - Testing
 // For Testing Only!
 //
 //
@@ -121,14 +120,6 @@
     
     self.navigationItem.title = @"Park Or Post?";
     self.navigationItem.rightBarButtonItem = menuButton;
-}
-
-- (void)menuButtonTapped {
-    
-    NSLog(@"Menu button tapped in Initial VC");
-    NSLog(@"Delegate: %@", self.delegate);
-    
-    [self.delegate didTapMenuButton];
 }
 
 - (void)showCardIOController {
@@ -169,6 +160,10 @@
     mapViewController.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController pushViewController:mapViewController
                                          animated:YES];
+}
+
+- (void)menuButtonTapped {
+    [self.delegate didTapMenuButton];
 }
 
 @end

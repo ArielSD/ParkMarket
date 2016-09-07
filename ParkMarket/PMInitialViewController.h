@@ -9,22 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <CardIO.h>
+#import "PMApplicationViewController.h"
 #import "PMCardIOViewController.h"
 #import "PMPostViewController.h"
 #import "PMParkViewController.h"
 
-@class PMInitialViewController;
-
-@protocol PMInitialViewControllerDelegate <NSObject>
-
-@required
-
-- (void)didTapMenuButton;
-
-@end
+@protocol MenuButtonDelegate;
 
 @interface PMInitialViewController : UIViewController <CardIOPaymentViewControllerDelegate> // For Testing only!
 
-@property (weak, nonatomic) id <PMInitialViewControllerDelegate> delegate;
+@property (weak, nonatomic) id <MenuButtonDelegate> delegate;
 
 @end

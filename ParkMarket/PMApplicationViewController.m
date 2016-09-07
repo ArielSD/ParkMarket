@@ -72,9 +72,6 @@
 }
 
 - (void)didTapMenuButton {
-    
-    NSLog(@"Did tap menu button in application VC");
-    
     UIView *menu = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width / 3.0, self.view.frame.size.height / 3.0)];
     menu.backgroundColor = [UIColor blueColor];
     [self.view addSubview:menu];

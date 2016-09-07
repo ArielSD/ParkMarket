@@ -14,6 +14,16 @@
 #import "PMInitialViewController.h"
 #import "PMLoginViewController.h"
 
-@interface PMApplicationViewController : UIViewController <PMLoginViewControllerDelegate, PMInitialViewControllerDelegate>
+@class PMApplicationViewController;
+
+@protocol MenuButtonDelegate <NSObject>
+
+@required
+
+- (void)didTapMenuButton;
+
+@end
+
+@interface PMApplicationViewController : UIViewController <PMLoginViewControllerDelegate, MenuButtonDelegate>
 
 @end
