@@ -23,18 +23,9 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"Parent View Controller: %@", self.parentViewController.parentViewController);
+    
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    NSLog(@"Navigation Controller In Initial ViewController: %@", self.navigationController);
-    
-    
-//    UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:@"Park or Post?"];
-//    UIBarButtonItem *editButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-//                                                                                    target:self
-//                                                                                    action:@selector(showMenu)];
-//    navigationItem.rightBarButtonItem = editButtonItem;
-//    
-//    self.navigationController.navigationBar.items = @[navigationItem];
     
     [self configurePostButton];
     [self configureParkButton];

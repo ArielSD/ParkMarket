@@ -30,8 +30,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self configureLocationManager];
+    [self configureNavigationBarItems];
     
     // Firebase call to populate the mapview with 'posted' parking spots.
     [self getAllAvailableParkingSpots];
@@ -90,6 +90,16 @@
     [self.parkButton addTarget:self
                         action:@selector(parkButtonTapped)
               forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)configureNavigationBarItems {
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:nil
+                                                                  action:nil];
+    
+    self.navigationItem.title = @"Park";
+    self.navigationItem.rightBarButtonItem = menuButton;
 }
 
 -(void)configureLocationManager {
