@@ -10,13 +10,17 @@
 
 @interface PMApplicationViewController ()
 
+@property (strong, nonatomic) UIView *menu;
+
+// Constraints that can change
+@property (strong, nonatomic) NSLayoutConstraint *menuRightAnchorConstraint;
+
 @end
 
 @implementation PMApplicationViewController
 
 - (void)viewDidLoad {
     NSLog(@"Application View Controller Did Load");
-    NSLog(@"Application View Controller: %@", self);
     
     // Testing Only
 //    [self testPayPalAPICall];
@@ -37,6 +41,8 @@
     else {
         [self showLoginViewController];
     }
+    
+    [self configureMenu];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,7 +50,32 @@
     NSLog(@"Did receive memory warning");
 }
 
-#pragma - Helper Methods
+#pragma mark - UI Layout
+
+- (void)configureMenu {
+    
+    NSLog(@"Configure Menu Called");
+    
+    self.menu = [UIView new];
+    [self.view addSubview:self.menu];
+    
+    self.menu.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.menu.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
+    self.menuRightAnchorConstraint = [self.menu.rightAnchor constraintEqualToAnchor:self.view.leftAnchor];
+    self.menuRightAnchorConstraint.active = YES;
+    [self.menu.heightAnchor constraintEqualToAnchor:self.view.heightAnchor].active = YES;
+    [self.menu.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
+                                        multiplier:1.0 / 3.0].active = YES;
+    
+    self.menu.backgroundColor = [UIColor blueColor];
+    
+    
+//    self.menu = [[UIView alloc] initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width / 3.0), self.view.frame.size.height)];
+//    [self.view addSubview:self.menu];
+//    self.menu.backgroundColor = [UIColor blueColor];
+}
+
+#pragma mark- Container View Methods
 
 - (void)showLoginViewController {
     PMLoginViewController *loginViewController = [PMLoginViewController new];
@@ -72,11 +103,17 @@
 }
 
 - (void)didTapMenuButton {
-    UIView *menu = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width / 3.0, self.view.frame.size.height / 3.0)];
-    menu.backgroundColor = [UIColor blueColor];
-    [self.view addSubview:menu];
+    NSLog(@"Did Tap Menu Button In Application View Controller");
+    
+    [UIView animateWithDuration:0.6
+                     animations:^{
+                         self.menuRightAnchorConstraint.active = NO;
+                         [self.menu.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
+                         [self.view layoutIfNeeded];
+                     }];
 }
 
+#pragma mark - Testing
 // Testing Only
 - (void)testPayPalAPICall {
     
