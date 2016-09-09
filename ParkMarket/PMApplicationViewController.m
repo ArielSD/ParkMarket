@@ -10,7 +10,7 @@
 
 @interface PMApplicationViewController ()
 
-@property (strong, nonatomic) UIView *menu;
+@property (strong, nonatomic) PMMenu *menu;
 
 // Constraints that can change
 @property (strong, nonatomic) NSLayoutConstraint *menuRightAnchorConstraint;
@@ -54,28 +54,18 @@
 #pragma mark - UI Layout
 
 - (void)configureMenu {
-    
-    NSLog(@"Configure Menu Called");
-    
-    self.menu = [UIView new];
+    self.menu = [[PMMenu alloc] initInViewController:self];
     [self.view addSubview:self.menu];
     
     self.menu.translatesAutoresizingMaskIntoConstraints = NO;
     [self.menu.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
     [self.menu.heightAnchor constraintEqualToAnchor:self.view.heightAnchor].active = YES;
     [self.menu.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
-                                        multiplier:1.0 / 3.0].active = YES;
-    
+                                   multiplier:1.0 / 3.0].active = YES;
     
     self.menuRightAnchorConstraint = [self.menu.rightAnchor constraintEqualToAnchor:self.view.leftAnchor];
     self.menuLeftAnchorConstraint = [self.menu.leftAnchor constraintEqualToAnchor:self.view.leftAnchor];
     self.menuRightAnchorConstraint.active = YES;
-    
-    self.menu.backgroundColor = [UIColor blueColor];
-    
-//    self.menu = [[UIView alloc] initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width / 3.0), self.view.frame.size.height)];
-//    [self.view addSubview:self.menu];
-//    self.menu.backgroundColor = [UIColor blueColor];
 }
 
 #pragma mark- Container View Methods
@@ -109,6 +99,8 @@
     if (self.menuRightAnchorConstraint.active == YES) {
         [UIView animateWithDuration:0.6
                          animations:^{
+                             self.view.alpha = 0.25;
+                             self.menu.alpha = 1.0;
                              self.menuRightAnchorConstraint.active = NO;
                              self.menuLeftAnchorConstraint.active = YES;
                              [self.view layoutIfNeeded];
@@ -118,6 +110,7 @@
     else {
         [UIView animateWithDuration:0.6
                          animations:^{
+                             self.view.alpha = 1.0;
                              self.menuLeftAnchorConstraint.active = NO;
                              self.menuRightAnchorConstraint.active = YES;
                              [self.view layoutIfNeeded];

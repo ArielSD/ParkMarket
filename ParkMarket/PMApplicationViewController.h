@@ -13,6 +13,7 @@
 // Testing only
 #import "PMInitialViewController.h"
 #import "PMLoginViewController.h"
+#import "PMMenu.h"
 
 @class PMApplicationViewController;
 
