@@ -66,6 +66,10 @@
     self.menuRightAnchorConstraint = [self.menu.rightAnchor constraintEqualToAnchor:self.view.leftAnchor];
     self.menuLeftAnchorConstraint = [self.menu.leftAnchor constraintEqualToAnchor:self.view.leftAnchor];
     self.menuRightAnchorConstraint.active = YES;
+    
+    [self.menu.addCardButton addTarget:self
+                                action:@selector(showCardIOController)
+                      forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark- Container View Methods
@@ -115,6 +119,28 @@
                              [self.view layoutIfNeeded];
                          }];
     }
+}
+
+#pragma mark - Helper Methods
+
+- (void)showCardIOController {
+    NSLog(@"Showing Card IO controller");
+    CardIOPaymentViewController *scanViewController = [[CardIOPaymentViewController alloc] initWithPaymentDelegate:self];
+    [self presentViewController:scanViewController
+                       animated:YES
+                     completion:nil];
+}
+
+- (void)userDidCancelPaymentViewController:(CardIOPaymentViewController *)paymentViewController {
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
+}
+
+- (void)userDidProvideCreditCardInfo:(CardIOCreditCardInfo *)cardInfo
+             inPaymentViewController:(CardIOPaymentViewController *)paymentViewController {
+    NSLog(@"Info: %@", cardInfo);
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
 }
 
 #pragma mark - Testing

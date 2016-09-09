@@ -27,16 +27,11 @@
         [self.addCardButton setTitle:@"Add Card"
                             forState:UIControlStateNormal];
         
-        [self.addCardButton addTarget:self
-                               action:@selector(testMethod)
-                     forControlEvents:UIControlEventTouchUpInside];
+//        [self.addCardButton addTarget:self
+//                               action:@selector(testMethod)
+//                     forControlEvents:UIControlEventTouchUpInside];
     }
     return  self;
-}
-
-// Testing
-- (void)testMethod {
-    NSLog(@"Add Card Tapped");
 }
 
 @end
