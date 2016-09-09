@@ -6,9 +6,9 @@
 //  Copyright © 2016 Ariel Scott-Dicker. All rights reserved.
 //
 
-#import "PMMenu.h"
+#import "PMMenuViewController.h"
 
-@implementation PMMenu
+@implementation PMMenuViewController
 
 - (instancetype)initInViewController:(UIViewController *)viewController {
     self = [super init];
@@ -37,7 +37,6 @@
 #pragma mark - Card IO Delegate Methods
 
 - (void)showCardIOController {
-    NSLog(@"Showing Card IO controller");
     CardIOPaymentViewController *scanViewController = [[CardIOPaymentViewController alloc] initWithPaymentDelegate:self];
     [self presentViewController:scanViewController
                        animated:YES

@@ -10,7 +10,7 @@
 
 @interface PMApplicationViewController ()
 
-@property (strong, nonatomic) PMMenu *menu;
+@property (strong, nonatomic) PMMenuViewController *menu;
 
 // Constraints that can change
 @property (strong, nonatomic) NSLayoutConstraint *menuRightAnchorConstraint;
@@ -21,7 +21,6 @@
 @implementation PMApplicationViewController
 
 - (void)viewDidLoad {
-    NSLog(@"Application View Controller Did Load");
     
     // Testing Only
 //    [self testPayPalAPICall];
@@ -54,7 +53,7 @@
 #pragma mark - UI Layout
 
 - (void)configureMenu {
-    self.menu = [[PMMenu alloc] initInViewController:self];
+    self.menu = [[PMMenuViewController alloc] initInViewController:self];
     [self.view addSubview:self.menu.view];
     
     self.menu.view.translatesAutoresizingMaskIntoConstraints = NO;
