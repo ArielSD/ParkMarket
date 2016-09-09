@@ -55,21 +55,17 @@
 
 - (void)configureMenu {
     self.menu = [[PMMenu alloc] initInViewController:self];
-    [self.view addSubview:self.menu];
+    [self.view addSubview:self.menu.view];
     
-    self.menu.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.menu.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
-    [self.menu.heightAnchor constraintEqualToAnchor:self.view.heightAnchor].active = YES;
-    [self.menu.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
+    self.menu.view.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.menu.view.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
+    [self.menu.view.heightAnchor constraintEqualToAnchor:self.view.heightAnchor].active = YES;
+    [self.menu.view.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
                                    multiplier:1.0 / 3.0].active = YES;
     
-    self.menuRightAnchorConstraint = [self.menu.rightAnchor constraintEqualToAnchor:self.view.leftAnchor];
-    self.menuLeftAnchorConstraint = [self.menu.leftAnchor constraintEqualToAnchor:self.view.leftAnchor];
+    self.menuRightAnchorConstraint = [self.menu.view.rightAnchor constraintEqualToAnchor:self.view.leftAnchor];
+    self.menuLeftAnchorConstraint = [self.menu.view.leftAnchor constraintEqualToAnchor:self.view.leftAnchor];
     self.menuRightAnchorConstraint.active = YES;
-    
-    [self.menu.addCardButton addTarget:self
-                                action:@selector(showCardIOController)
-                      forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark- Container View Methods
@@ -119,28 +115,6 @@
                              [self.view layoutIfNeeded];
                          }];
     }
-}
-
-#pragma mark - Helper Methods
-
-- (void)showCardIOController {
-    NSLog(@"Showing Card IO controller");
-    CardIOPaymentViewController *scanViewController = [[CardIOPaymentViewController alloc] initWithPaymentDelegate:self];
-    [self presentViewController:scanViewController
-                       animated:YES
-                     completion:nil];
-}
-
-- (void)userDidCancelPaymentViewController:(CardIOPaymentViewController *)paymentViewController {
-    [self dismissViewControllerAnimated:YES
-                             completion:nil];
-}
-
-- (void)userDidProvideCreditCardInfo:(CardIOCreditCardInfo *)cardInfo
-             inPaymentViewController:(CardIOPaymentViewController *)paymentViewController {
-    NSLog(@"Info: %@", cardInfo);
-    [self dismissViewControllerAnimated:YES
-                             completion:nil];
 }
 
 #pragma mark - Testing

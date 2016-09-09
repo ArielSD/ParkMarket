@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <FirebaseAuth/FirebaseAuth.h>
-#import <CardIO.h>
 // Testing only
 #import <AFNetworking.h>
 // Testing only
@@ -26,6 +25,6 @@
 
 @end
 
-@interface PMApplicationViewController : UIViewController <PMLoginViewControllerDelegate, MenuButtonDelegate, CardIOPaymentViewControllerDelegate>
+@interface PMApplicationViewController : UIViewController <PMLoginViewControllerDelegate, MenuButtonDelegate>
 
 @end

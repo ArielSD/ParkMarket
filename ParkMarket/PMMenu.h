@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CardIO.h>
 
-@interface PMMenu : UIView
+@interface PMMenu : UIViewController <CardIOPaymentViewControllerDelegate>
 
 @property (strong, nonatomic) UIButton *addCardButton;
 @property (strong, nonatomic) UIButton *logoutButton;
