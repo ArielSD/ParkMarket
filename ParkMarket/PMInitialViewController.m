@@ -110,6 +110,9 @@
 }
 
 - (void)menuButtonTapped {
+    
+    NSLog(@"Menu button tapped in initialViewController");
+    
     [self.delegate didTapMenuButton];
 }
 

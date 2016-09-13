@@ -7,13 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CardIO.h>
 
-@interface PMMenuViewController : UIViewController <CardIOPaymentViewControllerDelegate>
+@class PMMenuViewController;
+
+@protocol PMMenuViewControllerDelegate <NSObject>
+
+@required
+
+- (void)didTapAddCardButton;
+
+@end
+
+@interface PMMenuViewController : UIViewController
 
 @property (strong, nonatomic) UIButton *addCardButton;
 @property (strong, nonatomic) UIButton *logoutButton;
 
-- (instancetype)initInViewController:(UIViewController *)viewController;
+@property (weak, nonatomic) id <PMMenuViewControllerDelegate> delegate;
+
+- (instancetype)init;
 
 @end

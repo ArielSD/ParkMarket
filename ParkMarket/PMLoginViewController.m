@@ -247,7 +247,7 @@
                                            NSLog(@"self.delegate: %@", self.delegate);
                                            
                                            [self.delegate didLogInUser];
-                                           [self.passwordTextField resignFirstResponder];
+                                           [self.confirmPasswordTextField resignFirstResponder];
                                        }
                                    }];
     }

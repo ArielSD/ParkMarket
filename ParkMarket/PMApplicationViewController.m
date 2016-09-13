@@ -53,7 +53,8 @@
 #pragma mark - UI Layout
 
 - (void)configureMenu {
-    self.menu = [[PMMenuViewController alloc] initInViewController:self];
+    self.menu = [PMMenuViewController new];
+    self.menu.delegate = self;
     [self.view addSubview:self.menu.view];
     
     self.menu.view.translatesAutoresizingMaskIntoConstraints = NO;
@@ -88,11 +89,13 @@
     [navigationController didMoveToParentViewController:self];
 }
 
-#pragma mark - Delegate Methods
+#pragma mark - PMLoginViewControllerDelegate Methods
 
 - (void)didLogInUser {
     [self showInitialViewController];
 }
+
+#pragma mark - MenuButtonDelegate Methods
 
 - (void)didTapMenuButton {
     if (self.menuRightAnchorConstraint.active == YES) {
@@ -116,7 +119,31 @@
     }
 }
 
+#pragma mark - PMMenuViewControllerDelegate Methods
+
+- (void)didTapAddCardButton {
+        CardIOPaymentViewController *scanViewController = [[CardIOPaymentViewController alloc] initWithPaymentDelegate:self];
+        [self presentViewController:scanViewController
+                           animated:YES
+                         completion:nil];
+}
+
+#pragma mark - CardIOPaymentViewControllerDelegate Methods
+
+- (void)userDidCancelPaymentViewController:(CardIOPaymentViewController *)paymentViewController {
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
+}
+
+- (void)userDidProvideCreditCardInfo:(CardIOCreditCardInfo *)cardInfo
+             inPaymentViewController:(CardIOPaymentViewController *)paymentViewController {
+    NSLog(@"Info: %@", cardInfo);
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
+}
+
 #pragma mark - Testing
+
 // Testing Only
 - (void)testPayPalAPICall {
     
