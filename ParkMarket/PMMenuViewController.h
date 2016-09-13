@@ -15,6 +15,7 @@
 @required
 
 - (void)didTapAddCardButton;
+- (void)didTapLogoutButton;
 
 @end
 
