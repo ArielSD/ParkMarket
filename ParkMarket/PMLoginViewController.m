@@ -243,6 +243,8 @@
     }
     
     else {
+    [self.confirmPasswordTextField resignFirstResponder];
+        
     [PMFirebaseClient createUserWithFirstName:self.firstNameTextField.text
                                         email:self.emailTextField.text
                                      password:self.passwordTextField.text
@@ -278,7 +280,6 @@
                                        
                                        else {
                                            [self.delegate didLogInUser];
-                                           [self.confirmPasswordTextField resignFirstResponder];
                                        }
                                    }];
     }
@@ -296,17 +297,19 @@
     }
     
     else {
+    [self.confirmPasswordTextField resignFirstResponder];
+        
     [PMFirebaseClient loginUserWithEmail:self.emailTextField.text
                                 password:self.passwordTextField.text
                               completion:^(NSError *error) {
                                   
                                   if (error) {
                                       NSLog(@"Error logging in: %@", error);
+                                      NSLog(@"%@", error.localizedDescription);
                                   }
                                   
                                   else {
                                       [self.delegate didLogInUser];
-                                      [self.confirmPasswordTextField resignFirstResponder];
                                   }
                                   
                               }];
