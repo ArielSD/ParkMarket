@@ -18,6 +18,7 @@
                                  if (error) {
                                      completionBlock(error);
                                  }
+                                 
                                  else{
                                      NSDictionary *userInformation = @{@"first name" : firstName,
                                                                        @"email" : email};
@@ -30,6 +31,23 @@
                                      completionBlock(nil);
                                  }
                              }];
+}
+
++ (void)loginUserWithEmail:(NSString *)email password:(NSString *)password completion:(void (^)(NSError *))completionBlock {
+    [[FIRAuth auth] signInWithEmail:email
+                           password:password
+                         completion:^(FIRUser *user, NSError *error) {
+                             
+                             if (error) {
+                                 completionBlock(error);
+                             }
+                             
+                             else {
+                                 NSLog(@"Current user from losingUser method: %@", user);
+                                 
+                                 completionBlock(nil);
+                             }
+                         }];
 }
 
 + (void)postParkingSpotWithLatitude:(NSString *)latitude longitute:(NSString *)longitude {

@@ -141,6 +141,10 @@
     
     [self.loginButton setTitle:@"Log In"
                       forState:UIControlStateNormal];
+    
+    [self.loginButton addTarget:self
+                         action:@selector(loginButtonTapped)
+               forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)configureSignUpButton {
@@ -246,6 +250,35 @@
                                            [self.confirmPasswordTextField resignFirstResponder];
                                        }
                                    }];
+    }
+}
+
+- (void)loginButtonTapped {
+    
+    // Check if the two password fields don't match
+    if (self.passwordTextField.text != self.confirmPasswordTextField.text) {
+        self.passwordTextField.backgroundColor = [UIColor redColor];
+        self.confirmPasswordTextField.backgroundColor = [UIColor redColor];
+        
+        self.passwordTextField.text = @"";
+        self.confirmPasswordTextField.text = @"";
+    }
+    
+    else {
+    [PMFirebaseClient loginUserWithEmail:self.emailTextField.text
+                                password:self.passwordTextField.text
+                              completion:^(NSError *error) {
+                                  
+                                  if (error) {
+                                      NSLog(@"Error logging in: %@", error);
+                                  }
+                                  
+                                  else {
+                                      [self.delegate didLogInUser];
+                                      [self.confirmPasswordTextField resignFirstResponder];
+                                  }
+                                  
+                              }];
     }
 }
 
