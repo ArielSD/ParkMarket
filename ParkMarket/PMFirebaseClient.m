@@ -43,8 +43,6 @@
                              }
                              
                              else {
-                                 NSLog(@"Current user from losingUser method: %@", user);
-                                 
                                  completionBlock(nil);
                              }
                          }];

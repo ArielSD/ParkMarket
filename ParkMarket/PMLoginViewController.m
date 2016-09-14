@@ -22,6 +22,8 @@
 @property (strong, nonatomic) UIButton *loginButton;
 @property (strong, nonatomic) UIButton *signUpButton;
 
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+
 // Constraints that can change
 @property (strong, nonatomic) NSLayoutConstraint *passwordTextFieldTopConstraint;
 @property (strong, nonatomic) NSLayoutConstraint *emailTextFieldTopConstraint;
@@ -210,6 +212,22 @@
     self.whatShouldWeCallYouLabel.textColor = [UIColor redColor];
 }
 
+- (void)configureActivityIndicator {
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicator.hidesWhenStopped = YES;
+    [self.view addSubview:self.activityIndicator];
+    
+    self.activityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.activityIndicator.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.activityIndicator.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
+    [self.activityIndicator.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+    [self.activityIndicator.heightAnchor constraintEqualToAnchor:self.view.heightAnchor].active = YES;
+    
+    self.activityIndicator.backgroundColor = [UIColor whiteColor];
+    
+    [self.activityIndicator startAnimating];
+}
+
 #pragma mark - UITextField Delegate Methods
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -297,7 +315,8 @@
     }
     
     else {
-    [self.confirmPasswordTextField resignFirstResponder];
+        [self.confirmPasswordTextField resignFirstResponder];
+        [self configureActivityIndicator];
         
     [PMFirebaseClient loginUserWithEmail:self.emailTextField.text
                                 password:self.passwordTextField.text
@@ -310,6 +329,7 @@
                                   
                                   else {
                                       [self.delegate didLogInUser];
+                                      [self.activityIndicator stopAnimating];
                                   }
                                   
                               }];
