@@ -242,10 +242,6 @@
                                        }
                                        
                                        else {
-                                           NSLog(@"Resigning first responder");
-                                           
-                                           NSLog(@"self.delegate: %@", self.delegate);
-                                           
                                            [self.delegate didLogInUser];
                                            [self.confirmPasswordTextField resignFirstResponder];
                                        }

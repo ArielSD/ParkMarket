@@ -28,12 +28,6 @@
     
     [super viewDidLoad];
     
-//    NSError *error;
-//    [[FIRAuth auth] signOut:&error];
-//    if (!error) {
-//        NSLog(@"A user has been signed out");
-//    }
-    
     if ([FIRAuth auth].currentUser) {
         [self showInitialViewController];
     }
@@ -70,22 +64,65 @@
 #pragma mark- Container View Methods
 
 - (void)showLoginViewController {
-    PMLoginViewController *loginViewController = [PMLoginViewController new];
-    loginViewController.delegate = self;
-    [self addChildViewController:loginViewController];
-    loginViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    [self.view addSubview:loginViewController.view];
-    [loginViewController didMoveToParentViewController:self];
+    if (self.childViewControllers.count == 0) {
+        PMLoginViewController *loginViewController = [PMLoginViewController new];
+        loginViewController.delegate = self;
+        [self addChildViewController:loginViewController];
+        loginViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        [self.view addSubview:loginViewController.view];
+        [loginViewController didMoveToParentViewController:self];
+    }
+    
+    else {
+        PMLoginViewController *loginViewController = [PMLoginViewController new];
+        loginViewController.delegate = self;
+        
+        [self cycleFromOldViewController:self.childViewControllers.lastObject
+                     toNewViewController:loginViewController];
+    }
 }
 
 - (void)showInitialViewController {
-    PMInitialViewController *initialViewController = [PMInitialViewController new];
-    initialViewController.delegate = self;
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
-    [self addChildViewController:navigationController];
-    navigationController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    [self.view addSubview:navigationController.view];
-    [navigationController didMoveToParentViewController:self];
+    if (self.childViewControllers.count == 0) {
+        PMInitialViewController *initialViewController = [PMInitialViewController new];
+        initialViewController.delegate = self;
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
+        [self addChildViewController:navigationController];
+        navigationController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        [self.view addSubview:navigationController.view];
+        [navigationController didMoveToParentViewController:self];
+    }
+    
+    else {
+        PMInitialViewController *initialViewController = [PMInitialViewController new];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
+        initialViewController.delegate = self;
+        
+        [self cycleFromOldViewController:self.childViewControllers.lastObject
+                     toNewViewController:navigationController];
+    }
+}
+
+- (void)cycleFromOldViewController:(UIViewController *)oldViewController
+               toNewViewController:(UIViewController *)newViewController {
+    [oldViewController willMoveToParentViewController:nil];
+    [self addChildViewController:newViewController];
+    
+    newViewController.view.frame = CGRectMake(0, self.view.frame.size.height, -self.view.frame.size.width, -self.view.frame.size.height);
+    CGRect endFrameForOldViewController = CGRectMake(0, self.view.frame.size.height, -self.view.frame.size.width, -self.view.frame.size.height);
+    
+    [self transitionFromViewController:oldViewController
+                      toViewController:newViewController
+                              duration:0.25
+                               options:0
+                            animations:^{
+                                newViewController.view.frame = oldViewController.view.frame;
+                                oldViewController.view.frame = endFrameForOldViewController;
+                            }
+                            completion:^(BOOL finished) {
+                                [oldViewController removeFromParentViewController];
+                                [newViewController didMoveToParentViewController:self];
+                            }];
 }
 
 #pragma mark - PMLoginViewControllerDelegate Methods
@@ -97,8 +134,13 @@
 #pragma mark - MenuButtonDelegate Methods
 
 - (void)didTapMenuButton {
+    
+    if (self.view.subviews.lastObject != self.menu.view) {
+        [self.view bringSubviewToFront:self.menu.view];
+    }
+
     if (self.menuRightAnchorConstraint.active == YES) {
-        [UIView animateWithDuration:0.6
+        [UIView animateWithDuration:0.4
                          animations:^{
                              self.view.subviews[2].alpha = 0.25;
                              self.menuRightAnchorConstraint.active = NO;
@@ -108,7 +150,7 @@
         
     }
     else {
-        [UIView animateWithDuration:0.6
+        [UIView animateWithDuration:0.4
                          animations:^{
                              self.view.subviews[2].alpha = 1.0;
                              self.menuLeftAnchorConstraint.active = NO;
@@ -131,7 +173,8 @@
     NSError *error;
     [[FIRAuth auth] signOut:&error];
     if (!error) {
-        NSLog(@"A user has been signed out");
+        self.menuLeftAnchorConstraint.active = NO;
+        self.menuRightAnchorConstraint.active = YES;
         [self showLoginViewController];
     }
 }
