@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) UIButton *postButton;
 @property (strong, nonatomic) UIButton *parkButton;
+@property (strong, nonatomic) UILabel *postLabel;
+@property (strong, nonatomic) UILabel *parkLabel;
 
 @end
 
@@ -19,10 +21,19 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [self configureNavigationBarItems];
     [self configurePostButton];
     [self configureParkButton];
+    [self configurePostLabel];
+    [self configureParkLabel];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    [CardIOUtilities preload];
 }
 
 -(void)didReceiveMemoryWarning {
@@ -47,7 +58,7 @@
     self.postButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.postButton.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
     [self.postButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor
-                                             constant:-(self.view.frame.size.width / 4)].active = YES;
+                                             constant:-(self.view.frame.size.width / 4.0)].active = YES;
     
     [self.postButton addTarget:self
                         action:@selector(postButtonTapped)
@@ -69,11 +80,49 @@
     self.parkButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.parkButton.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
     [self.parkButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor
-                                             constant:(self.view.frame.size.width / 4)].active = YES;
+                                             constant:(self.view.frame.size.width / 4.0)].active = YES;
     
     [self.parkButton addTarget:self
                         action:@selector(parkButtonTapped)
               forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)configurePostLabel {
+    self.postLabel = [UILabel new];
+    [self.view addSubview:self.postLabel];
+    
+    self.postLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.postLabel.topAnchor constraintEqualToAnchor:self.postButton.bottomAnchor
+                                             constant:self.view.frame.size.height / 20.0].active = YES;
+    [self.postLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor
+                                                 constant:-(self.view.frame.size.width / 4.0)].active = YES;
+    
+    self.postLabel.textAlignment = NSTextAlignmentCenter;
+    self.postLabel.text = @"Post";
+}
+
+- (void)configureParkLabel {
+    self.parkLabel = [UILabel new];
+    [self.view addSubview:self.parkLabel];
+    
+    self.parkLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.parkLabel.topAnchor constraintEqualToAnchor:self.parkButton.bottomAnchor
+                                             constant:self.view.frame.size.height / 20.0].active = YES;
+    [self.parkLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor
+                                                 constant:(self.view.frame.size.width / 4.0)].active = YES;
+    
+    self.parkLabel.textAlignment = NSTextAlignmentCenter;
+    self.parkLabel.text = @"Park";
+}
+
+- (void)configureNavigationBarItems {
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(menuButtonTapped)];
+    
+    self.navigationItem.title = @"Park Or Post?";
+    self.navigationItem.rightBarButtonItem = menuButton;
 }
 
 #pragma mark - Responder Methods
@@ -90,6 +139,10 @@
     mapViewController.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController pushViewController:mapViewController
                                          animated:YES];
+}
+
+- (void)menuButtonTapped {
+    [self.delegate didTapMenuButton];
 }
 
 @end

@@ -17,6 +17,10 @@
                        password:(NSString *)password
                      completion:(void (^)(NSError *error))completionBlock;
 
++ (void)loginUserWithEmail:(NSString *)email
+                  password:(NSString *)password
+                completion:(void (^)(NSError *error))completionBlock;
+
 + (void)postParkingSpotWithLatitude:(NSString *)latitude
                           longitute:(NSString *)longitude;
 

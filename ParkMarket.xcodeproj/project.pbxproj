@@ -19,6 +19,7 @@
 		B05AECCF1CF4AB4300A5660A /* ParkMarketUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECCE1CF4AB4300A5660A /* ParkMarketUITests.m */; };
 		B063C3021D0B6CD7002BA9D0 /* PMParkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */; };
 		B06F140A1D553A5600197AC5 /* PMParkingSpot.m in Sources */ = {isa = PBXBuildFile; fileRef = B06F14091D553A5600197AC5 /* PMParkingSpot.m */; };
+		B07C00321D818EA600C23D8D /* PMMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B07C00311D818EA600C23D8D /* PMMenuViewController.m */; };
 		B09ED25A1CF507A70054D0FC /* PMInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09ED2591CF507A70054D0FC /* PMInitialViewController.m */; };
 		B09ED25D1CF612180054D0FC /* PMPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09ED25C1CF612180054D0FC /* PMPostViewController.m */; };
 		B0B2F4671D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
@@ -69,11 +70,14 @@
 		B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMParkViewController.m; sourceTree = "<group>"; };
 		B06F14081D553A5600197AC5 /* PMParkingSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMParkingSpot.h; sourceTree = "<group>"; };
 		B06F14091D553A5600197AC5 /* PMParkingSpot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMParkingSpot.m; sourceTree = "<group>"; };
+		B07C00301D818EA600C23D8D /* PMMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMMenuViewController.h; sourceTree = "<group>"; };
+		B07C00311D818EA600C23D8D /* PMMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMMenuViewController.m; sourceTree = "<group>"; };
 		B09ED2581CF507A70054D0FC /* PMInitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMInitialViewController.h; sourceTree = "<group>"; };
 		B09ED2591CF507A70054D0FC /* PMInitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMInitialViewController.m; sourceTree = "<group>"; };
 		B09ED25B1CF612180054D0FC /* PMPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMPostViewController.h; sourceTree = "<group>"; };
 		B09ED25C1CF612180054D0FC /* PMPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMPostViewController.m; sourceTree = "<group>"; };
 		B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B0C29F251D89D4100058C2AF /* ParkMarket.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ParkMarket.entitlements; sourceTree = "<group>"; };
 		B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMLoginViewController.h; sourceTree = "<group>"; };
 		B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMLoginViewController.m; sourceTree = "<group>"; };
 		F07AA50B8F5A1E3305FA77B7 /* Pods-ParkMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarket.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket.release.xcconfig"; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 		B05AECA81CF4AB4200A5660A /* ParkMarket */ = {
 			isa = PBXGroup;
 			children = (
+				B0C29F251D89D4100058C2AF /* ParkMarket.entitlements */,
 				B05AECAC1CF4AB4200A5660A /* AppDelegate.h */,
 				B05AECAD1CF4AB4200A5660A /* AppDelegate.m */,
 				B06F140C1D553A9600197AC5 /* ViewControllers */,
@@ -186,6 +191,8 @@
 			children = (
 				B020F5981D496FD300847684 /* PMApplicationViewController.h */,
 				B020F5991D496FD300847684 /* PMApplicationViewController.m */,
+				B07C00301D818EA600C23D8D /* PMMenuViewController.h */,
+				B07C00311D818EA600C23D8D /* PMMenuViewController.m */,
 				B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */,
 				B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */,
 				B09ED2581CF507A70054D0FC /* PMInitialViewController.h */,
@@ -272,12 +279,17 @@
 		B05AEC9E1CF4AB4200A5660A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Ariel Scott-Dicker";
 				TargetAttributes = {
 					B05AECA51CF4AB4200A5660A = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 7LA77DS2EA;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					B05AECBE1CF4AB4300A5660A = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -396,6 +408,7 @@
 			files = (
 				B063C3021D0B6CD7002BA9D0 /* PMParkViewController.m in Sources */,
 				B0EB86D11D46901D001A0F6D /* PMLoginViewController.m in Sources */,
+				B07C00321D818EA600C23D8D /* PMMenuViewController.m in Sources */,
 				B020F5A31D519F6F00847684 /* PMFirebaseClient.m in Sources */,
 				B020F59A1D496FD300847684 /* PMApplicationViewController.m in Sources */,
 				B06F140A1D553A5600197AC5 /* PMParkingSpot.m in Sources */,
@@ -471,8 +484,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -516,8 +531,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -545,7 +562,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9B2B4B26D070EFEF83541101 /* Pods-ParkMarket.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ParkMarket/ParkMarket.entitlements;
 				INFOPLIST_FILE = ParkMarket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -558,7 +575,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F07AA50B8F5A1E3305FA77B7 /* Pods-ParkMarket.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ParkMarket/ParkMarket.entitlements;
 				INFOPLIST_FILE = ParkMarket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
