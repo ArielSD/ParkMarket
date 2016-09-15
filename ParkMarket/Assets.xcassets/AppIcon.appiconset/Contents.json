@@ -3,17 +3,6 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "size" : "20x20",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "iphone",
-      "size" : "20x20",
-      "scale" : "3x"
-    },
-    {
-      "idiom" : "iphone",
-      "size" : "29x29",
       "filename" : "Icon-App-20x20@2x.png",
       "scale" : "2x"
     },
@@ -22,6 +11,12 @@
       "idiom" : "iphone",
       "filename" : "Icon-App-20x20@3x.png",
       "scale" : "3x"
+    },
+    {
+      "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "Icon-App-29x29@1x.png",
+      "scale" : "1x"
     },
     {
       "size" : "29x29",
@@ -48,6 +43,17 @@
       "scale" : "3x"
     },
     {
+      "size" : "57x57",
+      "idiom" : "iphone",
+      "filename" : "Icon-App-57x57@1x.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "iphone",
+      "size" : "57x57",
+      "scale" : "2x"
+    },
+    {
       "size" : "60x60",
       "idiom" : "iphone",
       "filename" : "Icon-App-60x60@2x.png",
@@ -62,21 +68,7 @@
     {
       "size" : "20x20",
       "idiom" : "ipad",
-<<<<<<< HEAD
-      "size" : "20x20",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "ipad",
-      "size" : "20x20",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "ipad",
-      "size" : "29x29",
-=======
       "filename" : "Icon-App-20x20@1x.png",
->>>>>>> 2b7d9d2376a6e80bbc241249babc3eaaf82a5d23
       "scale" : "1x"
     },
     {
@@ -88,7 +80,7 @@
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "Icon-App-29x29@1x.png",
+      "filename" : "Icon-App-29x29@1x-1.png",
       "scale" : "1x"
     },
     {
@@ -107,6 +99,26 @@
       "size" : "40x40",
       "idiom" : "ipad",
       "filename" : "Icon-App-40x40@2x-1.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "50x50",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "50x50",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "72x72",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "72x72",
       "scale" : "2x"
     },
     {
