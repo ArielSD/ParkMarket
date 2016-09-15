@@ -562,7 +562,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9B2B4B26D070EFEF83541101 /* Pods-ParkMarket.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ParkMarket/ParkMarket.entitlements;
 				INFOPLIST_FILE = ParkMarket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -576,7 +575,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F07AA50B8F5A1E3305FA77B7 /* Pods-ParkMarket.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ParkMarket/ParkMarket.entitlements;
 				INFOPLIST_FILE = ParkMarket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
