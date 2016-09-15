@@ -140,7 +140,7 @@
     }
 
     if (self.menuRightAnchorConstraint.active == YES) {
-        [UIView animateWithDuration:0.4
+        [UIView animateWithDuration:0.25
                          animations:^{
                              self.view.subviews[2].alpha = 0.25;
                              self.menuRightAnchorConstraint.active = NO;
@@ -150,7 +150,7 @@
         
     }
     else {
-        [UIView animateWithDuration:0.4
+        [UIView animateWithDuration:0.25
                          animations:^{
                              self.view.subviews[2].alpha = 1.0;
                              self.menuLeftAnchorConstraint.active = NO;

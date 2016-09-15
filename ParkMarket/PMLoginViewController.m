@@ -13,6 +13,7 @@
 @property (strong, nonatomic) UILabel *welcomeLabel;
 @property (strong, nonatomic) UILabel *emailAlreadyTakenLabel;
 @property (strong, nonatomic) UILabel *whatShouldWeCallYouLabel;
+@property (strong, nonatomic) UILabel *loggingYouInLabel;
 
 @property (strong, nonatomic) UITextField *firstNameTextField;
 @property (strong, nonatomic) UITextField *emailTextField;
@@ -212,6 +213,20 @@
     self.whatShouldWeCallYouLabel.textColor = [UIColor redColor];
 }
 
+- (void)configureLoggingYouInLabel {
+    self.loggingYouInLabel = [UILabel new];
+    [self.view addSubview:self.loggingYouInLabel];
+    
+    self.loggingYouInLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.loggingYouInLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.loggingYouInLabel.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor
+                                                         constant:self.view.frame.size.height / 8.0].active = YES;
+    [self.loggingYouInLabel.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+    
+    self.loggingYouInLabel.textAlignment = NSTextAlignmentCenter;
+    self.loggingYouInLabel.text = @"Logging you in...";
+}
+
 - (void)configureActivityIndicator {
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.activityIndicator.hidesWhenStopped = YES;
@@ -224,6 +239,8 @@
     [self.activityIndicator.heightAnchor constraintEqualToAnchor:self.view.heightAnchor].active = YES;
     
     self.activityIndicator.backgroundColor = [UIColor whiteColor];
+    
+    [self configureLoggingYouInLabel];
     
     [self.activityIndicator startAnimating];
 }
@@ -261,7 +278,9 @@
     }
     
     else {
-    [self.confirmPasswordTextField resignFirstResponder];
+        [self.confirmPasswordTextField resignFirstResponder];
+        [self configureActivityIndicator];
+        self.loggingYouInLabel.text = @"Signing you in...";
         
     [PMFirebaseClient createUserWithFirstName:self.firstNameTextField.text
                                         email:self.emailTextField.text
@@ -298,6 +317,8 @@
                                        
                                        else {
                                            [self.delegate didLogInUser];
+                                           [self.activityIndicator stopAnimating];
+                                           self.loggingYouInLabel.hidden = YES;
                                        }
                                    }];
     }
@@ -330,8 +351,8 @@
                                   else {
                                       [self.delegate didLogInUser];
                                       [self.activityIndicator stopAnimating];
+                                      self.loggingYouInLabel.hidden = YES;
                                   }
-                                  
                               }];
     }
 }
