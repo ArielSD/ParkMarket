@@ -8,12 +8,24 @@
 
 #import <UIKit/UIKit.h>
 #import <FirebaseAuth/FirebaseAuth.h>
+#import <CardIO.h>
 // Testing only
 #import <AFNetworking.h>
 // Testing only
 #import "PMInitialViewController.h"
 #import "PMLoginViewController.h"
+#import "PMMenuViewController.h"
 
-@interface PMApplicationViewController : UIViewController <PMLoginViewControllerDelegate>
+@class PMApplicationViewController;
+
+@protocol MenuButtonDelegate <NSObject>
+
+@required
+
+- (void)didTapMenuButton;
+
+@end
+
+@interface PMApplicationViewController : UIViewController <PMLoginViewControllerDelegate, MenuButtonDelegate, PMMenuViewControllerDelegate,CardIOPaymentViewControllerDelegate>
 
 @end

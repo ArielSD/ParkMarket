@@ -27,6 +27,7 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     [self configureLocationManager];
+    [self configureNavigationBarItems];
     
     self.viewHeight = self.view.frame.size.height;
     self.viewWidth = self.view.frame.size.width;
@@ -81,6 +82,16 @@
     [self.postButton addTarget:self
                         action:@selector(postButtonTapped)
               forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)configureNavigationBarItems {
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:nil
+                                                                  action:nil];
+    
+    self.navigationItem.title = @"Post";
+    self.navigationItem.rightBarButtonItem = menuButton;
 }
 
 -(void)configureLocationManager {

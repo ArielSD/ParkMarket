@@ -30,8 +30,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self configureLocationManager];
+    [self configureNavigationBarItems];
+    
+    // Firebase call to populate the mapview with 'posted' parking spots.
     [self getAllAvailableParkingSpots];
     
     self.viewHeight = self.view.frame.size.height;
@@ -88,6 +90,16 @@
     [self.parkButton addTarget:self
                         action:@selector(parkButtonTapped)
               forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)configureNavigationBarItems {
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:nil
+                                                                  action:nil];
+    
+    self.navigationItem.title = @"Park";
+    self.navigationItem.rightBarButtonItem = menuButton;
 }
 
 -(void)configureLocationManager {
@@ -163,6 +175,7 @@
     }
 }
 
+// Alert controller if there are no available parking spots (This will be useful when I make a distance radius)
 - (void)noAvailableSpots {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Hmmm..."
                                                                              message:@"There are currently no available spots"
@@ -178,6 +191,7 @@
                      completion:nil];
 }
 
+// Alert controller for when a user tries to "park" without selecting a parking spot first.
 - (void)noParkingSpotSelected {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Not so fast!"
                                                                              message:@"You haven't selected a parking spot to take."

@@ -11,16 +11,23 @@
 @interface PMLoginViewController ()
 
 @property (strong, nonatomic) UILabel *welcomeLabel;
+@property (strong, nonatomic) UILabel *emailAlreadyTakenLabel;
+@property (strong, nonatomic) UILabel *whatShouldWeCallYouLabel;
+@property (strong, nonatomic) UILabel *loggingYouInLabel;
+
 @property (strong, nonatomic) UITextField *firstNameTextField;
 @property (strong, nonatomic) UITextField *emailTextField;
-@property (strong, nonatomic) UILabel *emailAlreadyTakenLabel;
 @property (strong, nonatomic) UITextField *passwordTextField;
 @property (strong, nonatomic) UITextField *confirmPasswordTextField;
+
 @property (strong, nonatomic) UIButton *loginButton;
 @property (strong, nonatomic) UIButton *signUpButton;
 
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+
 // Constraints that can change
 @property (strong, nonatomic) NSLayoutConstraint *passwordTextFieldTopConstraint;
+@property (strong, nonatomic) NSLayoutConstraint *emailTextFieldTopConstraint;
 
 @end
 
@@ -64,8 +71,9 @@
     
     self.firstNameTextField.translatesAutoresizingMaskIntoConstraints = NO;
     [self.firstNameTextField.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [self.firstNameTextField.topAnchor constraintEqualToAnchor:self.welcomeLabel.bottomAnchor
-                                                      constant:self.view.frame.size.height / 33].active = YES;
+    self.emailTextFieldTopConstraint = [self.firstNameTextField.topAnchor constraintEqualToAnchor:self.welcomeLabel.bottomAnchor
+                                                      constant:self.view.frame.size.height / 33];
+    self.emailTextFieldTopConstraint.active = YES;
     [self.firstNameTextField.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
                                                       multiplier:0.5].active = YES;
     
@@ -79,8 +87,9 @@
     
     self.emailTextField.translatesAutoresizingMaskIntoConstraints = NO;
     [self.emailTextField.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [self.emailTextField.topAnchor constraintEqualToAnchor:self.firstNameTextField.bottomAnchor
-                                                  constant:self.view.frame.size.height / 50.0].active = YES;
+    self.emailTextFieldTopConstraint = [self.emailTextField.topAnchor constraintEqualToAnchor:self.firstNameTextField.bottomAnchor
+                                                  constant:self.view.frame.size.height / 50.0];
+    self.emailTextFieldTopConstraint.active = YES;
     [self.emailTextField.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
                                                   multiplier:0.5].active = YES;
     
@@ -141,6 +150,10 @@
     
     [self.loginButton setTitle:@"Log In"
                       forState:UIControlStateNormal];
+    
+    [self.loginButton addTarget:self
+                         action:@selector(loginButtonTapped)
+               forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)configureSignUpButton {
@@ -180,6 +193,58 @@
     self.emailAlreadyTakenLabel.textColor = [UIColor redColor];
 }
 
+- (void)configureWhatShouldWeCallYouLabel {
+    self.whatShouldWeCallYouLabel = [UILabel new];
+    [self.view addSubview:self.whatShouldWeCallYouLabel];
+    
+    self.whatShouldWeCallYouLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.whatShouldWeCallYouLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.whatShouldWeCallYouLabel.topAnchor constraintEqualToAnchor:self.firstNameTextField.bottomAnchor
+                                                            constant:self.view.frame.size.height / 50.0].active = YES;
+    [self.whatShouldWeCallYouLabel.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+    
+    self.emailTextFieldTopConstraint.active = NO;
+    self.emailTextFieldTopConstraint = [self.emailTextField.topAnchor constraintEqualToAnchor:self.whatShouldWeCallYouLabel.bottomAnchor
+                                                                                     constant:self.view.frame.size.height / 50.0];
+    self.emailTextFieldTopConstraint.active = YES;
+    
+    self.whatShouldWeCallYouLabel.text = @"What should we call you?";
+    self.whatShouldWeCallYouLabel.textAlignment = NSTextAlignmentCenter;
+    self.whatShouldWeCallYouLabel.textColor = [UIColor redColor];
+}
+
+- (void)configureLoggingYouInLabel {
+    self.loggingYouInLabel = [UILabel new];
+    [self.view addSubview:self.loggingYouInLabel];
+    
+    self.loggingYouInLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.loggingYouInLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.loggingYouInLabel.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor
+                                                         constant:self.view.frame.size.height / 8.0].active = YES;
+    [self.loggingYouInLabel.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+    
+    self.loggingYouInLabel.textAlignment = NSTextAlignmentCenter;
+    self.loggingYouInLabel.text = @"Logging you in...";
+}
+
+- (void)configureActivityIndicator {
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicator.hidesWhenStopped = YES;
+    [self.view addSubview:self.activityIndicator];
+    
+    self.activityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.activityIndicator.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.activityIndicator.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
+    [self.activityIndicator.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+    [self.activityIndicator.heightAnchor constraintEqualToAnchor:self.view.heightAnchor].active = YES;
+    
+    self.activityIndicator.backgroundColor = [UIColor whiteColor];
+    
+    [self configureLoggingYouInLabel];
+    
+    [self.activityIndicator startAnimating];
+}
+
 #pragma mark - UITextField Delegate Methods
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -198,8 +263,13 @@
 
 - (void)signUpButtonTapped {
     
+    // Check if the 'First Name' field is blank
+    if ([self.firstNameTextField.text isEqualToString:@""]) {
+        [self configureWhatShouldWeCallYouLabel];
+    }
+    
     // Check if the two password fields don't match
-    if (self.passwordTextField.text != self.confirmPasswordTextField.text) {
+    else if (self.passwordTextField.text != self.confirmPasswordTextField.text) {
         self.passwordTextField.backgroundColor = [UIColor redColor];
         self.confirmPasswordTextField.backgroundColor = [UIColor redColor];
         
@@ -208,6 +278,10 @@
     }
     
     else {
+        [self.confirmPasswordTextField resignFirstResponder];
+        [self configureActivityIndicator];
+        self.loggingYouInLabel.text = @"Signing you in...";
+        
     [PMFirebaseClient createUserWithFirstName:self.firstNameTextField.text
                                         email:self.emailTextField.text
                                      password:self.passwordTextField.text
@@ -242,11 +316,44 @@
                                        }
                                        
                                        else {
-                                           NSLog(@"Resigning first responder");
                                            [self.delegate didLogInUser];
-                                           [self.passwordTextField resignFirstResponder];
+                                           [self.activityIndicator stopAnimating];
+                                           self.loggingYouInLabel.hidden = YES;
                                        }
                                    }];
+    }
+}
+
+- (void)loginButtonTapped {
+    
+    // Check if the two password fields don't match
+    if (self.passwordTextField.text != self.confirmPasswordTextField.text) {
+        self.passwordTextField.backgroundColor = [UIColor redColor];
+        self.confirmPasswordTextField.backgroundColor = [UIColor redColor];
+        
+        self.passwordTextField.text = @"";
+        self.confirmPasswordTextField.text = @"";
+    }
+    
+    else {
+        [self.confirmPasswordTextField resignFirstResponder];
+        [self configureActivityIndicator];
+        
+    [PMFirebaseClient loginUserWithEmail:self.emailTextField.text
+                                password:self.passwordTextField.text
+                              completion:^(NSError *error) {
+                                  
+                                  if (error) {
+                                      NSLog(@"Error logging in: %@", error);
+                                      NSLog(@"%@", error.localizedDescription);
+                                  }
+                                  
+                                  else {
+                                      [self.delegate didLogInUser];
+                                      [self.activityIndicator stopAnimating];
+                                      self.loggingYouInLabel.hidden = YES;
+                                  }
+                              }];
     }
 }
 
