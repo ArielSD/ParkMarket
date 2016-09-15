@@ -24,6 +24,8 @@
       "idiom" : "iphone",
       "size" : "29x29",
       "scale" : "3x"
+    }
+    {
       "idiom" : "iphone",
       "filename" : "Icon-App-29x29@1x.png",
       "scale" : "1x"
