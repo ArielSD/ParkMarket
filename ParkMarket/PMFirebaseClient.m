@@ -50,7 +50,7 @@
                          }];
 }
 
-+ (void)postParkingSpotWithLatitude:(NSString *)latitude longitute:(NSString *)longitude {
++ (void)postParkingSpotWithLatitude:(NSString *)latitude longitute:(NSString *)longitude carModel:(NSString *)carModel {
     
     // Posting a spot to the 'parkingSpots' node
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
@@ -61,6 +61,7 @@
     [firebaseClient getCurrentUserFirstNameWithCompletion:^(NSDictionary *currentUser) {
         NSString *currentUserFirstName = currentUser[@"first name"];
         NSDictionary *parkingSpotInformation = @{@"owner" : currentUserFirstName,
+                                                 @"car" : carModel,
                                                  @"identifier" : newParkingSpotReference.key,
                                                  @"latitude" : latitude,
                                                  @"longitude" : longitude};

@@ -24,7 +24,8 @@
                 completion:(void (^)(NSError *error))completionBlock;
 
 + (void)postParkingSpotWithLatitude:(NSString *)latitude
-                          longitute:(NSString *)longitude;
+                          longitute:(NSString *)longitude
+                           carModel:(NSString *)carModel;
 
 + (void)getAvailableParkingSpotsWithCompletion:(void (^)(NSDictionary *parkingSpots))completionBlock;
 
