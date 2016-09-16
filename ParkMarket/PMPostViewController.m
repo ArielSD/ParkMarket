@@ -125,12 +125,7 @@
 #pragma mark - Firebase Methods
 
 -(void)postButtonTapped {
-    NSString *currentLocationLatitude = [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.latitude];
-    NSString *currentLocationLongitude = [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.longitude];
-    
-    [PMFirebaseClient postParkingSpotWithLatitude:currentLocationLatitude
-                                        longitute:currentLocationLongitude];
-    [self confirmPostedParkingSpot];
+    [self askForCarModelBeingParked];
 }
 
 #pragma mark - Helper Methods
@@ -150,6 +145,39 @@
                                                                        completion:nil];
                                           }];
                      }];
+}
+
+- (void)askForCarModelBeingParked {
+    UIAlertController *carModelAlertController = [UIAlertController alertControllerWithTitle:@"What kind of car are you parking?"
+                                                                                     message:nil
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *post = [UIAlertAction actionWithTitle:@"Post"
+                                                   style:UIAlertActionStyleDefault
+                                                 handler:^(UIAlertAction * _Nonnull action) {
+                                                     NSString *currentLocationLatitude = [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.latitude];
+                                                     NSString *currentLocationLongitude = [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.longitude];
+                                                     NSString *carModel = carModelAlertController.textFields.firstObject.text;
+
+                                                     [PMFirebaseClient postParkingSpotWithLatitude:currentLocationLatitude
+                                                                                         longitute:currentLocationLongitude
+                                                                                          carModel:carModel];
+                                                     
+                                                     [self confirmPostedParkingSpot];
+                                                 }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:nil];
+    
+    [carModelAlertController addAction:post];
+    [carModelAlertController addAction:cancel];
+    [carModelAlertController addTextFieldWithConfigurationHandler:nil];
+    carModelAlertController.preferredAction = post;
+    
+    [self presentViewController:carModelAlertController
+                       animated:YES
+                     completion:nil];
 }
 
 @end

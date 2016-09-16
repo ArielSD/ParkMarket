@@ -12,6 +12,8 @@
 
 @interface PMFirebaseClient : NSObject
 
+#pragma mark - Class Methods
+
 + (void)createUserWithFirstName:(NSString *)firstName
                           email:(NSString *)email
                        password:(NSString *)password
@@ -22,7 +24,8 @@
                 completion:(void (^)(NSError *error))completionBlock;
 
 + (void)postParkingSpotWithLatitude:(NSString *)latitude
-                          longitute:(NSString *)longitude;
+                          longitute:(NSString *)longitude
+                           carModel:(NSString *)carModel;
 
 + (void)getAvailableParkingSpotsWithCompletion:(void (^)(NSDictionary *parkingSpots))completionBlock;
 

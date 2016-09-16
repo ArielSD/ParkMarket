@@ -166,7 +166,7 @@
             GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpotLocation];
             marker.userData = parkingSpotIdentifier;
             marker.appearAnimation = kGMSMarkerAnimationPop;
-            marker.title = parkingSpotOwner;
+            marker.title = [NSString stringWithFormat:@"Owner: %@", parkingSpotOwner];
             marker.snippet = parkingSpotIdentifier;
             marker.map = self.mapView;
             
