@@ -316,9 +316,9 @@
                                        }
                                        
                                        else {
-                                           [self.delegate didLogInUser];
                                            [self.activityIndicator stopAnimating];
                                            self.loggingYouInLabel.hidden = YES;
+                                           [self.delegate didLogInUser];
                                        }
                                    }];
     }
@@ -349,9 +349,9 @@
                                   }
                                   
                                   else {
-                                      [self.delegate didLogInUser];
                                       [self.activityIndicator stopAnimating];
                                       self.loggingYouInLabel.hidden = YES;
+                                      [self.delegate didLogInUser];
                                   }
                               }];
     }

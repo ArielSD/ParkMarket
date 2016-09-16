@@ -21,6 +21,9 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *currentLocation;
 
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) UILabel *gettingAvailableParkingSpotsLabel;
+
 @property CGFloat viewHeight;
 @property CGFloat viewWidth;
 
@@ -114,6 +117,40 @@
     self.navigationItem.rightBarButtonItem = menuButton;
 }
 
+- (void)configureGettingAvailableParkingSpotsLabel {
+    self.gettingAvailableParkingSpotsLabel = [UILabel new];
+    [self.view addSubview:self.gettingAvailableParkingSpotsLabel];
+    
+    self.gettingAvailableParkingSpotsLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.gettingAvailableParkingSpotsLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.gettingAvailableParkingSpotsLabel.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor
+                                                         constant:self.view.frame.size.height / 8.0].active = YES;
+    [self.gettingAvailableParkingSpotsLabel.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+    
+    self.gettingAvailableParkingSpotsLabel.textAlignment = NSTextAlignmentCenter;
+    self.gettingAvailableParkingSpotsLabel.text = @"Getting all available spots...";
+}
+
+- (void)configureActivityIndicator {
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicator.hidesWhenStopped = YES;
+    [self.view addSubview:self.activityIndicator];
+    
+    self.activityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.activityIndicator.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.activityIndicator.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
+    [self.activityIndicator.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+    [self.activityIndicator.heightAnchor constraintEqualToAnchor:self.view.heightAnchor].active = YES;
+    
+    self.activityIndicator.backgroundColor = [UIColor whiteColor];
+    
+    [self configureGettingAvailableParkingSpotsLabel];
+    
+    [self.activityIndicator startAnimating];
+}
+
+#pragma mark - Core Location
+
 -(void)configureLocationManager {
     self.locationManager = [CLLocationManager new];
     self.locationManager.delegate = self;
@@ -148,11 +185,19 @@
 #pragma mark - Network Call
 
 - (void)getAllAvailableParkingSpots {
+    
+    NSLog(@"Get all available parking spots called");
+    
+    [self configureActivityIndicator];
+    
     [PMFirebaseClient getAvailableParkingSpotsWithCompletion:^(NSDictionary *parkingSpots) {
         if (parkingSpots == nil) {
             [self noAvailableSpots];
         }
         else {
+            [self.activityIndicator stopAnimating];
+            self.gettingAvailableParkingSpotsLabel.hidden = YES;
+            
             self.parkingSpots = [NSMutableDictionary dictionaryWithDictionary:parkingSpots];
             [self populateMapWithMarkersForParkingSpotsFromDictionary:self.parkingSpots];
         }
