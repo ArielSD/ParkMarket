@@ -41,6 +41,9 @@
 #pragma mark - UI Layout
 
 -(void)configureMapView {
+    
+    NSLog(@"Configure MapView Called");
+    
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.currentLocation.coordinate.latitude
                                                             longitude:self.currentLocation.coordinate.longitude
                                                                  zoom:15];
@@ -59,9 +62,10 @@
 
 -(void)configureQuestionLabel {
     self.questionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.viewWidth, self.viewHeight * 0.2 - self.navigationController.navigationBar.frame.size.height)];
+    [self.view addSubview:self.questionLabel];
+    
     self.questionLabel.textAlignment = NSTextAlignmentCenter;
     self.questionLabel.text = @"Where's the spot you're posting?";
-    [self.view addSubview:self.questionLabel];
 }
 
 -(void)configurePostButton {
@@ -105,6 +109,9 @@
 #pragma mark - CLLocationManagerDelegate Methods
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    
+    NSLog(@"Did update locations called");
+    
     CLLocation *mostRecentLocation = [locations lastObject];
     NSDate *locationCaptureTime = mostRecentLocation.timestamp;
     NSTimeInterval timeSinceLocationCapture = [locationCaptureTime timeIntervalSinceNow];
@@ -112,7 +119,10 @@
     if (timeSinceLocationCapture <= 2) {
         self.currentLocation = mostRecentLocation;
         [self.locationManager stopUpdatingLocation];
-        [self configureMapView];
+        
+        if (!self.mapView) {
+            [self configureMapView];
+        }
     }
 }
 
