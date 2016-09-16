@@ -10,6 +10,8 @@
 
 @implementation PMFirebaseClient
 
+#pragma mark - Class Methods
+
 + (void)createUserWithFirstName:(NSString *)firstName email:(NSString *)email password:(NSString *)password completion:(void (^)(NSError *))completionBlock {
     [[FIRAuth auth] createUserWithEmail:email
                                password:password
@@ -55,12 +57,16 @@
     FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
     FIRDatabaseReference *newParkingSpotReference = [parkingSpotsReference childByAutoId];
     
-    NSDictionary *parkingSpotInformation = @{@"owner" : [FIRAuth auth].currentUser.uid,
-                                             @"identifier" : newParkingSpotReference.key,
-                                             @"latitude" : latitude,
-                                             @"longitude" : longitude};
-    
-    [newParkingSpotReference setValue:parkingSpotInformation];
+    PMFirebaseClient *firebaseClient = [PMFirebaseClient new];
+    [firebaseClient getCurrentUserFirstNameWithCompletion:^(NSDictionary *currentUser) {
+        NSString *currentUserFirstName = currentUser[@"first name"];
+        NSDictionary *parkingSpotInformation = @{@"owner" : currentUserFirstName,
+                                                 @"identifier" : newParkingSpotReference.key,
+                                                 @"latitude" : latitude,
+                                                 @"longitude" : longitude};
+        
+        [newParkingSpotReference setValue:parkingSpotInformation];
+    }];
     
     // Posting a spot to the currently logged in user
     FIRUser *currentUser = [FIRAuth auth].currentUser;
@@ -78,9 +84,9 @@
 }
 
 + (void)getAvailableParkingSpotsWithCompletion:(void (^)(NSDictionary *parkingSpots))completionBlock {
-    
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
+    
     [parkingSpotsReference observeSingleEventOfType:FIRDataEventTypeValue
                                   withBlock:^(FIRDataSnapshot *snapshot) {
                                       NSDictionary *parkingSpots = snapshot.value;
@@ -109,6 +115,20 @@
     FIRDatabaseReference *ownersParkingSpotsReference = [parkingSpotOwnerReference child:@"postedParkingSpots"];
     FIRDatabaseReference *parkingSpotToRemoveReference = [ownersParkingSpotsReference child:identifier];
     [parkingSpotToRemoveReference removeValue];
+}
+
+#pragma mark - Helper Methods
+
+- (void)getCurrentUserFirstNameWithCompletion:(void (^)(NSDictionary *currentUser))completionBlock {
+    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+    FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+    FIRDatabaseReference *currentUserReference = [usersReference child:[FIRAuth auth].currentUser.uid];
+    
+    [currentUserReference observeSingleEventOfType:FIRDataEventTypeValue
+                                         withBlock:^(FIRDataSnapshot *snapshot) {
+                                             NSDictionary *currentUserDictionary = snapshot.value;
+                                             completionBlock(currentUserDictionary);
+                                         }];
 }
 
 @end
