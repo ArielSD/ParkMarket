@@ -24,6 +24,7 @@
     
     // Testing Only
 //    [self testPayPalAPICall];
+    [self testPayPalVault];
     // Testing Only
     
     [super viewDidLoad];
@@ -232,6 +233,34 @@
                      NSLog(@"Success! Response Object: %@", responseObject);
                  } failure:^(NSURLSessionDataTask *task, NSError *error) {
                      NSLog(@"%@", error);
+                 }];
+}
+
+- (void)testPayPalVault {
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    sessionManager.requestSerializer = [AFJSONRequestSerializer new];
+    NSString *payPalURLString = @"https://api.sandbox.paypal.com/v1/vault/credit-card";
+    
+    NSDictionary *payloadDictionary = @{
+                                        @"payer_id" : @"Test Payer ID",
+                                        @"type" : @"mastercard",
+                                        @"number" : @"REDACTED",
+                                        @"expire_month" : @"5",
+                                        @"expire_year" : @"2020",
+                                        @"first_name" : @"Ariel",
+                                        @"last_name" : @"ScottDicker"
+                                        };
+    
+    [sessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [sessionManager.requestSerializer setValue:@"Bearer access_token$sandbox$cnws7cr5s5ntktrh$ce576ab1ca59372e59519389a22d0ccd" forHTTPHeaderField:@"Authorization"];
+    
+    [sessionManager POST:payPalURLString
+              parameters:payloadDictionary
+                progress:nil
+                 success:^(NSURLSessionDataTask *task, id responseObject) {
+                     NSLog(@"Success! Response Object: %@", responseObject);
+                 } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                     NSLog(@"%@", error.localizedDescription);
                  }];
 }
 
