@@ -66,10 +66,22 @@
 }
 
 -(void)configureQuestionLabel {
-    self.questionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.viewWidth, self.viewHeight * 0.2 - self.navigationController.navigationBar.frame.size.height)];
+    self.questionLabel = [UILabel new];
+    [self.view addSubview:self.questionLabel];
+    
     self.questionLabel.textAlignment = NSTextAlignmentCenter;
     self.questionLabel.text = @"Where do you want to park?";
-    [self.view addSubview:self.questionLabel];
+    
+    CGFloat bottomOfNavigationBar = CGRectGetMaxY(self.navigationController.navigationBar.frame);
+    CGFloat topYCoordinateOfMapView = CGRectGetMinY(self.mapView.frame);
+    CGFloat distanceBetweenBottomOfNavigationBarAndTopOfMapView = topYCoordinateOfMapView - bottomOfNavigationBar;
+    CGSize questionLabelSize = [self.questionLabel sizeThatFits:self.questionLabel.frame.size];
+    
+    self.questionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.questionLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.questionLabel.topAnchor constraintEqualToAnchor:self.navigationController.navigationBar.bottomAnchor
+                                                 constant:distanceBetweenBottomOfNavigationBarAndTopOfMapView / 2.0 - questionLabelSize.height / 2.0].active = YES;
+    [self.questionLabel.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
 }
 
 -(void)configureParkButton {
@@ -120,7 +132,10 @@
     if (timeSinceLocationCapture <= 2) {
         self.currentLocation = mostRecentLocation;
         [self.locationManager stopUpdatingLocation];
-        [self configureMapView];
+        
+        if (!self.mapView) {
+            [self configureMapView];
+        }
     }
 }
 

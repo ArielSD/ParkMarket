@@ -41,9 +41,6 @@
 #pragma mark - UI Layout
 
 -(void)configureMapView {
-    
-    NSLog(@"Configure MapView Called");
-    
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.currentLocation.coordinate.latitude
                                                             longitude:self.currentLocation.coordinate.longitude
                                                                  zoom:15];
@@ -61,11 +58,22 @@
 }
 
 -(void)configureQuestionLabel {
-    self.questionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.viewWidth, self.viewHeight * 0.2 - self.navigationController.navigationBar.frame.size.height)];
+    self.questionLabel = [UILabel new];
     [self.view addSubview:self.questionLabel];
     
     self.questionLabel.textAlignment = NSTextAlignmentCenter;
     self.questionLabel.text = @"Where's the spot you're posting?";
+    
+    CGFloat bottomOfNavigationBar = CGRectGetMaxY(self.navigationController.navigationBar.frame);
+    CGFloat topYCoordinateOfMapView = CGRectGetMinY(self.mapView.frame);
+    CGFloat distanceBetweenBottomOfNavigationBarAndTopOfMapView = topYCoordinateOfMapView - bottomOfNavigationBar;
+    CGSize questionLabelSize = [self.questionLabel sizeThatFits:self.questionLabel.frame.size];
+    
+    self.questionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.questionLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.questionLabel.topAnchor constraintEqualToAnchor:self.navigationController.navigationBar.bottomAnchor
+                                                 constant:(distanceBetweenBottomOfNavigationBarAndTopOfMapView / 2.0) - questionLabelSize.height / 2.0].active = YES;
+    [self.questionLabel.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
 }
 
 -(void)configurePostButton {
@@ -109,9 +117,6 @@
 #pragma mark - CLLocationManagerDelegate Methods
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    
-    NSLog(@"Did update locations called");
-    
     CLLocation *mostRecentLocation = [locations lastObject];
     NSDate *locationCaptureTime = mostRecentLocation.timestamp;
     NSTimeInterval timeSinceLocationCapture = [locationCaptureTime timeIntervalSinceNow];
