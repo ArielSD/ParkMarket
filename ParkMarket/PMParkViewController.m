@@ -214,6 +214,7 @@
         
         NSString *parkingSpotIdentifier = parkingSpot[@"identifier"];
         NSString *parkingSpotOwner = parkingSpot[@"owner"];
+        NSString *typeOfCarParked = parkingSpot[@"car"];
         NSString *parkingSpotLatitudeString = parkingSpot[@"latitude"];
         NSString *parkingSpotLongitudeString = parkingSpot[@"longitude"];
         
@@ -227,7 +228,7 @@
             marker.userData = parkingSpotIdentifier;
             marker.appearAnimation = kGMSMarkerAnimationPop;
             marker.title = [NSString stringWithFormat:@"Owner: %@", parkingSpotOwner];
-            marker.snippet = parkingSpotIdentifier;
+            marker.snippet = typeOfCarParked;
             marker.map = self.mapView;
             
             [self.parkingSpotMarkers addObject:marker];

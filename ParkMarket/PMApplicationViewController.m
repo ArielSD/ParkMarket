@@ -244,8 +244,8 @@
     NSDictionary *payloadDictionary = @{
                                         @"payer_id" : @"Test Payer ID",
                                         @"type" : @"mastercard",
-                                        @"number" : @"REDACTED",
-                                        @"expire_month" : @"5",
+                                        @"number" : @"5178058381539991",
+                                        @"expire_month" : @"05",
                                         @"expire_year" : @"2020",
                                         @"first_name" : @"Ariel",
                                         @"last_name" : @"ScottDicker"
@@ -260,7 +260,7 @@
                  success:^(NSURLSessionDataTask *task, id responseObject) {
                      NSLog(@"Success! Response Object: %@", responseObject);
                  } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                     NSLog(@"%@", error.localizedDescription);
+                     NSLog(@"%@", error);
                  }];
 }
 
