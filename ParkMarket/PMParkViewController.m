@@ -110,8 +110,8 @@
 - (void)configureNavigationBarItems {
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
                                                                    style:UIBarButtonItemStylePlain
-                                                                  target:nil
-                                                                  action:nil];
+                                                                  target:self
+                                                                  action:@selector(menuButtonTapped)];
     
     self.navigationItem.title = @"Park";
     self.navigationItem.rightBarButtonItem = menuButton;
@@ -204,6 +204,12 @@
     }];
 }
 
+#pragma mark - Responder Methods
+
+- (void)menuButtonTapped {
+    [self.delegate didTapMenuButton];
+}
+
 #pragma mark - Helper Methods
 
 - (void)populateMapWithMarkersForParkingSpotsFromDictionary:(NSDictionary *)dictionary {
@@ -268,6 +274,24 @@
                      completion:nil];
 }
 
+- (void)confirmTakenSpot {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Parked!"
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertController
+                       animated:YES
+                     completion:^{
+                         [UIView animateWithDuration:0.4
+                                          animations:^{
+                                              alertController.view.alpha = 0.0;
+                                          } completion:^(BOOL finished) {
+                                              [self dismissViewControllerAnimated:YES
+                                                                       completion:nil];
+                                              [self.navigationController popToRootViewControllerAnimated:YES];
+                                          }];
+                     }];
+}
+
 - (void)parkButtonTapped {
     if (self.selectedMarker == nil) {
         [self noParkingSpotSelected];
@@ -283,26 +307,6 @@
     
     [self confirmTakenSpot];
     }
-}
-
-#pragma mark - Helper Methods
-
-- (void)confirmTakenSpot {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Parked!"
-                                                                                 message:nil
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        [self presentViewController:alertController
-                           animated:YES
-                         completion:^{
-                             [UIView animateWithDuration:0.4
-                                              animations:^{
-                                                  alertController.view.alpha = 0.0;
-                                              } completion:^(BOOL finished) {
-                                                  [self dismissViewControllerAnimated:YES
-                                                                           completion:nil];
-                                                  [self.navigationController popToRootViewControllerAnimated:YES];
-                                              }];
-                         }];
 }
 
 #pragma mark - Map View Delegate Methods

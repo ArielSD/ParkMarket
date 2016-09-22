@@ -129,6 +129,10 @@
 
 -(void)postButtonTapped {
     PMPostViewController *mapViewController = [PMPostViewController new];
+    
+    PMApplicationViewController *applicationViewController = (PMApplicationViewController *)self.parentViewController.parentViewController;
+    mapViewController.delegate = applicationViewController;
+    
     mapViewController.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController pushViewController:mapViewController
                                          animated:YES];
@@ -136,6 +140,10 @@
 
 -(void)parkButtonTapped {
     PMParkViewController *mapViewController = [PMParkViewController new];
+    
+    PMApplicationViewController *applicationViewController = (PMApplicationViewController *)self.parentViewController.parentViewController;
+    mapViewController.delegate = applicationViewController;
+
     mapViewController.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController pushViewController:mapViewController
                                          animated:YES];

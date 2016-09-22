@@ -99,8 +99,8 @@
 - (void)configureNavigationBarItems {
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
                                                                    style:UIBarButtonItemStylePlain
-                                                                  target:nil
-                                                                  action:nil];
+                                                                  target:self
+                                                                  action:@selector(menuButtonTapped)];
     
     self.navigationItem.title = @"Post";
     self.navigationItem.rightBarButtonItem = menuButton;
@@ -141,6 +141,12 @@
 
 -(void)postButtonTapped {
     [self askForCarModelBeingParked];
+}
+
+#pragma mark - Responder Methods
+
+- (void)menuButtonTapped {
+    [self.delegate didTapMenuButton];
 }
 
 #pragma mark - Helper Methods
