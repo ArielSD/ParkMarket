@@ -189,7 +189,9 @@
 
 - (void)userDidProvideCreditCardInfo:(CardIOCreditCardInfo *)cardInfo
              inPaymentViewController:(CardIOPaymentViewController *)paymentViewController {
-    NSLog(@"Info: %@", cardInfo);
+    
+    [PMPayPalClient storeCreditCard:cardInfo];
+    
     [self dismissViewControllerAnimated:YES
                              completion:nil];
 }
@@ -256,6 +258,7 @@
                 progress:nil
                  success:^(NSURLSessionDataTask *task, id responseObject) {
                      NSLog(@"We did it");
+                     NSLog(@"Response Object: %@", responseObject);
                  }
                  failure:^(NSURLSessionDataTask *task, NSError *error) {
                      NSLog(@"We didn't do it");

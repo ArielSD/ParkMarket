@@ -12,8 +12,6 @@
 
 @interface PMFirebaseClient : NSObject
 
-#pragma mark - Class Methods
-
 + (void)createUserWithFirstName:(NSString *)firstName
                           email:(NSString *)email
                        password:(NSString *)password

@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <CardIO.h>
+
 // Testing only
 #import <AFNetworking.h>
 // Testing only
+
+#import "PMPayPalClient.h"
+
 #import "PMInitialViewController.h"
 #import "PMLoginViewController.h"
 #import "PMMenuViewController.h"
