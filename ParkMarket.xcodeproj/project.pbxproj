@@ -120,6 +120,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B017D21B1D94715B0041C3A3 /* API Clients */ = {
+			isa = PBXGroup;
+			children = (
+				B020F5A11D519F6F00847684 /* PMFirebaseClient.h */,
+				B020F5A21D519F6F00847684 /* PMFirebaseClient.m */,
+				B017D2181D9454460041C3A3 /* PMPayPalClient.h */,
+				B017D2191D9454460041C3A3 /* PMPayPalClient.m */,
+			);
+			name = "API Clients";
+			sourceTree = "<group>";
+		};
+		B017D21C1D9471680041C3A3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B06F14081D553A5600197AC5 /* PMParkingSpot.h */,
+				B06F14091D553A5600197AC5 /* PMParkingSpot.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		B05AEC9D1CF4AB4200A5660A = {
 			isa = PBXGroup;
 			children = (
@@ -149,12 +169,8 @@
 				B05AECAC1CF4AB4200A5660A /* AppDelegate.h */,
 				B05AECAD1CF4AB4200A5660A /* AppDelegate.m */,
 				B06F140C1D553A9600197AC5 /* ViewControllers */,
-				B020F5A11D519F6F00847684 /* PMFirebaseClient.h */,
-				B020F5A21D519F6F00847684 /* PMFirebaseClient.m */,
-				B017D2181D9454460041C3A3 /* PMPayPalClient.h */,
-				B017D2191D9454460041C3A3 /* PMPayPalClient.m */,
-				B06F14081D553A5600197AC5 /* PMParkingSpot.h */,
-				B06F14091D553A5600197AC5 /* PMParkingSpot.m */,
+				B017D21B1D94715B0041C3A3 /* API Clients */,
+				B017D21C1D9471680041C3A3 /* Models */,
 				B05AECB21CF4AB4200A5660A /* Main.storyboard */,
 				B05AECB51CF4AB4300A5660A /* Assets.xcassets */,
 				B05AECB71CF4AB4300A5660A /* LaunchScreen.storyboard */,
