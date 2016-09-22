@@ -15,14 +15,12 @@
 @required
 
 - (void)didTapAddCardButton;
+- (void)didTapMySpotsButton;
 - (void)didTapLogoutButton;
 
 @end
 
 @interface PMMenuViewController : UIViewController
-
-@property (strong, nonatomic) UIButton *addCardButton;
-@property (strong, nonatomic) UIButton *logoutButton;
 
 @property (weak, nonatomic) id <PMMenuViewControllerDelegate> delegate;
 
