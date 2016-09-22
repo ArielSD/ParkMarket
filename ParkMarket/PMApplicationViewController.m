@@ -23,8 +23,8 @@
 - (void)viewDidLoad {
     
     // Testing Only
-//    [self testPayPalAPICall];
-    [self testPayPalVault];
+    // [self testPayPalAPICall];
+     [self testOAuth];
     // Testing Only
     
     [super viewDidLoad];
@@ -236,31 +236,30 @@
                  }];
 }
 
-- (void)testPayPalVault {
+- (void)testOAuth {
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
-    sessionManager.requestSerializer = [AFJSONRequestSerializer new];
-    NSString *payPalURLString = @"https://api.sandbox.paypal.com/v1/vault/credit-card";
+    sessionManager.requestSerializer = [AFHTTPRequestSerializer new];
     
-    NSDictionary *payloadDictionary = @{
-                                        @"payer_id" : @"Test Payer ID",
-                                        @"type" : @"mastercard",
-                                        @"number" : @"5178058381539991",
-                                        @"expire_month" : @"05",
-                                        @"expire_year" : @"2020",
-                                        @"first_name" : @"Ariel",
-                                        @"last_name" : @"ScottDicker"
-                                        };
+    NSString *payPalURLString = @"https://api.sandbox.paypal.com/v1/oauth2/token";
+    NSString *clientID = @"Aa6s3b1XPLRsiGFwtN_OGDcsQLFVy1OwbrtQZrhK9JB9nKYkSwcfBHCegLK6tYPDEi2WQd-nC0xk7s1M";
+    NSString *secret = @"EK9j96pAmT6LoBSLLYgtbsqOVTMT-oveF-uwoxHBvUPruI5vFgrgrwzFNSDWNtWNC58A5qapcepR1Ii_";
     
-    [sessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [sessionManager.requestSerializer setValue:@"Bearer access_token$sandbox$cnws7cr5s5ntktrh$ce576ab1ca59372e59519389a22d0ccd" forHTTPHeaderField:@"Authorization"];
+    NSDictionary *payloadDictionary = @{@"grant_type" : @"client_credentials"};
+    
+    [sessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [sessionManager.requestSerializer setValue:@"en_US" forHTTPHeaderField:@"Accept-Language"];
+    [sessionManager.requestSerializer setAuthorizationHeaderFieldWithUsername:clientID
+                                                                     password:secret];
     
     [sessionManager POST:payPalURLString
               parameters:payloadDictionary
                 progress:nil
                  success:^(NSURLSessionDataTask *task, id responseObject) {
-                     NSLog(@"Success! Response Object: %@", responseObject);
-                 } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                     NSLog(@"%@", error);
+                     NSLog(@"We did it");
+                 }
+                 failure:^(NSURLSessionDataTask *task, NSError *error) {
+                     NSLog(@"We didn't do it");
+                     NSLog(@"Error: %@", error);
                  }];
 }
 
