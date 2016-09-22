@@ -272,6 +272,7 @@
     if (self.selectedMarker == nil) {
         [self noParkingSpotSelected];
     }
+    
     else {
     GMSMarker *markerToDelete = self.selectedMarker;
     [self.parkingSpots removeObjectForKey:self.selectedMarker.userData];
@@ -279,7 +280,29 @@
     [PMFirebaseClient removeClaimedParkingSpotFromOwner:self.selectedMarker.title
                                          withIdentifier:self.selectedMarker.userData];
     markerToDelete.map = nil;
+    
+    [self confirmTakenSpot];
     }
+}
+
+#pragma mark - Helper Methods
+
+- (void)confirmTakenSpot {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Parked!"
+                                                                                 message:nil
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alertController
+                           animated:YES
+                         completion:^{
+                             [UIView animateWithDuration:0.4
+                                              animations:^{
+                                                  alertController.view.alpha = 0.0;
+                                              } completion:^(BOOL finished) {
+                                                  [self dismissViewControllerAnimated:YES
+                                                                           completion:nil];
+                                                  [self.navigationController popToRootViewControllerAnimated:YES];
+                                              }];
+                         }];
 }
 
 #pragma mark - Map View Delegate Methods
