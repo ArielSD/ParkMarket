@@ -29,7 +29,8 @@
     
     self.addCardButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.addCardButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [self.addCardButton.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
+    [self.addCardButton.topAnchor constraintEqualToAnchor:self.view.topAnchor
+                                                 constant:self.view.frame.size.height / 10.0].active = YES;
     
     [self.addCardButton setTitle:@"Add Card"
                         forState:UIControlStateNormal];
@@ -45,8 +46,8 @@
     
     self.logoutButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.logoutButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [self.logoutButton.topAnchor constraintEqualToAnchor:self.addCardButton.bottomAnchor
-                                                constant:self.view.frame.size.height / 5].active = YES;
+    [self.logoutButton.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor
+                                                constant:-self.view.frame.size.height / 10.0].active = YES;
     
     [self.logoutButton setTitle:@"Log Out"
                        forState:UIControlStateNormal];
