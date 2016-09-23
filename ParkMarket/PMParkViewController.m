@@ -252,7 +252,9 @@
     
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
                                                      style:UIAlertActionStyleDefault
-                                                   handler:nil];
+                                                   handler:^(UIAlertAction * _Nonnull action) {
+                                                       [self.navigationController popToRootViewControllerAnimated:YES];
+                                                   }];
     
     [alertController addAction:action];
     [self presentViewController:alertController
