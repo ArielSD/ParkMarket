@@ -171,7 +171,10 @@
 }
 
 - (void)didTapMySpotsButton {
-    NSLog(@"Did tap my spots button");
+    PMUserPostedSpotsViewController *userPostedSpotsViewController = [PMUserPostedSpotsViewController new];
+    [self presentViewController:userPostedSpotsViewController
+                       animated:YES
+                     completion:nil];
 }
 
 - (void)didTapLogoutButton {

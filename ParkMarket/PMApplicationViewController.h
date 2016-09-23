@@ -19,6 +19,7 @@
 #import "PMLoginViewController.h"
 #import "PMInitialViewController.h"
 #import "PMMenuViewController.h"
+#import "PMUserPostedSpotsViewController.h"
 
 @class PMApplicationViewController;
 

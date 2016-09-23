@@ -16,6 +16,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    // Testing - Slow Animation
+    //[self.window.layer setSpeed:.05f];
+    
     [GMSServices provideAPIKey:@"AIzaSyDqktqpxE5X23pzv8pmS3DtWS3HaLpHTyQ"];
     [FIRApp configure];
     return YES;

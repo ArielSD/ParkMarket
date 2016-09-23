@@ -127,9 +127,6 @@
 
 // Remove a spot from the 'parkingSpots' node
 + (void)removeClaimedParkingSpotWithIdentifier:(NSString *)identifier {
-    
-    NSLog(@"Removing a spot from parking spots");
-    
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
     FIRDatabaseReference *parkingSpotToRemoveReference = [parkingSpotsReference child:identifier];
@@ -138,9 +135,6 @@
 
 // Remove a spot from the 'users' node
 + (void)removeClaimedParkingSpotFromOwner:(NSString *)owner withIdentifier:(NSString *)identifier {
-    
-    NSLog(@"Removing a spot from a user");
-    
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *usersReference = [rootReference child:@"users"];
     FIRDatabaseReference *parkingSpotOwnerReference = [usersReference child:owner];

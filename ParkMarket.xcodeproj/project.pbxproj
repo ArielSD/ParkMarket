@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		53DFDF1762652542AC7474A2 /* libPods-ParkMarket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34B90F8E429F882B24E728DD /* libPods-ParkMarket.a */; };
 		B017D21A1D9454460041C3A3 /* PMPayPalClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B017D2191D9454460041C3A3 /* PMPayPalClient.m */; };
+		B017D21F1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B017D21E1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m */; };
 		B020F59A1D496FD300847684 /* PMApplicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B020F5991D496FD300847684 /* PMApplicationViewController.m */; };
 		B020F5A31D519F6F00847684 /* PMFirebaseClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B020F5A21D519F6F00847684 /* PMFirebaseClient.m */; };
 		B05AECAB1CF4AB4200A5660A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECAA1CF4AB4200A5660A /* main.m */; };
@@ -51,6 +52,8 @@
 		9B2B4B26D070EFEF83541101 /* Pods-ParkMarket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarket.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket.debug.xcconfig"; sourceTree = "<group>"; };
 		B017D2181D9454460041C3A3 /* PMPayPalClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMPayPalClient.h; sourceTree = "<group>"; };
 		B017D2191D9454460041C3A3 /* PMPayPalClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMPayPalClient.m; sourceTree = "<group>"; };
+		B017D21D1D95668C0041C3A3 /* PMUserPostedSpotsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMUserPostedSpotsViewController.h; sourceTree = "<group>"; };
+		B017D21E1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMUserPostedSpotsViewController.m; sourceTree = "<group>"; };
 		B020F5981D496FD300847684 /* PMApplicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMApplicationViewController.h; sourceTree = "<group>"; };
 		B020F5991D496FD300847684 /* PMApplicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMApplicationViewController.m; sourceTree = "<group>"; };
 		B020F5A11D519F6F00847684 /* PMFirebaseClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMFirebaseClient.h; sourceTree = "<group>"; };
@@ -214,6 +217,8 @@
 				B020F5991D496FD300847684 /* PMApplicationViewController.m */,
 				B07C00301D818EA600C23D8D /* PMMenuViewController.h */,
 				B07C00311D818EA600C23D8D /* PMMenuViewController.m */,
+				B017D21D1D95668C0041C3A3 /* PMUserPostedSpotsViewController.h */,
+				B017D21E1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m */,
 				B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */,
 				B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */,
 				B09ED2581CF507A70054D0FC /* PMInitialViewController.h */,
@@ -436,6 +441,7 @@
 				B05AECAE1CF4AB4200A5660A /* AppDelegate.m in Sources */,
 				B017D21A1D9454460041C3A3 /* PMPayPalClient.m in Sources */,
 				B09ED25A1CF507A70054D0FC /* PMInitialViewController.m in Sources */,
+				B017D21F1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m in Sources */,
 				B09ED25D1CF612180054D0FC /* PMPostViewController.m in Sources */,
 				B05AECAB1CF4AB4200A5660A /* main.m in Sources */,
 			);

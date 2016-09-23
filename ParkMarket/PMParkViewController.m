@@ -12,9 +12,10 @@
 
 @property (strong, nonatomic) NSMutableDictionary *parkingSpots;
 @property (strong, nonatomic) NSMutableArray *parkingSpotMarkers;
-@property (strong, nonatomic) GMSMarker *selectedMarker;
 
+@property (strong, nonatomic) GMSMarker *selectedMarker;
 @property (strong, nonatomic) GMSMapView *mapView;
+
 @property (strong, nonatomic) UILabel *questionLabel;
 @property (strong, nonatomic) UIButton *parkButton;
 
@@ -33,6 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self configureLocationManager];
     [self configureNavigationBarItems];
     
@@ -311,10 +313,7 @@
     [PMFirebaseClient removeClaimedParkingSpotFromOwner:parkingSpotData[@"owner UID"]
                                          withIdentifier:parkingSpotData[@"identifier"]];
         
-    NSLog(@"Identifier in park button tapped: %@", self.selectedMarker.userData);
-        
     markerToDelete.map = nil;
-    
     [self confirmTakenSpot];
     }
 }
