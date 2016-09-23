@@ -170,6 +170,10 @@
                          completion:nil];
 }
 
+- (void)didTapMySpotsButton {
+    NSLog(@"Did Tap My Spots Button");
+}
+
 - (void)didTapLogoutButton {
     NSError *error;
     [[FIRAuth auth] signOut:&error];

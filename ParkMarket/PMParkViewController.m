@@ -185,9 +185,6 @@
 #pragma mark - Network Call
 
 - (void)getAllAvailableParkingSpots {
-    
-    NSLog(@"Get all available parking spots called");
-    
     [self configureActivityIndicator];
     
     [PMFirebaseClient getAvailableParkingSpotsWithCompletion:^(NSDictionary *parkingSpots) {
@@ -219,10 +216,14 @@
         NSDictionary *parkingSpot = dictionary[parkingSpotKey];
         
         NSString *parkingSpotIdentifier = parkingSpot[@"identifier"];
-        NSString *parkingSpotOwner = parkingSpot[@"owner"];
+        NSString *parkingSpotOwnerName = parkingSpot[@"owner"];
+        NSString *parkingSpotOwnerUID = parkingSpot[@"owner UID"];
         NSString *typeOfCarParked = parkingSpot[@"car"];
         NSString *parkingSpotLatitudeString = parkingSpot[@"latitude"];
         NSString *parkingSpotLongitudeString = parkingSpot[@"longitude"];
+        
+        NSDictionary *parkingSpotData = @{@"owner UID" : parkingSpotOwnerUID,
+                                          @"identifier" : parkingSpotIdentifier};
         
         double parkingSpotLatitudeDouble = parkingSpotLatitudeString.doubleValue;
         double parkingSpotLongitudeDouble = parkingSpotLongitudeString.doubleValue;
@@ -231,9 +232,9 @@
         
         dispatch_async(dispatch_get_main_queue(), ^ {
             GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpotLocation];
-            marker.userData = parkingSpotIdentifier;
+            marker.userData = parkingSpotData;
             marker.appearAnimation = kGMSMarkerAnimationPop;
-            marker.title = [NSString stringWithFormat:@"Owner: %@", parkingSpotOwner];
+            marker.title = [NSString stringWithFormat:@"Owner: %@", parkingSpotOwnerName];
             marker.snippet = typeOfCarParked;
             marker.map = self.mapView;
             
@@ -300,9 +301,15 @@
     else {
     GMSMarker *markerToDelete = self.selectedMarker;
     [self.parkingSpots removeObjectForKey:self.selectedMarker.userData];
-    [PMFirebaseClient removeClaimedParkingSpotWithIdentifier:self.selectedMarker.userData];
-    [PMFirebaseClient removeClaimedParkingSpotFromOwner:self.selectedMarker.title
-                                         withIdentifier:self.selectedMarker.userData];
+        
+    NSDictionary *parkingSpotData = markerToDelete.userData;
+        
+    [PMFirebaseClient removeClaimedParkingSpotWithIdentifier:parkingSpotData[@"identifier"]];
+    [PMFirebaseClient removeClaimedParkingSpotFromOwner:parkingSpotData[@"owner UID"]
+                                         withIdentifier:parkingSpotData[@"identifier"]];
+        
+    NSLog(@"Identifier in park button tapped: %@", self.selectedMarker.userData);
+        
     markerToDelete.map = nil;
     
     [self confirmTakenSpot];

@@ -50,9 +50,12 @@
                          }];
 }
 
+#warning Refactor this to two separate methods
 + (void)postParkingSpotWithLatitude:(NSString *)latitude longitute:(NSString *)longitude carModel:(NSString *)carModel {
     
     // Posting a spot to the 'parkingSpots' node
+    FIRUser *currentUser = [FIRAuth auth].currentUser;
+    NSString *currentUserUID = currentUser.uid;
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
     FIRDatabaseReference *newParkingSpotReference = [parkingSpotsReference childByAutoId];
@@ -61,6 +64,7 @@
     [firebaseClient getCurrentUserFirstNameWithCompletion:^(NSDictionary *currentUser) {
         NSString *currentUserFirstName = currentUser[@"first name"];
         NSDictionary *parkingSpotInformation = @{@"owner" : currentUserFirstName,
+                                                 @"owner UID" : currentUserUID,
                                                  @"car" : carModel,
                                                  @"identifier" : newParkingSpotReference.key,
                                                  @"latitude" : latitude,
@@ -70,8 +74,6 @@
     }];
     
     // Posting a spot to the currently logged in user
-    FIRUser *currentUser = [FIRAuth auth].currentUser;
-    NSString *currentUserUID = currentUser.uid;
     FIRDatabaseReference *usersReference = [rootReference child:@"users"];
     FIRDatabaseReference *currentUserReference = [usersReference child:currentUserUID];
     FIRDatabaseReference *postedParkingSpotsReference = [currentUserReference child:@"postedParkingSpots"];
@@ -101,15 +103,27 @@
                                   }];
 }
 
++ (void)getCurrentUsersPostedSpots:(void (^)(NSDictionary *))completionBlock {
+    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+    
+}
+
 // Remove a spot from the 'parkingSpots' node
 + (void)removeClaimedParkingSpotWithIdentifier:(NSString *)identifier {
+    
+    NSLog(@"Removing a spot from parking spots");
+    
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
     FIRDatabaseReference *parkingSpotToRemoveReference = [parkingSpotsReference child:identifier];
     [parkingSpotToRemoveReference removeValue];
 }
 
+// Remove a spot from the 'users' node
 + (void)removeClaimedParkingSpotFromOwner:(NSString *)owner withIdentifier:(NSString *)identifier {
+    
+    NSLog(@"Removing a spot from a user");
+    
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *usersReference = [rootReference child:@"users"];
     FIRDatabaseReference *parkingSpotOwnerReference = [usersReference child:owner];

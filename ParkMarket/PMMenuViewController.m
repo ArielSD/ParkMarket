@@ -90,7 +90,7 @@
 }
 
 - (void)mySpotsButtonTapped {
-    NSLog(@"My Spots Button Tapped");
+    [self.delegate didTapMySpotsButton];
 }
 
 - (void)logoutButtonTapped {

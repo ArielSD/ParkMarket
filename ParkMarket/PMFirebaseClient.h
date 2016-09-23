@@ -27,6 +27,8 @@
 
 + (void)getAvailableParkingSpotsWithCompletion:(void (^)(NSDictionary *parkingSpots))completionBlock;
 
++ (void)getCurrentUsersPostedSpots:(void (^)(NSDictionary *currentUsersPostedSpots))completionBlock;
+
 + (void)removeClaimedParkingSpotWithIdentifier:(NSString *)identifier;
 
 + (void)removeClaimedParkingSpotFromOwner:(NSString *)owner
