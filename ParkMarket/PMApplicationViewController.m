@@ -171,15 +171,7 @@
 }
 
 - (void)didTapMySpotsButton {
-    [PMFirebaseClient getCurrentUsersPostedSpots:^(NSDictionary *currentUsersPostedSpots) {
-        if (currentUsersPostedSpots == NULL) {
-            NSLog(@"You have no spots!");
-        }
-        
-        else {
-            NSLog(@"Your Spots: %@", currentUsersPostedSpots);
-        }
-    }];
+    NSLog(@"Did tap my spots button");
 }
 
 - (void)didTapLogoutButton {
