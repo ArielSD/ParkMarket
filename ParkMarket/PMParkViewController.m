@@ -191,6 +191,7 @@
         if (parkingSpots == nil) {
             [self noAvailableSpots];
         }
+        
         else {
             [self.activityIndicator stopAnimating];
             self.gettingAvailableParkingSpotsLabel.hidden = YES;

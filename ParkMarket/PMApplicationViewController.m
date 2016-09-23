@@ -24,7 +24,7 @@
     
     // Testing Only
     // [self testPayPalAPICall];
-     [self testOAuth];
+    //[self testOAuth];
     // Testing Only
     
     [super viewDidLoad];
@@ -171,7 +171,15 @@
 }
 
 - (void)didTapMySpotsButton {
-    NSLog(@"Did Tap My Spots Button");
+    [PMFirebaseClient getCurrentUsersPostedSpots:^(NSDictionary *currentUsersPostedSpots) {
+        if (currentUsersPostedSpots == NULL) {
+            NSLog(@"You have no spots!");
+        }
+        
+        else {
+            NSLog(@"Your Spots: %@", currentUsersPostedSpots);
+        }
+    }];
 }
 
 - (void)didTapLogoutButton {

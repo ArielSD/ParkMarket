@@ -12,6 +12,7 @@
 
 #pragma mark - Class Methods
 
+#warning Refactor with 'success' and 'failure' blocks
 + (void)createUserWithFirstName:(NSString *)firstName email:(NSString *)email password:(NSString *)password completion:(void (^)(NSError *))completionBlock {
     [[FIRAuth auth] createUserWithEmail:email
                                password:password
@@ -94,18 +95,34 @@
                                   withBlock:^(FIRDataSnapshot *snapshot) {
                                       NSDictionary *parkingSpots = snapshot.value;
                                       
-                                      if ([parkingSpots isKindOfClass:[NSNull class]]) {
-                                          completionBlock(nil);
-                                      }
-                                      else {
+                                      if ([snapshot exists]) {
                                           completionBlock(parkingSpots);
+                                      }
+                                      
+                                      else if (![snapshot exists]) {
+                                          completionBlock(nil);
                                       }
                                   }];
 }
 
-+ (void)getCurrentUsersPostedSpots:(void (^)(NSDictionary *))completionBlock {
++ (void)getCurrentUsersPostedSpots:(void (^)(NSDictionary *parkingSpots))completionBlock {
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+    FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+    FIRDatabaseReference *currentUserReference = [usersReference child:[FIRAuth auth].currentUser.uid];
+    FIRDatabaseReference *currentUserPostedParkingSpotsReference = [currentUserReference child:@"postedParkingSpots"];
     
+    [currentUserPostedParkingSpotsReference observeSingleEventOfType:FIRDataEventTypeValue
+                                                           withBlock:^(FIRDataSnapshot *snapshot) {
+                                                               NSDictionary *parkingSpots = snapshot.value;
+                                                               
+                                                               if ([snapshot exists]) {
+                                                                   completionBlock(parkingSpots);
+                                                               }
+                                                               
+                                                               else if (![snapshot exists]) {
+                                                                   completionBlock(nil);
+                                                               }
+                                                           }];
 }
 
 // Remove a spot from the 'parkingSpots' node
