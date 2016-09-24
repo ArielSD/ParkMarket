@@ -10,6 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import <FirebaseDatabase/FirebaseDatabase.h>
+#import "PMFirebaseClient.h"
 
 @interface PMUserPostedSpotsViewController : UIViewController <CLLocationManagerDelegate, GMSMapViewDelegate>
 

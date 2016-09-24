@@ -81,6 +81,7 @@
     FIRDatabaseReference *newPostedParkingSpotReference = [postedParkingSpotsReference child:newParkingSpotReference.key];
     
     NSDictionary *parkingSpotCoordinates = @{@"identifier" : newParkingSpotReference.key,
+                                             @"car" : carModel,
                                              @"latitude" : latitude,
                                              @"longitude" : longitude};
     
@@ -105,7 +106,7 @@
                                   }];
 }
 
-+ (void)getCurrentUsersPostedSpots:(void (^)(NSDictionary *parkingSpots))completionBlock {
++ (void)getCurrentUserPostedSpots:(void (^)(NSDictionary *parkingSpots))completionBlock {
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *usersReference = [rootReference child:@"users"];
     FIRDatabaseReference *currentUserReference = [usersReference child:[FIRAuth auth].currentUser.uid];

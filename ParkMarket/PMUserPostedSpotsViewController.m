@@ -33,6 +33,8 @@
     
     [self configureLocationManager];
     
+    [self getAllUserPostedParkingSpots];
+    
     self.viewHeight = self.view.frame.size.height;
     self.viewWidth = self.view.frame.size.width;
 }
@@ -111,12 +113,61 @@
         [self.locationManager startUpdatingLocation];
     }
 }
+
+#pragma mark - Network Call
+
+- (void)getAllUserPostedParkingSpots {
+    [PMFirebaseClient getCurrentUserPostedSpots:^(NSDictionary *currentUsersPostedSpots) {
+        if (currentUsersPostedSpots == nil) {
+            NSLog(@"You have no posted spots");
+        }
+        
+        else {
+            self.parkingSpots = [NSMutableDictionary dictionaryWithDictionary:currentUsersPostedSpots];
+            [self populateMapWithMarkersForParkingSpotsFromDictionary:self.parkingSpots];
+        }
+    }];
+}
                                    
 #pragma mark - Helper Methods
                                    
 - (void)doneButtonTapped {
     [self dismissViewControllerAnimated:YES
                              completion:nil];
+}
+
+- (void)populateMapWithMarkersForParkingSpotsFromDictionary:(NSDictionary *)dictionary {
+    self.parkingSpotMarkers = [NSMutableArray new];
+    
+    for (NSString *parkingSpotKey in dictionary) {
+        NSDictionary *parkingSpot = dictionary[parkingSpotKey];
+        
+        //NSString *parkingSpotIdentifier = parkingSpot[@"identifier"];
+        //NSString *parkingSpotOwnerName = parkingSpot[@"owner"];
+        //NSString *parkingSpotOwnerUID = parkingSpot[@"owner UID"];
+        NSString *typeOfCarParked = parkingSpot[@"car"];
+        NSString *parkingSpotLatitudeString = parkingSpot[@"latitude"];
+        NSString *parkingSpotLongitudeString = parkingSpot[@"longitude"];
+        
+        //NSDictionary *parkingSpotData = @{@"owner UID" : parkingSpotOwnerUID,
+                                          //@"identifier" : parkingSpotIdentifier};
+        
+        double parkingSpotLatitudeDouble = parkingSpotLatitudeString.doubleValue;
+        double parkingSpotLongitudeDouble = parkingSpotLongitudeString.doubleValue;
+        
+        CLLocationCoordinate2D parkingSpotLocation = CLLocationCoordinate2DMake(parkingSpotLatitudeDouble, parkingSpotLongitudeDouble);
+        
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpotLocation];
+            //marker.userData = parkingSpotData;
+            marker.appearAnimation = kGMSMarkerAnimationPop;
+            marker.title = [NSString stringWithFormat:@"Car: %@", typeOfCarParked];
+            //marker.snippet = typeOfCarParked;
+            marker.map = self.mapView;
+            
+            [self.parkingSpotMarkers addObject:marker];
+        });
+    }
 }
 
 @end
