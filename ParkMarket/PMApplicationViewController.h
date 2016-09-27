@@ -12,6 +12,7 @@
 
 // Testing only
 #import <AFNetworking.h>
+#import "PMMessagesViewController.h"
 // Testing only
 
 #import "PMPayPalClient.h"

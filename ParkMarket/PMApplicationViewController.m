@@ -184,7 +184,13 @@
 }
 
 - (void)didTapMessagesButton {
-    NSLog(@"Did tap messages button");
+    PMMessagesViewController *messagesViewController = [PMMessagesViewController new];
+    messagesViewController.senderId = @"Sender ID";
+    messagesViewController.senderDisplayName = @"Sender Display Name";
+    
+    [self presentViewController:messagesViewController
+                       animated:YES
+                     completion:nil];
 }
 
 - (void)didTapLogoutButton {

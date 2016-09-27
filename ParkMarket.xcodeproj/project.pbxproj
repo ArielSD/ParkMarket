@@ -27,6 +27,7 @@
 		B0B2F4671D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
 		B0B2F4681D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
 		B0B2F4691D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
+		B0C8A0FB1D9B02710029C2C1 /* PMMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C8A0FA1D9B02710029C2C1 /* PMMessagesViewController.m */; };
 		B0EB86D11D46901D001A0F6D /* PMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,8 @@
 		B09ED25C1CF612180054D0FC /* PMPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMPostViewController.m; sourceTree = "<group>"; };
 		B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B0C29F251D89D4100058C2AF /* ParkMarket.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ParkMarket.entitlements; sourceTree = "<group>"; };
+		B0C8A0F91D9B02710029C2C1 /* PMMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMMessagesViewController.h; sourceTree = "<group>"; };
+		B0C8A0FA1D9B02710029C2C1 /* PMMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMMessagesViewController.m; sourceTree = "<group>"; };
 		B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMLoginViewController.h; sourceTree = "<group>"; };
 		B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMLoginViewController.m; sourceTree = "<group>"; };
 		F07AA50B8F5A1E3305FA77B7 /* Pods-ParkMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarket.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket.release.xcconfig"; sourceTree = "<group>"; };
@@ -219,6 +222,8 @@
 				B07C00311D818EA600C23D8D /* PMMenuViewController.m */,
 				B017D21D1D95668C0041C3A3 /* PMUserPostedSpotsViewController.h */,
 				B017D21E1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m */,
+				B0C8A0F91D9B02710029C2C1 /* PMMessagesViewController.h */,
+				B0C8A0FA1D9B02710029C2C1 /* PMMessagesViewController.m */,
 				B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */,
 				B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */,
 				B09ED2581CF507A70054D0FC /* PMInitialViewController.h */,
@@ -436,6 +441,7 @@
 				B0EB86D11D46901D001A0F6D /* PMLoginViewController.m in Sources */,
 				B07C00321D818EA600C23D8D /* PMMenuViewController.m in Sources */,
 				B020F5A31D519F6F00847684 /* PMFirebaseClient.m in Sources */,
+				B0C8A0FB1D9B02710029C2C1 /* PMMessagesViewController.m in Sources */,
 				B020F59A1D496FD300847684 /* PMApplicationViewController.m in Sources */,
 				B06F140A1D553A5600197AC5 /* PMParkingSpot.m in Sources */,
 				B05AECAE1CF4AB4200A5660A /* AppDelegate.m in Sources */,
