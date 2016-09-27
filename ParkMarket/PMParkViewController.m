@@ -65,9 +65,6 @@
     self.mapView.delegate = self;
     
     [self.view addSubview:self.mapView];
-    
-    [self configureQuestionLabel];
-    [self configureParkButton];
 }
 
 -(void)configureQuestionLabel {
@@ -174,6 +171,8 @@
         
         if (!self.mapView) {
             [self configureMapView];
+            [self configureQuestionLabel];
+            [self configureParkButton];
         }
     }
 }

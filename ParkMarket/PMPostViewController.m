@@ -53,9 +53,6 @@
     self.mapView.myLocationEnabled = YES;
     
     [self.view addSubview:self.mapView];
-    
-    [self configureQuestionLabel];
-    [self configurePostButton];
 }
 
 -(void)configureQuestionLabel {
@@ -128,6 +125,8 @@
         
         if (!self.mapView) {
             [self configureMapView];
+            [self configureQuestionLabel];
+            [self configurePostButton];
         }
     }
 }

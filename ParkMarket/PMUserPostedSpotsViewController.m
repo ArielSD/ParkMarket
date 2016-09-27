@@ -15,8 +15,8 @@
 
 @property (strong, nonatomic) GMSMarker *selectedMarker;
 @property (strong, nonatomic) GMSMapView *mapView;
-
 @property (strong, nonatomic) UINavigationBar *navigationBar;
+@property (strong, nonatomic) UIButton *removeSpotButton;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *currentLocation;
@@ -80,6 +80,26 @@
     self.navigationBar.items = @[navigationItem];
 }
 
+- (void)configureRemoveSpotButton {
+    self.removeSpotButton = [UIButton buttonWithType: UIButtonTypeSystem];
+    [self.view addSubview:self.removeSpotButton];
+    
+    self.removeSpotButton.backgroundColor = [UIColor whiteColor];
+    [self.removeSpotButton setTitle:@"Remove"
+                           forState:UIControlStateNormal];
+    
+    self.removeSpotButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.removeSpotButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.removeSpotButton.centerYAnchor constraintEqualToAnchor:self.view.bottomAnchor
+                                                        constant:-40].active = YES;
+    [self.removeSpotButton.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
+                                                    multiplier:0.5].active = YES;
+    
+    [self.removeSpotButton addTarget:self
+                              action:@selector(removePostedParkingSpot)
+                    forControlEvents:UIControlEventTouchUpInside];
+}
+
 #pragma mark - Core Location
 
 -(void)configureLocationManager {
@@ -104,6 +124,7 @@
         if (!self.mapView) {
             [self configureMapView];
             [self configureNavigationBar];
+            [self configureRemoveSpotButton];
         }
     }
 }
