@@ -12,7 +12,6 @@
 
 // Testing only
 #import <AFNetworking.h>
-#import "PMMessagesViewController.h"
 // Testing only
 
 #import "PMPayPalClient.h"
@@ -21,6 +20,7 @@
 #import "PMInitialViewController.h"
 #import "PMMenuViewController.h"
 #import "PMUserPostedSpotsViewController.h"
+#import "PMMessagesViewController.h"
 
 @class PMApplicationViewController;
 

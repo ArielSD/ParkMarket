@@ -41,7 +41,6 @@
 
 + (void)saveCard:(CardIOCreditCardInfo *)card WithAccessToken:(NSString *)accessToken {
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
-#warning Make sure that this is the correct type of serializer
     sessionManager.requestSerializer = [AFHTTPRequestSerializer new];
     
     NSString *payPalURLString = @"https://api.sandbox.paypal.com/v1/vault/credit-cards";
