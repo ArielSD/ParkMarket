@@ -16,6 +16,7 @@
 
 - (void)didTapAddCardButton;
 - (void)didTapMySpotsButton;
+- (void)didTapMessagesButton;
 - (void)didTapLogoutButton;
 
 @end

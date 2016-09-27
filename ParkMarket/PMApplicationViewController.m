@@ -183,6 +183,10 @@
                      completion:nil];
 }
 
+- (void)didTapMessagesButton {
+    NSLog(@"Did tap messages button");
+}
+
 - (void)didTapLogoutButton {
     NSError *error;
     [[FIRAuth auth] signOut:&error];

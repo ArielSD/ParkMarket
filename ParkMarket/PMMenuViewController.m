@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) UIButton *addCardButton;
 @property (strong, nonatomic) UIButton *mySpotsButton;
+@property (strong, nonatomic) UIButton *messagesButton;
 @property (strong, nonatomic) UIButton *logoutButton;
 
 @end
@@ -23,6 +24,7 @@
     if (self) {
         [self configureAddCardButton];
         [self configureMySpotsButton];
+        [self configureMessagesButton];
         [self configureLogoutButton];
     }
     return  self;
@@ -66,6 +68,23 @@
                  forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)configureMessagesButton {
+    self.messagesButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.view addSubview:self.messagesButton];
+    
+    self.messagesButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.messagesButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.messagesButton.topAnchor constraintEqualToAnchor:self.mySpotsButton.bottomAnchor
+                                                  constant:self.view.frame.size.height / 20.0].active = YES;
+    
+    [self.messagesButton setTitle:@"Messages"
+                        forState:UIControlStateNormal];
+    
+    [self.messagesButton addTarget:self
+                           action:@selector(messagesButtonTapped)
+                 forControlEvents:UIControlEventTouchUpInside];
+}
+
 - (void)configureLogoutButton {
     self.logoutButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.view addSubview:self.logoutButton];
@@ -91,6 +110,10 @@
 
 - (void)mySpotsButtonTapped {
     [self.delegate didTapMySpotsButton];
+}
+
+- (void)messagesButtonTapped {
+    [self.delegate didTapMessagesButton];
 }
 
 - (void)logoutButtonTapped {
