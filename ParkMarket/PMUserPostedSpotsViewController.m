@@ -96,7 +96,7 @@
                                                     multiplier:0.5].active = YES;
     
     [self.removeSpotButton addTarget:self
-                              action:@selector(removePostedParkingSpot)
+                              action:@selector(removeButtonTapped)
                     forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -151,7 +151,59 @@
 }
                                    
 #pragma mark - Helper Methods
-                                   
+
+- (void)populateMapWithMarkersForParkingSpotsFromDictionary:(NSDictionary *)dictionary {
+    self.parkingSpotMarkers = [NSMutableArray new];
+    
+    for (NSString *parkingSpotKey in dictionary) {
+        NSDictionary *parkingSpot = dictionary[parkingSpotKey];
+        
+        NSString *parkingSpotIdentifier = parkingSpot[@"identifier"];
+        NSString *typeOfCarParked = parkingSpot[@"car"];
+        NSString *parkingSpotLatitudeString = parkingSpot[@"latitude"];
+        NSString *parkingSpotLongitudeString = parkingSpot[@"longitude"];
+        
+        double parkingSpotLatitudeDouble = parkingSpotLatitudeString.doubleValue;
+        double parkingSpotLongitudeDouble = parkingSpotLongitudeString.doubleValue;
+        
+        CLLocationCoordinate2D parkingSpotLocation = CLLocationCoordinate2DMake(parkingSpotLatitudeDouble, parkingSpotLongitudeDouble);
+        
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpotLocation];
+            marker.appearAnimation = kGMSMarkerAnimationPop;
+            marker.userData = parkingSpotIdentifier;
+            marker.title = [NSString stringWithFormat:@"Car: %@", typeOfCarParked];
+            marker.icon = [GMSMarker markerImageWithColor:[UIColor yellowColor]];
+            marker.map = self.mapView;
+            
+            [self.parkingSpotMarkers addObject:marker];
+        });
+    }
+}
+
+- (void)removeButtonTapped {
+    if (self.selectedMarker == nil) {
+        [self noParkingSpotSelected];
+    }
+    
+    else {
+        GMSMarker *markerToDelete = self.selectedMarker;
+        [self.parkingSpots removeObjectForKey:self.selectedMarker.userData];
+        
+        [PMFirebaseClient removeClaimedParkingSpotWithIdentifier:self.selectedMarker.userData];
+        [PMFirebaseClient removeClaimedParkingSpotFromOwner:[FIRAuth auth].currentUser.uid
+                                             withIdentifier:self.selectedMarker.userData];
+        
+        markerToDelete.map = nil;
+        [self confirmRemovedSpot];
+    }
+    
+    if (self.parkingSpots.count == 0) {
+        [self dismissViewControllerAnimated:YES
+                                 completion:nil];
+    }
+}
+
 - (void)doneButtonTapped {
     [self dismissViewControllerAnimated:YES
                              completion:nil];
@@ -175,30 +227,57 @@
                      completion:nil];
 }
 
-- (void)populateMapWithMarkersForParkingSpotsFromDictionary:(NSDictionary *)dictionary {
-    self.parkingSpotMarkers = [NSMutableArray new];
+- (void)noParkingSpotSelected {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Not so fast!"
+                                                                             message:@"You haven't selected a parking spot to remove."
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
     
-    for (NSString *parkingSpotKey in dictionary) {
-        NSDictionary *parkingSpot = dictionary[parkingSpotKey];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:nil];
+    
+    [alertController addAction:action];
+    [self presentViewController:alertController
+                       animated:YES
+                     completion:nil];
+}
+
+- (void)confirmRemovedSpot {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Removed!"
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertController
+                       animated:YES
+                     completion:^{
+                         [UIView animateWithDuration:0.4
+                                          animations:^{
+                                              alertController.view.alpha = 0.0;
+                                          } completion:^(BOOL finished) {
+                                              [self dismissViewControllerAnimated:YES
+                                                                       completion:nil];
+                                              [self.navigationController popToRootViewControllerAnimated:YES];
+                                          }];
+                     }];
+}
+
+#pragma mark - Map View Delegate Methods
+
+- (void)mapView:(GMSMapView *)mapView didLongPressInfoWindowOfMarker:(GMSMarker *)marker {
+    if (marker.opacity == 1) {
+        self.selectedMarker = marker;
         
-        NSString *typeOfCarParked = parkingSpot[@"car"];
-        NSString *parkingSpotLatitudeString = parkingSpot[@"latitude"];
-        NSString *parkingSpotLongitudeString = parkingSpot[@"longitude"];
+        for (GMSMarker *marker in self.parkingSpotMarkers) {
+            marker.icon = nil;
+            marker.opacity = 1;
+        }
         
-        double parkingSpotLatitudeDouble = parkingSpotLatitudeString.doubleValue;
-        double parkingSpotLongitudeDouble = parkingSpotLongitudeString.doubleValue;
-        
-        CLLocationCoordinate2D parkingSpotLocation = CLLocationCoordinate2DMake(parkingSpotLatitudeDouble, parkingSpotLongitudeDouble);
-        
-        dispatch_async(dispatch_get_main_queue(), ^ {
-            GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpotLocation];
-            marker.appearAnimation = kGMSMarkerAnimationPop;
-            marker.title = [NSString stringWithFormat:@"Car: %@", typeOfCarParked];
-            marker.icon = [GMSMarker markerImageWithColor:[UIColor yellowColor]];
-            marker.map = self.mapView;
-            
-            [self.parkingSpotMarkers addObject:marker];
-        });
+        marker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
+        marker.opacity = 0.5;
+    }
+    else {
+        self.selectedMarker = nil;
+        marker.icon = nil;
+        marker.opacity = 1;
     }
 }
 

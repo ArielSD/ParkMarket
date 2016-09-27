@@ -245,6 +245,26 @@
     }
 }
 
+- (void)parkButtonTapped {
+    if (self.selectedMarker == nil) {
+        [self noParkingSpotSelected];
+    }
+    
+    else {
+        GMSMarker *markerToDelete = self.selectedMarker;
+        [self.parkingSpots removeObjectForKey:self.selectedMarker.userData[@"identifier"]];
+        
+        NSDictionary *parkingSpotData = markerToDelete.userData;
+        
+        [PMFirebaseClient removeClaimedParkingSpotWithIdentifier:parkingSpotData[@"identifier"]];
+        [PMFirebaseClient removeClaimedParkingSpotFromOwner:parkingSpotData[@"owner UID"]
+                                             withIdentifier:parkingSpotData[@"identifier"]];
+        
+        markerToDelete.map = nil;
+        [self confirmTakenSpot];
+    }
+}
+
 // Alert controller if there are no available parking spots (This will be useful when I make a distance radius)
 - (void)noAvailableSpots {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Hmmm..."
@@ -297,30 +317,9 @@
                      }];
 }
 
-- (void)parkButtonTapped {
-    if (self.selectedMarker == nil) {
-        [self noParkingSpotSelected];
-    }
-    
-    else {
-    GMSMarker *markerToDelete = self.selectedMarker;
-    [self.parkingSpots removeObjectForKey:self.selectedMarker.userData];
-        
-    NSDictionary *parkingSpotData = markerToDelete.userData;
-        
-    [PMFirebaseClient removeClaimedParkingSpotWithIdentifier:parkingSpotData[@"identifier"]];
-    [PMFirebaseClient removeClaimedParkingSpotFromOwner:parkingSpotData[@"owner UID"]
-                                         withIdentifier:parkingSpotData[@"identifier"]];
-        
-    markerToDelete.map = nil;
-    [self confirmTakenSpot];
-    }
-}
-
 #pragma mark - Map View Delegate Methods
 
 - (void)mapView:(GMSMapView *)mapView didLongPressInfoWindowOfMarker:(GMSMarker *)marker {
-    
     if (marker.opacity == 1) {
         self.selectedMarker = marker;
         
