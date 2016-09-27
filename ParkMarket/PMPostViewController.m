@@ -27,8 +27,6 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"Parent View Controller Of Post: %@", self.navigationController);
-    
     [self configureLocationManager];
     [self configureNavigationBarItems];
     

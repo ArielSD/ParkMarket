@@ -119,7 +119,7 @@
 - (void)getAllUserPostedParkingSpots {
     [PMFirebaseClient getCurrentUserPostedSpots:^(NSDictionary *currentUsersPostedSpots) {
         if (currentUsersPostedSpots == nil) {
-            NSLog(@"You have no posted spots");
+            [self noUserPostedSpots];
         }
         
         else {
@@ -134,6 +134,24 @@
 - (void)doneButtonTapped {
     [self dismissViewControllerAnimated:YES
                              completion:nil];
+}
+
+- (void)noUserPostedSpots {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Hmmm..."
+                                                                             message:@"You don't have any posted spots!"
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * _Nonnull action) {
+                                                       [self dismissViewControllerAnimated:YES
+                                                                                completion:nil];
+                                                   }];
+    
+    [alertController addAction:action];
+    [self presentViewController:alertController
+                       animated:YES
+                     completion:nil];
 }
 
 - (void)populateMapWithMarkersForParkingSpotsFromDictionary:(NSDictionary *)dictionary {

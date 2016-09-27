@@ -22,8 +22,6 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"Parent View Controller: %@", self.parentViewController);
-    
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self configureNavigationBarItems];
