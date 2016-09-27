@@ -16,6 +16,8 @@
 @property (strong, nonatomic) NSLayoutConstraint *menuRightAnchorConstraint;
 @property (strong, nonatomic) NSLayoutConstraint *menuLeftAnchorConstraint;
 
+@property (strong, nonatomic) UITapGestureRecognizer *dismissMenuTapGestureRecognizer;
+
 @end
 
 @implementation PMApplicationViewController
@@ -135,7 +137,6 @@
 #pragma mark - MenuButtonDelegate Methods
 
 - (void)didTapMenuButton {
-    
     if (self.view.subviews.lastObject != self.menu.view) {
         [self.view bringSubviewToFront:self.menu.view];
     }
@@ -147,9 +148,12 @@
                              self.menuRightAnchorConstraint.active = NO;
                              self.menuLeftAnchorConstraint.active = YES;
                              [self.view layoutIfNeeded];
+                             
+                             [self addTapGestureRecognizerToDismissMenu];
                          }];
         
     }
+    
     else {
         [UIView animateWithDuration:0.25
                          animations:^{
@@ -157,6 +161,8 @@
                              self.menuLeftAnchorConstraint.active = NO;
                              self.menuRightAnchorConstraint.active = YES;
                              [self.view layoutIfNeeded];
+                             
+                             [self removeTapGestureRecognizerToDismissMenu];
                          }];
     }
 }
@@ -201,6 +207,33 @@
     
     [self dismissViewControllerAnimated:YES
                              completion:nil];
+}
+
+#pragma mark - Helper Methods
+
+- (void)addTapGestureRecognizerToDismissMenu {
+    self.dismissMenuTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                   action:@selector(didTapMenuButton)];
+    
+    [self.view.subviews[2] addGestureRecognizer:self.dismissMenuTapGestureRecognizer];
+    
+    UINavigationController *navigationController = self.childViewControllers.firstObject;
+    UIViewController *viewController = navigationController.topViewController;
+    
+    for (UIView *view in viewController.view.subviews) {
+        view.userInteractionEnabled = NO;
+    }
+}
+
+- (void)removeTapGestureRecognizerToDismissMenu {
+    [self.view.subviews[2] removeGestureRecognizer:self.dismissMenuTapGestureRecognizer];
+    
+    UINavigationController *navigationController = self.childViewControllers.firstObject;
+    UIViewController *viewController = navigationController.topViewController;
+    
+    for (UIView *view in viewController.view.subviews) {
+        view.userInteractionEnabled = YES;
+    }
 }
 
 #pragma mark - Testing

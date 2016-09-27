@@ -174,6 +174,9 @@
         
         if (!self.mapView) {
             [self configureMapView];
+            
+            NSLog(@"Park VC's View's Subviews: %@", self.view.subviews);
+            
         }
     }
 }
