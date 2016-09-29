@@ -597,6 +597,7 @@
 			baseConfigurationReference = 9B2B4B26D070EFEF83541101 /* Pods-ParkMarket.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ParkMarket/ParkMarket.entitlements;
+				DEVELOPMENT_TEAM = 7LA77DS2EA;
 				INFOPLIST_FILE = ParkMarket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -610,6 +611,7 @@
 			baseConfigurationReference = F07AA50B8F5A1E3305FA77B7 /* Pods-ParkMarket.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ParkMarket/ParkMarket.entitlements;
+				DEVELOPMENT_TEAM = 7LA77DS2EA;
 				INFOPLIST_FILE = ParkMarket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

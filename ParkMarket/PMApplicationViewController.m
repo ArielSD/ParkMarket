@@ -185,6 +185,7 @@
 
 - (void)didTapMessagesButton {
     PMMessagesViewController *messagesViewController = [PMMessagesViewController new];
+    messagesViewController.title = @"Messages";
     messagesViewController.senderId = @"Sender ID";
     messagesViewController.senderDisplayName = @"Sender Display Name";
     
