@@ -6,7 +6,11 @@
 //  Copyright © 2016 Ariel Scott-Dicker. All rights reserved.
 //
 
-#import <JSQMessagesViewController/JSQMessagesViewController.h>
+#import <JSQMessagesViewController.h>
+#import <JSQMessage.h>
+#import <JSQMessages.h>
+#import <JSQMessagesBubbleImageFactory.h>
+#import <JSQMessagesBubbleImage.h>
 
 @class PMMessagesViewController;
 
