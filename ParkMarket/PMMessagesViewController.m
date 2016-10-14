@@ -10,9 +10,7 @@
 
 @interface PMMessagesViewController ()
 
-// Testing
-@property(strong, nonatomic) UIButton *dismissButton;
-// Testing
+@property (strong, nonatomic) UIBarButtonItem *doneButton;
 
 @end
 
@@ -21,8 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Testing
-    [self configureDismissButton];
+    [self configureNavigationItems];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,26 +27,21 @@
     NSLog(@"Did receive memory warning");
 }
 
-// Testing
-- (void)configureDismissButton {
-    self.dismissButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [self.view addSubview:self.dismissButton];
+#pragma mark - UI Layout
+
+- (void)configureNavigationItems {
+    self.doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                target:self
+                                                                                action:@selector(doneButtonTapped)];
     
-    self.dismissButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.dismissButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [self.dismissButton.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
-    
-    [self.dismissButton setTitle:@"Dismiss"
-                        forState:UIControlStateNormal];
-    
-    [self.dismissButton addTarget:self
-                           action:@selector(dismissButtonTapped)
-                 forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = self.doneButton;
+
 }
 
-- (void)dismissButtonTapped {
-    [self dismissViewControllerAnimated:YES
-                             completion:nil];
+#pragma mark - Delegate Methods
+
+- (void)doneButtonTapped {
+    [self.delegate willDismissPMMessagesViewController:self];
 }
 
 @end

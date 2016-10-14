@@ -32,6 +32,6 @@
 
 @end
 
-@interface PMApplicationViewController : UIViewController <PMLoginViewControllerDelegate, MenuButtonDelegate, PMMenuViewControllerDelegate,CardIOPaymentViewControllerDelegate>
+@interface PMApplicationViewController : UIViewController <PMLoginViewControllerDelegate, MenuButtonDelegate, PMMenuViewControllerDelegate,CardIOPaymentViewControllerDelegate, PMMessagesViewControllerDelegate>
 
 @end

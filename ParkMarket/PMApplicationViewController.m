@@ -185,23 +185,23 @@
 
 - (void)didTapMessagesButton {
     PMMessagesViewController *messagesViewController = [PMMessagesViewController new];
-    messagesViewController.title = @"Messages";
+    messagesViewController.title = @"Title";
     messagesViewController.senderId = @"Sender ID";
     messagesViewController.senderDisplayName = @"Sender Display Name";
+    messagesViewController.delegate = self;
     
-    [self presentViewController:messagesViewController
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:messagesViewController];
+    
+    [self presentViewController:navigationController
                        animated:YES
                      completion:nil];
 }
 
-- (void)didTapLogoutButton {
-    NSError *error;
-    [[FIRAuth auth] signOut:&error];
-    if (!error) {
-        self.menuLeftAnchorConstraint.active = NO;
-        self.menuRightAnchorConstraint.active = YES;
-        [self showLoginViewController];
-    }
+#pragma mark - PMMessagesViewControllerDelegate Methods
+
+- (void)willDismissPMMessagesViewController:(PMMessagesViewController *)messagesViewController {
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
 }
 
 #pragma mark - CardIOPaymentViewControllerDelegate Methods
@@ -244,6 +244,18 @@
     
     for (UIView *view in viewController.view.subviews) {
         view.userInteractionEnabled = YES;
+    }
+}
+
+#pragma mark - Log Out
+
+- (void)didTapLogoutButton {
+    NSError *error;
+    [[FIRAuth auth] signOut:&error];
+    if (!error) {
+        self.menuLeftAnchorConstraint.active = NO;
+        self.menuRightAnchorConstraint.active = YES;
+        [self showLoginViewController];
     }
 }
 

@@ -8,6 +8,18 @@
 
 #import <JSQMessagesViewController/JSQMessagesViewController.h>
 
+@class PMMessagesViewController;
+
+@protocol PMMessagesViewControllerDelegate <NSObject>
+
+@required
+
+- (void)willDismissPMMessagesViewController:(PMMessagesViewController *)messagesViewController;
+
+@end
+
 @interface PMMessagesViewController : JSQMessagesViewController
+
+@property (weak, nonatomic) id <PMMessagesViewControllerDelegate> delegate;
 
 @end
