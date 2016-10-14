@@ -24,25 +24,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.messages = [NSMutableArray new];
-    
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
     
-    NSLog(@"View Did Load");
     
-    [self configureNavigationItems];
-    
-    [self setUpBubbles];
+    [self configureMessageBubbles];
     
     [self addMessageWithID:@"foo"
                       text:@"Hey Person!"];
+    [self addMessageWithID:@"Sender ID"
+                      text:@"Yo!"];
     [self finishReceivingMessage];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     NSLog(@"Did receive memory warning");
+}
+
+#pragma mark - Init Method
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _messages = [NSMutableArray new];
+        [self configureNavigationItems];
+    }
+    return self;
 }
 
 #pragma mark - UI Layout
@@ -65,10 +73,24 @@
 #pragma mark - UICollectionViewDataSource Protocol Methods
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    
-    NSLog(@"Self.messages.count: %lu", self.messages.count);
-    
     return self.messages.count;
+}
+
+#pragma mark - UICollectionView Delegate Methods
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    JSQMessagesCollectionViewCell *cell = [super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    
+    JSQMessage *message = self.messages[indexPath.item];
+    
+    if ([message.senderId isEqualToString:@"Sender ID"]) {
+        cell.textView.textColor = [UIColor whiteColor];
+    }
+    
+    else {
+        cell.textView.textColor = [UIColor blackColor];
+    }
+    return cell;
 }
 
 #pragma mark - JSQMessagesCollectionViewDataSource Protocol Methods
@@ -95,19 +117,14 @@
 #pragma mark - Testing
 
 - (void)addMessageWithID:(NSString *)id text:(NSString *)text {
-    
-    NSLog(@"Add message called");
-    
     JSQMessage *message = [JSQMessage messageWithSenderId:id
                                               displayName:@""
                                                      text:text];
     
     [self.messages addObject:message];
-    
-    NSLog(@"Self.messages.count in addMessage: %lu", self.messages.count);
 }
 
-- (void)setUpBubbles {
+- (void)configureMessageBubbles {
     JSQMessagesBubbleImageFactory *factory = [JSQMessagesBubbleImageFactory new];
     self.incomingBubbleImageView = [factory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
     self.outgoingBubbleImageView = [factory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleBlueColor]];

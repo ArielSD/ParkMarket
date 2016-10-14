@@ -26,4 +26,6 @@
 
 @property (weak, nonatomic) id <PMMessagesViewControllerDelegate> delegate;
 
+- (instancetype)init;
+
 @end
