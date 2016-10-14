@@ -24,17 +24,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [PMFirebaseClient observeNewMessagesInViewController:self
+                                         addToDataSource:self.messages];
+    
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
     
-    
     [self configureMessageBubbles];
-    
-    [self addMessageWithID:@"foo"
-                      text:@"Hey Person!"];
-    [self addMessageWithID:@"Sender ID"
-                      text:@"Yo!"];
-    [self finishReceivingMessage];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,7 +79,7 @@
     
     JSQMessage *message = self.messages[indexPath.item];
     
-    if ([message.senderId isEqualToString:@"Sender ID"]) {
+    if ([message.senderId isEqualToString:[FIRAuth auth].currentUser.uid]) {
         cell.textView.textColor = [UIColor whiteColor];
     }
     
@@ -103,7 +99,7 @@
 - (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
     JSQMessage *message = self.messages[indexPath.item];
     
-    if ([message.senderId isEqualToString:@"Sender ID"]) {
+    if ([message.senderId isEqualToString:[FIRAuth auth].currentUser.uid]) {
         return  self.outgoingBubbleImageView;
     }
     else {
@@ -115,15 +111,28 @@
     return nil;
 }
 
+#pragma mark - Responder Methods
+
+- (void)didPressSendButton:(UIButton *)button
+           withMessageText:(NSString *)text
+                  senderId:(NSString *)senderId
+         senderDisplayName:(NSString *)senderDisplayName
+                      date:(NSDate *)date {
+    [PMFirebaseClient addMessageWithSenderID:senderId
+                                 messageBody:text];
+    
+    [self finishSendingMessage];
+}
+
 #pragma mark - Testing
 
-- (void)addMessageWithID:(NSString *)id text:(NSString *)text {
-    JSQMessage *message = [JSQMessage messageWithSenderId:id
-                                              displayName:@""
-                                                     text:text];
-    
-    [self.messages addObject:message];
-}
+//- (void)addMessageWithID:(NSString *)id text:(NSString *)text {
+//    JSQMessage *message = [JSQMessage messageWithSenderId:id
+//                                              displayName:@""
+//                                                     text:text];
+//    
+//    [self.messages addObject:message];
+//}
 
 - (void)configureMessageBubbles {
     JSQMessagesBubbleImageFactory *factory = [JSQMessagesBubbleImageFactory new];

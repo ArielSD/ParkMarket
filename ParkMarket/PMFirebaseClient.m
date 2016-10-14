@@ -144,6 +144,38 @@
     [parkingSpotToRemoveReference removeValue];
 }
 
++ (void)addMessageWithSenderID:(NSString *)senderID
+                   messageBody:(NSString *)messageBody {
+    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+    FIRDatabaseReference *messagesReference = [rootReference child:@"messages"];
+    FIRDatabaseReference *newMessageReference = [messagesReference childByAutoId];
+    
+    NSDictionary *messageInformation = @{@"senderID" : senderID,
+                                         @"message body" : messageBody};
+    
+    [newMessageReference setValue:messageInformation];
+}
+
++ (void)observeNewMessagesInViewController:(JSQMessagesViewController *)messagesViewController
+                           addToDataSource:(NSMutableArray *)dataSource {
+    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+    FIRDatabaseReference *messagesReference = [rootReference child:@"messages"];
+    
+    [messagesReference observeEventType:FIRDataEventTypeChildAdded
+                              withBlock:^(FIRDataSnapshot *snapshot) {
+                                  NSString *senderID = snapshot.value[@"senderID"];
+                                  NSString *messageBody = snapshot.value[@"message body"];
+                                  
+                                  JSQMessage *message = [JSQMessage messageWithSenderId:senderID
+                                                                            displayName:@""
+                                                                                   text:messageBody];
+                                  
+                                  [dataSource addObject:message];
+                                  [messagesViewController finishReceivingMessage];
+                              }];
+
+}
+
 #pragma mark - Helper Methods
 
 - (void)getCurrentUserFirstNameWithCompletion:(void (^)(NSDictionary *currentUser))completionBlock {

@@ -186,7 +186,7 @@
 - (void)didTapMessagesButton {
     PMMessagesViewController *messagesViewController = [PMMessagesViewController new];
     messagesViewController.title = @"Title";
-    messagesViewController.senderId = @"Sender ID";
+    messagesViewController.senderId = [FIRAuth auth].currentUser.uid;
     messagesViewController.senderDisplayName = @"Sender Display Name";
     messagesViewController.delegate = self;
     

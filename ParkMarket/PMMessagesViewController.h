@@ -11,6 +11,7 @@
 #import <JSQMessages.h>
 #import <JSQMessagesBubbleImageFactory.h>
 #import <JSQMessagesBubbleImage.h>
+#import "PMFirebaseClient.h"
 
 @class PMMessagesViewController;
 

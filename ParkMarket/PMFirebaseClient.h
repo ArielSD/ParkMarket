@@ -10,6 +10,9 @@
 #import <FirebaseDatabase/FirebaseDatabase.h>
 #import <FirebaseAuth/FirebaseAuth.h>
 
+#import <JSQMessagesViewController.h>
+#import <JSQMessage.h>
+
 @interface PMFirebaseClient : NSObject
 
 + (void)createUserWithFirstName:(NSString *)firstName
@@ -33,5 +36,11 @@
 
 + (void)removeClaimedParkingSpotFromOwner:(NSString *)owner
                            withIdentifier:(NSString *)identifier;
+
++ (void)addMessageWithSenderID:(NSString *)senderID
+                   messageBody:(NSString *)messageBody;
+
++ (void)observeNewMessagesInViewController:(JSQMessagesViewController *)messagesViewController
+                           addToDataSource:(NSMutableArray *)dataSource;
 
 @end
