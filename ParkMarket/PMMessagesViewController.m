@@ -90,6 +90,7 @@
     else {
         cell.textView.textColor = [UIColor blackColor];
     }
+    
     return cell;
 }
 
