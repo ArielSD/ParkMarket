@@ -146,6 +146,8 @@
 
 + (void)addMessageWithSenderID:(NSString *)senderID
                    messageBody:(NSString *)messageBody {
+    
+    // Add message to the "messages" node
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *messagesReference = [rootReference child:@"messages"];
     FIRDatabaseReference *newMessageReference = [messagesReference childByAutoId];
@@ -154,6 +156,9 @@
                                          @"message body" : messageBody};
     
     [newMessageReference setValue:messageInformation];
+    
+    // Add message to a user's "messages" node
+    
 }
 
 + (void)observeNewMessagesInViewController:(JSQMessagesViewController *)messagesViewController
