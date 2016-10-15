@@ -221,7 +221,15 @@
             [self.activityIndicator stopAnimating];
             self.gettingAvailableParkingSpotsLabel.hidden = YES;
             
-            self.parkingSpots = [NSMutableDictionary dictionaryWithDictionary:parkingSpots];
+            self.parkingSpots = [NSMutableDictionary new];
+            
+            for (NSString *parkingSpotIdentifier in parkingSpots) {
+                PMParkingSpot *parkingSpot = [PMParkingSpot parkingSpotFromDictionary:parkingSpots[parkingSpotIdentifier]];
+                
+                [self.parkingSpots setObject:parkingSpot
+                                      forKey:parkingSpot.identifier];
+            }
+            
             [self populateMapWithMarkersForParkingSpotsFromDictionary:self.parkingSpots];
         }
     }];
@@ -236,35 +244,21 @@
 #pragma mark - Helper Methods
 
 - (void)populateMapWithMarkersForParkingSpotsFromDictionary:(NSDictionary *)dictionary {
-    self.parkingSpotMarkers = [NSMutableArray new];
-    
-    for (NSString *parkingSpotKey in dictionary) {
-        NSDictionary *parkingSpot = dictionary[parkingSpotKey];
+    for (NSString *parkingSpotIdentifier in dictionary) {
+        PMParkingSpot *parkingSpot = dictionary[parkingSpotIdentifier];
         
-        NSString *parkingSpotIdentifier = parkingSpot[@"identifier"];
-        NSString *parkingSpotOwnerName = parkingSpot[@"owner"];
-        NSString *parkingSpotOwnerUID = parkingSpot[@"owner UID"];
-        NSString *typeOfCarParked = parkingSpot[@"car"];
-        NSString *parkingSpotLatitudeString = parkingSpot[@"latitude"];
-        NSString *parkingSpotLongitudeString = parkingSpot[@"longitude"];
+        NSDictionary *parkingSpotData = @{@"owner UID" : parkingSpot.ownerUID,
+                                          @"identifier" : parkingSpot.identifier};
         
-        NSDictionary *parkingSpotData = @{@"owner UID" : parkingSpotOwnerUID,
-                                          @"identifier" : parkingSpotIdentifier};
-        
-        double parkingSpotLatitudeDouble = parkingSpotLatitudeString.doubleValue;
-        double parkingSpotLongitudeDouble = parkingSpotLongitudeString.doubleValue;
-        
-        CLLocationCoordinate2D parkingSpotLocation = CLLocationCoordinate2DMake(parkingSpotLatitudeDouble, parkingSpotLongitudeDouble);
+        CLLocationCoordinate2D parkingSpotLocation = CLLocationCoordinate2DMake(parkingSpot.latitude.doubleValue, parkingSpot.longitude.doubleValue);
         
         dispatch_async(dispatch_get_main_queue(), ^ {
-            GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpotLocation];
-            marker.userData = parkingSpotData;
-            marker.appearAnimation = kGMSMarkerAnimationPop;
-            marker.title = [NSString stringWithFormat:@"Owner: %@", parkingSpotOwnerName];
-            marker.snippet = typeOfCarParked;
-            marker.map = self.mapView;
-            
-            [self.parkingSpotMarkers addObject:marker];
+            parkingSpot.parkingSpotMarker = [GMSMarker markerWithPosition:parkingSpotLocation];
+            parkingSpot.parkingSpotMarker.userData = parkingSpotData;
+            parkingSpot.parkingSpotMarker.appearAnimation = kGMSMarkerAnimationPop;
+            parkingSpot.parkingSpotMarker.title = [NSString stringWithFormat:@"Owner: %@", parkingSpot.ownerFirstName];
+            parkingSpot.parkingSpotMarker.snippet = parkingSpot.car;
+            parkingSpot.parkingSpotMarker.map = self.mapView;
         });
     }
 }
@@ -278,11 +272,9 @@
         GMSMarker *markerToDelete = self.selectedParkingSpotMarker;
         [self.parkingSpots removeObjectForKey:self.selectedParkingSpotMarker.userData[@"identifier"]];
         
-        NSDictionary *parkingSpotData = markerToDelete.userData;
-        
-        [PMFirebaseClient removeClaimedParkingSpotWithIdentifier:parkingSpotData[@"identifier"]];
-        [PMFirebaseClient removeClaimedParkingSpotFromOwner:parkingSpotData[@"owner UID"]
-                                             withIdentifier:parkingSpotData[@"identifier"]];
+        [PMFirebaseClient removeClaimedParkingSpotWithIdentifier:markerToDelete.userData[@"identifier"]];
+        [PMFirebaseClient removeClaimedParkingSpotFromOwner:markerToDelete.userData[@"owner UID"]
+                                             withIdentifier:markerToDelete.userData[@"identifier"]];
         
         markerToDelete.map = nil;
         [self confirmTakenSpot];

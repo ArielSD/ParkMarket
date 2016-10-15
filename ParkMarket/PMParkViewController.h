@@ -10,8 +10,10 @@
 #import <CoreLocation/CoreLocation.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import <FirebaseDatabase/FirebaseDatabase.h>
+
 #import "PMFirebaseClient.h"
 #import "PMApplicationViewController.h"
+#import "PMParkingSpot.h"
 
 @protocol MenuButtonDelegate;
 
