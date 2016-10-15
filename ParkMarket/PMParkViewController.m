@@ -11,11 +11,10 @@
 @interface PMParkViewController ()
 
 @property (strong, nonatomic) NSMutableDictionary *parkingSpots;
-@property (strong, nonatomic) NSMutableArray *parkingSpotMarkers;
 
-@property (strong, nonatomic) GMSMarker *selectedParkingSpotMarker;
+@property (strong, nonatomic) PMParkingSpot *selectedParkingSpot;
+
 @property (strong, nonatomic) GMSMapView *mapView;
-
 @property (strong, nonatomic) UILabel *questionLabel;
 @property (strong, nonatomic) UIButton *parkButton;
 @property (strong, nonatomic) UIButton *messageButton;
@@ -264,19 +263,18 @@
 }
 
 - (void)parkButtonTapped {
-    if (self.selectedParkingSpotMarker == nil) {
+    if (self.selectedParkingSpot == nil) {
         [self noParkingSpotSelected];
     }
     
     else {
-        GMSMarker *markerToDelete = self.selectedParkingSpotMarker;
-        [self.parkingSpots removeObjectForKey:self.selectedParkingSpotMarker.userData[@"identifier"]];
+        [self.parkingSpots removeObjectForKey:self.selectedParkingSpot.identifier];
         
-        [PMFirebaseClient removeClaimedParkingSpotWithIdentifier:markerToDelete.userData[@"identifier"]];
-        [PMFirebaseClient removeClaimedParkingSpotFromOwner:markerToDelete.userData[@"owner UID"]
-                                             withIdentifier:markerToDelete.userData[@"identifier"]];
+        [PMFirebaseClient removeClaimedParkingSpotWithIdentifier:self.selectedParkingSpot.identifier];
+        [PMFirebaseClient removeClaimedParkingSpotFromOwner:self.selectedParkingSpot.ownerUID
+                                             withIdentifier:self.selectedParkingSpot.identifier];
         
-        markerToDelete.map = nil;
+        self.selectedParkingSpot.parkingSpotMarker.map = nil;
         [self confirmTakenSpot];
     }
 }
@@ -341,11 +339,13 @@
 
 - (void)mapView:(GMSMapView *)mapView didLongPressInfoWindowOfMarker:(GMSMarker *)marker {
     if (marker.opacity == 1) {
-        self.selectedParkingSpotMarker = marker;
+        self.selectedParkingSpot = self.parkingSpots[marker.userData[@"identifier"]];
         
-        for (GMSMarker *marker in self.parkingSpotMarkers) {
-            marker.icon = nil;
-            marker.opacity = 1;
+        for (NSString *parkingSpotIdentifier in self.parkingSpots) {
+            PMParkingSpot *parkingSpot = self.parkingSpots[parkingSpotIdentifier];
+            
+            parkingSpot.parkingSpotMarker.icon = nil;
+            parkingSpot.parkingSpotMarker.opacity = 1;
         }
         
         marker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
@@ -355,7 +355,7 @@
     }
     
     else {
-        self.selectedParkingSpotMarker = nil;
+        self.selectedParkingSpot = nil;
         marker.icon = nil;
         marker.opacity = 1;
         
