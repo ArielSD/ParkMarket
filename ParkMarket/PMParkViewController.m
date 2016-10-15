@@ -13,11 +13,12 @@
 @property (strong, nonatomic) NSMutableDictionary *parkingSpots;
 @property (strong, nonatomic) NSMutableArray *parkingSpotMarkers;
 
-@property (strong, nonatomic) GMSMarker *selectedMarker;
+@property (strong, nonatomic) GMSMarker *selectedParkingSpotMarker;
 @property (strong, nonatomic) GMSMapView *mapView;
 
 @property (strong, nonatomic) UILabel *questionLabel;
 @property (strong, nonatomic) UIButton *parkButton;
+@property (strong, nonatomic) UIButton *messageButton;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *currentLocation;
@@ -97,13 +98,35 @@
     self.parkButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.parkButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
     [self.parkButton.centerYAnchor constraintEqualToAnchor:self.view.bottomAnchor
-                                                  constant:-40].active = YES;
+                                                  constant:-40.0].active = YES;
     [self.parkButton.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
-                                              multiplier:0.5].active = YES;
+                                              multiplier:0.2].active = YES;
+    [self.parkButton sizeToFit];
     
     [self.parkButton addTarget:self
                         action:@selector(parkButtonTapped)
               forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)configureMessageButton {
+    self.messageButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.view addSubview:self.messageButton];
+    
+    self.messageButton.backgroundColor = [UIColor whiteColor];
+    [self.messageButton setTitle:@"Message Owner"
+                        forState:UIControlStateNormal];
+    
+    self.messageButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.messageButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.messageButton.bottomAnchor constraintEqualToAnchor:self.parkButton.topAnchor
+                                                    constant:-(self.view.frame.size.height / 50.0)].active = YES;
+    [self.messageButton sizeToFit];
+    
+    [self.messageButton addTarget:self
+                           action:@selector(messageButtonTapped)
+                 forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.messageButton setEnabled:NO];
 }
 
 - (void)configureNavigationBarItems {
@@ -173,6 +196,7 @@
             [self configureMapView];
             [self configureQuestionLabel];
             [self configureParkButton];
+            [self configureMessageButton];
         }
     }
 }
@@ -246,13 +270,13 @@
 }
 
 - (void)parkButtonTapped {
-    if (self.selectedMarker == nil) {
+    if (self.selectedParkingSpotMarker == nil) {
         [self noParkingSpotSelected];
     }
     
     else {
-        GMSMarker *markerToDelete = self.selectedMarker;
-        [self.parkingSpots removeObjectForKey:self.selectedMarker.userData[@"identifier"]];
+        GMSMarker *markerToDelete = self.selectedParkingSpotMarker;
+        [self.parkingSpots removeObjectForKey:self.selectedParkingSpotMarker.userData[@"identifier"]];
         
         NSDictionary *parkingSpotData = markerToDelete.userData;
         
@@ -263,6 +287,10 @@
         markerToDelete.map = nil;
         [self confirmTakenSpot];
     }
+}
+
+- (void)messageButtonTapped {
+    NSLog(@"Message button tapped");
 }
 
 // Alert controller if there are no available parking spots (This will be useful when I make a distance radius)
@@ -321,7 +349,7 @@
 
 - (void)mapView:(GMSMapView *)mapView didLongPressInfoWindowOfMarker:(GMSMarker *)marker {
     if (marker.opacity == 1) {
-        self.selectedMarker = marker;
+        self.selectedParkingSpotMarker = marker;
         
         for (GMSMarker *marker in self.parkingSpotMarkers) {
             marker.icon = nil;
@@ -330,11 +358,16 @@
         
         marker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
         marker.opacity = 0.5;
+        
+        [self.messageButton setEnabled:YES];
     }
+    
     else {
-        self.selectedMarker = nil;
+        self.selectedParkingSpotMarker = nil;
         marker.icon = nil;
         marker.opacity = 1;
+        
+        [self.messageButton setEnabled:NO];
     }
 }
 
