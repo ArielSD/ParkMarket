@@ -22,18 +22,7 @@
 #import "PMUserPostedSpotsViewController.h"
 #import "PMMessagesViewController.h"
 
-@class PMApplicationViewController;
-
-@protocol MenuButtonDelegate <NSObject>
-
-@required
-
-- (void)didTapMenuButton;
-
-@end
-
 @interface PMApplicationViewController : UIViewController <PMLoginViewControllerDelegate,
-                                                           MenuButtonDelegate,
                                                            PMMenuViewControllerDelegate,
                                                            CardIOPaymentViewControllerDelegate,
                                                            PMMessagesViewControllerDelegate>

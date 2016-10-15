@@ -128,29 +128,24 @@
 #pragma mark - Responder Methods
 
 -(void)postButtonTapped {
-    PMPostViewController *mapViewController = [PMPostViewController new];
+    PMPostViewController *postViewController = [PMPostViewController new];
     
-    PMApplicationViewController *applicationViewController = (PMApplicationViewController *)self.parentViewController.parentViewController;
-    mapViewController.delegate = applicationViewController;
-    
-    mapViewController.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationController pushViewController:mapViewController
+    postViewController.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationController pushViewController:postViewController
                                          animated:YES];
 }
 
 -(void)parkButtonTapped {
-    PMParkViewController *mapViewController = [PMParkViewController new];
-    
-    PMApplicationViewController *applicationViewController = (PMApplicationViewController *)self.parentViewController.parentViewController;
-    mapViewController.delegate = applicationViewController;
+    PMParkViewController *parkViewController = [PMParkViewController new];
 
-    mapViewController.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationController pushViewController:mapViewController
+    parkViewController.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationController pushViewController:parkViewController
                                          animated:YES];
 }
 
 - (void)menuButtonTapped {
-    [self.delegate didTapMenuButton];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"menuButtonWasTapped"
+                                                        object:self];
 }
 
 @end

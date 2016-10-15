@@ -146,7 +146,8 @@
 #pragma mark - Responder Methods
 
 - (void)menuButtonTapped {
-    [self.delegate didTapMenuButton];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"menuButtonWasTapped"
+                                                        object:self];
 }
 
 #pragma mark - Helper Methods

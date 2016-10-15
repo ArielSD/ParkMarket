@@ -15,10 +15,18 @@
 #import "PMApplicationViewController.h"
 #import "PMParkingSpot.h"
 
-@protocol MenuButtonDelegate;
+//@class PMParkViewController;
+
+//@protocol PMParkViewControllerDelegate <NSObject>
+//
+//@required
+//
+//- (void)didTapMessageButtonForParkingSpot:(PMParkingSpot *)parkingSpot;
+//
+//@end
 
 @interface PMParkViewController : UIViewController <CLLocationManagerDelegate, GMSMapViewDelegate>
 
-@property (weak, nonatomic) id <MenuButtonDelegate> delegate;
+//@property (weak, nonatomic) id <PMParkViewControllerDelegate> parkViewControllerDelegate;
 
 @end

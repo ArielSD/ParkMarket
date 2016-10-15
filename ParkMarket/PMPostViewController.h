@@ -13,10 +13,6 @@
 #import "PMFirebaseClient.h"
 #import "PMApplicationViewController.h"
 
-@protocol MenuButtonDelegate;
-
 @interface PMPostViewController : UIViewController <CLLocationManagerDelegate>
-
-@property (weak, nonatomic) id <MenuButtonDelegate> delegate;
 
 @end

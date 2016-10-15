@@ -39,6 +39,7 @@
     }
     
     [self configureMenu];
+    [self configureNotificationObservers];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,7 +89,6 @@
 - (void)showInitialViewController {
     if (self.childViewControllers.count == 0) {
         PMInitialViewController *initialViewController = [PMInitialViewController new];
-        initialViewController.delegate = self;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
         [self addChildViewController:navigationController];
         navigationController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
@@ -99,7 +99,6 @@
     else {
         PMInitialViewController *initialViewController = [PMInitialViewController new];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
-        initialViewController.delegate = self;
         
         [self cycleFromOldViewController:self.childViewControllers.lastObject
                      toNewViewController:navigationController];
@@ -134,9 +133,9 @@
     [self showInitialViewController];
 }
 
-#pragma mark - MenuButtonDelegate Methods
+#pragma mark - Notification Center Methods
 
-- (void)didTapMenuButton {
+- (void)menuButtonTapped {
     if (self.view.subviews.lastObject != self.menu.view) {
         [self.view bringSubviewToFront:self.menu.view];
     }
@@ -222,9 +221,16 @@
 
 #pragma mark - Helper Methods
 
+- (void)configureNotificationObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(menuButtonTapped)
+                                                 name:@"menuButtonWasTapped"
+                                               object:nil];
+}
+
 - (void)addTapGestureRecognizerToDismissMenu {
     self.dismissMenuTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                   action:@selector(didTapMenuButton)];
+                                                                                   action:@selector(menuButtonTapped)];
     
     [self.view.subviews[2] addGestureRecognizer:self.dismissMenuTapGestureRecognizer];
     

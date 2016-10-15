@@ -12,10 +12,6 @@
 #import "PMPostViewController.h"
 #import "PMParkViewController.h"
 
-@protocol MenuButtonDelegate;
-
 @interface PMInitialViewController : UIViewController
-
-@property (weak, nonatomic) id <MenuButtonDelegate> delegate;
 
 @end
