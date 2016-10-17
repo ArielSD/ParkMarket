@@ -188,8 +188,14 @@
 }
 
 - (void)didTapMessagesButton {
+    // Implement messages tableview here
+}
+
+#pragma mark - PMParkViewControllerMessageDelegate Methods
+
+- (void)didTapMessageButtonForParkingSpot:(PMParkingSpot *)parkingSpot {
     PMMessagesViewController *messagesViewController = [PMMessagesViewController new];
-    messagesViewController.title = @"Title";
+    messagesViewController.title = parkingSpot.ownerFirstName;
     messagesViewController.senderId = [FIRAuth auth].currentUser.uid;
     messagesViewController.senderDisplayName = @"Sender Display Name";
     
@@ -198,13 +204,6 @@
     [self presentViewController:navigationController
                        animated:YES
                      completion:nil];
-}
-
-#pragma mark - PMParkViewControllerMessageDelegate Methods
-
-- (void)didTapMessageButtonForParkingSpot:(PMParkingSpot *)parkingSpot {
-    [self didTapMessagesButton];
-    NSLog(@"Selected Parking Spot: %@", parkingSpot);
 }
 
 #pragma mark - CardIOPaymentViewControllerDelegate Methods

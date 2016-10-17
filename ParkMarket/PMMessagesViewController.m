@@ -60,6 +60,12 @@
 
 }
 
+- (void)configureMessageBubbles {
+    JSQMessagesBubbleImageFactory *factory = [JSQMessagesBubbleImageFactory new];
+    self.incomingBubbleImageView = [factory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
+    self.outgoingBubbleImageView = [factory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleBlueColor]];
+}
+
 #pragma mark - Protocol Methods
 
 - (void)doneButtonTapped {
@@ -123,22 +129,6 @@
                                  messageBody:text];
     
     [self finishSendingMessage];
-}
-
-#pragma mark - Testing
-
-//- (void)addMessageWithID:(NSString *)id text:(NSString *)text {
-//    JSQMessage *message = [JSQMessage messageWithSenderId:id
-//                                              displayName:@""
-//                                                     text:text];
-//    
-//    [self.messages addObject:message];
-//}
-
-- (void)configureMessageBubbles {
-    JSQMessagesBubbleImageFactory *factory = [JSQMessagesBubbleImageFactory new];
-    self.incomingBubbleImageView = [factory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
-    self.outgoingBubbleImageView = [factory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleBlueColor]];
 }
 
 @end

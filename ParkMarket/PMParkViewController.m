@@ -282,7 +282,6 @@
 
 - (void)messageButtonTapped {
     [self.delegate didTapMessageButtonForParkingSpot:self.selectedParkingSpot];
-    NSLog(@"Selected Parking Spot: %@", self.selectedParkingSpot);
 }
 
 // Alert controller if there are no available parking spots (This will be useful when I make a distance radius)
