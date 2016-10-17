@@ -12,9 +12,9 @@
 #import <FirebaseDatabase/FirebaseDatabase.h>
 
 #import "PMFirebaseClient.h"
-#import "PMApplicationViewController.h"
 #import "PMParkingSpot.h"
 
+// Does this forward class declaration have to be here?
 @class PMParkViewController;
 
 @protocol PMParkViewControllerMessageDelegate <NSObject>
