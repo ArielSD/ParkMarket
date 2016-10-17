@@ -192,7 +192,6 @@
     messagesViewController.title = @"Title";
     messagesViewController.senderId = [FIRAuth auth].currentUser.uid;
     messagesViewController.senderDisplayName = @"Sender Display Name";
-//    messagesViewController.delegate = self;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:messagesViewController];
     
@@ -201,12 +200,12 @@
                      completion:nil];
 }
 
-#pragma mark - PMMessagesViewControllerDelegate Methods
+#pragma mark - PMParkViewControllerMessageDelegate Methods
 
-//- (void)willDismissPMMessagesViewController:(PMMessagesViewController *)messagesViewController {
-//    [self dismissViewControllerAnimated:YES
-//                             completion:nil];
-//}
+- (void)didTapMessageButtonForParkingSpot:(PMParkingSpot *)parkingSpot {
+    [self didTapMessagesButton];
+    NSLog(@"Selected Parking Spot: %@", parkingSpot);
+}
 
 #pragma mark - CardIOPaymentViewControllerDelegate Methods
 
