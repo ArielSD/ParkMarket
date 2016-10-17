@@ -63,7 +63,8 @@
 #pragma mark - Protocol Methods
 
 - (void)doneButtonTapped {
-    [self.delegate willDismissPMMessagesViewController:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"doneButtonTappedInMessagesViewController"
+                                                        object:self];
 }
 
 #pragma mark - UICollectionViewDataSource Protocol Methods

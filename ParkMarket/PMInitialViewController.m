@@ -136,7 +136,10 @@
 }
 
 -(void)parkButtonTapped {
+    PMApplicationViewController *applicationViewController = (PMApplicationViewController *)self.parentViewController.parentViewController;
+    
     PMParkViewController *parkViewController = [PMParkViewController new];
+    parkViewController.delegate = applicationViewController;
 
     parkViewController.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController pushViewController:parkViewController

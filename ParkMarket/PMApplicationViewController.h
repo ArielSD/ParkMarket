@@ -25,6 +25,6 @@
 @interface PMApplicationViewController : UIViewController <PMLoginViewControllerDelegate,
                                                            PMMenuViewControllerDelegate,
                                                            CardIOPaymentViewControllerDelegate,
-                                                           PMMessagesViewControllerDelegate>
+                                                           PMParkViewControllerMessageDelegate>
 
 @end

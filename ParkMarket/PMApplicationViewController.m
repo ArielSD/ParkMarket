@@ -166,6 +166,11 @@
     }
 }
 
+- (void)doneButtonTappedInMessagesViewController {
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
+}
+
 #pragma mark - PMMenuViewControllerDelegate Methods
 
 - (void)didTapAddCardButton {
@@ -187,7 +192,7 @@
     messagesViewController.title = @"Title";
     messagesViewController.senderId = [FIRAuth auth].currentUser.uid;
     messagesViewController.senderDisplayName = @"Sender Display Name";
-    messagesViewController.delegate = self;
+//    messagesViewController.delegate = self;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:messagesViewController];
     
@@ -198,10 +203,10 @@
 
 #pragma mark - PMMessagesViewControllerDelegate Methods
 
-- (void)willDismissPMMessagesViewController:(PMMessagesViewController *)messagesViewController {
-    [self dismissViewControllerAnimated:YES
-                             completion:nil];
-}
+//- (void)willDismissPMMessagesViewController:(PMMessagesViewController *)messagesViewController {
+//    [self dismissViewControllerAnimated:YES
+//                             completion:nil];
+//}
 
 #pragma mark - CardIOPaymentViewControllerDelegate Methods
 
@@ -225,6 +230,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(menuButtonTapped)
                                                  name:@"menuButtonWasTapped"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(doneButtonTappedInMessagesViewController)
+                                                 name:@"doneButtonTappedInMessagesViewController"
                                                object:nil];
 }
 
