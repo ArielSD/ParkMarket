@@ -23,9 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"View did load");
-    
     [self generateChatID];
+    
+    NSLog(@"chat ID: %@", self.chatID);
     
     [PMFirebaseClient observeNewMessagesInViewController:self];
     
@@ -44,9 +44,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        
-        NSLog(@"In the 'if' of init");
-        
         _messages = [NSMutableArray new];
         [self configureNavigationItems];
     }
@@ -129,7 +126,6 @@
                   senderId:(NSString *)senderId
          senderDisplayName:(NSString *)senderDisplayName
                       date:(NSDate *)date {
-    
     [PMFirebaseClient addMessageFromMessagesViewController:self
                                                messageBody:text];
     
