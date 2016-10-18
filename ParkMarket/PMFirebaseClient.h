@@ -39,10 +39,10 @@
 + (void)removeClaimedParkingSpotFromOwner:(NSString *)owner
                            withIdentifier:(NSString *)identifier;
 
-+ (void)addMessageWithSenderID:(NSString *)senderID
-                   messageBody:(NSString *)messageBody;
++ (void)addMessageFromMessagesViewController:(PMMessagesViewController *)messagesViewController
+                                 messageBody:(NSString *)messageBody;
 
-+ (void)observeNewMessagesInViewController:(PMMessagesViewController *)messagesViewController
-                           addToDataSource:(NSMutableArray *)dataSource;
+
++ (void)observeNewMessagesInViewController:(PMMessagesViewController *)messagesViewController;
 
 @end

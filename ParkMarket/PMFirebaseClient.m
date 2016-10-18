@@ -148,22 +148,19 @@
     [parkingSpotToRemoveReference removeValue];
 }
 
-+ (void)addMessageWithSenderID:(NSString *)senderID
-                   messageBody:(NSString *)messageBody {
++ (void)addMessageFromMessagesViewController:(PMMessagesViewController *)messagesViewController
+                                 messageBody:(NSString *)messageBody {
     
-    NSLog(@"Add message called in firebase");
-    
-    // Add message to the "messages" node
+    // Add message to the "chats" node
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
-    FIRDatabaseReference *messagesReference = [rootReference child:@"messages"];
-    FIRDatabaseReference *newMessageReference = [messagesReference childByAutoId];
+    FIRDatabaseReference *chatsReference = [rootReference child:@"chats"];
+    FIRDatabaseReference *currentChatReference = [chatsReference child:messagesViewController.chatID];
+    FIRDatabaseReference *newMessageReference = [currentChatReference childByAutoId];
     
-    NSDictionary *messageInformation = @{@"senderID" : senderID,
+    NSDictionary *messageInformation = @{@"sender" : [FIRAuth auth].currentUser.uid,
                                          @"message body" : messageBody};
     
     [newMessageReference setValue:messageInformation];
-    
-    // Add message to a user's "messages" node
 }
 
 //    PMFirebaseClient *firebaseClient = [PMFirebaseClient new];
@@ -307,26 +304,20 @@
 //        [senderNewMessageReference setValue:messageData];
 //        [receiverNewMessageReference setValue:messageData];
 
-+ (void)observeNewMessagesInViewController:(PMMessagesViewController *)messagesViewController
-                           addToDataSource:(NSMutableArray *)dataSource {
-    
-    NSLog(@"Observe called in firebase");
-    
++ (void)observeNewMessagesInViewController:(PMMessagesViewController *)messagesViewController {
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
-    FIRDatabaseReference *messagesReference = [rootReference child:@"messages"];
+    FIRDatabaseReference *chatsReference = [rootReference child:@"chats"];
+    FIRDatabaseReference *chatToObserveReference = [chatsReference child:messagesViewController.chatID];
     
-    [messagesReference observeEventType:FIRDataEventTypeChildAdded
-                              withBlock:^(FIRDataSnapshot *snapshot) {
-                                  NSString *senderID = snapshot.value[@"senderID"];
-                                  NSString *messageBody = snapshot.value[@"message body"];
-                                  
-                                  JSQMessage *message = [JSQMessage messageWithSenderId:senderID
-                                                                            displayName:@""
-                                                                                   text:messageBody];
-                                  
-                                  [dataSource addObject:message];
-                                  [messagesViewController finishReceivingMessage];
-                              }];
+    [chatToObserveReference observeEventType:FIRDataEventTypeChildAdded
+                                   withBlock:^(FIRDataSnapshot *snapshot) {
+                                       JSQMessage *message = [JSQMessage messageWithSenderId:snapshot.value[@"sender"]
+                                                                                 displayName:@""
+                                                                                        text:snapshot.value[@"message body"]];
+                                       
+                                       [messagesViewController.messages addObject:message];
+                                       [messagesViewController finishReceivingMessage];
+                                   }];
 }
 
 #pragma mark - Helper Methods
