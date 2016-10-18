@@ -25,8 +25,6 @@
     
     [self generateChatID];
     
-    NSLog(@"chat ID: %@", self.chatID);
-    
     [PMFirebaseClient observeNewMessagesInViewController:self];
     
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
