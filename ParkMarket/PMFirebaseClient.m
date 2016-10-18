@@ -151,6 +151,8 @@
 + (void)addMessageWithSenderID:(NSString *)senderID
                    messageBody:(NSString *)messageBody {
     
+    NSLog(@"Add message called in firebase");
+    
     // Add message to the "messages" node
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *messagesReference = [rootReference child:@"messages"];
@@ -307,6 +309,9 @@
 
 + (void)observeNewMessagesInViewController:(PMMessagesViewController *)messagesViewController
                            addToDataSource:(NSMutableArray *)dataSource {
+    
+    NSLog(@"Observe called in firebase");
+    
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *messagesReference = [rootReference child:@"messages"];
     

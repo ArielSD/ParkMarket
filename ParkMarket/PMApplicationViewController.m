@@ -11,6 +11,7 @@
 @interface PMApplicationViewController ()
 
 @property (strong, nonatomic) PMMenuViewController *menu;
+@property (strong, nonatomic) UINavigationController *navigationController;
 
 // Constraints that can change
 @property (strong, nonatomic) NSLayoutConstraint *menuRightAnchorConstraint;
@@ -89,19 +90,19 @@
 - (void)showInitialViewController {
     if (self.childViewControllers.count == 0) {
         PMInitialViewController *initialViewController = [PMInitialViewController new];
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
-        [self addChildViewController:navigationController];
-        navigationController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-        [self.view addSubview:navigationController.view];
-        [navigationController didMoveToParentViewController:self];
+        self.navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
+        [self addChildViewController:self.navigationController];
+        self.navigationController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        [self.view addSubview:self.navigationController.view];
+        [self.navigationController didMoveToParentViewController:self];
     }
     
     else {
         PMInitialViewController *initialViewController = [PMInitialViewController new];
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
+        self.navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
         
         [self cycleFromOldViewController:self.childViewControllers.lastObject
-                     toNewViewController:navigationController];
+                     toNewViewController:self.navigationController];
     }
 }
 
@@ -241,10 +242,9 @@
     self.dismissMenuTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                    action:@selector(menuButtonTapped)];
     
-    [self.view.subviews[2] addGestureRecognizer:self.dismissMenuTapGestureRecognizer];
+    [self.navigationController.view addGestureRecognizer:self.dismissMenuTapGestureRecognizer];
     
-    UINavigationController *navigationController = self.childViewControllers.firstObject;
-    UIViewController *viewController = navigationController.topViewController;
+    UIViewController *viewController = self.navigationController.topViewController;
     
     for (UIView *view in viewController.view.subviews) {
         view.userInteractionEnabled = NO;
@@ -252,10 +252,9 @@
 }
 
 - (void)removeTapGestureRecognizerToDismissMenu {
-    [self.view.subviews[2] removeGestureRecognizer:self.dismissMenuTapGestureRecognizer];
+    [self.navigationController.view removeGestureRecognizer:self.dismissMenuTapGestureRecognizer];
     
-    UINavigationController *navigationController = self.childViewControllers.firstObject;
-    UIViewController *viewController = navigationController.topViewController;
+    UIViewController *viewController = self.navigationController.topViewController;
     
     for (UIView *view in viewController.view.subviews) {
         view.userInteractionEnabled = YES;

@@ -23,12 +23,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"View did load");
+    
     self.chatID = [NSString stringWithFormat:@"%@%@", [FIRAuth auth].currentUser.uid, self.recipient];
     
     [PMFirebaseClient observeNewMessagesInViewController:self
                                          addToDataSource:self.messages];
-    
-    NSLog(@"Messages in viewDidLoad: %@", self.messages);
     
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
@@ -128,6 +128,9 @@
                   senderId:(NSString *)senderId
          senderDisplayName:(NSString *)senderDisplayName
                       date:(NSDate *)date {
+    
+    NSLog(@"Did press send button");
+    
     [PMFirebaseClient addMessageWithSenderID:senderId
                                  messageBody:text];
     
