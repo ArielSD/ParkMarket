@@ -8,6 +8,9 @@
 
 #import "PMFirebaseClient.h"
 
+// Because of an import loop issue
+#import "PMMessagesViewController.h"
+
 @implementation PMFirebaseClient
 
 #pragma mark - Class Methods
@@ -57,6 +60,7 @@
     // Posting a spot to the 'parkingSpots' node
     FIRUser *currentUser = [FIRAuth auth].currentUser;
     NSString *currentUserUID = currentUser.uid;
+    
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
     FIRDatabaseReference *newParkingSpotReference = [parkingSpotsReference childByAutoId];
@@ -158,10 +162,150 @@
     [newMessageReference setValue:messageInformation];
     
     // Add message to a user's "messages" node
-    
 }
 
-+ (void)observeNewMessagesInViewController:(JSQMessagesViewController *)messagesViewController
+//    PMFirebaseClient *firebaseClient = [PMFirebaseClient new];
+////    __block NSString *REFACTORTHIS = [NSString new];
+//    NSDictionary *messageData = @{@"sender" : senderID,
+//                                  @"receiver" : recipientUID,
+//                                  @"text" : messageBody};
+//    
+//    // Adding the message to the 'chats' node
+//    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+//    FIRDatabaseReference *allChatsReference = [rootReference child:@"chats"];
+//        
+//        [firebaseClient getCurrentUserChatsWithCompletion:^(NSDictionary *chats) {
+//            
+//            NSLog(@"chats: %@", chats);
+//            NSLog(@"Datasource in get chats block: %@", messagesViewController.messages);
+//            
+//            if ([chats isKindOfClass:[NSNull class]]) {
+//                
+//                FIRDatabaseReference *currentChatReference = [allChatsReference child:messagesViewController.chatID];
+//                FIRDatabaseReference *messagesReference = [currentChatReference child:@"messages"];
+//                FIRDatabaseReference *newMessageReference = [messagesReference childByAutoId];
+//                [newMessageReference setValue:messageData];
+//                
+////                REFACTORTHIS = currentChatReference.key;
+////                messagesViewController.chatID = currentChatReference.key;
+//                
+////                [PMFirebaseClient observeNewMessagesInChatReference:currentChatReference
+////                                             messagesViewController:messagesViewController];
+//                
+//                NSLog(@"Chat ID in the block: %@", messagesViewController.chatID);
+//                
+//                // Adding the message to the sender's node
+//                FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+//                FIRDatabaseReference *currentUserReference = [usersReference child:senderID];
+//                FIRDatabaseReference *currentUserChats = [currentUserReference child:@"chats"];
+//                FIRDatabaseReference *currentSenderChatReference = [currentUserChats child:messagesViewController.chatID];
+//                FIRDatabaseReference *userOppositeSender = [currentSenderChatReference child:@"other user"];
+//                FIRDatabaseReference *currentUserMessagesReference = [currentSenderChatReference child:@"messages"];
+//                FIRDatabaseReference *senderNewMessageReference = [currentUserMessagesReference childByAutoId];
+//                
+//                // Adding the message to the receiver's node
+//                FIRDatabaseReference *receiverReference = [usersReference child:recipientUID];
+//                FIRDatabaseReference *receiverChatsReference = [receiverReference child:@"chats"];
+//                FIRDatabaseReference *currentReceiverChatReference = [receiverChatsReference child:messagesViewController.chatID];
+//                FIRDatabaseReference *userOppositeReceiver = [currentReceiverChatReference child:@"other user"];
+//                FIRDatabaseReference *receiverMessagesReference = [currentReceiverChatReference child:@"messages"];
+//                FIRDatabaseReference *receiverNewMessageReference = [receiverMessagesReference childByAutoId];
+//                
+//                [userOppositeSender setValue:recipientUID];
+//                [userOppositeReceiver setValue:senderID];
+//                [senderNewMessageReference setValue:messageData];
+//                [receiverNewMessageReference setValue:messageData];
+//            }
+//            
+//            else {
+//                
+//                NSLog(@"Chats is not null");
+//                
+//                for (NSString *chatKey in chats) {
+////                    NSDictionary *chat = chats[chatKey];
+//                    if ([chatKey isEqualToString:messagesViewController.chatID] || [chatKey isEqualToString:[NSString stringWithFormat:@"%@%@", recipientUID, senderID]]) {
+//                        
+//                        NSLog(@"These two people already have a chat!");
+//                        
+//                        FIRDatabaseReference *currentChatReference = [allChatsReference child:messagesViewController.chatID];
+//                        FIRDatabaseReference *messagesReference = [currentChatReference child:@"messages"];
+//                        FIRDatabaseReference *newMessageReference = [messagesReference childByAutoId];
+//                        [newMessageReference setValue:messageData];
+//                        
+////                        REFACTORTHIS = messagesViewController.chatID;
+//                    }
+//                    
+//                    else {
+//                        FIRDatabaseReference *currentChatReference = [allChatsReference childByAutoId];
+//                        FIRDatabaseReference *messagesReference = [currentChatReference child:@"messages"];
+//                        FIRDatabaseReference *newMessageReference = [messagesReference childByAutoId];
+//                        [newMessageReference setValue:messageData];
+//                        
+////                        REFACTORTHIS = currentChatReference.key;
+//                        messagesViewController.chatID = currentChatReference.key;
+//                    }
+//                    
+//                    // Adding the message to the sender's node
+//                    FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+//                    FIRDatabaseReference *currentUserReference = [usersReference child:senderID];
+//                    FIRDatabaseReference *currentUserChats = [currentUserReference child:@"chats"];
+//                    FIRDatabaseReference *currentSenderChatReference = [currentUserChats child:messagesViewController.chatID];
+//                    FIRDatabaseReference *userOppositeSender = [currentSenderChatReference child:@"other user"];
+//                    FIRDatabaseReference *currentUserMessagesReference = [currentSenderChatReference child:@"messages"];
+//                    FIRDatabaseReference *senderNewMessageReference = [currentUserMessagesReference childByAutoId];
+//                    
+//                    // Adding the message to the receiver's node
+//                    FIRDatabaseReference *receiverReference = [usersReference child:recipientUID];
+//                    FIRDatabaseReference *receiverChatsReference = [receiverReference child:@"chats"];
+//                    FIRDatabaseReference *currentReceiverChatReference = [receiverChatsReference child:messagesViewController.chatID];
+//                    FIRDatabaseReference *userOppositeReceiver = [currentReceiverChatReference child:@"other user"];
+//                    FIRDatabaseReference *receiverMessagesReference = [currentReceiverChatReference child:@"messages"];
+//                    FIRDatabaseReference *receiverNewMessageReference = [receiverMessagesReference childByAutoId];
+//                    
+//                    [userOppositeSender setValue:recipientUID];
+//                    [userOppositeReceiver setValue:senderID];
+//                    [senderNewMessageReference setValue:messageData];
+//                    [receiverNewMessageReference setValue:messageData];
+//                }
+//            }
+//        }];
+    // this was the else
+//        FIRDatabaseReference *currentChatReference = [allChatsReference child:messagesViewController.chatID];
+//        FIRDatabaseReference *messagesReference = [currentChatReference child:@"messages"];
+//        FIRDatabaseReference *newMessageReference = [messagesReference childByAutoId];
+//        [newMessageReference setValue:messageData];
+//        
+////        REFACTORTHIS = messagesViewController.chatID;
+//    
+//        // Adding the message to the sender's node
+//        
+//        NSLog(@"Adding to sender's node");
+//        
+//        FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+//        FIRDatabaseReference *currentUserReference = [usersReference child:senderID];
+//        FIRDatabaseReference *currentUserChats = [currentUserReference child:@"chats"];
+//        FIRDatabaseReference *currentSenderChatReference = [currentUserChats child:messagesViewController.chatID];
+//        FIRDatabaseReference *userOppositeSender = [currentSenderChatReference child:@"other user"];
+//        FIRDatabaseReference *currentUserMessagesReference = [currentSenderChatReference child:@"messages"];
+//        FIRDatabaseReference *senderNewMessageReference = [currentUserMessagesReference childByAutoId];
+//        
+//        // Adding the message to the receiver's node
+//        
+//        NSLog(@"Adding to receiver's node");
+//        
+//        FIRDatabaseReference *receiverReference = [usersReference child:recipientUID];
+//        FIRDatabaseReference *receiverChatsReference = [receiverReference child:@"chats"];
+//        FIRDatabaseReference *currentReceiverChatReference = [receiverChatsReference child:messagesViewController.chatID];
+//        FIRDatabaseReference *userOppositeReceiver = [currentReceiverChatReference child:@"other user"];
+//        FIRDatabaseReference *receiverMessagesReference = [currentReceiverChatReference child:@"messages"];
+//        FIRDatabaseReference *receiverNewMessageReference = [receiverMessagesReference childByAutoId];
+//        
+//        [userOppositeSender setValue:recipientUID];
+//        [userOppositeReceiver setValue:senderID];
+//        [senderNewMessageReference setValue:messageData];
+//        [receiverNewMessageReference setValue:messageData];
+
++ (void)observeNewMessagesInViewController:(PMMessagesViewController *)messagesViewController
                            addToDataSource:(NSMutableArray *)dataSource {
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *messagesReference = [rootReference child:@"messages"];
@@ -178,7 +322,6 @@
                                   [dataSource addObject:message];
                                   [messagesViewController finishReceivingMessage];
                               }];
-
 }
 
 #pragma mark - Helper Methods
@@ -193,6 +336,19 @@
                                              NSDictionary *currentUserDictionary = snapshot.value;
                                              completionBlock(currentUserDictionary);
                                          }];
+}
+
+- (void)getCurrentUserChatsWithCompletion:(void (^)(NSDictionary *chats))completionBlock {
+    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+    FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+    FIRDatabaseReference *currentUserReference = [usersReference child:[FIRAuth auth].currentUser.uid];
+    FIRDatabaseReference *currentUserChatsReference = [currentUserReference child:@"chats"];
+    
+    [currentUserChatsReference observeSingleEventOfType:FIRDataEventTypeValue
+                                              withBlock:^(FIRDataSnapshot *snapshot) {
+                                                  NSDictionary *currentUserChatsDictionary = snapshot.value;
+                                                  completionBlock(currentUserChatsDictionary);
+                                              }];
 }
 
 @end

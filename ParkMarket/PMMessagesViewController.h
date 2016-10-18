@@ -16,6 +16,10 @@
 
 @interface PMMessagesViewController : JSQMessagesViewController
 
+@property (strong, nonatomic) NSString *chatID;
+@property (strong, nonatomic) NSString *recipient;
+@property (strong, nonatomic) NSMutableArray *messages;
+
 - (instancetype)init;
 
 @end

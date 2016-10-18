@@ -13,6 +13,8 @@
 #import <JSQMessagesViewController.h>
 #import <JSQMessage.h>
 
+@class PMMessagesViewController;
+
 @interface PMFirebaseClient : NSObject
 
 + (void)createUserWithFirstName:(NSString *)firstName
@@ -40,7 +42,7 @@
 + (void)addMessageWithSenderID:(NSString *)senderID
                    messageBody:(NSString *)messageBody;
 
-+ (void)observeNewMessagesInViewController:(JSQMessagesViewController *)messagesViewController
++ (void)observeNewMessagesInViewController:(PMMessagesViewController *)messagesViewController
                            addToDataSource:(NSMutableArray *)dataSource;
 
 @end

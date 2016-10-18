@@ -11,11 +11,10 @@
 @interface PMMessagesViewController ()
 
 @property (strong, nonatomic) UIBarButtonItem *doneButton;
-
-@property (strong, nonatomic) NSMutableArray *messages;
-
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageView;
 @property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleImageView;
+
+@property BOOL isObservingMessages;
 
 @end
 
@@ -24,8 +23,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.chatID = [NSString stringWithFormat:@"%@%@", [FIRAuth auth].currentUser.uid, self.recipient];
+    
     [PMFirebaseClient observeNewMessagesInViewController:self
                                          addToDataSource:self.messages];
+    
+    NSLog(@"Messages in viewDidLoad: %@", self.messages);
     
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;

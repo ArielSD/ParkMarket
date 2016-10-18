@@ -198,6 +198,7 @@
     messagesViewController.title = parkingSpot.ownerFirstName;
     messagesViewController.senderId = [FIRAuth auth].currentUser.uid;
     messagesViewController.senderDisplayName = @"Sender Display Name";
+    messagesViewController.recipient = parkingSpot.ownerUID;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:messagesViewController];
     
