@@ -161,6 +161,13 @@
                                          @"message body" : messageBody};
     
     [newMessageReference setValue:messageInformation];
+    
+    // Add chat to the sender's (current user) node
+    FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+    FIRDatabaseReference *currentUserReference = [usersReference child:[FIRAuth auth].currentUser.uid];
+    FIRDatabaseReference *currentUserAllChatsReference = [currentUserReference child:@"chats"];
+    FIRDatabaseReference *currentUserCurrentChatReference = [currentUserAllChatsReference child:@"chatID"];
+    [currentUserCurrentChatReference setValue:messagesViewController.chatID];
 }
 
 //    PMFirebaseClient *firebaseClient = [PMFirebaseClient new];

@@ -147,7 +147,7 @@
                                                                         ascending:YES];
     
     NSArray *sortedUIDs = [userIDArray sortedArrayUsingDescriptors:@[uidSortDescriptor]];
-    NSString *alphabeticalChatID = [NSString stringWithFormat:@"%@%@", sortedUIDs.firstObject, sortedUIDs.lastObject];
+    NSString *alphabeticalChatID = [NSString stringWithFormat:@"%@%@%@", sortedUIDs.firstObject, sortedUIDs.lastObject, self.parkingSpot.identifier];
     self.chatID = alphabeticalChatID;
 }
 

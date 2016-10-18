@@ -13,11 +13,13 @@
 #import <JSQMessagesBubbleImage.h>
 
 #import "PMFirebaseClient.h"
+#import "PMParkingSpot.h"
 
 @interface PMMessagesViewController : JSQMessagesViewController
 
 @property (strong, nonatomic) NSString *chatID;
 @property (strong, nonatomic) NSString *recipient;
+@property (strong, nonatomic) PMParkingSpot *parkingSpot;
 @property (strong, nonatomic) NSMutableArray *messages;
 
 - (instancetype)init;
