@@ -23,13 +23,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.chatID = [NSString stringWithFormat:@"%@%@", [FIRAuth auth].currentUser.uid, self.recipient];
+    NSLog(@"View did load");
+    
+    [self generateChatID];
     
     [PMFirebaseClient observeNewMessagesInViewController:self];
     
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
-    
     [self configureMessageBubbles];
 }
 
@@ -43,6 +44,9 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        
+        NSLog(@"In the 'if' of init");
+        
         _messages = [NSMutableArray new];
         [self configureNavigationItems];
     }
@@ -130,6 +134,21 @@
                                                messageBody:text];
     
     [self finishSendingMessage];
+}
+
+#pragma mark - Helper Methods
+
+- (void)generateChatID {
+    NSString *senderID = [FIRAuth auth].currentUser.uid;
+    NSString *receiverID = self.recipient;
+    
+    NSArray *userIDArray = @[senderID, receiverID];
+    NSSortDescriptor *uidSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil
+                                                                        ascending:YES];
+    
+    NSArray *sortedUIDs = [userIDArray sortedArrayUsingDescriptors:@[uidSortDescriptor]];
+    NSString *alphabeticalChatID = [NSString stringWithFormat:@"%@%@", sortedUIDs.firstObject, sortedUIDs.lastObject];
+    self.chatID = alphabeticalChatID;
 }
 
 @end
