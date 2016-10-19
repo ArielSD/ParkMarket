@@ -183,7 +183,12 @@
 }
 
 - (void)didTapMessagesButton {
-    // Implement messages tableview here
+    PMUserMessagesTableViewController *userMessagesTableViewController = [PMUserMessagesTableViewController new];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:userMessagesTableViewController];
+    
+    [self presentViewController:navigationController
+                       animated:YES
+                     completion:nil];
 }
 
 #pragma mark - PMParkViewControllerMessageDelegate Methods

@@ -20,6 +20,7 @@
 		B05AECC41CF4AB4300A5660A /* ParkMarketTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECC31CF4AB4300A5660A /* ParkMarketTests.m */; };
 		B05AECCF1CF4AB4300A5660A /* ParkMarketUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECCE1CF4AB4300A5660A /* ParkMarketUITests.m */; };
 		B063C3021D0B6CD7002BA9D0 /* PMParkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */; };
+		B06EAB9B1DB7EDA90025D1DD /* PMUserMessagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B06EAB9A1DB7EDA90025D1DD /* PMUserMessagesTableViewController.m */; };
 		B06F140A1D553A5600197AC5 /* PMParkingSpot.m in Sources */ = {isa = PBXBuildFile; fileRef = B06F14091D553A5600197AC5 /* PMParkingSpot.m */; };
 		B07C00321D818EA600C23D8D /* PMMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B07C00311D818EA600C23D8D /* PMMenuViewController.m */; };
 		B09ED25A1CF507A70054D0FC /* PMInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09ED2591CF507A70054D0FC /* PMInitialViewController.m */; };
@@ -75,6 +76,8 @@
 		B05AECD01CF4AB4300A5660A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B063C3001D0B6CD7002BA9D0 /* PMParkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMParkViewController.h; sourceTree = "<group>"; };
 		B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMParkViewController.m; sourceTree = "<group>"; };
+		B06EAB991DB7EDA90025D1DD /* PMUserMessagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMUserMessagesTableViewController.h; sourceTree = "<group>"; };
+		B06EAB9A1DB7EDA90025D1DD /* PMUserMessagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMUserMessagesTableViewController.m; sourceTree = "<group>"; };
 		B06F14081D553A5600197AC5 /* PMParkingSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMParkingSpot.h; sourceTree = "<group>"; };
 		B06F14091D553A5600197AC5 /* PMParkingSpot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMParkingSpot.m; sourceTree = "<group>"; };
 		B07C00301D818EA600C23D8D /* PMMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMMenuViewController.h; sourceTree = "<group>"; };
@@ -222,6 +225,8 @@
 				B07C00311D818EA600C23D8D /* PMMenuViewController.m */,
 				B017D21D1D95668C0041C3A3 /* PMUserPostedSpotsViewController.h */,
 				B017D21E1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m */,
+				B06EAB991DB7EDA90025D1DD /* PMUserMessagesTableViewController.h */,
+				B06EAB9A1DB7EDA90025D1DD /* PMUserMessagesTableViewController.m */,
 				B0C8A0F91D9B02710029C2C1 /* PMMessagesViewController.h */,
 				B0C8A0FA1D9B02710029C2C1 /* PMMessagesViewController.m */,
 				B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */,
@@ -448,6 +453,7 @@
 				B017D21A1D9454460041C3A3 /* PMPayPalClient.m in Sources */,
 				B09ED25A1CF507A70054D0FC /* PMInitialViewController.m in Sources */,
 				B017D21F1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m in Sources */,
+				B06EAB9B1DB7EDA90025D1DD /* PMUserMessagesTableViewController.m in Sources */,
 				B09ED25D1CF612180054D0FC /* PMPostViewController.m in Sources */,
 				B05AECAB1CF4AB4200A5660A /* main.m in Sources */,
 			);

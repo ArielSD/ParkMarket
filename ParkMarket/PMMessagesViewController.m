@@ -36,7 +36,7 @@
     NSLog(@"Did receive memory warning");
 }
 
-#pragma mark - Init Method
+#pragma mark - Init Method Override
 
 - (instancetype)init {
     self = [super init];

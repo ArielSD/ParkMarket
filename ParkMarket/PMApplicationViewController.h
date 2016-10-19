@@ -20,6 +20,7 @@
 #import "PMInitialViewController.h"
 #import "PMMenuViewController.h"
 #import "PMUserPostedSpotsViewController.h"
+#import "PMUserMessagesTableViewController.h"
 #import "PMMessagesViewController.h"
 
 @interface PMApplicationViewController : UIViewController <PMLoginViewControllerDelegate,
