@@ -166,13 +166,13 @@
     FIRDatabaseReference *usersReference = [rootReference child:@"users"];
     FIRDatabaseReference *currentUserReference = [usersReference child:[FIRAuth auth].currentUser.uid];
     FIRDatabaseReference *currentUserAllChatsReference = [currentUserReference child:@"chats"];
-    FIRDatabaseReference *currentUserCurrentChatReference = [currentUserAllChatsReference childByAutoId];
+    FIRDatabaseReference *currentUserCurrentChatReference = [currentUserAllChatsReference child:messagesViewController.chatID];
     [currentUserCurrentChatReference setValue:@{@"chatID" : messagesViewController.chatID}];
     
     // Add chat to the receiver's node
     FIRDatabaseReference *messageReceiverReference = [usersReference child:messagesViewController.recipient];
     FIRDatabaseReference *messageReceiverAllChatsReference = [messageReceiverReference child:@"chats"];
-    FIRDatabaseReference *messageReceiverCurrentChatReference = [messageReceiverAllChatsReference childByAutoId];
+    FIRDatabaseReference *messageReceiverCurrentChatReference = [messageReceiverAllChatsReference child:messagesViewController.chatID];
     [messageReceiverCurrentChatReference setValue:@{@"chatID" : messagesViewController.chatID}];
 }
 
