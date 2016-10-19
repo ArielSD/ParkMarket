@@ -122,10 +122,12 @@
 }
 
 - (void)parkButtonTapped {
-    [self doneButtonTapped];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"parkTappedInMessagesViewController"
-                                                        object:self
-                                                      userInfo:@{@"parkingSpotInMessagesViewController" : self.parkingSpot.identifier}];
+    [self dismissViewControllerAnimated:YES
+                             completion:^{
+                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"parkTappedInMessagesViewController"
+                                                                                     object:self
+                                                                                   userInfo:@{@"parkingSpotInMessagesViewController" : self.parkingSpot.identifier}];
+                             }];
 }
 
 - (void)didPressSendButton:(UIButton *)button
