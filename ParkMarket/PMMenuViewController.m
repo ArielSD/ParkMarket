@@ -60,7 +60,7 @@
     [self.mySpotsButton.topAnchor constraintEqualToAnchor:self.addCardButton.bottomAnchor
                                                  constant:self.view.frame.size.height / 20.0].active = YES;
     
-    [self.mySpotsButton setTitle:@"My Spots"
+    [self.mySpotsButton setTitle:@"Posted Spots"
                         forState:UIControlStateNormal];
     
     [self.mySpotsButton addTarget:self
