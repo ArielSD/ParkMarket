@@ -17,6 +17,8 @@
 
 @interface PMFirebaseClient : NSObject
 
+#pragma mark - User Management
+
 + (void)createUserWithFirstName:(NSString *)firstName
                           email:(NSString *)email
                        password:(NSString *)password
@@ -26,18 +28,26 @@
                   password:(NSString *)password
                 completion:(void (^)(NSError *error))completionBlock;
 
+#pragma mark - Posting Spots
+
 + (void)postParkingSpotWithLatitude:(NSString *)latitude
                           longitute:(NSString *)longitude
                            carModel:(NSString *)carModel;
+
+#pragma mark - Retrieving Spots
 
 + (void)getAvailableParkingSpotsWithCompletion:(void (^)(NSDictionary *parkingSpots))completionBlock;
 
 + (void)getCurrentUserPostedSpots:(void (^)(NSDictionary *currentUsersPostedSpots))completionBlock;
 
+#pragma mark - Removing Spots
+
 + (void)removeClaimedParkingSpotWithIdentifier:(NSString *)identifier;
 
 + (void)removeClaimedParkingSpotFromOwner:(NSString *)owner
                            withIdentifier:(NSString *)identifier;
+
+#pragma mark - Messaging
 
 + (void)addMessageFromMessagesViewController:(PMMessagesViewController *)messagesViewController
                                  messageBody:(NSString *)messageBody;
