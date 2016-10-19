@@ -21,8 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"View did load");
-    
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:@"cell"];
     
@@ -67,18 +65,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    NSLog(@"Chat.count: %lu", self.chats.count);
-    
     return self.chats.count;
 }
 
 #pragma mark - Tableview Delegate Methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSLog(@"Cell for row called");
-    
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                                    reuseIdentifier:@"cell"];
     
@@ -93,9 +85,6 @@
 #pragma mark - Network Call
 
 - (void)getCurrentUserChats {
-    
-    NSLog(@"Get current user chats");
-    
     [PMFirebaseClient getCurrentUserChats:^(NSDictionary *chatsDictionary) {
         if (chatsDictionary == nil) {
             [self noCurrentUserChats];
