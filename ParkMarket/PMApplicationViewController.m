@@ -11,7 +11,6 @@
 @interface PMApplicationViewController ()
 
 @property (strong, nonatomic) PMMenuViewController *menu;
-@property (strong, nonatomic) UINavigationController *navigationController;
 
 // Constraints that can change
 @property (strong, nonatomic) NSLayoutConstraint *menuRightAnchorConstraint;
@@ -167,11 +166,6 @@
     }
 }
 
-- (void)doneButtonTappedInMessagesViewController {
-    [self dismissViewControllerAnimated:YES
-                             completion:nil];
-}
-
 #pragma mark - PMMenuViewControllerDelegate Methods
 
 - (void)didTapAddCardButton {
@@ -231,11 +225,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(menuButtonTapped)
                                                  name:@"menuButtonWasTapped"
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(doneButtonTappedInMessagesViewController)
-                                                 name:@"doneButtonTappedInMessagesViewController"
                                                object:nil];
 }
 

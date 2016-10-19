@@ -27,4 +27,6 @@
                                                            CardIOPaymentViewControllerDelegate,
                                                            PMParkViewControllerMessageDelegate>
 
+@property (strong, nonatomic) UINavigationController *navigationController;
+
 @end

@@ -11,10 +11,9 @@
 @interface PMMessagesViewController ()
 
 @property (strong, nonatomic) UIBarButtonItem *doneButton;
+@property (strong, nonatomic) UIBarButtonItem *parkButton;
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageView;
 @property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleImageView;
-
-@property BOOL isObservingMessages;
 
 @end
 
@@ -55,21 +54,19 @@
                                                                                 target:self
                                                                                 action:@selector(doneButtonTapped)];
     
+    self.parkButton = [[UIBarButtonItem alloc] initWithTitle:@"Park"
+                                                       style:UIBarButtonItemStylePlain
+                                                      target:self
+                                                      action:@selector(parkButtonTapped)];
+    
     self.navigationItem.rightBarButtonItem = self.doneButton;
-
+    self.navigationItem.leftBarButtonItem = self.parkButton;
 }
 
 - (void)configureMessageBubbles {
     JSQMessagesBubbleImageFactory *factory = [JSQMessagesBubbleImageFactory new];
     self.incomingBubbleImageView = [factory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
     self.outgoingBubbleImageView = [factory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleBlueColor]];
-}
-
-#pragma mark - Protocol Methods
-
-- (void)doneButtonTapped {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"doneButtonTappedInMessagesViewController"
-                                                        object:self];
 }
 
 #pragma mark - UICollectionViewDataSource Protocol Methods
@@ -118,6 +115,18 @@
 }
 
 #pragma mark - Responder Methods
+
+- (void)doneButtonTapped {
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
+}
+
+- (void)parkButtonTapped {
+    [self doneButtonTapped];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"parkTappedInMessagesViewController"
+                                                        object:self
+                                                      userInfo:@{@"parkingSpotInMessagesViewController" : self.parkingSpot.identifier}];
+}
 
 - (void)didPressSendButton:(UIButton *)button
            withMessageText:(NSString *)text

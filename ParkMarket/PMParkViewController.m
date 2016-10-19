@@ -36,6 +36,7 @@
     [super viewDidLoad];
     
     [self configureLocationManager];
+    [self configureNotificationObservers];
     [self configureNavigationBarItems];
     
     // Firebase call to populate the mapview with 'posted' parking spots.
@@ -334,6 +335,22 @@
                                               [self.navigationController popToRootViewControllerAnimated:YES];
                                           }];
                      }];
+}
+
+- (void)configureNotificationObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(parkButtonTappedInPresentedMessagesViewController:)
+                                                 name:@"parkTappedInMessagesViewController"
+                                               object:nil];
+}
+
+- (void)parkButtonTappedInPresentedMessagesViewController:(NSNotification *)notification {
+    NSDictionary *parkingSpotDictionary = notification.userInfo;
+    NSString *parkingSpotToTakeIdentifier = parkingSpotDictionary[@"parkingSpotInMessagesViewController"];
+    PMParkingSpot *parkingSpotToTake = self.parkingSpots[parkingSpotToTakeIdentifier];
+    
+    self.selectedParkingSpot = parkingSpotToTake;
+    [self parkButtonTapped];
 }
 
 #pragma mark - Map View Delegate Methods
