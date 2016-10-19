@@ -15,6 +15,8 @@
 
 #pragma mark - Class Methods
 
+#pragma mark - User Management
+
 #warning Refactor with 'success' and 'failure' blocks
 + (void)createUserWithFirstName:(NSString *)firstName email:(NSString *)email password:(NSString *)password completion:(void (^)(NSError *))completionBlock {
     [[FIRAuth auth] createUserWithEmail:email
@@ -54,6 +56,8 @@
                          }];
 }
 
+#pragma mark - Posting Spots
+
 #warning Refactor this to two separate methods
 + (void)postParkingSpotWithLatitude:(NSString *)latitude longitute:(NSString *)longitude carModel:(NSString *)carModel {
     
@@ -92,6 +96,8 @@
     [newPostedParkingSpotReference setValue:parkingSpotCoordinates];
 }
 
+#pragma mark - Retrieving Spots
+
 + (void)getAvailableParkingSpotsWithCompletion:(void (^)(NSDictionary *parkingSpots))completionBlock {
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
@@ -119,7 +125,6 @@
     [currentUserPostedParkingSpotsReference observeSingleEventOfType:FIRDataEventTypeValue
                                                            withBlock:^(FIRDataSnapshot *snapshot) {
                                                                NSDictionary *parkingSpots = snapshot.value;
-                                                               
                                                                if ([snapshot exists]) {
                                                                    completionBlock(parkingSpots);
                                                                }
@@ -129,6 +134,8 @@
                                                                }
                                                            }];
 }
+
+#pragma mark - Removing Spots
 
 // Remove a spot from the 'parkingSpots' node
 + (void)removeClaimedParkingSpotWithIdentifier:(NSString *)identifier {
@@ -147,6 +154,8 @@
     FIRDatabaseReference *parkingSpotToRemoveReference = [ownersParkingSpotsReference child:identifier];
     [parkingSpotToRemoveReference removeValue];
 }
+
+#pragma mark - Messaging
 
 + (void)addMessageFromMessagesViewController:(PMMessagesViewController *)messagesViewController
                                  messageBody:(NSString *)messageBody {
@@ -190,6 +199,25 @@
                                        [messagesViewController.messages addObject:message];
                                        [messagesViewController finishReceivingMessage];
                                    }];
+}
+
++ (void)getCurrentUserChats:(void (^)(NSDictionary *))completionBlock {
+    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+    FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+    FIRDatabaseReference *currentUserReference = [usersReference child:[FIRAuth auth].currentUser.uid];
+    FIRDatabaseReference *currentUserChatsReference = [currentUserReference child:@"chats"];
+    
+    [currentUserChatsReference observeSingleEventOfType:FIRDataEventTypeValue
+                                              withBlock:^(FIRDataSnapshot *snapshot) {
+                                                  NSDictionary *chats = snapshot.value;
+                                                  if ([snapshot exists]) {
+                                                      completionBlock(chats);
+                                                  }
+                                                  
+                                                  else if (![snapshot exists]) {
+                                                      completionBlock(nil);
+                                                  }
+                                              }];
 }
 
 #pragma mark - Helper Methods

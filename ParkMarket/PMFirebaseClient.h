@@ -52,7 +52,8 @@
 + (void)addMessageFromMessagesViewController:(PMMessagesViewController *)messagesViewController
                                  messageBody:(NSString *)messageBody;
 
-
 + (void)observeNewMessagesInViewController:(PMMessagesViewController *)messagesViewController;
+
++ (void)getCurrentUserChats:(void (^) (NSDictionary *chatsDictionary))completionBlock;
 
 @end

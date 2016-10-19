@@ -21,6 +21,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"View did load");
+    
+    [self.tableView registerClass:[UITableViewCell class]
+           forCellReuseIdentifier:@"cell"];
+    
+    [self getCurrentUserChats];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -53,16 +60,52 @@
     self.navigationItem.rightBarButtonItem = self.doneButton;
 }
 
-#pragma mark - Table view data source
+#pragma mark - Tableview Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    
+    NSLog(@"Chat.count: %lu", self.chats.count);
+    
+    return self.chats.count;
+}
+
+#pragma mark - Tableview Delegate Methods
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSLog(@"Cell for row called");
+    
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                                   reuseIdentifier:@"cell"];
+    
+    cell = [tableView dequeueReusableCellWithIdentifier:@"cell"
+                                           forIndexPath:indexPath];
+    
+    cell.textLabel.text = self.chats[indexPath.row];
+    
+    return cell;
+}
+
+#pragma mark - Network Call
+
+- (void)getCurrentUserChats {
+    
+    NSLog(@"Get current user chats");
+    
+    [PMFirebaseClient getCurrentUserChats:^(NSDictionary *chatsDictionary) {
+        if (chatsDictionary == nil) {
+            [self noCurrentUserChats];
+        }
+        
+        else {
+            self.chats = chatsDictionary.allKeys;
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 #pragma mark - Responder Methods
@@ -70,6 +113,26 @@
 - (void)doneButtonTapped {
     [self dismissViewControllerAnimated:YES
                              completion:nil];
+}
+
+#pragma mark - Helper Methods
+
+- (void)noCurrentUserChats {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Hmmm..."
+                                                                             message:@"You don't have any chats!"
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * _Nonnull action) {
+                                                       [self dismissViewControllerAnimated:YES
+                                                                                completion:nil];
+                                                   }];
+    
+    [alertController addAction:action];
+    [self presentViewController:alertController
+                       animated:YES
+                     completion:nil];
 }
 
 /*

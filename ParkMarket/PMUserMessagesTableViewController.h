@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PMFirebaseClient.h"
 
 @interface PMUserMessagesTableViewController : UITableViewController
 
