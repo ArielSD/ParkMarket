@@ -71,13 +71,14 @@
 #pragma mark - Tableview Delegate Methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2
                                                    reuseIdentifier:@"cell"];
     
     cell = [tableView dequeueReusableCellWithIdentifier:@"cell"
                                            forIndexPath:indexPath];
     
     cell.textLabel.text = self.chats[indexPath.row];
+    cell.detailTextLabel.text = @"Detail";
     
     return cell;
 }
