@@ -8,14 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "PMApplicationViewController.h"
+
 #import "PMPostViewController.h"
 #import "PMParkViewController.h"
-
-@protocol MenuButtonDelegate;
+#import "PMApplicationViewController.h"
 
 @interface PMInitialViewController : UIViewController
-
-@property (weak, nonatomic) id <MenuButtonDelegate> delegate;
 
 @end

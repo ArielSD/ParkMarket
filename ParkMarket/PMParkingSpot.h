@@ -8,12 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import <FirebaseAuth/FirebaseAuth.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 @interface PMParkingSpot : NSObject
 
-@property (strong, nonatomic) FIRUser *owner;
+@property (strong, nonatomic) NSString *ownerFirstName;
+@property (strong, nonatomic) NSString *ownerUID;
+@property (strong, nonatomic) NSString *identifier;
+@property (strong, nonatomic) NSString *car;
 @property (strong, nonatomic) NSString *latitude;
 @property (strong, nonatomic) NSString *longitude;
+
+@property (strong, nonatomic) GMSMarker *parkingSpotMarker;
 
 + (instancetype)parkingSpotFromDictionary:(NSDictionary *)dictionary;
 

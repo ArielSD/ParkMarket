@@ -13,6 +13,7 @@ pod 'Firebase/Core'
 pod 'Firebase/Messaging'
 pod 'AFNetworking', '~> 3.0'
 pod 'PayPal-iOS-SDK'
+pod 'JSQMessagesViewController'
 
 end
 

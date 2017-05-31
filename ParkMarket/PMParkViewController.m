@@ -11,15 +11,19 @@
 @interface PMParkViewController ()
 
 @property (strong, nonatomic) NSMutableDictionary *parkingSpots;
-@property (strong, nonatomic) NSMutableArray *parkingSpotMarkers;
-@property (strong, nonatomic) GMSMarker *selectedMarker;
+
+@property (strong, nonatomic) PMParkingSpot *selectedParkingSpot;
 
 @property (strong, nonatomic) GMSMapView *mapView;
 @property (strong, nonatomic) UILabel *questionLabel;
 @property (strong, nonatomic) UIButton *parkButton;
+@property (strong, nonatomic) UIButton *messageButton;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *currentLocation;
+
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) UILabel *gettingAvailableParkingSpotsLabel;
 
 @property CGFloat viewHeight;
 @property CGFloat viewWidth;
@@ -30,7 +34,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self configureLocationManager];
+    [self configureNotificationObservers];
     [self configureNavigationBarItems];
     
     // Firebase call to populate the mapview with 'posted' parking spots.
@@ -60,16 +66,25 @@
     self.mapView.delegate = self;
     
     [self.view addSubview:self.mapView];
-    
-    [self configureQuestionLabel];
-    [self configureParkButton];
 }
 
 -(void)configureQuestionLabel {
-    self.questionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.viewWidth, self.viewHeight * 0.2 - self.navigationController.navigationBar.frame.size.height)];
+    self.questionLabel = [UILabel new];
+    [self.view addSubview:self.questionLabel];
+    
     self.questionLabel.textAlignment = NSTextAlignmentCenter;
     self.questionLabel.text = @"Where do you want to park?";
-    [self.view addSubview:self.questionLabel];
+    
+    CGFloat bottomOfNavigationBar = CGRectGetMaxY(self.navigationController.navigationBar.frame);
+    CGFloat topYCoordinateOfMapView = CGRectGetMinY(self.mapView.frame);
+    CGFloat distanceBetweenBottomOfNavigationBarAndTopOfMapView = topYCoordinateOfMapView - bottomOfNavigationBar;
+    CGSize questionLabelSize = [self.questionLabel sizeThatFits:self.questionLabel.frame.size];
+    
+    self.questionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.questionLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.questionLabel.topAnchor constraintEqualToAnchor:self.navigationController.navigationBar.bottomAnchor
+                                                 constant:distanceBetweenBottomOfNavigationBarAndTopOfMapView / 2.0 - questionLabelSize.height / 2.0].active = YES;
+    [self.questionLabel.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
 }
 
 -(void)configureParkButton {
@@ -83,24 +98,80 @@
     self.parkButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.parkButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
     [self.parkButton.centerYAnchor constraintEqualToAnchor:self.view.bottomAnchor
-                                                  constant:-40].active = YES;
+                                                  constant:-40.0].active = YES;
     [self.parkButton.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
-                                              multiplier:0.5].active = YES;
+                                              multiplier:0.2].active = YES;
+    [self.parkButton sizeToFit];
     
     [self.parkButton addTarget:self
                         action:@selector(parkButtonTapped)
               forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)configureMessageButton {
+    self.messageButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.view addSubview:self.messageButton];
+    
+    self.messageButton.backgroundColor = [UIColor whiteColor];
+    [self.messageButton setTitle:@"Message Owner"
+                        forState:UIControlStateNormal];
+    
+    self.messageButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.messageButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.messageButton.bottomAnchor constraintEqualToAnchor:self.parkButton.topAnchor
+                                                    constant:-(self.view.frame.size.height / 50.0)].active = YES;
+    [self.messageButton sizeToFit];
+    
+    [self.messageButton addTarget:self
+                           action:@selector(messageButtonTapped)
+                 forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.messageButton setEnabled:NO];
+}
+
 - (void)configureNavigationBarItems {
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
                                                                    style:UIBarButtonItemStylePlain
-                                                                  target:nil
-                                                                  action:nil];
+                                                                  target:self
+                                                                  action:@selector(menuButtonTapped)];
     
     self.navigationItem.title = @"Park";
     self.navigationItem.rightBarButtonItem = menuButton;
 }
+
+- (void)configureGettingAvailableParkingSpotsLabel {
+    self.gettingAvailableParkingSpotsLabel = [UILabel new];
+    [self.view addSubview:self.gettingAvailableParkingSpotsLabel];
+    
+    self.gettingAvailableParkingSpotsLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.gettingAvailableParkingSpotsLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.gettingAvailableParkingSpotsLabel.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor
+                                                         constant:self.view.frame.size.height / 8.0].active = YES;
+    [self.gettingAvailableParkingSpotsLabel.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+    
+    self.gettingAvailableParkingSpotsLabel.textAlignment = NSTextAlignmentCenter;
+    self.gettingAvailableParkingSpotsLabel.text = @"Getting all available spots...";
+}
+
+- (void)configureActivityIndicator {
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicator.hidesWhenStopped = YES;
+    [self.view addSubview:self.activityIndicator];
+    
+    self.activityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.activityIndicator.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.activityIndicator.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
+    [self.activityIndicator.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+    [self.activityIndicator.heightAnchor constraintEqualToAnchor:self.view.heightAnchor].active = YES;
+    
+    self.activityIndicator.backgroundColor = [UIColor whiteColor];
+    
+    [self configureGettingAvailableParkingSpotsLabel];
+    
+    [self.activityIndicator startAnimating];
+}
+
+#pragma mark - Core Location
 
 -(void)configureLocationManager {
     self.locationManager = [CLLocationManager new];
@@ -120,7 +191,13 @@
     if (timeSinceLocationCapture <= 2) {
         self.currentLocation = mostRecentLocation;
         [self.locationManager stopUpdatingLocation];
-        [self configureMapView];
+        
+        if (!self.mapView) {
+            [self configureMapView];
+            [self configureQuestionLabel];
+            [self configureParkButton];
+            [self configureMessageButton];
+        }
     }
 }
 
@@ -133,46 +210,79 @@
 #pragma mark - Network Call
 
 - (void)getAllAvailableParkingSpots {
+    [self configureActivityIndicator];
+    
     [PMFirebaseClient getAvailableParkingSpotsWithCompletion:^(NSDictionary *parkingSpots) {
         if (parkingSpots == nil) {
             [self noAvailableSpots];
         }
+        
         else {
-            self.parkingSpots = [NSMutableDictionary dictionaryWithDictionary:parkingSpots];
+            [self.activityIndicator stopAnimating];
+            self.gettingAvailableParkingSpotsLabel.hidden = YES;
+            
+            self.parkingSpots = [NSMutableDictionary new];
+            
+            for (NSString *parkingSpotIdentifier in parkingSpots) {
+                PMParkingSpot *parkingSpot = [PMParkingSpot parkingSpotFromDictionary:parkingSpots[parkingSpotIdentifier]];
+                
+                [self.parkingSpots setObject:parkingSpot
+                                      forKey:parkingSpot.identifier];
+            }
+            
             [self populateMapWithMarkersForParkingSpotsFromDictionary:self.parkingSpots];
         }
     }];
 }
 
+#pragma mark - Responder Methods
+
+- (void)menuButtonTapped {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"menuButtonWasTapped"
+                                                        object:self];
+}
+
 #pragma mark - Helper Methods
 
 - (void)populateMapWithMarkersForParkingSpotsFromDictionary:(NSDictionary *)dictionary {
-    self.parkingSpotMarkers = [NSMutableArray new];
-    
-    for (NSString *parkingSpotKey in dictionary) {
-        NSDictionary *parkingSpot = dictionary[parkingSpotKey];
+    for (NSString *parkingSpotIdentifier in dictionary) {
+        PMParkingSpot *parkingSpot = dictionary[parkingSpotIdentifier];
         
-        NSString *parkingSpotIdentifier = parkingSpot[@"identifier"];
-        NSString *parkingSpotOwner = parkingSpot[@"owner"];
-        NSString *parkingSpotLatitudeString = parkingSpot[@"latitude"];
-        NSString *parkingSpotLongitudeString = parkingSpot[@"longitude"];
+        NSDictionary *parkingSpotData = @{@"owner UID" : parkingSpot.ownerUID,
+                                          @"identifier" : parkingSpot.identifier};
         
-        double parkingSpotLatitudeDouble = parkingSpotLatitudeString.doubleValue;
-        double parkingSpotLongitudeDouble = parkingSpotLongitudeString.doubleValue;
-        
-        CLLocationCoordinate2D parkingSpotLocation = CLLocationCoordinate2DMake(parkingSpotLatitudeDouble, parkingSpotLongitudeDouble);
+        CLLocationCoordinate2D parkingSpotLocation = CLLocationCoordinate2DMake(parkingSpot.latitude.doubleValue, parkingSpot.longitude.doubleValue);
         
         dispatch_async(dispatch_get_main_queue(), ^ {
-            GMSMarker *marker = [GMSMarker markerWithPosition:parkingSpotLocation];
-            marker.userData = parkingSpotIdentifier;
-            marker.appearAnimation = kGMSMarkerAnimationPop;
-            marker.title = parkingSpotOwner;
-            marker.snippet = parkingSpotIdentifier;
-            marker.map = self.mapView;
-            
-            [self.parkingSpotMarkers addObject:marker];
+            parkingSpot.parkingSpotMarker = [GMSMarker markerWithPosition:parkingSpotLocation];
+            parkingSpot.parkingSpotMarker.userData = parkingSpotData;
+            parkingSpot.parkingSpotMarker.appearAnimation = kGMSMarkerAnimationPop;
+            parkingSpot.parkingSpotMarker.title = [NSString stringWithFormat:@"Owner: %@", parkingSpot.ownerFirstName];
+            parkingSpot.parkingSpotMarker.snippet = parkingSpot.car;
+            parkingSpot.parkingSpotMarker.map = self.mapView;
         });
     }
+}
+
+- (void)parkButtonTapped {
+    if (self.selectedParkingSpot == nil) {
+        [self noParkingSpotSelected];
+    }
+    
+    else {
+        [self.parkingSpots removeObjectForKey:self.selectedParkingSpot.identifier];
+        
+        [PMFirebaseClient removeClaimedParkingSpotWithIdentifier:self.selectedParkingSpot.identifier];
+        [PMFirebaseClient removeClaimedParkingSpotFromOwner:self.selectedParkingSpot.ownerUID
+                                             withIdentifier:self.selectedParkingSpot.identifier];
+        
+        self.selectedParkingSpot.parkingSpotMarker.map = nil;
+        [self confirmTakenSpot];
+    }
+}
+
+- (void)messageButtonTapped {
+    [self.delegate didTapMessageButtonForParkingSpot:self.selectedParkingSpot];
 }
 
 // Alert controller if there are no available parking spots (This will be useful when I make a distance radius)
@@ -183,7 +293,9 @@
     
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
                                                      style:UIAlertActionStyleDefault
-                                                   handler:nil];
+                                                   handler:^(UIAlertAction * _Nonnull action) {
+                                                       [self.navigationController popToRootViewControllerAnimated:YES];
+                                                   }];
     
     [alertController addAction:action];
     [self presentViewController:alertController
@@ -207,39 +319,65 @@
                      completion:nil];
 }
 
-- (void)parkButtonTapped {
-    if (self.selectedMarker == nil) {
-        [self noParkingSpotSelected];
-    }
-    else {
-    GMSMarker *markerToDelete = self.selectedMarker;
-    [self.parkingSpots removeObjectForKey:self.selectedMarker.userData];
-    [PMFirebaseClient removeClaimedParkingSpotWithIdentifier:self.selectedMarker.userData];
-    [PMFirebaseClient removeClaimedParkingSpotFromOwner:self.selectedMarker.title
-                                         withIdentifier:self.selectedMarker.userData];
-    markerToDelete.map = nil;
-    }
+- (void)confirmTakenSpot {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Parked!"
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertController
+                       animated:YES
+                     completion:^{
+                         [UIView animateWithDuration:0.4
+                                          animations:^{
+                                              alertController.view.alpha = 0.0;
+                                          } completion:^(BOOL finished) {
+                                              [self dismissViewControllerAnimated:YES
+                                                                       completion:nil];
+                                              [self.navigationController popToRootViewControllerAnimated:YES];
+                                          }];
+                     }];
+}
+
+- (void)configureNotificationObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(parkButtonTappedInPresentedMessagesViewController:)
+                                                 name:@"parkTappedInMessagesViewController"
+                                               object:nil];
+}
+
+- (void)parkButtonTappedInPresentedMessagesViewController:(NSNotification *)notification {
+    NSDictionary *parkingSpotDictionary = notification.userInfo;
+    NSString *parkingSpotToTakeIdentifier = parkingSpotDictionary[@"parkingSpotInMessagesViewController"];
+    PMParkingSpot *parkingSpotToTake = self.parkingSpots[parkingSpotToTakeIdentifier];
+    
+    self.selectedParkingSpot = parkingSpotToTake;
+    [self parkButtonTapped];
 }
 
 #pragma mark - Map View Delegate Methods
 
 - (void)mapView:(GMSMapView *)mapView didLongPressInfoWindowOfMarker:(GMSMarker *)marker {
-    
     if (marker.opacity == 1) {
-        self.selectedMarker = marker;
+        self.selectedParkingSpot = self.parkingSpots[marker.userData[@"identifier"]];
         
-        for (GMSMarker *marker in self.parkingSpotMarkers) {
-            marker.icon = nil;
-            marker.opacity = 1;
+        for (NSString *parkingSpotIdentifier in self.parkingSpots) {
+            PMParkingSpot *parkingSpot = self.parkingSpots[parkingSpotIdentifier];
+            
+            parkingSpot.parkingSpotMarker.icon = nil;
+            parkingSpot.parkingSpotMarker.opacity = 1;
         }
         
         marker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
         marker.opacity = 0.5;
+        
+        [self.messageButton setEnabled:YES];
     }
+    
     else {
-        self.selectedMarker = nil;
+        self.selectedParkingSpot = nil;
         marker.icon = nil;
         marker.opacity = 1;
+        
+        [self.messageButton setEnabled:NO];
     }
 }
 

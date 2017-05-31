@@ -10,7 +10,14 @@
 #import <FirebaseDatabase/FirebaseDatabase.h>
 #import <FirebaseAuth/FirebaseAuth.h>
 
+#import <JSQMessagesViewController.h>
+#import <JSQMessage.h>
+
+@class PMMessagesViewController;
+
 @interface PMFirebaseClient : NSObject
+
+#pragma mark - User Management
 
 + (void)createUserWithFirstName:(NSString *)firstName
                           email:(NSString *)email
@@ -21,14 +28,32 @@
                   password:(NSString *)password
                 completion:(void (^)(NSError *error))completionBlock;
 
+#pragma mark - Posting Spots
+
 + (void)postParkingSpotWithLatitude:(NSString *)latitude
-                          longitute:(NSString *)longitude;
+                          longitute:(NSString *)longitude
+                           carModel:(NSString *)carModel;
+
+#pragma mark - Retrieving Spots
 
 + (void)getAvailableParkingSpotsWithCompletion:(void (^)(NSDictionary *parkingSpots))completionBlock;
+
++ (void)getCurrentUserPostedSpots:(void (^)(NSDictionary *currentUsersPostedSpots))completionBlock;
+
+#pragma mark - Removing Spots
 
 + (void)removeClaimedParkingSpotWithIdentifier:(NSString *)identifier;
 
 + (void)removeClaimedParkingSpotFromOwner:(NSString *)owner
                            withIdentifier:(NSString *)identifier;
+
+#pragma mark - Messaging
+
++ (void)addMessageFromMessagesViewController:(PMMessagesViewController *)messagesViewController
+                                 messageBody:(NSString *)messageBody;
+
++ (void)observeNewMessagesInViewController:(PMMessagesViewController *)messagesViewController;
+
++ (void)getCurrentUserChats:(void (^) (NSDictionary *chatsDictionary))completionBlock;
 
 @end

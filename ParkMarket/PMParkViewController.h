@@ -10,12 +10,23 @@
 #import <CoreLocation/CoreLocation.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import <FirebaseDatabase/FirebaseDatabase.h>
-#import "PMFirebaseClient.h"
 
-@protocol MenuButtonDelegate;
+#import "PMFirebaseClient.h"
+#import "PMParkingSpot.h"
+
+// Does this forward class declaration have to be here?
+@class PMParkViewController;
+
+@protocol PMParkViewControllerMessageDelegate <NSObject>
+
+@required
+
+- (void)didTapMessageButtonForParkingSpot:(PMParkingSpot *)parkingSpot;
+
+@end
 
 @interface PMParkViewController : UIViewController <CLLocationManagerDelegate, GMSMapViewDelegate>
 
-@property (weak, nonatomic) id <MenuButtonDelegate> delegate;
+@property (weak, nonatomic) id <PMParkViewControllerMessageDelegate> delegate;
 
 @end

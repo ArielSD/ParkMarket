@@ -8,12 +8,23 @@
 
 #import "PMMenuViewController.h"
 
+@interface PMMenuViewController ()
+
+@property (strong, nonatomic) UIButton *addCardButton;
+@property (strong, nonatomic) UIButton *mySpotsButton;
+@property (strong, nonatomic) UIButton *messagesButton;
+@property (strong, nonatomic) UIButton *logoutButton;
+
+@end
+
 @implementation PMMenuViewController
 
 - (instancetype)init {
     self = [super init];
     if (self) {
         [self configureAddCardButton];
+        [self configureMySpotsButton];
+        [self configureMessagesButton];
         [self configureLogoutButton];
     }
     return  self;
@@ -29,7 +40,8 @@
     
     self.addCardButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.addCardButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [self.addCardButton.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
+    [self.addCardButton.topAnchor constraintEqualToAnchor:self.view.topAnchor
+                                                 constant:self.view.frame.size.height / 10.0].active = YES;
     
     [self.addCardButton setTitle:@"Add Card"
                         forState:UIControlStateNormal];
@@ -39,14 +51,48 @@
                  forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)configureMySpotsButton {
+    self.mySpotsButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.view addSubview:self.mySpotsButton];
+    
+    self.mySpotsButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.mySpotsButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.mySpotsButton.topAnchor constraintEqualToAnchor:self.addCardButton.bottomAnchor
+                                                 constant:self.view.frame.size.height / 20.0].active = YES;
+    
+    [self.mySpotsButton setTitle:@"Posted Spots"
+                        forState:UIControlStateNormal];
+    
+    [self.mySpotsButton addTarget:self
+                           action:@selector(mySpotsButtonTapped)
+                 forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)configureMessagesButton {
+    self.messagesButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.view addSubview:self.messagesButton];
+    
+    self.messagesButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.messagesButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.messagesButton.topAnchor constraintEqualToAnchor:self.mySpotsButton.bottomAnchor
+                                                  constant:self.view.frame.size.height / 20.0].active = YES;
+    
+    [self.messagesButton setTitle:@"Messages"
+                        forState:UIControlStateNormal];
+    
+    [self.messagesButton addTarget:self
+                           action:@selector(messagesButtonTapped)
+                 forControlEvents:UIControlEventTouchUpInside];
+}
+
 - (void)configureLogoutButton {
     self.logoutButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.view addSubview:self.logoutButton];
     
     self.logoutButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.logoutButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [self.logoutButton.topAnchor constraintEqualToAnchor:self.addCardButton.bottomAnchor
-                                                constant:self.view.frame.size.height / 5].active = YES;
+    [self.logoutButton.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor
+                                                constant:-self.view.frame.size.height / 10.0].active = YES;
     
     [self.logoutButton setTitle:@"Log Out"
                        forState:UIControlStateNormal];
@@ -60,6 +106,14 @@
 
 - (void)addCardButtonTapped {
     [self.delegate didTapAddCardButton];
+}
+
+- (void)mySpotsButtonTapped {
+    [self.delegate didTapMySpotsButton];
+}
+
+- (void)messagesButtonTapped {
+    [self.delegate didTapMessagesButton];
 }
 
 - (void)logoutButtonTapped {

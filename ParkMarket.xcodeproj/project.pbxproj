@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		53DFDF1762652542AC7474A2 /* libPods-ParkMarket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34B90F8E429F882B24E728DD /* libPods-ParkMarket.a */; };
+		B017D21A1D9454460041C3A3 /* PMPayPalClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B017D2191D9454460041C3A3 /* PMPayPalClient.m */; };
+		B017D21F1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B017D21E1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m */; };
 		B020F59A1D496FD300847684 /* PMApplicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B020F5991D496FD300847684 /* PMApplicationViewController.m */; };
 		B020F5A31D519F6F00847684 /* PMFirebaseClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B020F5A21D519F6F00847684 /* PMFirebaseClient.m */; };
 		B05AECAB1CF4AB4200A5660A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECAA1CF4AB4200A5660A /* main.m */; };
@@ -18,6 +20,8 @@
 		B05AECC41CF4AB4300A5660A /* ParkMarketTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECC31CF4AB4300A5660A /* ParkMarketTests.m */; };
 		B05AECCF1CF4AB4300A5660A /* ParkMarketUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECCE1CF4AB4300A5660A /* ParkMarketUITests.m */; };
 		B063C3021D0B6CD7002BA9D0 /* PMParkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */; };
+		B066077E1EDE3EFB00A4C6FD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B066077C1EDE3EFB00A4C6FD /* Login.storyboard */; };
+		B06EAB9B1DB7EDA90025D1DD /* PMUserMessagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B06EAB9A1DB7EDA90025D1DD /* PMUserMessagesTableViewController.m */; };
 		B06F140A1D553A5600197AC5 /* PMParkingSpot.m in Sources */ = {isa = PBXBuildFile; fileRef = B06F14091D553A5600197AC5 /* PMParkingSpot.m */; };
 		B07C00321D818EA600C23D8D /* PMMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B07C00311D818EA600C23D8D /* PMMenuViewController.m */; };
 		B09ED25A1CF507A70054D0FC /* PMInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09ED2591CF507A70054D0FC /* PMInitialViewController.m */; };
@@ -25,6 +29,7 @@
 		B0B2F4671D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
 		B0B2F4681D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
 		B0B2F4691D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
+		B0C8A0FB1D9B02710029C2C1 /* PMMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C8A0FA1D9B02710029C2C1 /* PMMessagesViewController.m */; };
 		B0EB86D11D46901D001A0F6D /* PMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +53,10 @@
 /* Begin PBXFileReference section */
 		34B90F8E429F882B24E728DD /* libPods-ParkMarket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ParkMarket.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B2B4B26D070EFEF83541101 /* Pods-ParkMarket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarket.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket.debug.xcconfig"; sourceTree = "<group>"; };
+		B017D2181D9454460041C3A3 /* PMPayPalClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMPayPalClient.h; sourceTree = "<group>"; };
+		B017D2191D9454460041C3A3 /* PMPayPalClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMPayPalClient.m; sourceTree = "<group>"; };
+		B017D21D1D95668C0041C3A3 /* PMUserPostedSpotsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMUserPostedSpotsViewController.h; sourceTree = "<group>"; };
+		B017D21E1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMUserPostedSpotsViewController.m; sourceTree = "<group>"; };
 		B020F5981D496FD300847684 /* PMApplicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMApplicationViewController.h; sourceTree = "<group>"; };
 		B020F5991D496FD300847684 /* PMApplicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMApplicationViewController.m; sourceTree = "<group>"; };
 		B020F5A11D519F6F00847684 /* PMFirebaseClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMFirebaseClient.h; sourceTree = "<group>"; };
@@ -68,6 +77,9 @@
 		B05AECD01CF4AB4300A5660A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B063C3001D0B6CD7002BA9D0 /* PMParkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMParkViewController.h; sourceTree = "<group>"; };
 		B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMParkViewController.m; sourceTree = "<group>"; };
+		B066077C1EDE3EFB00A4C6FD /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Login.storyboard; path = ParkMarket/Login.storyboard; sourceTree = "<group>"; };
+		B06EAB991DB7EDA90025D1DD /* PMUserMessagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMUserMessagesTableViewController.h; sourceTree = "<group>"; };
+		B06EAB9A1DB7EDA90025D1DD /* PMUserMessagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMUserMessagesTableViewController.m; sourceTree = "<group>"; };
 		B06F14081D553A5600197AC5 /* PMParkingSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMParkingSpot.h; sourceTree = "<group>"; };
 		B06F14091D553A5600197AC5 /* PMParkingSpot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMParkingSpot.m; sourceTree = "<group>"; };
 		B07C00301D818EA600C23D8D /* PMMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMMenuViewController.h; sourceTree = "<group>"; };
@@ -78,6 +90,8 @@
 		B09ED25C1CF612180054D0FC /* PMPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMPostViewController.m; sourceTree = "<group>"; };
 		B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B0C29F251D89D4100058C2AF /* ParkMarket.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ParkMarket.entitlements; sourceTree = "<group>"; };
+		B0C8A0F91D9B02710029C2C1 /* PMMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMMessagesViewController.h; sourceTree = "<group>"; };
+		B0C8A0FA1D9B02710029C2C1 /* PMMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMMessagesViewController.m; sourceTree = "<group>"; };
 		B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMLoginViewController.h; sourceTree = "<group>"; };
 		B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMLoginViewController.m; sourceTree = "<group>"; };
 		F07AA50B8F5A1E3305FA77B7 /* Pods-ParkMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarket.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket.release.xcconfig"; sourceTree = "<group>"; };
@@ -117,9 +131,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B017D21B1D94715B0041C3A3 /* API Clients */ = {
+			isa = PBXGroup;
+			children = (
+				B020F5A11D519F6F00847684 /* PMFirebaseClient.h */,
+				B020F5A21D519F6F00847684 /* PMFirebaseClient.m */,
+				B017D2181D9454460041C3A3 /* PMPayPalClient.h */,
+				B017D2191D9454460041C3A3 /* PMPayPalClient.m */,
+			);
+			name = "API Clients";
+			sourceTree = "<group>";
+		};
+		B017D21C1D9471680041C3A3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B06F14081D553A5600197AC5 /* PMParkingSpot.h */,
+				B06F14091D553A5600197AC5 /* PMParkingSpot.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		B05AEC9D1CF4AB4200A5660A = {
 			isa = PBXGroup;
 			children = (
+				B066077D1EDE3EFB00A4C6FD /* Views */,
 				B05AECA81CF4AB4200A5660A /* ParkMarket */,
 				B05AECC21CF4AB4300A5660A /* ParkMarketTests */,
 				B05AECCD1CF4AB4300A5660A /* ParkMarketUITests */,
@@ -146,10 +181,8 @@
 				B05AECAC1CF4AB4200A5660A /* AppDelegate.h */,
 				B05AECAD1CF4AB4200A5660A /* AppDelegate.m */,
 				B06F140C1D553A9600197AC5 /* ViewControllers */,
-				B020F5A11D519F6F00847684 /* PMFirebaseClient.h */,
-				B020F5A21D519F6F00847684 /* PMFirebaseClient.m */,
-				B06F14081D553A5600197AC5 /* PMParkingSpot.h */,
-				B06F14091D553A5600197AC5 /* PMParkingSpot.m */,
+				B017D21B1D94715B0041C3A3 /* API Clients */,
+				B017D21C1D9471680041C3A3 /* Models */,
 				B05AECB21CF4AB4200A5660A /* Main.storyboard */,
 				B05AECB51CF4AB4300A5660A /* Assets.xcassets */,
 				B05AECB71CF4AB4300A5660A /* LaunchScreen.storyboard */,
@@ -186,6 +219,14 @@
 			path = ParkMarketUITests;
 			sourceTree = "<group>";
 		};
+		B066077D1EDE3EFB00A4C6FD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B066077C1EDE3EFB00A4C6FD /* Login.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		B06F140C1D553A9600197AC5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +234,12 @@
 				B020F5991D496FD300847684 /* PMApplicationViewController.m */,
 				B07C00301D818EA600C23D8D /* PMMenuViewController.h */,
 				B07C00311D818EA600C23D8D /* PMMenuViewController.m */,
+				B017D21D1D95668C0041C3A3 /* PMUserPostedSpotsViewController.h */,
+				B017D21E1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m */,
+				B06EAB991DB7EDA90025D1DD /* PMUserMessagesTableViewController.h */,
+				B06EAB9A1DB7EDA90025D1DD /* PMUserMessagesTableViewController.m */,
+				B0C8A0F91D9B02710029C2C1 /* PMMessagesViewController.h */,
+				B0C8A0FA1D9B02710029C2C1 /* PMMessagesViewController.m */,
 				B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */,
 				B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */,
 				B09ED2581CF507A70054D0FC /* PMInitialViewController.h */,
@@ -279,7 +326,7 @@
 		B05AEC9E1CF4AB4200A5660A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Ariel Scott-Dicker";
 				TargetAttributes = {
 					B05AECA51CF4AB4200A5660A = {
@@ -331,6 +378,7 @@
 				B05AECB91CF4AB4300A5660A /* LaunchScreen.storyboard in Resources */,
 				B0B2F4671D0760E100E57E03 /* GoogleService-Info.plist in Resources */,
 				B05AECB61CF4AB4300A5660A /* Assets.xcassets in Resources */,
+				B066077E1EDE3EFB00A4C6FD /* Login.storyboard in Resources */,
 				B05AECB41CF4AB4200A5660A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,10 +458,14 @@
 				B0EB86D11D46901D001A0F6D /* PMLoginViewController.m in Sources */,
 				B07C00321D818EA600C23D8D /* PMMenuViewController.m in Sources */,
 				B020F5A31D519F6F00847684 /* PMFirebaseClient.m in Sources */,
+				B0C8A0FB1D9B02710029C2C1 /* PMMessagesViewController.m in Sources */,
 				B020F59A1D496FD300847684 /* PMApplicationViewController.m in Sources */,
 				B06F140A1D553A5600197AC5 /* PMParkingSpot.m in Sources */,
 				B05AECAE1CF4AB4200A5660A /* AppDelegate.m in Sources */,
+				B017D21A1D9454460041C3A3 /* PMPayPalClient.m in Sources */,
 				B09ED25A1CF507A70054D0FC /* PMInitialViewController.m in Sources */,
+				B017D21F1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m in Sources */,
+				B06EAB9B1DB7EDA90025D1DD /* PMUserMessagesTableViewController.m in Sources */,
 				B09ED25D1CF612180054D0FC /* PMPostViewController.m in Sources */,
 				B05AECAB1CF4AB4200A5660A /* main.m in Sources */,
 			);
@@ -484,8 +536,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -529,8 +583,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -558,8 +614,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9B2B4B26D070EFEF83541101 /* Pods-ParkMarket.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ParkMarket/ParkMarket.entitlements;
+				DEVELOPMENT_TEAM = 7LA77DS2EA;
 				INFOPLIST_FILE = ParkMarket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -572,8 +628,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F07AA50B8F5A1E3305FA77B7 /* Pods-ParkMarket.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ParkMarket/ParkMarket.entitlements;
+				DEVELOPMENT_TEAM = 7LA77DS2EA;
 				INFOPLIST_FILE = ParkMarket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

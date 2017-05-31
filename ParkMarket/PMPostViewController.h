@@ -10,12 +10,9 @@
 #import <CoreLocation/CoreLocation.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import <FirebaseDatabase/FirebaseDatabase.h>
+
 #import "PMFirebaseClient.h"
 
-@protocol MenuButtonDelegate;
-
 @interface PMPostViewController : UIViewController <CLLocationManagerDelegate>
-
-@property (weak, nonatomic) id <MenuButtonDelegate> delegate;
 
 @end

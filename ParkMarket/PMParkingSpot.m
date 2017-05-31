@@ -12,7 +12,10 @@
 
 + (instancetype)parkingSpotFromDictionary:(NSDictionary *)dictionary {
     PMParkingSpot *parkingSpot = [PMParkingSpot new];
-    parkingSpot.owner = dictionary[@"owner"];
+    parkingSpot.ownerFirstName = dictionary[@"owner"];
+    parkingSpot.ownerUID = dictionary[@"owner UID"];
+    parkingSpot.identifier = dictionary[@"identifier"];
+    parkingSpot.car = dictionary[@"car"];
     parkingSpot.latitude = dictionary[@"latitude"];
     parkingSpot.longitude = dictionary[@"longitude"];
     return parkingSpot;

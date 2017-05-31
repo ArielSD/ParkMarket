@@ -26,6 +26,7 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    
     [self configureLocationManager];
     [self configureNavigationBarItems];
     
@@ -52,16 +53,25 @@
     self.mapView.myLocationEnabled = YES;
     
     [self.view addSubview:self.mapView];
-    
-    [self configureQuestionLabel];
-    [self configurePostButton];
 }
 
 -(void)configureQuestionLabel {
-    self.questionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.viewWidth, self.viewHeight * 0.2 - self.navigationController.navigationBar.frame.size.height)];
+    self.questionLabel = [UILabel new];
+    [self.view addSubview:self.questionLabel];
+    
     self.questionLabel.textAlignment = NSTextAlignmentCenter;
     self.questionLabel.text = @"Where's the spot you're posting?";
-    [self.view addSubview:self.questionLabel];
+    
+    CGFloat bottomOfNavigationBar = CGRectGetMaxY(self.navigationController.navigationBar.frame);
+    CGFloat topYCoordinateOfMapView = CGRectGetMinY(self.mapView.frame);
+    CGFloat distanceBetweenBottomOfNavigationBarAndTopOfMapView = topYCoordinateOfMapView - bottomOfNavigationBar;
+    CGSize questionLabelSize = [self.questionLabel sizeThatFits:self.questionLabel.frame.size];
+    
+    self.questionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.questionLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.questionLabel.topAnchor constraintEqualToAnchor:self.navigationController.navigationBar.bottomAnchor
+                                                 constant:(distanceBetweenBottomOfNavigationBarAndTopOfMapView / 2.0) - questionLabelSize.height / 2.0].active = YES;
+    [self.questionLabel.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
 }
 
 -(void)configurePostButton {
@@ -87,8 +97,8 @@
 - (void)configureNavigationBarItems {
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
                                                                    style:UIBarButtonItemStylePlain
-                                                                  target:nil
-                                                                  action:nil];
+                                                                  target:self
+                                                                  action:@selector(menuButtonTapped)];
     
     self.navigationItem.title = @"Post";
     self.navigationItem.rightBarButtonItem = menuButton;
@@ -112,7 +122,12 @@
     if (timeSinceLocationCapture <= 2) {
         self.currentLocation = mostRecentLocation;
         [self.locationManager stopUpdatingLocation];
-        [self configureMapView];
+        
+        if (!self.mapView) {
+            [self configureMapView];
+            [self configureQuestionLabel];
+            [self configurePostButton];
+        }
     }
 }
 
@@ -125,12 +140,14 @@
 #pragma mark - Firebase Methods
 
 -(void)postButtonTapped {
-    NSString *currentLocationLatitude = [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.latitude];
-    NSString *currentLocationLongitude = [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.longitude];
-    
-    [PMFirebaseClient postParkingSpotWithLatitude:currentLocationLatitude
-                                        longitute:currentLocationLongitude];
-    [self confirmPostedParkingSpot];
+    [self askForCarModelBeingParked];
+}
+
+#pragma mark - Responder Methods
+
+- (void)menuButtonTapped {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"menuButtonWasTapped"
+                                                        object:self];
 }
 
 #pragma mark - Helper Methods
@@ -148,8 +165,42 @@
                                           } completion:^(BOOL finished) {
                                               [self dismissViewControllerAnimated:YES
                                                                        completion:nil];
+                                              [self.navigationController popToRootViewControllerAnimated:YES];
                                           }];
                      }];
+}
+
+- (void)askForCarModelBeingParked {
+    UIAlertController *carModelAlertController = [UIAlertController alertControllerWithTitle:@"What kind of car are you parking?"
+                                                                                     message:nil
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *post = [UIAlertAction actionWithTitle:@"Post"
+                                                   style:UIAlertActionStyleDefault
+                                                 handler:^(UIAlertAction * _Nonnull action) {
+                                                     NSString *currentLocationLatitude = [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.latitude];
+                                                     NSString *currentLocationLongitude = [NSString stringWithFormat:@"%f", self.currentLocation.coordinate.longitude];
+                                                     NSString *carModel = carModelAlertController.textFields.firstObject.text;
+
+                                                     [PMFirebaseClient postParkingSpotWithLatitude:currentLocationLatitude
+                                                                                         longitute:currentLocationLongitude
+                                                                                          carModel:carModel];
+                                                     
+                                                     [self confirmPostedParkingSpot];
+                                                 }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:nil];
+    
+    [carModelAlertController addAction:post];
+    [carModelAlertController addAction:cancel];
+    [carModelAlertController addTextFieldWithConfigurationHandler:nil];
+    carModelAlertController.preferredAction = post;
+    
+    [self presentViewController:carModelAlertController
+                       animated:YES
+                     completion:nil];
 }
 
 @end

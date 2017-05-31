@@ -16,6 +16,8 @@
 @property (strong, nonatomic) NSLayoutConstraint *menuRightAnchorConstraint;
 @property (strong, nonatomic) NSLayoutConstraint *menuLeftAnchorConstraint;
 
+@property (strong, nonatomic) UITapGestureRecognizer *dismissMenuTapGestureRecognizer;
+
 @end
 
 @implementation PMApplicationViewController
@@ -23,7 +25,8 @@
 - (void)viewDidLoad {
     
     // Testing Only
-//    [self testPayPalAPICall];
+    // [self testPayPalAPICall];
+    // [self testOAuth];
     // Testing Only
     
     [super viewDidLoad];
@@ -36,6 +39,7 @@
     }
     
     [self configureMenu];
+    [self configureNotificationObservers];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,7 +69,8 @@
 
 - (void)showLoginViewController {
     if (self.childViewControllers.count == 0) {
-        PMLoginViewController *loginViewController = [PMLoginViewController new];
+        UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+        PMLoginViewController *loginViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         loginViewController.delegate = self;
         [self addChildViewController:loginViewController];
         loginViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
@@ -85,21 +90,19 @@
 - (void)showInitialViewController {
     if (self.childViewControllers.count == 0) {
         PMInitialViewController *initialViewController = [PMInitialViewController new];
-        initialViewController.delegate = self;
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
-        [self addChildViewController:navigationController];
-        navigationController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-        [self.view addSubview:navigationController.view];
-        [navigationController didMoveToParentViewController:self];
+        self.navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
+        [self addChildViewController:self.navigationController];
+        self.navigationController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        [self.view addSubview:self.navigationController.view];
+        [self.navigationController didMoveToParentViewController:self];
     }
     
     else {
         PMInitialViewController *initialViewController = [PMInitialViewController new];
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
-        initialViewController.delegate = self;
+        self.navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
         
         [self cycleFromOldViewController:self.childViewControllers.lastObject
-                     toNewViewController:navigationController];
+                     toNewViewController:self.navigationController];
     }
 }
 
@@ -131,10 +134,9 @@
     [self showInitialViewController];
 }
 
-#pragma mark - MenuButtonDelegate Methods
+#pragma mark - Notification Center Methods
 
-- (void)didTapMenuButton {
-    
+- (void)menuButtonTapped {
     if (self.view.subviews.lastObject != self.menu.view) {
         [self.view bringSubviewToFront:self.menu.view];
     }
@@ -146,9 +148,12 @@
                              self.menuRightAnchorConstraint.active = NO;
                              self.menuLeftAnchorConstraint.active = YES;
                              [self.view layoutIfNeeded];
+                             
+                             [self addTapGestureRecognizerToDismissMenu];
                          }];
         
     }
+    
     else {
         [UIView animateWithDuration:0.25
                          animations:^{
@@ -156,6 +161,8 @@
                              self.menuLeftAnchorConstraint.active = NO;
                              self.menuRightAnchorConstraint.active = YES;
                              [self.view layoutIfNeeded];
+                             
+                             [self removeTapGestureRecognizerToDismissMenu];
                          }];
     }
 }
@@ -169,14 +176,37 @@
                          completion:nil];
 }
 
-- (void)didTapLogoutButton {
-    NSError *error;
-    [[FIRAuth auth] signOut:&error];
-    if (!error) {
-        self.menuLeftAnchorConstraint.active = NO;
-        self.menuRightAnchorConstraint.active = YES;
-        [self showLoginViewController];
-    }
+- (void)didTapMySpotsButton {
+    PMUserPostedSpotsViewController *userPostedSpotsViewController = [PMUserPostedSpotsViewController new];
+    [self presentViewController:userPostedSpotsViewController
+                       animated:YES
+                     completion:nil];
+}
+
+- (void)didTapMessagesButton {
+    PMUserMessagesTableViewController *userMessagesTableViewController = [PMUserMessagesTableViewController new];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:userMessagesTableViewController];
+    
+    [self presentViewController:navigationController
+                       animated:YES
+                     completion:nil];
+}
+
+#pragma mark - PMParkViewControllerMessageDelegate Methods
+
+- (void)didTapMessageButtonForParkingSpot:(PMParkingSpot *)parkingSpot {
+    PMMessagesViewController *messagesViewController = [PMMessagesViewController new];
+    messagesViewController.parkingSpot = parkingSpot;
+    messagesViewController.title = parkingSpot.ownerFirstName;
+    messagesViewController.senderId = [FIRAuth auth].currentUser.uid;
+    messagesViewController.senderDisplayName = @"Sender Display Name";
+    messagesViewController.recipient = parkingSpot.ownerUID;
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:messagesViewController];
+    
+    [self presentViewController:navigationController
+                       animated:YES
+                     completion:nil];
 }
 
 #pragma mark - CardIOPaymentViewControllerDelegate Methods
@@ -188,9 +218,55 @@
 
 - (void)userDidProvideCreditCardInfo:(CardIOCreditCardInfo *)cardInfo
              inPaymentViewController:(CardIOPaymentViewController *)paymentViewController {
-    NSLog(@"Info: %@", cardInfo);
+    
+    [PMPayPalClient storeCreditCard:cardInfo];
+    
     [self dismissViewControllerAnimated:YES
                              completion:nil];
+}
+
+#pragma mark - Helper Methods
+
+- (void)configureNotificationObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(menuButtonTapped)
+                                                 name:@"menuButtonWasTapped"
+                                               object:nil];
+}
+
+- (void)addTapGestureRecognizerToDismissMenu {
+    self.dismissMenuTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                   action:@selector(menuButtonTapped)];
+    
+    [self.navigationController.view addGestureRecognizer:self.dismissMenuTapGestureRecognizer];
+    
+    UIViewController *viewController = self.navigationController.topViewController;
+    
+    for (UIView *view in viewController.view.subviews) {
+        view.userInteractionEnabled = NO;
+    }
+}
+
+- (void)removeTapGestureRecognizerToDismissMenu {
+    [self.navigationController.view removeGestureRecognizer:self.dismissMenuTapGestureRecognizer];
+    
+    UIViewController *viewController = self.navigationController.topViewController;
+    
+    for (UIView *view in viewController.view.subviews) {
+        view.userInteractionEnabled = YES;
+    }
+}
+
+#pragma mark - Log Out
+
+- (void)didTapLogoutButton {
+    NSError *error;
+    [[FIRAuth auth] signOut:&error];
+    if (!error) {
+        self.menuLeftAnchorConstraint.active = NO;
+        self.menuRightAnchorConstraint.active = YES;
+        [self showLoginViewController];
+    }
 }
 
 #pragma mark - Testing
@@ -232,6 +308,34 @@
                      NSLog(@"Success! Response Object: %@", responseObject);
                  } failure:^(NSURLSessionDataTask *task, NSError *error) {
                      NSLog(@"%@", error);
+                 }];
+}
+
+- (void)testOAuth {
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    sessionManager.requestSerializer = [AFHTTPRequestSerializer new];
+    
+    NSString *payPalURLString = @"https://api.sandbox.paypal.com/v1/oauth2/token";
+    NSString *clientID = @"Aa6s3b1XPLRsiGFwtN_OGDcsQLFVy1OwbrtQZrhK9JB9nKYkSwcfBHCegLK6tYPDEi2WQd-nC0xk7s1M";
+    NSString *secret = @"EK9j96pAmT6LoBSLLYgtbsqOVTMT-oveF-uwoxHBvUPruI5vFgrgrwzFNSDWNtWNC58A5qapcepR1Ii_";
+    
+    NSDictionary *payloadDictionary = @{@"grant_type" : @"client_credentials"};
+    
+    [sessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [sessionManager.requestSerializer setValue:@"en_US" forHTTPHeaderField:@"Accept-Language"];
+    [sessionManager.requestSerializer setAuthorizationHeaderFieldWithUsername:clientID
+                                                                     password:secret];
+    
+    [sessionManager POST:payPalURLString
+              parameters:payloadDictionary
+                progress:nil
+                 success:^(NSURLSessionDataTask *task, id responseObject) {
+                     NSLog(@"We did it");
+                     NSLog(@"Response Object: %@", responseObject);
+                 }
+                 failure:^(NSURLSessionDataTask *task, NSError *error) {
+                     NSLog(@"We didn't do it");
+                     NSLog(@"Error: %@", error);
                  }];
 }
 
