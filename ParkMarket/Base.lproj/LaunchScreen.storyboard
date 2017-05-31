@@ -22,14 +22,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vome" translatesAutoresizingMaskIntoConstraints="NO" id="x0s-Cy-zHg">
-                                <rect key="frame" x="-0.5" y="-0.5" width="375" height="667"/>
+                                <rect key="frame" x="153" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="x0s-Cy-zHg" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="02g-t4-tCg"/>
                             <constraint firstItem="x0s-Cy-zHg" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="7HM-ea-DJh"/>
-                            <constraint firstItem="x0s-Cy-zHg" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="PKs-Db-NiQ"/>
+                            <constraint firstItem="x0s-Cy-zHg" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="153" id="PKs-Db-NiQ"/>
                             <constraint firstItem="x0s-Cy-zHg" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="cbH-jt-L1N"/>
                         </constraints>
                     </view>

@@ -26,7 +26,7 @@
     
     // Testing Only
     // [self testPayPalAPICall];
-    //[self testOAuth];
+    // [self testOAuth];
     // Testing Only
     
     [super viewDidLoad];
@@ -69,7 +69,8 @@
 
 - (void)showLoginViewController {
     if (self.childViewControllers.count == 0) {
-        PMLoginViewController *loginViewController = [PMLoginViewController new];
+        UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+        PMLoginViewController *loginViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         loginViewController.delegate = self;
         [self addChildViewController:loginViewController];
         loginViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
