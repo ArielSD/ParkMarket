@@ -41,20 +41,37 @@
                              }];
 }
 
-+ (void)loginUserWithEmail:(NSString *)email password:(NSString *)password completion:(void (^)(NSError *))completionBlock {
++ (void)loginUserWithEmail:(NSString *)email
+                  password:(NSString *)password
+                   success:(void (^)(FIRUser *))success
+                   failure:(void (^)(NSError *))failure {
     [[FIRAuth auth] signInWithEmail:email
                            password:password
                          completion:^(FIRUser *user, NSError *error) {
-                             
                              if (error) {
-                                 completionBlock(error);
+                                 failure(error);
                              }
                              
                              else {
-                                 completionBlock(nil);
+                                 success(user);
                              }
                          }];
 }
+
+//+ (void)loginUserWithEmail:(NSString *)email password:(NSString *)password completion:(void (^)(NSError *))completionBlock {
+//    [[FIRAuth auth] signInWithEmail:email
+//                           password:password
+//                         completion:^(FIRUser *user, NSError *error) {
+//                             
+//                             if (error) {
+//                                 completionBlock(error);
+//                             }
+//                             
+//                             else {
+//                                 completionBlock(nil);
+//                             }
+//                         }];
+//}
 
 #pragma mark - Posting Spots
 

@@ -26,7 +26,8 @@
 
 + (void)loginUserWithEmail:(NSString *)email
                   password:(NSString *)password
-                completion:(void (^)(NSError *error))completionBlock;
+                   success:(void (^)(FIRUser *user))success
+                   failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Posting Spots
 

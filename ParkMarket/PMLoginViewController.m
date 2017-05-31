@@ -6,15 +6,19 @@
 //  Copyright © 2016 Ariel Scott-Dicker. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "PMLoginViewController.h"
 
 @interface PMLoginViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UIButton *logInButton;
+@property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 
 // Constraints that can change
-@property (strong, nonatomic) NSLayoutConstraint *passwordTextFieldTopConstraint;
-@property (strong, nonatomic) NSLayoutConstraint *emailTextFieldTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *emailTextFieldCenterXContstraint;
 
 @end
 
@@ -22,15 +26,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    /*
-    [self configureWelcomeLabel];
-    [self configureFirstNameTextField];
-    [self configureEmailTextField];
-    [self configurePasswordTextField];
-    [self configureConfirmPasswordTextField];
-    [self configureLoginButton];
-    [self configureSignUpButton];
-    */
 }
 
 - (void)didReceiveMemoryWarning {
@@ -122,7 +117,58 @@
  */
 
 - (IBAction)logInButtonTapped:(id)sender {
-    [self.delegate didLogInUser];
+    [PMFirebaseClient loginUserWithEmail:self.emailTextField.text
+                                password:self.passwordTextField.text
+                                 success:^(FIRUser *user) {
+                                     [self.delegate didLogInUser];
+                                 }
+                                 failure:^(NSError *error) {
+                                     
+                                     [self.view layoutIfNeeded];
+                                     
+                                     [UIView animateWithDuration:0.15
+                                                           delay:0
+                                                         options:UIViewAnimationOptionCurveEaseOut
+                                                      animations:^{
+                                                          self.emailTextFieldCenterXContstraint.constant = 20;
+                                                          self.emailTextField.layer.borderWidth = 1.0;
+                                                          self.emailTextField.layer.cornerRadius = 8.0;
+                                                          self.emailTextField.layer.borderColor = [[UIColor redColor] CGColor];
+                                                          [self.view layoutIfNeeded];
+                                                      }
+                                                      completion:^(BOOL finished) {
+                                                          [UIView animateWithDuration:0.15
+                                                                                delay:0
+                                                                              options:UIViewAnimationOptionCurveEaseOut
+                                                                           animations:^{
+                                                                               self.emailTextFieldCenterXContstraint.constant = -20;
+                                                                               [self.view layoutIfNeeded];
+                                                                           }
+                                                                           completion:^(BOOL finished) {
+                                                                               [UIView animateWithDuration:0.6
+                                                                                                     delay:0
+                                                                                    usingSpringWithDamping:0.3
+                                                                                     initialSpringVelocity:0
+                                                                                                   options:0
+                                                                                                animations:^{
+                                                                                                    self.emailTextFieldCenterXContstraint.constant = 0;
+                                                                                                    [self.view layoutIfNeeded];
+                                                                                                }
+                                                                                                completion:nil];
+                                                                           }];
+                                                      }];
+                                     
+//                                     [UIView animateWithDuration:0.4
+//                                                           delay:0
+//                                                         options:UIViewAnimationOptionAutoreverse
+//                                                      animations:^{
+//                                                          self.emailTextFieldCenterXContstraint.constant = 20;
+//                                                          [self.view layoutIfNeeded];
+//                                                      }
+//                                                      completion:nil];
+                                     
+                                     NSLog(@"Error Logging In: %@", error);
+                                 }];
 }
 
 @end

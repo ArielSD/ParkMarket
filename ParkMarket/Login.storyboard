@@ -35,7 +35,7 @@
                                 <rect key="frame" x="59.5" y="236" width="256" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oe5-Ku-HEZ">
                                 <rect key="frame" x="59" y="318" width="257" height="40"/>
@@ -76,6 +76,7 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="3Wx-Ps-qPX" id="WvT-6W-2A2"/>
+                        <outlet property="emailTextFieldCenterXContstraint" destination="9FT-B9-uLf" id="aUv-Sy-3bZ"/>
                         <outlet property="logInButton" destination="oe5-Ku-HEZ" id="qHK-Zq-Amo"/>
                         <outlet property="passwordTextField" destination="Ev3-ks-bPN" id="jle-Ug-Jy2"/>
                         <outlet property="signUpButton" destination="a90-CV-3sq" id="4zJ-Bt-yS8"/>

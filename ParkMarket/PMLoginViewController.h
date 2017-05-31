@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import "PMFirebaseClient.h"
 
 @class PMLoginViewController;
@@ -21,11 +20,6 @@
 @end
 
 @interface PMLoginViewController : UIViewController <UITextFieldDelegate>
-
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UIButton *logInButton;
-@property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 
 @property (weak, nonatomic) id <PMLoginViewControllerDelegate> delegate;
 
