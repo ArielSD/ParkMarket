@@ -20,6 +20,7 @@
 		B05AECC41CF4AB4300A5660A /* ParkMarketTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECC31CF4AB4300A5660A /* ParkMarketTests.m */; };
 		B05AECCF1CF4AB4300A5660A /* ParkMarketUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECCE1CF4AB4300A5660A /* ParkMarketUITests.m */; };
 		B063C3021D0B6CD7002BA9D0 /* PMParkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */; };
+		B066077E1EDE3EFB00A4C6FD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B066077C1EDE3EFB00A4C6FD /* Login.storyboard */; };
 		B06EAB9B1DB7EDA90025D1DD /* PMUserMessagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B06EAB9A1DB7EDA90025D1DD /* PMUserMessagesTableViewController.m */; };
 		B06F140A1D553A5600197AC5 /* PMParkingSpot.m in Sources */ = {isa = PBXBuildFile; fileRef = B06F14091D553A5600197AC5 /* PMParkingSpot.m */; };
 		B07C00321D818EA600C23D8D /* PMMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B07C00311D818EA600C23D8D /* PMMenuViewController.m */; };
@@ -76,6 +77,7 @@
 		B05AECD01CF4AB4300A5660A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B063C3001D0B6CD7002BA9D0 /* PMParkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMParkViewController.h; sourceTree = "<group>"; };
 		B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMParkViewController.m; sourceTree = "<group>"; };
+		B066077C1EDE3EFB00A4C6FD /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Login.storyboard; path = ParkMarket/Login.storyboard; sourceTree = "<group>"; };
 		B06EAB991DB7EDA90025D1DD /* PMUserMessagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMUserMessagesTableViewController.h; sourceTree = "<group>"; };
 		B06EAB9A1DB7EDA90025D1DD /* PMUserMessagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMUserMessagesTableViewController.m; sourceTree = "<group>"; };
 		B06F14081D553A5600197AC5 /* PMParkingSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMParkingSpot.h; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 		B05AEC9D1CF4AB4200A5660A = {
 			isa = PBXGroup;
 			children = (
+				B066077D1EDE3EFB00A4C6FD /* Views */,
 				B05AECA81CF4AB4200A5660A /* ParkMarket */,
 				B05AECC21CF4AB4300A5660A /* ParkMarketTests */,
 				B05AECCD1CF4AB4300A5660A /* ParkMarketUITests */,
@@ -214,6 +217,14 @@
 				B05AECD01CF4AB4300A5660A /* Info.plist */,
 			);
 			path = ParkMarketUITests;
+			sourceTree = "<group>";
+		};
+		B066077D1EDE3EFB00A4C6FD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B066077C1EDE3EFB00A4C6FD /* Login.storyboard */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		B06F140C1D553A9600197AC5 /* ViewControllers */ = {
@@ -367,6 +378,7 @@
 				B05AECB91CF4AB4300A5660A /* LaunchScreen.storyboard in Resources */,
 				B0B2F4671D0760E100E57E03 /* GoogleService-Info.plist in Resources */,
 				B05AECB61CF4AB4300A5660A /* Assets.xcassets in Resources */,
+				B066077E1EDE3EFB00A4C6FD /* Login.storyboard in Resources */,
 				B05AECB41CF4AB4200A5660A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
