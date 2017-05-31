@@ -6,8 +6,8 @@
 //  Copyright © 2016 Ariel Scott-Dicker. All rights reserved.
 //
 
-#import <QuartzCore/QuartzCore.h>
 #import "PMLoginViewController.h"
+#import "UITextField+PMTextField.h"
 
 @interface PMLoginViewController ()
 
@@ -19,6 +19,7 @@
 
 // Constraints that can change
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *emailTextFieldCenterXContstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordTextFieldCenterXConstraint;
 
 @end
 
@@ -123,51 +124,37 @@
                                      [self.delegate didLogInUser];
                                  }
                                  failure:^(NSError *error) {
+                                     NSError *underlyingError = error.userInfo[@"NSUnderlyingError"];
+                                     NSDictionary *FIRAuthErrorUserInfoDeserializedResponseKey = underlyingError.userInfo[@"FIRAuthErrorUserInfoDeserializedResponseKey"];
+                                     NSString *errorName =  error.userInfo[@"error_name"];
+                                     NSString *message = FIRAuthErrorUserInfoDeserializedResponseKey[@"message"];
                                      
-                                     [self.view layoutIfNeeded];
+                                     if ([message isEqualToString:@"INVALID_EMAIL"]) {
+                                         [UITextField shake:self.emailTextField
+                                                       view:self.view
+                                                 constraint:self.emailTextFieldCenterXContstraint];
+                                     }
                                      
-                                     [UIView animateWithDuration:0.15
-                                                           delay:0
-                                                         options:UIViewAnimationOptionCurveEaseOut
-                                                      animations:^{
-                                                          self.emailTextFieldCenterXContstraint.constant = 20;
-                                                          self.emailTextField.layer.borderWidth = 1.0;
-                                                          self.emailTextField.layer.cornerRadius = 8.0;
-                                                          self.emailTextField.layer.borderColor = [[UIColor redColor] CGColor];
-                                                          [self.view layoutIfNeeded];
-                                                      }
-                                                      completion:^(BOOL finished) {
-                                                          [UIView animateWithDuration:0.15
-                                                                                delay:0
-                                                                              options:UIViewAnimationOptionCurveEaseOut
-                                                                           animations:^{
-                                                                               self.emailTextFieldCenterXContstraint.constant = -20;
-                                                                               [self.view layoutIfNeeded];
-                                                                           }
-                                                                           completion:^(BOOL finished) {
-                                                                               [UIView animateWithDuration:0.6
-                                                                                                     delay:0
-                                                                                    usingSpringWithDamping:0.3
-                                                                                     initialSpringVelocity:0
-                                                                                                   options:0
-                                                                                                animations:^{
-                                                                                                    self.emailTextFieldCenterXContstraint.constant = 0;
-                                                                                                    [self.view layoutIfNeeded];
-                                                                                                }
-                                                                                                completion:nil];
-                                                                           }];
-                                                      }];
+                                     if ([errorName isEqualToString:@"ERROR_WRONG_PASSWORD"] || [message isEqualToString:@"MISSING_PASSWORD"]) {
+                                         [UITextField shake:self.passwordTextField
+                                                       view:self.view
+                                                 constraint:self.passwordTextFieldCenterXConstraint];
+                                     }
                                      
-//                                     [UIView animateWithDuration:0.4
-//                                                           delay:0
-//                                                         options:UIViewAnimationOptionAutoreverse
-//                                                      animations:^{
-//                                                          self.emailTextFieldCenterXContstraint.constant = 20;
-//                                                          [self.view layoutIfNeeded];
-//                                                      }
-//                                                      completion:nil];
-                                     
-                                     NSLog(@"Error Logging In: %@", error);
+                                     if ([errorName isEqualToString:@"ERROR_USER_NOT_FOUND"]) {
+                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Hmmm..."
+                                                                                                                  message:@"Looks like you don't have an account yet. Tap Sign Up to make one now!"
+                                                                                                           preferredStyle:UIAlertControllerStyleAlert];
+                                         
+                                         UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+                                                                                          style:UIAlertActionStyleDefault
+                                                                                        handler:nil];
+                                         
+                                         [alertController addAction:action];
+                                         [self presentViewController:alertController
+                                                            animated:YES
+                                                          completion:nil];
+                                     }
                                  }];
 }
 
