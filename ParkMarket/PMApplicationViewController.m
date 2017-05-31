@@ -68,8 +68,9 @@
 #pragma mark- Container View Methods
 
 - (void)showLoginViewController {
+    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    
     if (self.childViewControllers.count == 0) {
-        UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
         PMLoginViewController *loginViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         loginViewController.delegate = self;
         [self addChildViewController:loginViewController];
@@ -79,7 +80,7 @@
     }
     
     else {
-        PMLoginViewController *loginViewController = [PMLoginViewController new];
+        PMLoginViewController *loginViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         loginViewController.delegate = self;
         
         [self cycleFromOldViewController:self.childViewControllers.lastObject

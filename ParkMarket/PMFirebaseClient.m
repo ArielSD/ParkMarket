@@ -58,21 +58,6 @@
                          }];
 }
 
-//+ (void)loginUserWithEmail:(NSString *)email password:(NSString *)password completion:(void (^)(NSError *))completionBlock {
-//    [[FIRAuth auth] signInWithEmail:email
-//                           password:password
-//                         completion:^(FIRUser *user, NSError *error) {
-//                             
-//                             if (error) {
-//                                 completionBlock(error);
-//                             }
-//                             
-//                             else {
-//                                 completionBlock(nil);
-//                             }
-//                         }];
-//}
-
 #pragma mark - Posting Spots
 
 #warning Refactor this to two separate methods
