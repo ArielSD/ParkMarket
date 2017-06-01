@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		53DFDF1762652542AC7474A2 /* libPods-ParkMarket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34B90F8E429F882B24E728DD /* libPods-ParkMarket.a */; };
+		8102064B3B036529F21D87E2 /* libPods-ParkMarketTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7670488F285EAA02701D3BD4 /* libPods-ParkMarketTests.a */; };
+		9A028D5C5EAED81BAE0B7EB3 /* libPods-ParkMarketUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBCD0370ADC6405DB8A60A97 /* libPods-ParkMarketUITests.a */; };
 		B01378561EDF36A100F610E4 /* UITextField+PMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B01378551EDF36A100F610E4 /* UITextField+PMTextField.m */; };
 		B017D21A1D9454460041C3A3 /* PMPayPalClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B017D2191D9454460041C3A3 /* PMPayPalClient.m */; };
 		B017D21F1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B017D21E1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m */; };
@@ -32,6 +33,7 @@
 		B0B2F4691D0760E100E57E03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B2F4661D0760E100E57E03 /* GoogleService-Info.plist */; };
 		B0C8A0FB1D9B02710029C2C1 /* PMMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C8A0FA1D9B02710029C2C1 /* PMMessagesViewController.m */; };
 		B0EB86D11D46901D001A0F6D /* PMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */; };
+		B10E2AF0F7649D3AE0062DE9 /* libPods-ParkMarket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23EE35979057BC93914BEC5E /* libPods-ParkMarket.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +54,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		34B90F8E429F882B24E728DD /* libPods-ParkMarket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ParkMarket.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B2B4B26D070EFEF83541101 /* Pods-ParkMarket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarket.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket.debug.xcconfig"; sourceTree = "<group>"; };
+		189E25BEF69E230DBEFAA0E4 /* Pods-ParkMarketTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarketTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarketTests/Pods-ParkMarketTests.debug.xcconfig"; sourceTree = "<group>"; };
+		23EE35979057BC93914BEC5E /* libPods-ParkMarket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ParkMarket.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		269A160F4253BAA982666958 /* Pods-ParkMarket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarket.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket.debug.xcconfig"; sourceTree = "<group>"; };
+		5FF0F4F757D727C8FE01A80C /* Pods-ParkMarketTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarketTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarketTests/Pods-ParkMarketTests.release.xcconfig"; sourceTree = "<group>"; };
+		7670488F285EAA02701D3BD4 /* libPods-ParkMarketTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ParkMarketTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CF601287799420239763BAB /* Pods-ParkMarketUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarketUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarketUITests/Pods-ParkMarketUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B01378541EDF36A100F610E4 /* UITextField+PMTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+PMTextField.h"; sourceTree = "<group>"; };
 		B01378551EDF36A100F610E4 /* UITextField+PMTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+PMTextField.m"; sourceTree = "<group>"; };
 		B017D2181D9454460041C3A3 /* PMPayPalClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMPayPalClient.h; sourceTree = "<group>"; };
@@ -97,7 +103,9 @@
 		B0C8A0FA1D9B02710029C2C1 /* PMMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMMessagesViewController.m; sourceTree = "<group>"; };
 		B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMLoginViewController.h; sourceTree = "<group>"; };
 		B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMLoginViewController.m; sourceTree = "<group>"; };
-		F07AA50B8F5A1E3305FA77B7 /* Pods-ParkMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarket.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket.release.xcconfig"; sourceTree = "<group>"; };
+		CBCD0370ADC6405DB8A60A97 /* libPods-ParkMarketUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ParkMarketUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D668F01831D4268299B840B0 /* Pods-ParkMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarket.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket.release.xcconfig"; sourceTree = "<group>"; };
+		EB264488D1711240AEDB5E4F /* Pods-ParkMarketUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkMarketUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParkMarketUITests/Pods-ParkMarketUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53DFDF1762652542AC7474A2 /* libPods-ParkMarket.a in Frameworks */,
+				B10E2AF0F7649D3AE0062DE9 /* libPods-ParkMarket.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8102064B3B036529F21D87E2 /* libPods-ParkMarketTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,16 +129,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A028D5C5EAED81BAE0B7EB3 /* libPods-ParkMarketUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		53C3584C5CB58A1F73CAFC93 /* Frameworks */ = {
+		1937ED44A57178834BB3C312 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				34B90F8E429F882B24E728DD /* libPods-ParkMarket.a */,
+				23EE35979057BC93914BEC5E /* libPods-ParkMarket.a */,
+				7670488F285EAA02701D3BD4 /* libPods-ParkMarketTests.a */,
+				CBCD0370ADC6405DB8A60A97 /* libPods-ParkMarketUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -172,8 +184,8 @@
 				B05AECC21CF4AB4300A5660A /* ParkMarketTests */,
 				B05AECCD1CF4AB4300A5660A /* ParkMarketUITests */,
 				B05AECA71CF4AB4200A5660A /* Products */,
-				F697AC925DD4D681C646122C /* Pods */,
-				53C3584C5CB58A1F73CAFC93 /* Frameworks */,
+				D62BF9E0E1BB260E7B942966 /* Pods */,
+				1937ED44A57178834BB3C312 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -265,11 +277,15 @@
 			name = ViewControllers;
 			sourceTree = "<group>";
 		};
-		F697AC925DD4D681C646122C /* Pods */ = {
+		D62BF9E0E1BB260E7B942966 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9B2B4B26D070EFEF83541101 /* Pods-ParkMarket.debug.xcconfig */,
-				F07AA50B8F5A1E3305FA77B7 /* Pods-ParkMarket.release.xcconfig */,
+				269A160F4253BAA982666958 /* Pods-ParkMarket.debug.xcconfig */,
+				D668F01831D4268299B840B0 /* Pods-ParkMarket.release.xcconfig */,
+				189E25BEF69E230DBEFAA0E4 /* Pods-ParkMarketTests.debug.xcconfig */,
+				5FF0F4F757D727C8FE01A80C /* Pods-ParkMarketTests.release.xcconfig */,
+				8CF601287799420239763BAB /* Pods-ParkMarketUITests.debug.xcconfig */,
+				EB264488D1711240AEDB5E4F /* Pods-ParkMarketUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -281,12 +297,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B05AECD31CF4AB4300A5660A /* Build configuration list for PBXNativeTarget "ParkMarket" */;
 			buildPhases = (
-				6525A03A899B7DF8BA33ECAF /* Check Pods Manifest.lock */,
+				10AFB8EA5848320AE5F25E00 /* [CP] Check Pods Manifest.lock */,
 				B05AECA21CF4AB4200A5660A /* Sources */,
 				B05AECA31CF4AB4200A5660A /* Frameworks */,
 				B05AECA41CF4AB4200A5660A /* Resources */,
-				EAB532686FC9C2A00EF0CB09 /* Embed Pods Frameworks */,
-				0B08D74DF16C755CF48032D7 /* Copy Pods Resources */,
+				11035BB5F66E4DE03ED30C75 /* [CP] Embed Pods Frameworks */,
+				3B607175BA51068EAE6CC607 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -301,9 +317,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B05AECD61CF4AB4300A5660A /* Build configuration list for PBXNativeTarget "ParkMarketTests" */;
 			buildPhases = (
+				83FBE25023B5215858839790 /* [CP] Check Pods Manifest.lock */,
 				B05AECBB1CF4AB4300A5660A /* Sources */,
 				B05AECBC1CF4AB4300A5660A /* Frameworks */,
 				B05AECBD1CF4AB4300A5660A /* Resources */,
+				21773011D23A2DCD997A11F4 /* [CP] Embed Pods Frameworks */,
+				5B122E9831EB0696A30A83C7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -319,9 +338,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B05AECD91CF4AB4300A5660A /* Build configuration list for PBXNativeTarget "ParkMarketUITests" */;
 			buildPhases = (
+				63DCF282670CC53C902BA767 /* [CP] Check Pods Manifest.lock */,
 				B05AECC61CF4AB4300A5660A /* Sources */,
 				B05AECC71CF4AB4300A5660A /* Frameworks */,
 				B05AECC81CF4AB4300A5660A /* Resources */,
+				B331A929D4E8391614BAB993 /* [CP] Embed Pods Frameworks */,
+				80EFD708393D6FE956F7D73D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -415,14 +437,59 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0B08D74DF16C755CF48032D7 /* Copy Pods Resources */ = {
+		10AFB8EA5848320AE5F25E00 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		11035BB5F66E4DE03ED30C75 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		21773011D23A2DCD997A11F4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ParkMarketTests/Pods-ParkMarketTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3B607175BA51068EAE6CC607 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,34 +497,79 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6525A03A899B7DF8BA33ECAF /* Check Pods Manifest.lock */ = {
+		5B122E9831EB0696A30A83C7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ParkMarketTests/Pods-ParkMarketTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EAB532686FC9C2A00EF0CB09 /* Embed Pods Frameworks */ = {
+		63DCF282670CC53C902BA767 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ParkMarket/Pods-ParkMarket-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		80EFD708393D6FE956F7D73D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ParkMarketUITests/Pods-ParkMarketUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		83FBE25023B5215858839790 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B331A929D4E8391614BAB993 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ParkMarketUITests/Pods-ParkMarketUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -626,7 +738,7 @@
 		};
 		B05AECD41CF4AB4300A5660A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9B2B4B26D070EFEF83541101 /* Pods-ParkMarket.debug.xcconfig */;
+			baseConfigurationReference = 269A160F4253BAA982666958 /* Pods-ParkMarket.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ParkMarket/ParkMarket.entitlements;
 				DEVELOPMENT_TEAM = 7LA77DS2EA;
@@ -640,7 +752,7 @@
 		};
 		B05AECD51CF4AB4300A5660A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F07AA50B8F5A1E3305FA77B7 /* Pods-ParkMarket.release.xcconfig */;
+			baseConfigurationReference = D668F01831D4268299B840B0 /* Pods-ParkMarket.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ParkMarket/ParkMarket.entitlements;
 				DEVELOPMENT_TEAM = 7LA77DS2EA;
@@ -654,6 +766,7 @@
 		};
 		B05AECD71CF4AB4300A5660A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 189E25BEF69E230DBEFAA0E4 /* Pods-ParkMarketTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = ParkMarketTests/Info.plist;
@@ -666,6 +779,7 @@
 		};
 		B05AECD81CF4AB4300A5660A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5FF0F4F757D727C8FE01A80C /* Pods-ParkMarketTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = ParkMarketTests/Info.plist;
@@ -678,6 +792,7 @@
 		};
 		B05AECDA1CF4AB4300A5660A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8CF601287799420239763BAB /* Pods-ParkMarketUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = ParkMarketUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -689,6 +804,7 @@
 		};
 		B05AECDB1CF4AB4300A5660A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB264488D1711240AEDB5E4F /* Pods-ParkMarketUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = ParkMarketUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
