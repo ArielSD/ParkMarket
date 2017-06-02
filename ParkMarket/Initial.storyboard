@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Post or Park?-->
+        <scene sceneID="b7g-Gx-lIa">
+            <objects>
+                <viewController storyboardIdentifier="initialViewController" id="Q5k-O9-b6t" customClass="PMInitialViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nh6-0T-j1a"/>
+                        <viewControllerLayoutGuide type="bottom" id="9C0-5f-qBM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NuZ-n0-giP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HmD-CR-Tdf">
+                                <rect key="frame" x="16" y="238" width="143" height="190"/>
+                                <state key="normal" title="Button" image="postButton"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAy-NW-fLp">
+                                <rect key="frame" x="216" y="238" width="143" height="190"/>
+                                <state key="normal" title="Button" image="parkButton"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hCI-Te-84R">
+                                <rect key="frame" x="16" y="436" width="143" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Park" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIG-Yu-nxt">
+                                <rect key="frame" x="216" y="436" width="143" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="EIG-Yu-nxt" firstAttribute="width" secondItem="eAy-NW-fLp" secondAttribute="height" multiplier="143:190" id="2oa-d9-vwJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eAy-NW-fLp" secondAttribute="trailing" id="5py-id-OAa"/>
+                            <constraint firstItem="EIG-Yu-nxt" firstAttribute="top" secondItem="eAy-NW-fLp" secondAttribute="bottom" constant="8" id="6aX-TP-SFX"/>
+                            <constraint firstItem="hCI-Te-84R" firstAttribute="width" secondItem="HmD-CR-Tdf" secondAttribute="height" multiplier="143:190" id="9QY-2o-koI"/>
+                            <constraint firstItem="eAy-NW-fLp" firstAttribute="width" secondItem="NuZ-n0-giP" secondAttribute="height" multiplier="143:667" id="CZB-do-6lL"/>
+                            <constraint firstItem="eAy-NW-fLp" firstAttribute="centerY" secondItem="NuZ-n0-giP" secondAttribute="centerY" id="XBX-P1-9KV"/>
+                            <constraint firstItem="EIG-Yu-nxt" firstAttribute="centerX" secondItem="eAy-NW-fLp" secondAttribute="centerX" id="esq-1p-ZPL"/>
+                            <constraint firstItem="hCI-Te-84R" firstAttribute="centerX" secondItem="HmD-CR-Tdf" secondAttribute="centerX" id="jg7-km-ta9"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="HmD-CR-Tdf" secondAttribute="leading" id="lxD-vF-BQc"/>
+                            <constraint firstItem="hCI-Te-84R" firstAttribute="top" secondItem="HmD-CR-Tdf" secondAttribute="bottom" constant="8" id="mD1-mM-6Za"/>
+                            <constraint firstItem="HmD-CR-Tdf" firstAttribute="top" secondItem="nh6-0T-j1a" secondAttribute="bottom" constant="174" id="mZc-e7-gpN"/>
+                            <constraint firstItem="eAy-NW-fLp" firstAttribute="top" secondItem="nh6-0T-j1a" secondAttribute="bottom" constant="174" id="oMB-Gq-hcT"/>
+                            <constraint firstItem="HmD-CR-Tdf" firstAttribute="centerY" secondItem="NuZ-n0-giP" secondAttribute="centerY" id="qDd-Kr-7fO"/>
+                            <constraint firstItem="HmD-CR-Tdf" firstAttribute="width" secondItem="NuZ-n0-giP" secondAttribute="height" multiplier="143:667" id="vhW-eq-ZHo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Post or Park?" id="7QP-SK-kbV"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hC2-lh-4vV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="783.20000000000005" y="85.907046476761622"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="h9V-Qb-gp8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JdT-8j-YHn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="d1Q-6b-ZrQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Q5k-O9-b6t" kind="relationship" relationship="rootViewController" id="NcX-Gx-2RI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9NV-HT-ely" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-156" y="85.907046476761622"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="parkButton" width="312" height="486"/>
+        <image name="postButton" width="311" height="485"/>
+    </resources>
+</document>

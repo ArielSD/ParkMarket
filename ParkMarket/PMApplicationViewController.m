@@ -89,8 +89,10 @@
 }
 
 - (void)showInitialViewController {
+    UIStoryboard *initialStoryboard = [UIStoryboard storyboardWithName:@"Initial" bundle:nil];
+    
     if (self.childViewControllers.count == 0) {
-        PMInitialViewController *initialViewController = [PMInitialViewController new];
+        PMInitialViewController *initialViewController = [initialStoryboard instantiateViewControllerWithIdentifier:@"initialViewController"];
         self.navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
         [self addChildViewController:self.navigationController];
         self.navigationController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
@@ -99,7 +101,7 @@
     }
     
     else {
-        PMInitialViewController *initialViewController = [PMInitialViewController new];
+        PMInitialViewController *initialViewController = [initialStoryboard instantiateViewControllerWithIdentifier:@"initialViewController"];
         self.navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
         
         [self cycleFromOldViewController:self.childViewControllers.lastObject
