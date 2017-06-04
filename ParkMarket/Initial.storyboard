@@ -26,10 +26,16 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HmD-CR-Tdf">
                                 <rect key="frame" x="16" y="238" width="143" height="190"/>
                                 <state key="normal" title="Button" image="postButton"/>
+                                <connections>
+                                    <action selector="postButtonTapped:" destination="Q5k-O9-b6t" eventType="touchUpInside" id="U64-nb-7aG"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAy-NW-fLp">
                                 <rect key="frame" x="216" y="238" width="143" height="190"/>
                                 <state key="normal" title="Button" image="parkButton"/>
+                                <connections>
+                                    <action selector="parkButtonTapped:" destination="Q5k-O9-b6t" eventType="touchUpInside" id="3xG-SS-XpH"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hCI-Te-84R">
                                 <rect key="frame" x="16" y="436" width="143" height="30"/>
@@ -63,6 +69,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Post or Park?" id="7QP-SK-kbV"/>
+                    <connections>
+                        <outlet property="parkButton" destination="eAy-NW-fLp" id="yOB-rp-oWc"/>
+                        <outlet property="postButton" destination="HmD-CR-Tdf" id="0eZ-Sg-tAv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hC2-lh-4vV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

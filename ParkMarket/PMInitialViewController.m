@@ -10,6 +10,9 @@
 
 @interface PMInitialViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *postButton;
+@property (weak, nonatomic) IBOutlet UIButton *parkButton;
+
 @end
 
 @implementation PMInitialViewController
@@ -30,7 +33,7 @@
 
 #pragma mark - Responder Methods
 
--(void)postButtonTapped {
+- (IBAction)postButtonTapped:(id)sender {
     PMPostViewController *postViewController = [PMPostViewController new];
     
     postViewController.view.backgroundColor = [UIColor whiteColor];
@@ -38,12 +41,12 @@
                                          animated:YES];
 }
 
--(void)parkButtonTapped {
+- (IBAction)parkButtonTapped:(id)sender {
     PMApplicationViewController *applicationViewController = (PMApplicationViewController *)self.parentViewController.parentViewController;
     
     PMParkViewController *parkViewController = [PMParkViewController new];
     parkViewController.delegate = applicationViewController;
-
+    
     parkViewController.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController pushViewController:parkViewController
                                          animated:YES];
