@@ -28,13 +28,13 @@
 
 -(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    NSLog(@"Did receive memory warning");
 }
 
 #pragma mark - Responder Methods
 
 - (IBAction)postButtonTapped:(id)sender {
-    PMPostViewController *postViewController = [PMPostViewController new];
+    UIStoryboard *postParkingSpotStoryboard = [UIStoryboard storyboardWithName:@"PostParkingSpot" bundle:nil];
+    PMPostViewController *postViewController = [postParkingSpotStoryboard instantiateViewControllerWithIdentifier:@"postViewController"];
     
     postViewController.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController pushViewController:postViewController
