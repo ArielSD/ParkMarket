@@ -22,12 +22,12 @@
 + (void)createUserWithFirstName:(NSString *)firstName
                           email:(NSString *)email
                        password:(NSString *)password
-                        failure:(void (^)(NSError *error))failure;
+                confirmPassword:(NSString *)confirmPassword
+                        failure:(void (^)(NSDictionary *error))failure;
 
 + (void)loginUserWithEmail:(NSString *)email
                   password:(NSString *)password
-                   success:(void (^)(FIRUser *user))success
-                   failure:(void (^)(NSError *error))failure;
+                   failure:(void (^)(NSDictionary *error))failure;
 
 #pragma mark - Posting Spots
 

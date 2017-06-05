@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 
-// Constraints that can change
+// Animatable Constraints
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *emailTextFieldCenterXContstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordTextFieldCenterXConstraint;
 
@@ -121,40 +121,38 @@
 - (IBAction)logInButtonTapped:(id)sender {
     [PMFirebaseClient loginUserWithEmail:self.emailTextField.text
                                 password:self.passwordTextField.text
-                                 success:^(FIRUser *user) {
-                                     [self.delegate didLogInUser];
-                                 }
-                                 failure:^(NSError *error) {
-                                     NSError *underlyingError = error.userInfo[@"NSUnderlyingError"];
-                                     NSDictionary *FIRAuthErrorUserInfoDeserializedResponseKey = underlyingError.userInfo[@"FIRAuthErrorUserInfoDeserializedResponseKey"];
-                                     NSString *errorName =  error.userInfo[@"error_name"];
-                                     NSString *message = FIRAuthErrorUserInfoDeserializedResponseKey[@"message"];
-                                     
-                                     if ([message isEqualToString:@"INVALID_EMAIL"]) {
-                                         [UITextField shake:self.emailTextField
-                                                       view:self.view
-                                                 constraint:self.emailTextFieldCenterXContstraint];
+                                 failure:^(NSDictionary *error) {
+                                     if (!error) {
+                                         [self.delegate didLogInUser];
                                      }
                                      
-                                     if ([errorName isEqualToString:@"ERROR_WRONG_PASSWORD"] || [message isEqualToString:@"MISSING_PASSWORD"]) {
-                                         [UITextField shake:self.passwordTextField
-                                                       view:self.view
-                                                 constraint:self.passwordTextFieldCenterXConstraint];
-                                     }
-                                     
-                                     if ([errorName isEqualToString:@"ERROR_USER_NOT_FOUND"]) {
-                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Hmmm..."
-                                                                                                                  message:@"Looks like you don't have an account yet. Tap Sign Up to make one now!"
-                                                                                                           preferredStyle:UIAlertControllerStyleAlert];
+                                     else {
+                                         if ([error[@"message"] isEqualToString:@"INVALID_EMAIL"]) {
+                                             [UITextField shake:self.emailTextField
+                                                           view:self.view
+                                                     constraint:self.emailTextFieldCenterXContstraint];
+                                         }
                                          
-                                         UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
-                                                                                          style:UIAlertActionStyleDefault
-                                                                                        handler:nil];
+                                         if ([error[@"error name"] isEqualToString:@"ERROR_WRONG_PASSWORD"] || [error[@"message"] isEqualToString:@"MISSING_PASSWORD"]) {
+                                             [UITextField shake:self.passwordTextField
+                                                           view:self.view
+                                                     constraint:self.passwordTextFieldCenterXConstraint];
+                                         }
                                          
-                                         [alertController addAction:action];
-                                         [self presentViewController:alertController
-                                                            animated:YES
-                                                          completion:nil];
+                                         if ([error[@"error name"] isEqualToString:@"ERROR_USER_NOT_FOUND"]) {
+                                             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Hmmm..."
+                                                                                                                      message:@"Looks like you don't have an account yet. Tap Sign Up to make one now!"
+                                                                                                               preferredStyle:UIAlertControllerStyleAlert];
+                                             
+                                             UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+                                                                                              style:UIAlertActionStyleDefault
+                                                                                            handler:nil];
+                                             
+                                             [alertController addAction:action];
+                                             [self presentViewController:alertController
+                                                                animated:YES
+                                                              completion:nil];
+                                         }
                                      }
                                  }];
 }

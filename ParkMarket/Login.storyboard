@@ -31,7 +31,7 @@
                                 <rect key="frame" x="60" y="181" width="256" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ev3-ks-bPN">
                                 <rect key="frame" x="60" y="236" width="256" height="30"/>
@@ -129,7 +129,7 @@
                                 <rect key="frame" x="60" y="101" width="256" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XV8-Ga-xji">
                                 <rect key="frame" x="60" y="318" width="256" height="40"/>
@@ -181,9 +181,13 @@
                     <connections>
                         <outlet property="closeButton" destination="t8J-gr-Ng1" id="FJx-2a-d9E"/>
                         <outlet property="confirmPasswordTextField" destination="tDm-cF-bTw" id="a59-Gt-Olf"/>
+                        <outlet property="confirmPasswordTextFieldCenterXConstraint" destination="FVm-KF-YTH" id="Mgx-Ro-Cru"/>
                         <outlet property="emailTextField" destination="q2C-tZ-NWN" id="kRQ-ql-eF9"/>
+                        <outlet property="emailTextFieldCenterXConstraint" destination="xwy-Sq-F8t" id="ggP-Ne-NwK"/>
                         <outlet property="firstNameTextField" destination="Nby-XO-bg0" id="HKH-bb-hgs"/>
+                        <outlet property="firstNameTextFieldCenterXConstraint" destination="5XQ-3I-iCt" id="TFt-D9-hZS"/>
                         <outlet property="passwordTextField" destination="9Kr-TK-aV2" id="1hz-Um-cgZ"/>
+                        <outlet property="passwordTextFieldCenterXConstraint" destination="1LU-pM-VyI" id="F6N-fZ-3ja"/>
                         <outlet property="signUpButton" destination="XV8-Ga-xji" id="Gsv-32-qvP"/>
                     </connections>
                 </viewController>

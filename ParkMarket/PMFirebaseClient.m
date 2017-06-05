@@ -20,12 +20,31 @@
 + (void)createUserWithFirstName:(NSString *)firstName
                           email:(NSString *)email
                        password:(NSString *)password
-                        failure:(void (^)(NSError *))failure {
+                confirmPassword:(NSString *)confirmPassword
+                        failure:(void (^)(NSDictionary *error))failure {
     [[FIRAuth auth] createUserWithEmail:email
                                password:password
                              completion:^(FIRUser *user, NSError *error) {
-                                 if (error) {
-                                     failure(error);
+                                 if ([firstName isEqualToString:@""]) {
+                                     NSDictionary *errorDictionary = @{@"error name" : @"EMPTY_FIRST_NAME",
+                                                                       @"message" : @""};
+                                     failure(errorDictionary);
+                                 }
+                                 
+                                 else if (![password isEqualToString:confirmPassword]) {
+                                     NSDictionary *errorDictionary = @{@"error name" : @"PASSWORDS_DO_NOT_MATCH",
+                                                                       @"message" : @""};
+                                     failure(errorDictionary);
+                                 }
+                                 
+                                 else if (error) {
+                                     NSError *underlyingError = error.userInfo[@"NSUnderlyingError"];
+                                     NSDictionary *FIRAuthErrorUserInfoDeserializedResponseKey = underlyingError.userInfo[@"FIRAuthErrorUserInfoDeserializedResponseKey"];
+                                     NSString *errorName =  error.userInfo[@"error_name"];
+                                     NSString *message = FIRAuthErrorUserInfoDeserializedResponseKey ? FIRAuthErrorUserInfoDeserializedResponseKey[@"message"] : @"";
+                                     NSDictionary *errorDictionary = @{@"error name" : errorName,
+                                                                       @"message" : message};
+                                     failure(errorDictionary);
                                  }
                                  
                                  else {
@@ -43,17 +62,18 @@
 
 + (void)loginUserWithEmail:(NSString *)email
                   password:(NSString *)password
-                   success:(void (^)(FIRUser *))success
-                   failure:(void (^)(NSError *))failure {
+                   failure:(void (^)(NSDictionary *error))failure {
     [[FIRAuth auth] signInWithEmail:email
                            password:password
                          completion:^(FIRUser *user, NSError *error) {
                              if (error) {
-                                 failure(error);
-                             }
-                             
-                             else {
-                                 success(user);
+                                 NSError *underlyingError = error.userInfo[@"NSUnderlyingError"];
+                                 NSDictionary *FIRAuthErrorUserInfoDeserializedResponseKey = underlyingError.userInfo[@"FIRAuthErrorUserInfoDeserializedResponseKey"];
+                                 NSString *errorName =  error.userInfo[@"error_name"];
+                                 NSString *message = FIRAuthErrorUserInfoDeserializedResponseKey ? FIRAuthErrorUserInfoDeserializedResponseKey[@"message"] : @"";
+                                 NSDictionary *errorDictionary = @{@"error name" : errorName,
+                                                                   @"message" : message};
+                                 failure(errorDictionary);
                              }
                          }];
 }
