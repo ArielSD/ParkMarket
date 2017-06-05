@@ -69,9 +69,9 @@
 
 - (void)showLoginViewController {
     UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    PMLoginViewController *loginViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"loginViewController"];
     
     if (self.childViewControllers.count == 0) {
-        PMLoginViewController *loginViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         loginViewController.delegate = self;
         [self addChildViewController:loginViewController];
         loginViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
@@ -80,7 +80,6 @@
     }
     
     else {
-        PMLoginViewController *loginViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         loginViewController.delegate = self;
         
         [self cycleFromOldViewController:self.childViewControllers.lastObject
@@ -90,9 +89,9 @@
 
 - (void)showInitialViewController {
     UIStoryboard *initialStoryboard = [UIStoryboard storyboardWithName:@"Initial" bundle:nil];
+    PMInitialViewController *initialViewController = [initialStoryboard instantiateViewControllerWithIdentifier:@"initialViewController"];
     
     if (self.childViewControllers.count == 0) {
-        PMInitialViewController *initialViewController = [initialStoryboard instantiateViewControllerWithIdentifier:@"initialViewController"];
         self.navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
         [self addChildViewController:self.navigationController];
         self.navigationController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
@@ -101,7 +100,6 @@
     }
     
     else {
-        PMInitialViewController *initialViewController = [initialStoryboard instantiateViewControllerWithIdentifier:@"initialViewController"];
         self.navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
         
         [self cycleFromOldViewController:self.childViewControllers.lastObject

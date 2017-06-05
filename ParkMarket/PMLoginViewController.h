@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PMFirebaseClient.h"
 
 @class PMLoginViewController;
 

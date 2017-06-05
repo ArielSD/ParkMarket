@@ -7,6 +7,8 @@
 //
 
 #import "PMLoginViewController.h"
+#import "PMSignUpViewController.h"
+#import "PMFirebaseClient.h"
 #import "UITextField+PMTextField.h"
 
 @interface PMLoginViewController ()
@@ -124,39 +126,44 @@
                                      [self.delegate didLogInUser];
                                  }
                                  failure:^(NSError *error) {
-                                     [self.delegate didLogInUser];
-//                                     NSError *underlyingError = error.userInfo[@"NSUnderlyingError"];
-//                                     NSDictionary *FIRAuthErrorUserInfoDeserializedResponseKey = underlyingError.userInfo[@"FIRAuthErrorUserInfoDeserializedResponseKey"];
-//                                     NSString *errorName =  error.userInfo[@"error_name"];
-//                                     NSString *message = FIRAuthErrorUserInfoDeserializedResponseKey[@"message"];
-//                                     
-//                                     if ([message isEqualToString:@"INVALID_EMAIL"]) {
-//                                         [UITextField shake:self.emailTextField
-//                                                       view:self.view
-//                                                 constraint:self.emailTextFieldCenterXContstraint];
-//                                     }
-//                                     
-//                                     if ([errorName isEqualToString:@"ERROR_WRONG_PASSWORD"] || [message isEqualToString:@"MISSING_PASSWORD"]) {
-//                                         [UITextField shake:self.passwordTextField
-//                                                       view:self.view
-//                                                 constraint:self.passwordTextFieldCenterXConstraint];
-//                                     }
-//                                     
-//                                     if ([errorName isEqualToString:@"ERROR_USER_NOT_FOUND"]) {
-//                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Hmmm..."
-//                                                                                                                  message:@"Looks like you don't have an account yet. Tap Sign Up to make one now!"
-//                                                                                                           preferredStyle:UIAlertControllerStyleAlert];
-//                                         
-//                                         UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
-//                                                                                          style:UIAlertActionStyleDefault
-//                                                                                        handler:nil];
-//                                         
-//                                         [alertController addAction:action];
-//                                         [self presentViewController:alertController
-//                                                            animated:YES
-//                                                          completion:nil];
-//                                     }
+                                     NSError *underlyingError = error.userInfo[@"NSUnderlyingError"];
+                                     NSDictionary *FIRAuthErrorUserInfoDeserializedResponseKey = underlyingError.userInfo[@"FIRAuthErrorUserInfoDeserializedResponseKey"];
+                                     NSString *errorName =  error.userInfo[@"error_name"];
+                                     NSString *message = FIRAuthErrorUserInfoDeserializedResponseKey[@"message"];
+                                     
+                                     if ([message isEqualToString:@"INVALID_EMAIL"]) {
+                                         [UITextField shake:self.emailTextField
+                                                       view:self.view
+                                                 constraint:self.emailTextFieldCenterXContstraint];
+                                     }
+                                     
+                                     if ([errorName isEqualToString:@"ERROR_WRONG_PASSWORD"] || [message isEqualToString:@"MISSING_PASSWORD"]) {
+                                         [UITextField shake:self.passwordTextField
+                                                       view:self.view
+                                                 constraint:self.passwordTextFieldCenterXConstraint];
+                                     }
+                                     
+                                     if ([errorName isEqualToString:@"ERROR_USER_NOT_FOUND"]) {
+                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Hmmm..."
+                                                                                                                  message:@"Looks like you don't have an account yet. Tap Sign Up to make one now!"
+                                                                                                           preferredStyle:UIAlertControllerStyleAlert];
+                                         
+                                         UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+                                                                                          style:UIAlertActionStyleDefault
+                                                                                        handler:nil];
+                                         
+                                         [alertController addAction:action];
+                                         [self presentViewController:alertController
+                                                            animated:YES
+                                                          completion:nil];
+                                     }
                                  }];
+}
+
+- (IBAction)signUpButtonTapped:(id)sender {
+    UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    PMSignUpViewController *signUpViewController = [loginStoryBoard instantiateViewControllerWithIdentifier:@"signUpViewController"];
+    [self presentViewController:signUpViewController animated:YES completion:nil];
 }
 
 @end
