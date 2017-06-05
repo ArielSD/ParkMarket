@@ -17,6 +17,7 @@
 #import "PMPayPalClient.h"
 
 #import "PMLoginViewController.h"
+#import "PMSignUpViewController.h"
 #import "PMInitialViewController.h"
 #import "PMMenuViewController.h"
 #import "PMUserPostedSpotsViewController.h"
@@ -24,6 +25,7 @@
 #import "PMMessagesViewController.h"
 
 @interface PMApplicationViewController : UIViewController <PMLoginViewControllerDelegate,
+                                                           PMSignUpViewControllerDelegate,
                                                            PMMenuViewControllerDelegate,
                                                            CardIOPaymentViewControllerDelegate,
                                                            PMParkViewControllerMessageDelegate>

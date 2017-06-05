@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class PMSignUpViewController;
+
+@protocol PMSignUpViewControllerDelegate <NSObject>
+
+@required
+
+- (void)didSignUpUser;
+
+@end
+
 @interface PMSignUpViewController : UIViewController
+
+@property (weak, nonatomic) id <PMSignUpViewControllerDelegate> delegate;
 
 @end

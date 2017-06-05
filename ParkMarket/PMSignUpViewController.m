@@ -7,6 +7,7 @@
 //
 
 #import "PMSignUpViewController.h"
+#import "PMFirebaseClient.h"
 
 @interface PMSignUpViewController ()
 
@@ -24,12 +25,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.closeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (IBAction)signUpButtonTapped:(id)sender {
+    [PMFirebaseClient createUserWithFirstName:self.firstNameTextField.text
+                                        email:self.emailTextField.text
+                                     password:self.passwordTextField.text
+                                      failure:^(NSError *error) {
+                                          if (error) {
+                                              NSLog(@"Sign In Error: %@", error);
+                                          }
+                                          
+                                          else {
+                                              [self.delegate didSignUpUser];
+                                              [self dismissViewControllerAnimated:YES completion:nil];
+                                          }
+                                      }];
 }
 
 - (IBAction)closeButtonTapped:(id)sender {

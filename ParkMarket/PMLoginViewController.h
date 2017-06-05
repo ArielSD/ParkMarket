@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PMSignUpViewController.h"
 
 @class PMLoginViewController;
 
@@ -21,5 +22,6 @@
 @interface PMLoginViewController : UIViewController <UITextFieldDelegate>
 
 @property (weak, nonatomic) id <PMLoginViewControllerDelegate> delegate;
+@property (strong, nonatomic) PMSignUpViewController *signUpViewController;
 
 @end

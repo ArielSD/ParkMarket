@@ -22,7 +22,7 @@
 + (void)createUserWithFirstName:(NSString *)firstName
                           email:(NSString *)email
                        password:(NSString *)password
-                     completion:(void (^)(NSError *error))completionBlock;
+                        failure:(void (^)(NSError *error))failure;
 
 + (void)loginUserWithEmail:(NSString *)email
                   password:(NSString *)password

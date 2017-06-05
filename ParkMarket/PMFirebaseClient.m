@@ -17,17 +17,18 @@
 
 #pragma mark - User Management
 
-#warning Refactor with 'success' and 'failure' blocks
-+ (void)createUserWithFirstName:(NSString *)firstName email:(NSString *)email password:(NSString *)password completion:(void (^)(NSError *))completionBlock {
++ (void)createUserWithFirstName:(NSString *)firstName
+                          email:(NSString *)email
+                       password:(NSString *)password
+                        failure:(void (^)(NSError *))failure {
     [[FIRAuth auth] createUserWithEmail:email
                                password:password
                              completion:^(FIRUser *user, NSError *error) {
-                                 
                                  if (error) {
-                                     completionBlock(error);
+                                     failure(error);
                                  }
                                  
-                                 else{
+                                 else {
                                      NSDictionary *userInformation = @{@"first name" : firstName,
                                                                        @"email" : email};
                                      
@@ -35,8 +36,7 @@
                                      FIRDatabaseReference *usersReference = [rootReference child:@"users"];
                                      FIRDatabaseReference *newUserReference = [usersReference child:user.uid];
                                      [newUserReference setValue:userInformation];
-                                     
-                                     completionBlock(nil);
+                                     failure(nil);
                                  }
                              }];
 }

@@ -111,13 +111,13 @@
                                 <rect key="frame" x="60" y="191" width="256" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="tDm-cF-bTw">
                                 <rect key="frame" x="60" y="236" width="256" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="q2C-tZ-NWN">
                                 <rect key="frame" x="60" y="146" width="256" height="30"/>
@@ -137,6 +137,9 @@
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="signUpButtonTapped:" destination="Th4-z0-obL" eventType="touchUpInside" id="GI0-3y-YrJ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8J-gr-Ng1">
                                 <rect key="frame" x="330" y="28" width="29" height="26"/>
@@ -176,6 +179,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="t8J-gr-Ng1" id="FJx-2a-d9E"/>
                         <outlet property="confirmPasswordTextField" destination="tDm-cF-bTw" id="a59-Gt-Olf"/>
                         <outlet property="emailTextField" destination="q2C-tZ-NWN" id="kRQ-ql-eF9"/>
                         <outlet property="firstNameTextField" destination="Nby-XO-bg0" id="HKH-bb-hgs"/>

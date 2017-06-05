@@ -7,7 +7,6 @@
 //
 
 #import "PMLoginViewController.h"
-#import "PMSignUpViewController.h"
 #import "PMFirebaseClient.h"
 #import "UITextField+PMTextField.h"
 
@@ -161,9 +160,7 @@
 }
 
 - (IBAction)signUpButtonTapped:(id)sender {
-    UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-    PMSignUpViewController *signUpViewController = [loginStoryBoard instantiateViewControllerWithIdentifier:@"signUpViewController"];
-    [self presentViewController:signUpViewController animated:YES completion:nil];
+    [self presentViewController:self.signUpViewController animated:YES completion:nil];
 }
 
 @end

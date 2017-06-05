@@ -44,7 +44,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    NSLog(@"Did receive memory warning");
 }
 
 #pragma mark - UI Layout
@@ -70,6 +69,8 @@
 - (void)showLoginViewController {
     UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     PMLoginViewController *loginViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+    loginViewController.signUpViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"signUpViewController"];
+    loginViewController.signUpViewController.delegate = self;
     
     if (self.childViewControllers.count == 0) {
         loginViewController.delegate = self;
@@ -81,7 +82,6 @@
     
     else {
         loginViewController.delegate = self;
-        
         [self cycleFromOldViewController:self.childViewControllers.lastObject
                      toNewViewController:loginViewController];
     }
@@ -101,7 +101,6 @@
     
     else {
         self.navigationController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
-        
         [self cycleFromOldViewController:self.childViewControllers.lastObject
                      toNewViewController:self.navigationController];
     }
@@ -127,6 +126,12 @@
                                 [oldViewController removeFromParentViewController];
                                 [newViewController didMoveToParentViewController:self];
                             }];
+}
+
+#pragma mark - PMSignUpViewControllerDelegate Methods
+
+- (void)didSignUpUser {
+    [self showInitialViewController];
 }
 
 #pragma mark - PMLoginViewControllerDelegate Methods
