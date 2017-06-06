@@ -11,10 +11,27 @@
 
 @interface PMChat ()
 
-@property (strong, nonatomic) NSArray <JSQMessage *> *messages;
+@property (strong, nonatomic) NSMutableArray <JSQMessage *> *messages;
 
 @end
 
 @implementation PMChat
+
++ (instancetype)chatFromDictionary:(NSDictionary *)dictionary {
+    PMChat *chat = [PMChat new];
+    chat.messages = [NSMutableArray new];
+    chat.id = dictionary.allKeys.firstObject;
+    NSDictionary *chatDictionary = dictionary[chat.id];
+    
+    for (NSString *key in chatDictionary) {
+        NSDictionary *messageDictionary = chatDictionary[key];
+        JSQMessage *message = [JSQMessage messageWithSenderId:messageDictionary[@"sender"]
+                                                  displayName:@"Display Name"
+                                                         text:messageDictionary[@"message body"]];
+        
+        [chat.messages addObject:message];
+    }
+    return chat;
+}
 
 @end

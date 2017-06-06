@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) NSString *id;
 
++ (instancetype)chatFromDictionary:(NSDictionary *)dictionary;
+
 @end

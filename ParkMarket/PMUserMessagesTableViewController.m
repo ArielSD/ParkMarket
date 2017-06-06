@@ -26,6 +26,7 @@
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:@"userMessageTableViewCell"];
     
+    self.chats = [NSMutableArray new];
     [self getCurrentUserChats];
 }
 
@@ -85,7 +86,9 @@
             for (NSString *key in chatKeys) {
                 [PMFirebaseClient getChatWithKey:key
                                          success:^(NSDictionary *chat) {
-                                             [self.chats addObject:chat];
+                                             PMChat *pmChat = [PMChat chatFromDictionary:chat];
+                                             [self.chats addObject:pmChat];
+                                             [self.tableView reloadData];
                                          }
                                          failure:^(NSError *error) {
                                              NSLog(@"Error: %@", error);
