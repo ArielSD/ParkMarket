@@ -291,6 +291,7 @@
         marker.opacity = 0.5;
         self.parkButton.enabled = YES;
         self.messageButton.hidden = NO;
+        self.messageButton.enabled = YES;
     }
     
     else {

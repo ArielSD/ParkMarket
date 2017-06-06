@@ -91,8 +91,7 @@
     FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
     FIRDatabaseReference *newParkingSpotReference = [parkingSpotsReference childByAutoId];
     
-    PMFirebaseClient *firebaseClient = [PMFirebaseClient new];
-    [firebaseClient getCurrentUserFirstNameWithCompletion:^(NSDictionary *currentUser) {
+    [PMFirebaseClient getCurrentUserFirstNameWithCompletion:^(NSDictionary *currentUser) {
         NSString *currentUserFirstName = currentUser[@"first name"];
         NSDictionary *parkingSpotInformation = @{@"owner" : currentUserFirstName,
                                                  @"owner UID" : currentUserUID,
@@ -196,17 +195,36 @@
     [newMessageReference setValue:messageInformation];
     
     // Add chat to the sender's (current user) node
-    FIRDatabaseReference *usersReference = [rootReference child:@"users"];
-    FIRDatabaseReference *currentUserReference = [usersReference child:[FIRAuth auth].currentUser.uid];
-    FIRDatabaseReference *currentUserAllChatsReference = [currentUserReference child:@"chats"];
-    FIRDatabaseReference *currentUserCurrentChatReference = [currentUserAllChatsReference child:messagesViewController.chatID];
-    [currentUserCurrentChatReference setValue:@{@"chatID" : messagesViewController.chatID}];
+    [PMFirebaseClient getUserFirstNameFromID:messagesViewController.receiverID
+                                     success:^(NSString *firstName) {
+                                         FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+                                         FIRDatabaseReference *currentUserReference = [usersReference child:[FIRAuth auth].currentUser.uid];
+                                         FIRDatabaseReference *currentUserAllChatsReference = [currentUserReference child:@"chats"];
+                                         FIRDatabaseReference *currentUserCurrentChatReference = [currentUserAllChatsReference child:messagesViewController.chatID];
+                                         
+                                         NSDictionary *chatInformation = @{@"chatID" : messagesViewController.chatID,
+                                                                           @"correspondent" : firstName};
+                                         [currentUserCurrentChatReference setValue:chatInformation];
+                                     }
+                                     failure:^(NSError *error) {
+                                         NSLog(@"Error: %@", error);
+                                     }];
     
     // Add chat to the receiver's node
-    FIRDatabaseReference *messageReceiverReference = [usersReference child:messagesViewController.receiverID];
-    FIRDatabaseReference *messageReceiverAllChatsReference = [messageReceiverReference child:@"chats"];
-    FIRDatabaseReference *messageReceiverCurrentChatReference = [messageReceiverAllChatsReference child:messagesViewController.chatID];
-    [messageReceiverCurrentChatReference setValue:@{@"chatID" : messagesViewController.chatID}];
+    [PMFirebaseClient getUserFirstNameFromID:[FIRAuth auth].currentUser.uid
+                                     success:^(NSString *firstName) {
+                                         FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+                                         FIRDatabaseReference *messageReceiverReference = [usersReference child:messagesViewController.receiverID];
+                                         FIRDatabaseReference *messageReceiverAllChatsReference = [messageReceiverReference child:@"chats"];
+                                         FIRDatabaseReference *messageReceiverCurrentChatReference = [messageReceiverAllChatsReference child:messagesViewController.chatID];
+                                         
+                                         NSDictionary *chatInformation = @{@"chatID" : messagesViewController.chatID,
+                                                                           @"correspondent" : firstName};
+                                         [messageReceiverCurrentChatReference setValue:chatInformation];
+                                     }
+                                     failure:^(NSError *error) {
+                                         NSLog(@"Error: %@", error);
+                                     }];
 }
 
 + (void)observeNewMessagesInViewController:(PMMessagesViewController *)messagesViewController {
@@ -265,7 +283,7 @@
 
 #pragma mark - Helper Methods
 
-- (void)getCurrentUserFirstNameWithCompletion:(void (^)(NSDictionary *currentUser))completionBlock {
++ (void)getCurrentUserFirstNameWithCompletion:(void (^)(NSDictionary *currentUser))completionBlock {
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *usersReference = [rootReference child:@"users"];
     FIRDatabaseReference *currentUserReference = [usersReference child:[FIRAuth auth].currentUser.uid];
@@ -275,6 +293,25 @@
                                              NSDictionary *currentUserDictionary = snapshot.value;
                                              completionBlock(currentUserDictionary);
                                          }];
+}
+
++ (void)getUserFirstNameFromID:(NSString *)userID
+                       success:(void (^)(NSString *firstName))success
+                       failure:(void (^)(NSError *error))failure {
+    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+    FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+    FIRDatabaseReference *userReference = [usersReference child:userID];
+    
+    [userReference observeSingleEventOfType:FIRDataEventTypeValue
+                                  withBlock:^(FIRDataSnapshot *snapshot) {
+                                      if ([snapshot exists]) {
+                                          NSDictionary *user = snapshot.value;
+                                          success(user[@"first name"]);
+                                      }
+                                  }
+                            withCancelBlock:^(NSError *error) {
+                                failure(error);
+                            }];
 }
 
 - (void)getCurrentUserChatsWithCompletion:(void (^)(NSDictionary *chats))completionBlock {
