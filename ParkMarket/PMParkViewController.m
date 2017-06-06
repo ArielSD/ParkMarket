@@ -298,6 +298,7 @@
         marker.icon = nil;
         marker.opacity = 1;
         self.parkButton.enabled = NO;
+        self.messageButton.enabled = NO;
     }
 }
 
