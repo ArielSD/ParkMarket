@@ -11,13 +11,7 @@
 @interface PMParkViewController ()
 
 @property (strong, nonatomic) NSMutableDictionary *parkingSpots;
-
 @property (strong, nonatomic) PMParkingSpot *selectedParkingSpot;
-
-@property (strong, nonatomic) GMSMapView *mapView;
-@property (strong, nonatomic) UILabel *questionLabel;
-@property (strong, nonatomic) UIButton *parkButton;
-@property (strong, nonatomic) UIButton *messageButton;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *currentLocation;
@@ -25,8 +19,9 @@
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) UILabel *gettingAvailableParkingSpotsLabel;
 
-@property CGFloat viewHeight;
-@property CGFloat viewWidth;
+@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIButton *parkButton;
+@property (weak, nonatomic) IBOutlet UIButton *messageButton;
 
 @end
 
@@ -41,92 +36,24 @@
     
     // Firebase call to populate the mapview with 'posted' parking spots.
     [self getAllAvailableParkingSpots];
-    
-    self.viewHeight = self.view.frame.size.height;
-    self.viewWidth = self.view.frame.size.width;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    NSLog(@"Did receive memory warning");
 }
 
 #pragma mark - UI Layout
 
 -(void)configureMapView {
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.currentLocation.coordinate.latitude
-                                                            longitude:self.currentLocation.coordinate.longitude
-                                                                 zoom:15];
+    GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithLatitude:self.currentLocation.coordinate.latitude
+                                                                    longitude:self.currentLocation.coordinate.longitude
+                                                                         zoom:15];
     
-    self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, self.viewHeight * 0.2, self.viewWidth, self.viewHeight - (self.viewHeight * 0.2))
-                                     camera:camera];
+    self.mapView.camera = cameraPosition;
+    self.mapView.delegate = self;
     self.mapView.settings.compassButton = YES;
     self.mapView.settings.myLocationButton = YES;
     self.mapView.myLocationEnabled = YES;
-    self.mapView.delegate = self;
-    
-    [self.view addSubview:self.mapView];
-}
-
--(void)configureQuestionLabel {
-    self.questionLabel = [UILabel new];
-    [self.view addSubview:self.questionLabel];
-    
-    self.questionLabel.textAlignment = NSTextAlignmentCenter;
-    self.questionLabel.text = @"Where do you want to park?";
-    
-    CGFloat bottomOfNavigationBar = CGRectGetMaxY(self.navigationController.navigationBar.frame);
-    CGFloat topYCoordinateOfMapView = CGRectGetMinY(self.mapView.frame);
-    CGFloat distanceBetweenBottomOfNavigationBarAndTopOfMapView = topYCoordinateOfMapView - bottomOfNavigationBar;
-    CGSize questionLabelSize = [self.questionLabel sizeThatFits:self.questionLabel.frame.size];
-    
-    self.questionLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.questionLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [self.questionLabel.topAnchor constraintEqualToAnchor:self.navigationController.navigationBar.bottomAnchor
-                                                 constant:distanceBetweenBottomOfNavigationBarAndTopOfMapView / 2.0 - questionLabelSize.height / 2.0].active = YES;
-    [self.questionLabel.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
-}
-
--(void)configureParkButton {
-    self.parkButton = [UIButton buttonWithType: UIButtonTypeSystem];
-    [self.view addSubview:self.parkButton];
-    
-    self.parkButton.backgroundColor = [UIColor whiteColor];
-    [self.parkButton setTitle:@"Park"
-                     forState:UIControlStateNormal];
-    
-    self.parkButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.parkButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [self.parkButton.centerYAnchor constraintEqualToAnchor:self.view.bottomAnchor
-                                                  constant:-40.0].active = YES;
-    [self.parkButton.widthAnchor constraintEqualToAnchor:self.view.widthAnchor
-                                              multiplier:0.2].active = YES;
-    [self.parkButton sizeToFit];
-    
-    [self.parkButton addTarget:self
-                        action:@selector(parkButtonTapped)
-              forControlEvents:UIControlEventTouchUpInside];
-}
-
-- (void)configureMessageButton {
-    self.messageButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [self.view addSubview:self.messageButton];
-    
-    self.messageButton.backgroundColor = [UIColor whiteColor];
-    [self.messageButton setTitle:@"Message Owner"
-                        forState:UIControlStateNormal];
-    
-    self.messageButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.messageButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [self.messageButton.bottomAnchor constraintEqualToAnchor:self.parkButton.topAnchor
-                                                    constant:-(self.view.frame.size.height / 50.0)].active = YES;
-    [self.messageButton sizeToFit];
-    
-    [self.messageButton addTarget:self
-                           action:@selector(messageButtonTapped)
-                 forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.messageButton setEnabled:NO];
 }
 
 - (void)configureNavigationBarItems {
@@ -191,13 +118,7 @@
     if (timeSinceLocationCapture <= 2) {
         self.currentLocation = mostRecentLocation;
         [self.locationManager stopUpdatingLocation];
-        
-        if (!self.mapView) {
-            [self configureMapView];
-            [self configureQuestionLabel];
-            [self configureParkButton];
-            [self configureMessageButton];
-        }
+        [self configureMapView];
     }
 }
 
@@ -368,16 +289,15 @@
         
         marker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
         marker.opacity = 0.5;
-        
-        [self.messageButton setEnabled:YES];
+        self.parkButton.enabled = YES;
+        self.messageButton.hidden = NO;
     }
     
     else {
         self.selectedParkingSpot = nil;
         marker.icon = nil;
         marker.opacity = 1;
-        
-        [self.messageButton setEnabled:NO];
+        self.parkButton.enabled = NO;
     }
 }
 

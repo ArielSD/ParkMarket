@@ -68,8 +68,15 @@
                             <constraint firstItem="HmD-CR-Tdf" firstAttribute="width" secondItem="NuZ-n0-giP" secondAttribute="height" multiplier="143:667" id="vhW-eq-ZHo"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Post or Park?" id="7QP-SK-kbV"/>
+                    <navigationItem key="navigationItem" title="Post or Park?" id="7QP-SK-kbV">
+                        <barButtonItem key="rightBarButtonItem" title="Menu" id="KoC-lb-pvP">
+                            <connections>
+                                <action selector="menuButtonTapped:" destination="Q5k-O9-b6t" id="dhd-uN-xDS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="menuButton" destination="KoC-lb-pvP" id="YXl-PK-ncR"/>
                         <outlet property="parkButton" destination="eAy-NW-fLp" id="yOB-rp-oWc"/>
                         <outlet property="postButton" destination="HmD-CR-Tdf" id="0eZ-Sg-tAv"/>
                     </connections>

@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *postButton;
 @property (weak, nonatomic) IBOutlet UIButton *parkButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *menuButton;
 
 @end
 
@@ -44,7 +45,8 @@
 - (IBAction)parkButtonTapped:(id)sender {
     PMApplicationViewController *applicationViewController = (PMApplicationViewController *)self.parentViewController.parentViewController;
     
-    PMParkViewController *parkViewController = [PMParkViewController new];
+    UIStoryboard *parkStoryboard = [UIStoryboard storyboardWithName:@"Park" bundle:nil];
+    PMParkViewController *parkViewController = [parkStoryboard instantiateViewControllerWithIdentifier:@"parkViewController"];
     parkViewController.delegate = applicationViewController;
     
     parkViewController.view.backgroundColor = [UIColor whiteColor];
@@ -52,7 +54,7 @@
                                          animated:YES];
 }
 
-- (void)menuButtonTapped {
+- (IBAction)menuButtonTapped:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"menuButtonWasTapped"
                                                         object:self];
 }

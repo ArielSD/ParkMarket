@@ -35,6 +35,7 @@
 		B0E5B5D61EE207A300D25618 /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0E5B5D51EE207A300D25618 /* Initial.storyboard */; };
 		B0E5B5D81EE4CA7000D25618 /* PostParkingSpot.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0E5B5D71EE4CA7000D25618 /* PostParkingSpot.storyboard */; };
 		B0E5B5DB1EE5A50200D25618 /* PMSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E5B5DA1EE5A50200D25618 /* PMSignUpViewController.m */; };
+		B0E5B5DD1EE635E700D25618 /* Park.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0E5B5DC1EE635E700D25618 /* Park.storyboard */; };
 		B0EB86D11D46901D001A0F6D /* PMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */; };
 		B10E2AF0F7649D3AE0062DE9 /* libPods-ParkMarket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23EE35979057BC93914BEC5E /* libPods-ParkMarket.a */; };
 /* End PBXBuildFile section */
@@ -108,6 +109,7 @@
 		B0E5B5D71EE4CA7000D25618 /* PostParkingSpot.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostParkingSpot.storyboard; sourceTree = "<group>"; };
 		B0E5B5D91EE5A50200D25618 /* PMSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMSignUpViewController.h; sourceTree = "<group>"; };
 		B0E5B5DA1EE5A50200D25618 /* PMSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMSignUpViewController.m; sourceTree = "<group>"; };
+		B0E5B5DC1EE635E700D25618 /* Park.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Park.storyboard; sourceTree = "<group>"; };
 		B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMLoginViewController.h; sourceTree = "<group>"; };
 		B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMLoginViewController.m; sourceTree = "<group>"; };
 		CBCD0370ADC6405DB8A60A97 /* libPods-ParkMarketUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ParkMarketUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -258,6 +260,7 @@
 				B0E5B5D51EE207A300D25618 /* Initial.storyboard */,
 				B066077C1EDE3EFB00A4C6FD /* Login.storyboard */,
 				B0E5B5D71EE4CA7000D25618 /* PostParkingSpot.storyboard */,
+				B0E5B5DC1EE635E700D25618 /* Park.storyboard */,
 			);
 			name = Views;
 			path = ..;
@@ -427,6 +430,7 @@
 				B0B2F4671D0760E100E57E03 /* GoogleService-Info.plist in Resources */,
 				B05AECB61CF4AB4300A5660A /* Assets.xcassets in Resources */,
 				B0E5B5D81EE4CA7000D25618 /* PostParkingSpot.storyboard in Resources */,
+				B0E5B5DD1EE635E700D25618 /* Park.storyboard in Resources */,
 				B0E5B5D61EE207A300D25618 /* Initial.storyboard in Resources */,
 				B066077E1EDE3EFB00A4C6FD /* Login.storyboard in Resources */,
 				B05AECB41CF4AB4200A5660A /* Main.storyboard in Resources */,
