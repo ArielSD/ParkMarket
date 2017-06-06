@@ -10,6 +10,8 @@
 
 @interface PMMessagesViewController ()
 
+@property (strong, nonatomic) PMParkingSpot *parkingSpot;
+
 @property (strong, nonatomic) UIBarButtonItem *doneButton;
 @property (strong, nonatomic) UIBarButtonItem *parkButton;
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageView;
@@ -22,8 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self generateChatID];
-    
     [PMFirebaseClient observeNewMessagesInViewController:self];
     
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
@@ -33,16 +33,33 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    NSLog(@"Did receive memory warning");
 }
 
 #pragma mark - Init Method Override
 
-- (instancetype)init {
+- (instancetype)initWithParkingSpot:(PMParkingSpot *)parkingSpot {
     self = [super init];
     if (self) {
         _messages = [NSMutableArray new];
+        
+        self.senderId = [FIRAuth auth].currentUser.uid;
+        self.senderDisplayName = @"senderDisplayName";
+        self.title = parkingSpot.ownerFirstName;
+        _parkingSpot = parkingSpot;
+        _receiverID = parkingSpot.ownerUID;
+        _chatID = [self generateChatID];
+        
         [self configureNavigationItems];
+    }
+    return self;
+}
+
+- (instancetype)initWithChatID:(NSString *)chatID {
+    self = [super init];
+    if (self) {
+        _chatID = @"cjKjPI1edMf5Giu5xvUtpldNQsf1yaZodS3rYVSpjvNRGTZVvq5xm3P2-KlxjW8dTuKySP3tDByI";
+        self.senderDisplayName = @"senderDisplayName";
+        self.senderId = @"senderID";
     }
     return self;
 }
@@ -136,6 +153,7 @@
          senderDisplayName:(NSString *)senderDisplayName
                       date:(NSDate *)date {
     [PMFirebaseClient addMessageFromMessagesViewController:self
+                                                  receiver:self.receiverID
                                                messageBody:text];
     
     [self finishSendingMessage];
@@ -143,9 +161,9 @@
 
 #pragma mark - Helper Methods
 
-- (void)generateChatID {
+- (NSString *)generateChatID {
     NSString *senderID = [FIRAuth auth].currentUser.uid;
-    NSString *receiverID = self.recipient;
+    NSString *receiverID = self.receiverID;
     
     NSArray *userIDArray = @[senderID, receiverID];
     NSSortDescriptor *uidSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil
@@ -153,7 +171,7 @@
     
     NSArray *sortedUIDs = [userIDArray sortedArrayUsingDescriptors:@[uidSortDescriptor]];
     NSString *alphabeticalChatID = [NSString stringWithFormat:@"%@%@%@", sortedUIDs.firstObject, sortedUIDs.lastObject, self.parkingSpot.identifier];
-    self.chatID = alphabeticalChatID;
+    return alphabeticalChatID;
 }
 
 @end

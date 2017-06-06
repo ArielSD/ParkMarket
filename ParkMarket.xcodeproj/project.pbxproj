@@ -14,6 +14,8 @@
 		B017D21F1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B017D21E1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m */; };
 		B020F59A1D496FD300847684 /* PMApplicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B020F5991D496FD300847684 /* PMApplicationViewController.m */; };
 		B020F5A31D519F6F00847684 /* PMFirebaseClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B020F5A21D519F6F00847684 /* PMFirebaseClient.m */; };
+		B042A8B91EE6F18C00FAEFD7 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B042A8B81EE6F18C00FAEFD7 /* Messages.storyboard */; };
+		B042A8BF1EE72FB600FAEFD7 /* PMChat.m in Sources */ = {isa = PBXBuildFile; fileRef = B042A8BE1EE72FB600FAEFD7 /* PMChat.m */; };
 		B05AECAB1CF4AB4200A5660A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECAA1CF4AB4200A5660A /* main.m */; };
 		B05AECAE1CF4AB4200A5660A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B05AECAD1CF4AB4200A5660A /* AppDelegate.m */; };
 		B05AECB41CF4AB4200A5660A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B05AECB21CF4AB4200A5660A /* Main.storyboard */; };
@@ -74,6 +76,9 @@
 		B020F5991D496FD300847684 /* PMApplicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMApplicationViewController.m; sourceTree = "<group>"; };
 		B020F5A11D519F6F00847684 /* PMFirebaseClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMFirebaseClient.h; sourceTree = "<group>"; };
 		B020F5A21D519F6F00847684 /* PMFirebaseClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMFirebaseClient.m; sourceTree = "<group>"; };
+		B042A8B81EE6F18C00FAEFD7 /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
+		B042A8BD1EE72FB600FAEFD7 /* PMChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMChat.h; sourceTree = "<group>"; };
+		B042A8BE1EE72FB600FAEFD7 /* PMChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMChat.m; sourceTree = "<group>"; };
 		B05AECA61CF4AB4200A5660A /* ParkMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParkMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B05AECAA1CF4AB4200A5660A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B05AECAC1CF4AB4200A5660A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -181,8 +186,45 @@
 			children = (
 				B06F14081D553A5600197AC5 /* PMParkingSpot.h */,
 				B06F14091D553A5600197AC5 /* PMParkingSpot.m */,
+				B042A8BD1EE72FB600FAEFD7 /* PMChat.h */,
+				B042A8BE1EE72FB600FAEFD7 /* PMChat.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		B042A8BA1EE6F5D400FAEFD7 /* Map Views */ = {
+			isa = PBXGroup;
+			children = (
+				B017D21D1D95668C0041C3A3 /* PMUserPostedSpotsViewController.h */,
+				B017D21E1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m */,
+				B09ED25B1CF612180054D0FC /* PMPostViewController.h */,
+				B09ED25C1CF612180054D0FC /* PMPostViewController.m */,
+				B063C3001D0B6CD7002BA9D0 /* PMParkViewController.h */,
+				B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */,
+			);
+			name = "Map Views";
+			sourceTree = "<group>";
+		};
+		B042A8BB1EE6F5E100FAEFD7 /* Sign In */ = {
+			isa = PBXGroup;
+			children = (
+				B0E5B5D91EE5A50200D25618 /* PMSignUpViewController.h */,
+				B0E5B5DA1EE5A50200D25618 /* PMSignUpViewController.m */,
+				B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */,
+				B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */,
+			);
+			name = "Sign In";
+			sourceTree = "<group>";
+		};
+		B042A8BC1EE6F5F200FAEFD7 /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+				B06EAB991DB7EDA90025D1DD /* PMUserMessagesTableViewController.h */,
+				B06EAB9A1DB7EDA90025D1DD /* PMUserMessagesTableViewController.m */,
+				B0C8A0F91D9B02710029C2C1 /* PMMessagesViewController.h */,
+				B0C8A0FA1D9B02710029C2C1 /* PMMessagesViewController.m */,
+			);
+			name = Messaging;
 			sourceTree = "<group>";
 		};
 		B05AEC9D1CF4AB4200A5660A = {
@@ -261,6 +303,7 @@
 				B066077C1EDE3EFB00A4C6FD /* Login.storyboard */,
 				B0E5B5D71EE4CA7000D25618 /* PostParkingSpot.storyboard */,
 				B0E5B5DC1EE635E700D25618 /* Park.storyboard */,
+				B042A8B81EE6F18C00FAEFD7 /* Messages.storyboard */,
 			);
 			name = Views;
 			path = ..;
@@ -271,24 +314,13 @@
 			children = (
 				B020F5981D496FD300847684 /* PMApplicationViewController.h */,
 				B020F5991D496FD300847684 /* PMApplicationViewController.m */,
-				B07C00301D818EA600C23D8D /* PMMenuViewController.h */,
-				B07C00311D818EA600C23D8D /* PMMenuViewController.m */,
-				B017D21D1D95668C0041C3A3 /* PMUserPostedSpotsViewController.h */,
-				B017D21E1D95668C0041C3A3 /* PMUserPostedSpotsViewController.m */,
-				B06EAB991DB7EDA90025D1DD /* PMUserMessagesTableViewController.h */,
-				B06EAB9A1DB7EDA90025D1DD /* PMUserMessagesTableViewController.m */,
-				B0C8A0F91D9B02710029C2C1 /* PMMessagesViewController.h */,
-				B0C8A0FA1D9B02710029C2C1 /* PMMessagesViewController.m */,
-				B0E5B5D91EE5A50200D25618 /* PMSignUpViewController.h */,
-				B0E5B5DA1EE5A50200D25618 /* PMSignUpViewController.m */,
-				B0EB86CF1D46901D001A0F6D /* PMLoginViewController.h */,
-				B0EB86D01D46901D001A0F6D /* PMLoginViewController.m */,
 				B09ED2581CF507A70054D0FC /* PMInitialViewController.h */,
 				B09ED2591CF507A70054D0FC /* PMInitialViewController.m */,
-				B09ED25B1CF612180054D0FC /* PMPostViewController.h */,
-				B09ED25C1CF612180054D0FC /* PMPostViewController.m */,
-				B063C3001D0B6CD7002BA9D0 /* PMParkViewController.h */,
-				B063C3011D0B6CD7002BA9D0 /* PMParkViewController.m */,
+				B07C00301D818EA600C23D8D /* PMMenuViewController.h */,
+				B07C00311D818EA600C23D8D /* PMMenuViewController.m */,
+				B042A8BA1EE6F5D400FAEFD7 /* Map Views */,
+				B042A8BB1EE6F5E100FAEFD7 /* Sign In */,
+				B042A8BC1EE6F5F200FAEFD7 /* Messaging */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -429,6 +461,7 @@
 				B05AECB91CF4AB4300A5660A /* LaunchScreen.storyboard in Resources */,
 				B0B2F4671D0760E100E57E03 /* GoogleService-Info.plist in Resources */,
 				B05AECB61CF4AB4300A5660A /* Assets.xcassets in Resources */,
+				B042A8B91EE6F18C00FAEFD7 /* Messages.storyboard in Resources */,
 				B0E5B5D81EE4CA7000D25618 /* PostParkingSpot.storyboard in Resources */,
 				B0E5B5DD1EE635E700D25618 /* Park.storyboard in Resources */,
 				B0E5B5D61EE207A300D25618 /* Initial.storyboard in Resources */,
@@ -601,6 +634,7 @@
 				B063C3021D0B6CD7002BA9D0 /* PMParkViewController.m in Sources */,
 				B0EB86D11D46901D001A0F6D /* PMLoginViewController.m in Sources */,
 				B07C00321D818EA600C23D8D /* PMMenuViewController.m in Sources */,
+				B042A8BF1EE72FB600FAEFD7 /* PMChat.m in Sources */,
 				B020F5A31D519F6F00847684 /* PMFirebaseClient.m in Sources */,
 				B0C8A0FB1D9B02710029C2C1 /* PMMessagesViewController.m in Sources */,
 				B0E5B5DB1EE5A50200D25618 /* PMSignUpViewController.m in Sources */,

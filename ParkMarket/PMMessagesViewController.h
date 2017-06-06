@@ -17,11 +17,12 @@
 
 @interface PMMessagesViewController : JSQMessagesViewController
 
+#warning These properties should be private
 @property (strong, nonatomic) NSString *chatID;
-@property (strong, nonatomic) NSString *recipient;
-@property (strong, nonatomic) PMParkingSpot *parkingSpot;
-@property (strong, nonatomic) NSMutableArray *messages;
+@property (strong, nonatomic) NSString *receiverID;
+@property (strong, nonatomic) NSMutableArray <JSQMessage *> *messages;
 
-- (instancetype)init;
+- (instancetype)initWithParkingSpot:(PMParkingSpot *)parkingSpot;
+- (instancetype)initWithChatID:(NSString *)chatID;
 
 @end

@@ -201,15 +201,8 @@
 #pragma mark - PMParkViewControllerMessageDelegate Methods
 
 - (void)didTapMessageButtonForParkingSpot:(PMParkingSpot *)parkingSpot {
-    PMMessagesViewController *messagesViewController = [PMMessagesViewController new];
-    messagesViewController.parkingSpot = parkingSpot;
-    messagesViewController.title = parkingSpot.ownerFirstName;
-    messagesViewController.senderId = [FIRAuth auth].currentUser.uid;
-    messagesViewController.senderDisplayName = @"Sender Display Name";
-    messagesViewController.recipient = parkingSpot.ownerUID;
-    
+    PMMessagesViewController *messagesViewController = [[PMMessagesViewController alloc] initWithParkingSpot:parkingSpot];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:messagesViewController];
-    
     [self presentViewController:navigationController
                        animated:YES
                      completion:nil];

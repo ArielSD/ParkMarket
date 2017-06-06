@@ -51,10 +51,15 @@
 #pragma mark - Messaging
 
 + (void)addMessageFromMessagesViewController:(PMMessagesViewController *)messagesViewController
+                                    receiver:(NSString *)receiver
                                  messageBody:(NSString *)messageBody;
 
 + (void)observeNewMessagesInViewController:(PMMessagesViewController *)messagesViewController;
 
 + (void)getCurrentUserChats:(void (^) (NSDictionary *chatsDictionary))completionBlock;
+
++ (void)getChatWithKey:(NSString *)key
+               success:(void (^) (NSDictionary *chat))success
+               failure:(void (^) (NSError *error))failure;
 
 @end

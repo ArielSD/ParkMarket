@@ -180,6 +180,7 @@
 #pragma mark - Messaging
 
 + (void)addMessageFromMessagesViewController:(PMMessagesViewController *)messagesViewController
+                                    receiver:(NSString *)receiver
                                  messageBody:(NSString *)messageBody {
     
     // Add message to the "chats" node
@@ -189,6 +190,7 @@
     FIRDatabaseReference *newMessageReference = [currentChatReference childByAutoId];
     
     NSDictionary *messageInformation = @{@"sender" : [FIRAuth auth].currentUser.uid,
+                                         @"receiver" : receiver,
                                          @"message body" : messageBody};
     
     [newMessageReference setValue:messageInformation];
@@ -201,7 +203,7 @@
     [currentUserCurrentChatReference setValue:@{@"chatID" : messagesViewController.chatID}];
     
     // Add chat to the receiver's node
-    FIRDatabaseReference *messageReceiverReference = [usersReference child:messagesViewController.recipient];
+    FIRDatabaseReference *messageReceiverReference = [usersReference child:messagesViewController.receiverID];
     FIRDatabaseReference *messageReceiverAllChatsReference = [messageReceiverReference child:@"chats"];
     FIRDatabaseReference *messageReceiverCurrentChatReference = [messageReceiverAllChatsReference child:messagesViewController.chatID];
     [messageReceiverCurrentChatReference setValue:@{@"chatID" : messagesViewController.chatID}];
@@ -240,6 +242,25 @@
                                                       completionBlock(nil);
                                                   }
                                               }];
+}
+
++ (void)getChatWithKey:(NSString *)key
+               success:(void (^)(NSDictionary *))success
+               failure:(void (^)(NSError *))failure{
+    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+    FIRDatabaseReference *chatsReference = [rootReference child:@"chats"];
+    FIRDatabaseReference *chatToRetrieveReference = [chatsReference child:key];
+    [chatToRetrieveReference observeSingleEventOfType:FIRDataEventTypeValue
+                                            withBlock:^(FIRDataSnapshot *snapshot) {
+                                                if ([snapshot exists]) {
+                                                    NSDictionary *chat = snapshot.value;
+                                                    success([NSDictionary dictionaryWithObject:chat
+                                                                                        forKey:key]);
+                                                }
+                                            }
+                                      withCancelBlock:^(NSError *error) {
+                                          failure(error);
+                                      }];
 }
 
 #pragma mark - Helper Methods

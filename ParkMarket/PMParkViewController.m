@@ -202,7 +202,7 @@
     }
 }
 
-- (void)messageButtonTapped {
+- (IBAction)messageButtonTapped:(id)sender {
     [self.delegate didTapMessageButtonForParkingSpot:self.selectedParkingSpot];
 }
 

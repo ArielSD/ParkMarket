@@ -7,10 +7,12 @@
 //
 
 #import "PMUserMessagesTableViewController.h"
+#import "PMMessagesViewController.h"
+#import "PMChat.h"
 
 @interface PMUserMessagesTableViewController ()
 
-@property (strong, nonatomic) NSArray *chats;
+@property (strong, nonatomic) NSMutableArray <PMChat *> *chats;
 
 @property (strong, nonatomic) UIBarButtonItem *doneButton;
 
@@ -22,20 +24,13 @@
     [super viewDidLoad];
     
     [self.tableView registerClass:[UITableViewCell class]
-           forCellReuseIdentifier:@"cell"];
+           forCellReuseIdentifier:@"userMessageTableViewCell"];
     
     [self getCurrentUserChats];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-//     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    NSLog(@"Did receiver memory warning");
 }
 
 #pragma mark - Init Method Override
@@ -60,10 +55,6 @@
 
 #pragma mark - Tableview Data Source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.chats.count;
 }
@@ -71,16 +62,14 @@
 #pragma mark - Tableview Delegate Methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2
-                                                   reuseIdentifier:@"cell"];
-    
-    cell = [tableView dequeueReusableCellWithIdentifier:@"cell"
-                                           forIndexPath:indexPath];
-    
-    cell.textLabel.text = self.chats[indexPath.row];
-    cell.detailTextLabel.text = @"Detail";
-    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userMessageTableViewCell" forIndexPath:indexPath];
+    PMChat *chat = self.chats[indexPath.row];
+    cell.textLabel.text = chat.id;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.navigationController pushViewController:[[PMMessagesViewController alloc] initWithChatID:(NSString *)self.chats[indexPath.row]] animated:YES];
 }
 
 #pragma mark - Network Call
@@ -92,7 +81,16 @@
         }
         
         else {
-            self.chats = chatsDictionary.allKeys;
+            NSArray *chatKeys = chatsDictionary.allKeys;
+            for (NSString *key in chatKeys) {
+                [PMFirebaseClient getChatWithKey:key
+                                         success:^(NSDictionary *chat) {
+                                             [self.chats addObject:chat];
+                                         }
+                                         failure:^(NSError *error) {
+                                             NSLog(@"Error: %@", error);
+                                         }];
+            }
             [self.tableView reloadData];
         }
     }];
@@ -124,59 +122,5 @@
                        animated:YES
                      completion:nil];
 }
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

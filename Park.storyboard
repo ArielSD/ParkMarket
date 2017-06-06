@@ -39,6 +39,9 @@
                                     <constraint firstAttribute="width" secondItem="Oqv-rg-jFP" secondAttribute="height" multiplier="26:21" id="1XE-Fu-AJD"/>
                                 </constraints>
                                 <state key="normal" image="messageButton"/>
+                                <connections>
+                                    <action selector="messageButtonTapped:" destination="Oyl-v0-Bdn" eventType="touchUpInside" id="s4e-QJ-fK0"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
