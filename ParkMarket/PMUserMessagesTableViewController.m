@@ -70,7 +70,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.navigationController pushViewController:[[PMMessagesViewController alloc] initWithChatID:(NSString *)self.chats[indexPath.row]] animated:YES];
+    PMChat *chat = self.chats[indexPath.row];
+    [self.navigationController pushViewController:[[PMMessagesViewController alloc] initWithChat:chat] animated:YES];
 }
 
 #pragma mark - Network Call

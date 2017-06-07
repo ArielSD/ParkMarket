@@ -54,12 +54,25 @@
     return self;
 }
 
-- (instancetype)initWithChatID:(NSString *)chatID {
+- (instancetype)initWithChat:(PMChat *)chat {
     self = [super init];
     if (self) {
-        _chatID = @"cjKjPI1edMf5Giu5xvUtpldNQsf1yaZodS3rYVSpjvNRGTZVvq5xm3P2-KlxjW8dTuKySP3tDByI";
+        
+        _messages = chat.messages;
+        _chatID = chat.id;
+        self.senderId = [FIRAuth auth].currentUser.uid;
         self.senderDisplayName = @"senderDisplayName";
-        self.senderId = @"senderID";
+        self.title = @"Title";
+
+//        [PMFirebaseClient getMessagesInChat:chat
+//                                    success:^(NSArray *messages) {
+//                                        _messages = messages.copy;
+//                                    }
+//                                    failure:^(NSError *error) {
+//                                        NSLog(@"Error: %@", error);
+//                                    }];
+        
+        [self configureNavigationItems];
     }
     return self;
 }

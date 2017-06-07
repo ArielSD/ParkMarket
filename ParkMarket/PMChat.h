@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <JSQMessage.h>
 
 @interface PMChat : NSObject
 
 @property (strong, nonatomic) NSString *id;
+@property (strong, nonatomic) NSMutableArray <JSQMessage *> *messages;
 
 + (instancetype)chatFromDictionary:(NSDictionary *)dictionary;
 

@@ -14,6 +14,7 @@
 
 #import "PMFirebaseClient.h"
 #import "PMParkingSpot.h"
+#import "PMChat.h"
 
 @interface PMMessagesViewController : JSQMessagesViewController
 
@@ -23,6 +24,6 @@
 @property (strong, nonatomic) NSMutableArray <JSQMessage *> *messages;
 
 - (instancetype)initWithParkingSpot:(PMParkingSpot *)parkingSpot;
-- (instancetype)initWithChatID:(NSString *)chatID;
+- (instancetype)initWithChat:(PMChat *)chat;
 
 @end

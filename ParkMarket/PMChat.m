@@ -7,13 +7,6 @@
 //
 
 #import "PMChat.h"
-#import <JSQMessage.h>
-
-@interface PMChat ()
-
-@property (strong, nonatomic) NSMutableArray <JSQMessage *> *messages;
-
-@end
 
 @implementation PMChat
 
