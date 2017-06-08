@@ -18,7 +18,7 @@
 
 @interface PMMessagesViewController : JSQMessagesViewController
 
-#warning These properties should be private
+#warning Shopuld these properties be private?
 @property (strong, nonatomic) NSString *chatID;
 @property (strong, nonatomic) NSString *receiverID;
 @property (strong, nonatomic) PMParkingSpot *parkingSpot;

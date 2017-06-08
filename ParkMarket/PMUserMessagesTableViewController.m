@@ -84,29 +84,6 @@
                                   failure:^(NSError *error) {
                                       NSLog(@"Error: %@", error);
                                   }];
-    
-    
-//    [PMFirebaseClient getCurrentUserChats:^(NSDictionary *chatsDictionary) {
-//        if (chatsDictionary == nil) {
-//            [self noCurrentUserChats];
-//        }
-//        
-//        else {
-//            NSArray *chatKeys = chatsDictionary.allKeys;
-//            for (NSString *key in chatKeys) {
-//                [PMFirebaseClient getChatWithKey:key
-//                                         success:^(NSDictionary *chat) {
-//                                             PMChat *pmChat = [PMChat chatFromDictionary:chat];
-//                                             [self.chats addObject:pmChat];
-//                                             [self.tableView reloadData];
-//                                         }
-//                                         failure:^(NSError *error) {
-//                                             NSLog(@"Error: %@", error);
-//                                         }];
-//            }
-//            [self.tableView reloadData];
-//        }
-//    }];
 }
 
 #pragma mark - Responder Methods
