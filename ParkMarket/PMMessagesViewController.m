@@ -55,7 +55,7 @@
 - (instancetype)initWithChat:(PMChat *)chat {
     self = [super init];
     if (self) {
-        _messages = chat.messages;
+        _messages = [NSMutableArray new];
         _chatID = chat.id;
         _receiverID = chat.receiver;
         _parkingSpot = chat.parkingSpot;
