@@ -334,35 +334,6 @@
                                    }];
 }
 
-//+ (void)getMessagesInChat:(PMChat *)chat
-//                  success:(void (^)(NSArray *))success
-//                  failure:(void (^)(NSError *))failure {
-//    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
-//    FIRDatabaseReference *chatsReference = [rootReference child:@"chats"];
-//    FIRDatabaseReference *chatReference = [chatsReference child:chat.id];
-//    
-//    [chatReference observeSingleEventOfType:FIRDataEventTypeValue
-//                                  withBlock:^(FIRDataSnapshot *snapshot) {
-//                                      if ([snapshot exists]) {
-//                                          NSDictionary *snapshotDictionary = snapshot.value;
-//                                          NSMutableArray *messages = [NSMutableArray new];
-//                                          
-//                                          for (NSString *messageKey in snapshotDictionary.allKeys) {
-//                                              NSDictionary *messageDictionary = snapshotDictionary[messageKey];
-//                                              JSQMessage *message = [JSQMessage messageWithSenderId:messageDictionary[@"sender"]
-//                                                                                        displayName:@"displayName"
-//                                                                                               text:messageDictionary[@"message body"]];
-//                                              
-//                                              [messages addObject:message];
-//                                              success(messages);
-//                                          }
-//                                      }
-//                                  }
-//                            withCancelBlock:^(NSError *error) {
-//                                failure(error);
-//                            }];
-//}
-
 #pragma mark - Helper Methods
 
 + (void)getCurrentUserFirstNameWithCompletion:(void (^)(NSDictionary *currentUser))completionBlock {
