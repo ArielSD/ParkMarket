@@ -268,7 +268,7 @@
                                                       NSMutableArray *chatsArray = [NSMutableArray new];
                                                       NSDictionary *chats = snapshot.value;
                                                       for (NSString *key in chats) {
-                                                          PMChat *chat = [PMChat chatFromDictionary:chats[key]];
+                                                          PMChat *chat = [PMChat chatFromDictionary:chats[key] id:key];
                                                           [chatsArray addObject:chat];
                                                       }
                                                       success(chatsArray);

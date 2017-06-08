@@ -18,6 +18,7 @@
 @property (strong, nonatomic) PMParkingSpot *parkingSpot;
 @property (strong, nonatomic) NSMutableArray <JSQMessage *> *messages;
 
-+ (instancetype)chatFromDictionary:(NSDictionary *)dictionary;
++ (instancetype)chatFromDictionary:(NSDictionary *)dictionary
+                                id:(NSString *)id;
 
 @end

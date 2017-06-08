@@ -10,13 +10,13 @@
 
 @implementation PMChat
 
-+ (instancetype)chatFromDictionary:(NSDictionary *)dictionary {
++ (instancetype)chatFromDictionary:(NSDictionary *)dictionary
+                                id:(NSString *)id {
     PMChat *chat = [PMChat new];
     chat.messages = [NSMutableArray new];
-    chat.id = dictionary.allKeys.firstObject;
-    NSDictionary *chatDictionary = dictionary[chat.id];
-    chat.receiver = chatDictionary[@"receiver"];
-    NSDictionary *messagesDictionary = chatDictionary[@"messages"];
+    chat.id = id;
+    chat.receiver = dictionary[@"receiver"];
+    NSDictionary *messagesDictionary = dictionary[@"messages"];
     
     for (NSString *key in messagesDictionary) {
         NSDictionary *messageDictionary = messagesDictionary[key];

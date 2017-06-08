@@ -52,13 +52,13 @@
     return self;
 }
 
-- (instancetype)initWithChat:(PMChat *)chat
-                  receiverID:(NSString *)receiverID {
+- (instancetype)initWithChat:(PMChat *)chat {
     self = [super init];
     if (self) {
         _messages = chat.messages;
         _chatID = chat.id;
-        _receiverID = receiverID;
+        _receiverID = chat.receiver;
+        _parkingSpot = chat.parkingSpot;
         self.senderId = [FIRAuth auth].currentUser.uid;
         self.senderDisplayName = @"senderDisplayName";
         self.title = @"Title";
