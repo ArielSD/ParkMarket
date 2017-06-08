@@ -10,8 +10,6 @@
 
 @interface PMMessagesViewController ()
 
-@property (strong, nonatomic) PMParkingSpot *parkingSpot;
-
 @property (strong, nonatomic) UIBarButtonItem *doneButton;
 @property (strong, nonatomic) UIBarButtonItem *parkButton;
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageView;
@@ -60,6 +58,7 @@
         
         _messages = chat.messages;
         _chatID = chat.id;
+//        _receiverID = 
         self.senderId = [FIRAuth auth].currentUser.uid;
         self.senderDisplayName = @"senderDisplayName";
         self.title = @"Title";
@@ -109,7 +108,6 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     JSQMessagesCollectionViewCell *cell = [super collectionView:collectionView cellForItemAtIndexPath:indexPath];
-    
     JSQMessage *message = self.messages[indexPath.item];
     
     if ([message.senderId isEqualToString:[FIRAuth auth].currentUser.uid]) {
@@ -135,6 +133,7 @@
     if ([message.senderId isEqualToString:[FIRAuth auth].currentUser.uid]) {
         return  self.outgoingBubbleImageView;
     }
+    
     else {
         return self.incomingBubbleImageView;
     }

@@ -186,8 +186,11 @@
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *chatsReference = [rootReference child:@"chats"];
     FIRDatabaseReference *currentChatReference = [chatsReference child:messagesViewController.chatID];
-    FIRDatabaseReference *newMessageReference = [currentChatReference childByAutoId];
+    FIRDatabaseReference *currentChatParkingSpotReference = [currentChatReference child:@"parking spot"];
+    [currentChatParkingSpotReference setValue:messagesViewController.parkingSpot.identifier];
     
+    FIRDatabaseReference *messagesReference = [currentChatReference child:@"messages"];
+    FIRDatabaseReference *newMessageReference = [messagesReference childByAutoId];
     NSDictionary *messageInformation = @{@"sender" : [FIRAuth auth].currentUser.uid,
                                          @"receiver" : receiver,
                                          @"message body" : messageBody};
@@ -231,12 +234,13 @@
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *chatsReference = [rootReference child:@"chats"];
     FIRDatabaseReference *chatToObserveReference = [chatsReference child:messagesViewController.chatID];
+    FIRDatabaseReference *messagesReference = [chatToObserveReference child:@"messages"];
     
-    [chatToObserveReference observeEventType:FIRDataEventTypeChildAdded
-                                   withBlock:^(FIRDataSnapshot *snapshot) {
-                                       JSQMessage *message = [JSQMessage messageWithSenderId:snapshot.value[@"sender"]
-                                                                                 displayName:@"displayName"
-                                                                                        text:snapshot.value[@"message body"]];
+    [messagesReference observeEventType:FIRDataEventTypeChildAdded
+                              withBlock:^(FIRDataSnapshot *snapshot) {
+                                  JSQMessage *message = [JSQMessage messageWithSenderId:snapshot.value[@"sender"]
+                                                                            displayName:@"displayName"
+                                                                                   text:snapshot.value[@"message body"]];
                                        
                                        [messagesViewController.messages addObject:message];
                                        [messagesViewController finishReceivingMessage];

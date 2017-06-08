@@ -64,8 +64,8 @@
                success:(void (^) (NSDictionary *chat))success
                failure:(void (^) (NSError *error))failure;
 
-+ (void)getMessagesInChat:(PMChat *)chat
-                  success:(void (^)(NSArray *messages))success
-                  failure:(void (^)(NSError *error))failure;
+//+ (void)getMessagesInChat:(PMChat *)chat
+//                  success:(void (^)(NSArray *messages))success
+//                  failure:(void (^)(NSError *error))failure;
 
 @end
