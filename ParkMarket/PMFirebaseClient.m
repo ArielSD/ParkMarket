@@ -181,33 +181,29 @@
 + (void)addMessageFromMessagesViewController:(PMMessagesViewController *)messagesViewController
                                     receiver:(NSString *)receiver
                                  messageBody:(NSString *)messageBody {
-    
-    // Add message to the "chats" node
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
-    FIRDatabaseReference *chatsReference = [rootReference child:@"chats"];
-    FIRDatabaseReference *currentChatReference = [chatsReference child:messagesViewController.chatID];
-    FIRDatabaseReference *currentChatParkingSpotReference = [currentChatReference child:@"parking spot"];
-    [currentChatParkingSpotReference setValue:messagesViewController.parkingSpot.identifier];
-    
-    FIRDatabaseReference *messagesReference = [currentChatReference child:@"messages"];
-    FIRDatabaseReference *newMessageReference = [messagesReference childByAutoId];
-    NSDictionary *messageInformation = @{@"sender" : [FIRAuth auth].currentUser.uid,
-                                         @"receiver" : receiver,
-                                         @"message body" : messageBody};
-    
-    [newMessageReference setValue:messageInformation];
+    FIRDatabaseReference *usersReference = [rootReference child:@"users"];
     
     // Add chat to the sender's (current user) node
     [PMFirebaseClient getUserFirstNameFromID:messagesViewController.receiverID
                                      success:^(NSString *firstName) {
-                                         FIRDatabaseReference *usersReference = [rootReference child:@"users"];
                                          FIRDatabaseReference *currentUserReference = [usersReference child:[FIRAuth auth].currentUser.uid];
                                          FIRDatabaseReference *currentUserAllChatsReference = [currentUserReference child:@"chats"];
                                          FIRDatabaseReference *currentUserCurrentChatReference = [currentUserAllChatsReference child:messagesViewController.chatID];
                                          
-                                         NSDictionary *chatInformation = @{@"chatID" : messagesViewController.chatID,
-                                                                           @"correspondent" : firstName};
-                                         [currentUserCurrentChatReference setValue:chatInformation];
+                                         FIRDatabaseReference *currentUserCurrentChatReceiverReference = [currentUserCurrentChatReference child:@"receiver"];
+                                         [currentUserCurrentChatReceiverReference setValue:messagesViewController.receiverID];
+                                         
+                                         FIRDatabaseReference *currentChatParkingSpotReference = [currentUserCurrentChatReference child:@"parking spot"];
+                                         [currentChatParkingSpotReference setValue:messagesViewController.parkingSpot.identifier];
+                                         
+                                         FIRDatabaseReference *messagesReference = [currentUserCurrentChatReference child:@"messages"];
+                                         FIRDatabaseReference *newMessageReference = [messagesReference childByAutoId];
+                                         NSDictionary *messageInformation = @{@"sender" : [FIRAuth auth].currentUser.uid,
+                                                                              @"receiver" : receiver,
+                                                                              @"message body" : messageBody};
+                                         
+                                         [newMessageReference setValue:messageInformation];
                                      }
                                      failure:^(NSError *error) {
                                          NSLog(@"Error: %@", error);
@@ -216,14 +212,23 @@
     // Add chat to the receiver's node
     [PMFirebaseClient getUserFirstNameFromID:[FIRAuth auth].currentUser.uid
                                      success:^(NSString *firstName) {
-                                         FIRDatabaseReference *usersReference = [rootReference child:@"users"];
                                          FIRDatabaseReference *messageReceiverReference = [usersReference child:messagesViewController.receiverID];
                                          FIRDatabaseReference *messageReceiverAllChatsReference = [messageReceiverReference child:@"chats"];
                                          FIRDatabaseReference *messageReceiverCurrentChatReference = [messageReceiverAllChatsReference child:messagesViewController.chatID];
                                          
-                                         NSDictionary *chatInformation = @{@"chatID" : messagesViewController.chatID,
-                                                                           @"correspondent" : firstName};
-                                         [messageReceiverCurrentChatReference setValue:chatInformation];
+                                         FIRDatabaseReference *messageReceiverCurrentChatCorrespondentReference = [messageReceiverCurrentChatReference child:@"receiver"];
+                                         [messageReceiverCurrentChatCorrespondentReference setValue:messagesViewController.senderId];
+                                         
+                                         FIRDatabaseReference *currentChatParkingSpotReference = [messageReceiverCurrentChatReference child:@"parking spot"];
+                                         [currentChatParkingSpotReference setValue:messagesViewController.parkingSpot.identifier];
+                                         
+                                         FIRDatabaseReference *messagesReference = [messageReceiverCurrentChatReference child:@"messages"];
+                                         FIRDatabaseReference *newMessageReference = [messagesReference childByAutoId];
+                                         NSDictionary *messageInformation = @{@"sender" : [FIRAuth auth].currentUser.uid,
+                                                                              @"receiver" : receiver,
+                                                                              @"message body" : messageBody};
+                                         
+                                         [newMessageReference setValue:messageInformation];
                                      }
                                      failure:^(NSError *error) {
                                          NSLog(@"Error: %@", error);
@@ -232,22 +237,26 @@
 
 + (void)observeNewMessagesInViewController:(PMMessagesViewController *)messagesViewController {
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
-    FIRDatabaseReference *chatsReference = [rootReference child:@"chats"];
-    FIRDatabaseReference *chatToObserveReference = [chatsReference child:messagesViewController.chatID];
-    FIRDatabaseReference *messagesReference = [chatToObserveReference child:@"messages"];
+    FIRDatabaseReference *usersReference = [rootReference child:@"users"];
+    FIRDatabaseReference *senderReference = [usersReference child:messagesViewController.senderId];
+    FIRDatabaseReference *senderChatsReference = [senderReference child:@"chats"];
+    FIRDatabaseReference *senderCurrentChatReference = [senderChatsReference child:messagesViewController.chatID];
+    FIRDatabaseReference *senderCurrentChatMessagesReference = [senderCurrentChatReference child:@"messages"];
     
-    [messagesReference observeEventType:FIRDataEventTypeChildAdded
-                              withBlock:^(FIRDataSnapshot *snapshot) {
-                                  JSQMessage *message = [JSQMessage messageWithSenderId:snapshot.value[@"sender"]
-                                                                            displayName:@"displayName"
-                                                                                   text:snapshot.value[@"message body"]];
-                                       
-                                       [messagesViewController.messages addObject:message];
-                                       [messagesViewController finishReceivingMessage];
-                                   }];
+    [senderCurrentChatMessagesReference observeEventType:FIRDataEventTypeChildAdded
+                                               withBlock:^(FIRDataSnapshot *snapshot) {
+                                                   JSQMessage *message = [JSQMessage messageWithSenderId:snapshot.value[@"sender"]
+                                                                                             displayName:@"displayName"
+                                                                                                    text:snapshot.value[@"message body"]];
+                                  
+                                  [messagesViewController.messages addObject:message];
+                                  [messagesViewController.collectionView reloadData];
+                                  [messagesViewController finishReceivingMessage];
+                              }];
 }
 
-+ (void)getCurrentUserChats:(void (^)(NSDictionary *))completionBlock {
++ (void)getCurrentUserChats:(void (^)(NSArray *chats))success
+                    failure:(void (^)(NSError *error))failure {
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *usersReference = [rootReference child:@"users"];
     FIRDatabaseReference *currentUserReference = [usersReference child:[FIRAuth auth].currentUser.uid];
@@ -255,15 +264,19 @@
     
     [currentUserChatsReference observeSingleEventOfType:FIRDataEventTypeValue
                                               withBlock:^(FIRDataSnapshot *snapshot) {
-                                                  NSDictionary *chats = snapshot.value;
                                                   if ([snapshot exists]) {
-                                                      completionBlock(chats);
+                                                      NSMutableArray *chatsArray = [NSMutableArray new];
+                                                      NSDictionary *chats = snapshot.value;
+                                                      for (NSString *key in chats) {
+                                                          PMChat *chat = [PMChat chatFromDictionary:chats[key]];
+                                                          [chatsArray addObject:chat];
+                                                      }
+                                                      success(chatsArray);
                                                   }
-                                                  
-                                                  else if (![snapshot exists]) {
-                                                      completionBlock(nil);
-                                                  }
-                                              }];
+                                              }
+                                        withCancelBlock:^(NSError *error) {
+                                            failure(error);
+                                        }];
 }
 
 + (void)getChatWithKey:(NSString *)key
@@ -284,6 +297,41 @@
                                       withCancelBlock:^(NSError *error) {
                                           failure(error);
                                       }];
+}
+
++ (void)getParkingSpotFromChat:(PMChat *)chat
+                       success:(void (^)(PMParkingSpot *parkingSpot))success
+                       failure:(void (^)(NSError *error))failure {
+    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+    FIRDatabaseReference *chatsReference = [rootReference child:@"chats"];
+    FIRDatabaseReference *currentChatReference = [chatsReference child:chat.id];
+    
+    [currentChatReference observeSingleEventOfType:FIRDataEventTypeValue
+                                         withBlock:^(FIRDataSnapshot *snapshot) {
+                                             if ([snapshot exists]) {
+                                                 NSDictionary *chat = snapshot.value;
+                                                 NSString *parkingSpotID = chat[@"parking spot"];
+                                                 
+                                                 FIRDatabaseReference *parkingSpotsReference = [rootReference child:@"parkingSpots"];
+                                                 
+                                                 [parkingSpotsReference observeSingleEventOfType:FIRDataEventTypeValue
+                                                                                       withBlock:^(FIRDataSnapshot *snapshot) {
+                                                                                           if ([snapshot exists]) {
+                                                                                               NSDictionary *parkingSpots = snapshot.value;
+                                                                                               NSDictionary *parkingSpotDictionary = parkingSpots[parkingSpotID];
+                                                                                               success([PMParkingSpot parkingSpotFromDictionary:parkingSpotDictionary]);
+                                                                                           }
+                                                                                       }
+                                                                                 withCancelBlock:^(NSError *error) {
+                                                                                     failure(error);
+                                                                                 }];
+                                                 
+                                                 success(chat[@"parking spot"]);
+                                             }
+                                         }
+                                   withCancelBlock:^(NSError *error) {
+                                       failure(error);
+                                   }];
 }
 
 //+ (void)getMessagesInChat:(PMChat *)chat
@@ -346,19 +394,6 @@
                             withCancelBlock:^(NSError *error) {
                                 failure(error);
                             }];
-}
-
-- (void)getCurrentUserChatsWithCompletion:(void (^)(NSDictionary *chats))completionBlock {
-    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
-    FIRDatabaseReference *usersReference = [rootReference child:@"users"];
-    FIRDatabaseReference *currentUserReference = [usersReference child:[FIRAuth auth].currentUser.uid];
-    FIRDatabaseReference *currentUserChatsReference = [currentUserReference child:@"chats"];
-    
-    [currentUserChatsReference observeSingleEventOfType:FIRDataEventTypeValue
-                                              withBlock:^(FIRDataSnapshot *snapshot) {
-                                                  NSDictionary *currentUserChatsDictionary = snapshot.value;
-                                                  completionBlock(currentUserChatsDictionary);
-                                              }];
 }
 
 @end

@@ -13,6 +13,7 @@
 #import <JSQMessagesViewController.h>
 #import <JSQMessage.h>
 
+#import "PMParkingSpot.h"
 #import "PMChat.h"
 
 @class PMMessagesViewController;
@@ -58,11 +59,16 @@
 
 + (void)observeNewMessagesInViewController:(PMMessagesViewController *)messagesViewController;
 
-+ (void)getCurrentUserChats:(void (^)(NSDictionary *chatsDictionary))completionBlock;
++ (void)getCurrentUserChats:(void (^)(NSArray *chats))success
+                    failure:(void (^)(NSError *error))failure;
 
 + (void)getChatWithKey:(NSString *)key
                success:(void (^) (NSDictionary *chat))success
                failure:(void (^) (NSError *error))failure;
+
++ (void)getParkingSpotFromChat:(PMChat *)chat
+                       success:(void (^)(PMParkingSpot *parkingSpot))success
+                       failure:(void (^)(NSError *error))failure;
 
 //+ (void)getMessagesInChat:(PMChat *)chat
 //                  success:(void (^)(NSArray *messages))success

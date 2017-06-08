@@ -15,9 +15,11 @@
     chat.messages = [NSMutableArray new];
     chat.id = dictionary.allKeys.firstObject;
     NSDictionary *chatDictionary = dictionary[chat.id];
+    chat.receiver = chatDictionary[@"receiver"];
+    NSDictionary *messagesDictionary = chatDictionary[@"messages"];
     
-    for (NSString *key in chatDictionary) {
-        NSDictionary *messageDictionary = chatDictionary[key];
+    for (NSString *key in messagesDictionary) {
+        NSDictionary *messageDictionary = messagesDictionary[key];
         JSQMessage *message = [JSQMessage messageWithSenderId:messageDictionary[@"sender"]
                                                   displayName:@"Display Name"
                                                          text:messageDictionary[@"message body"]];

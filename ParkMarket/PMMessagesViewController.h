@@ -25,6 +25,7 @@
 @property (strong, nonatomic) NSMutableArray <JSQMessage *> *messages;
 
 - (instancetype)initWithParkingSpot:(PMParkingSpot *)parkingSpot;
-- (instancetype)initWithChat:(PMChat *)chat;
+- (instancetype)initWithChat:(PMChat *)chat
+                  receiverID:(NSString *)receiverID;
 
 @end

@@ -12,7 +12,7 @@
 
 @interface PMUserMessagesTableViewController ()
 
-@property (strong, nonatomic) NSMutableArray <PMChat *> *chats;
+@property (strong, nonatomic) NSArray <PMChat *> *chats;
 
 @property (strong, nonatomic) UIBarButtonItem *doneButton;
 
@@ -71,33 +71,58 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     PMChat *chat = self.chats[indexPath.row];
-    [self.navigationController pushViewController:[[PMMessagesViewController alloc] initWithChat:chat] animated:YES];
+    [PMFirebaseClient getParkingSpotFromChat:chat
+                                     success:^(PMParkingSpot *parkingSpot) {
+#warning chat should have a parking spot property. Make that happen
+                                     }
+                                     failure:^(NSError *error) {
+                                         NSLog(@"Error: %@", error);
+                                     }];
+    
+//    [PMFirebaseClient getParkingSpotIDFromChat:chat
+//                                       success:^(NSString *id) {
+//                                           NSString *currentUser = [FIRAuth auth].currentUser.uid;
+//                                           NSString *receiverID = [[chat.id stringByReplacingOccurrencesOfString:currentUser withString:@""] stringByReplacingOccurrencesOfString:id withString:@""];
+//                                           [self.navigationController pushViewController:[[PMMessagesViewController alloc] initWithChat:chat receiverID:receiverID]
+//                                                                                animated:YES];
+//                                       }
+//                                       failure:^(NSError *error) {
+//                                           NSLog(@"Error: %@", error);
+//                                       }];
 }
 
 #pragma mark - Network Call
 
 - (void)getCurrentUserChats {
-    [PMFirebaseClient getCurrentUserChats:^(NSDictionary *chatsDictionary) {
-        if (chatsDictionary == nil) {
-            [self noCurrentUserChats];
-        }
-        
-        else {
-            NSArray *chatKeys = chatsDictionary.allKeys;
-            for (NSString *key in chatKeys) {
-                [PMFirebaseClient getChatWithKey:key
-                                         success:^(NSDictionary *chat) {
-                                             PMChat *pmChat = [PMChat chatFromDictionary:chat];
-                                             [self.chats addObject:pmChat];
-                                             [self.tableView reloadData];
-                                         }
-                                         failure:^(NSError *error) {
-                                             NSLog(@"Error: %@", error);
-                                         }];
-            }
-            [self.tableView reloadData];
-        }
-    }];
+    [PMFirebaseClient getCurrentUserChats:^(NSArray *chats) {
+        self.chats = chats;
+    }
+                                  failure:^(NSError *error) {
+                                      NSLog(@"Error: %@", error);
+                                  }];
+    
+    
+//    [PMFirebaseClient getCurrentUserChats:^(NSDictionary *chatsDictionary) {
+//        if (chatsDictionary == nil) {
+//            [self noCurrentUserChats];
+//        }
+//        
+//        else {
+//            NSArray *chatKeys = chatsDictionary.allKeys;
+//            for (NSString *key in chatKeys) {
+//                [PMFirebaseClient getChatWithKey:key
+//                                         success:^(NSDictionary *chat) {
+//                                             PMChat *pmChat = [PMChat chatFromDictionary:chat];
+//                                             [self.chats addObject:pmChat];
+//                                             [self.tableView reloadData];
+//                                         }
+//                                         failure:^(NSError *error) {
+//                                             NSLog(@"Error: %@", error);
+//                                         }];
+//            }
+//            [self.tableView reloadData];
+//        }
+//    }];
 }
 
 #pragma mark - Responder Methods

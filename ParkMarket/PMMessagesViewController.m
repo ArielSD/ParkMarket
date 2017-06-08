@@ -52,24 +52,16 @@
     return self;
 }
 
-- (instancetype)initWithChat:(PMChat *)chat {
+- (instancetype)initWithChat:(PMChat *)chat
+                  receiverID:(NSString *)receiverID {
     self = [super init];
     if (self) {
-        
         _messages = chat.messages;
         _chatID = chat.id;
-//        _receiverID = 
+        _receiverID = receiverID;
         self.senderId = [FIRAuth auth].currentUser.uid;
         self.senderDisplayName = @"senderDisplayName";
         self.title = @"Title";
-
-//        [PMFirebaseClient getMessagesInChat:chat
-//                                    success:^(NSArray *messages) {
-//                                        _messages = messages.copy;
-//                                    }
-//                                    failure:^(NSError *error) {
-//                                        NSLog(@"Error: %@", error);
-//                                    }];
         
         [self configureNavigationItems];
     }

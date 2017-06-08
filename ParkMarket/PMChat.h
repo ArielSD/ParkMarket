@@ -9,9 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <JSQMessage.h>
 
+#import "PMParkingSpot.h"
+
 @interface PMChat : NSObject
 
 @property (strong, nonatomic) NSString *id;
+@property (strong, nonatomic) NSString *receiver;
+@property (strong, nonatomic) PMParkingSpot *parkingSpot;
 @property (strong, nonatomic) NSMutableArray <JSQMessage *> *messages;
 
 + (instancetype)chatFromDictionary:(NSDictionary *)dictionary;
