@@ -121,14 +121,14 @@
                              completion:nil];
 }
 
-- (void)parkButtonTapped {
-    [self dismissViewControllerAnimated:YES
-                             completion:^{
-                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"parkTappedInMessagesViewController"
-                                                                                     object:self
-                                                                                   userInfo:@{@"parkingSpotInMessagesViewController" : self.parkingSpot.identifier}];
-                             }];
-}
+//- (void)parkButtonTapped {
+//    [self dismissViewControllerAnimated:YES
+//                             completion:^{
+//                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"parkTappedInMessagesViewController"
+//                                                                                     object:self
+//                                                                                   userInfo:@{@"parkingSpotInMessagesViewController" : self.parkingSpot.identifier}];
+//                             }];
+//}
 
 - (void)didPressSendButton:(UIButton *)button
            withMessageText:(NSString *)text

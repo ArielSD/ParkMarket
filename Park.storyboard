@@ -32,6 +32,9 @@
                                     <constraint firstAttribute="width" secondItem="AS4-WO-fxK" secondAttribute="height" multiplier="71:112" id="BqD-Ea-O2B"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="parkButton"/>
+                                <connections>
+                                    <action selector="parkButtonTapped:" destination="Oyl-v0-Bdn" eventType="touchUpInside" id="FZn-cS-CCq"/>
+                                </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oqv-rg-jFP">
                                 <rect key="frame" x="169" y="508" width="37" height="30"/>

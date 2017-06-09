@@ -185,7 +185,7 @@
     }
 }
 
-- (void)parkButtonTapped {
+- (IBAction)parkButtonTapped:(id)sender {
     if (self.selectedParkingSpot == nil) {
         [self noParkingSpotSelected];
     }
@@ -265,14 +265,14 @@
                                                object:nil];
 }
 
-- (void)parkButtonTappedInPresentedMessagesViewController:(NSNotification *)notification {
-    NSDictionary *parkingSpotDictionary = notification.userInfo;
-    NSString *parkingSpotToTakeIdentifier = parkingSpotDictionary[@"parkingSpotInMessagesViewController"];
-    PMParkingSpot *parkingSpotToTake = self.parkingSpots[parkingSpotToTakeIdentifier];
-    
-    self.selectedParkingSpot = parkingSpotToTake;
-    [self parkButtonTapped];
-}
+//- (void)parkButtonTappedInPresentedMessagesViewController:(NSNotification *)notification {
+//    NSDictionary *parkingSpotDictionary = notification.userInfo;
+//    NSString *parkingSpotToTakeIdentifier = parkingSpotDictionary[@"parkingSpotInMessagesViewController"];
+//    PMParkingSpot *parkingSpotToTake = self.parkingSpots[parkingSpotToTakeIdentifier];
+//    
+//    self.selectedParkingSpot = parkingSpotToTake;
+//    [self parkButtonTapped];
+//}
 
 #pragma mark - Map View Delegate Methods
 
