@@ -11,7 +11,6 @@
 @interface PMMessagesViewController ()
 
 @property (strong, nonatomic) UIBarButtonItem *doneButton;
-@property (strong, nonatomic) UIBarButtonItem *parkButton;
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageView;
 @property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleImageView;
 
@@ -75,13 +74,7 @@
                                                                                 target:self
                                                                                 action:@selector(doneButtonTapped)];
     
-    self.parkButton = [[UIBarButtonItem alloc] initWithTitle:@"Park"
-                                                       style:UIBarButtonItemStylePlain
-                                                      target:self
-                                                      action:@selector(parkButtonTapped)];
-    
     self.navigationItem.rightBarButtonItem = self.doneButton;
-    self.navigationItem.leftBarButtonItem = self.parkButton;
 }
 
 - (void)configureMessageBubbles {
@@ -140,15 +133,6 @@
 - (void)doneButtonTapped {
     [self dismissViewControllerAnimated:YES
                              completion:nil];
-}
-
-- (void)parkButtonTapped {
-    [self dismissViewControllerAnimated:YES
-                             completion:^{
-                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"parkTappedInMessagesViewController"
-                                                                                     object:self
-                                                                                   userInfo:@{@"parkingSpotInMessagesViewController" : self.parkingSpot.identifier}];
-                             }];
 }
 
 - (void)didPressSendButton:(UIButton *)button
