@@ -289,25 +289,25 @@
                                         }];
 }
 
-+ (void)getChatWithKey:(NSString *)key
-               success:(void (^)(NSDictionary *))success
-               failure:(void (^)(NSError *))failure{
-    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
-    FIRDatabaseReference *chatsReference = [rootReference child:@"chats"];
-    FIRDatabaseReference *chatToRetrieveReference = [chatsReference child:key];
-    
-    [chatToRetrieveReference observeSingleEventOfType:FIRDataEventTypeValue
-                                            withBlock:^(FIRDataSnapshot *snapshot) {
-                                                if ([snapshot exists]) {
-                                                    NSDictionary *chat = snapshot.value;
-                                                    success([NSDictionary dictionaryWithObject:chat
-                                                                                        forKey:key]);
-                                                }
-                                            }
-                                      withCancelBlock:^(NSError *error) {
-                                          failure(error);
-                                      }];
-}
+//+ (void)getChatWithKey:(NSString *)key
+//               success:(void (^)(NSDictionary *))success
+//               failure:(void (^)(NSError *))failure{
+//    FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
+//    FIRDatabaseReference *chatsReference = [rootReference child:@"chats"];
+//    FIRDatabaseReference *chatToRetrieveReference = [chatsReference child:key];
+//    
+//    [chatToRetrieveReference observeSingleEventOfType:FIRDataEventTypeValue
+//                                            withBlock:^(FIRDataSnapshot *snapshot) {
+//                                                if ([snapshot exists]) {
+//                                                    NSDictionary *chat = snapshot.value;
+//                                                    success([NSDictionary dictionaryWithObject:chat
+//                                                                                        forKey:key]);
+//                                                }
+//                                            }
+//                                      withCancelBlock:^(NSError *error) {
+//                                          failure(error);
+//                                      }];
+//}
 
 + (void)getParkingSpotFromChat:(PMChat *)chat
                        success:(void (^)(PMParkingSpot *parkingSpot))success

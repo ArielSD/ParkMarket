@@ -63,9 +63,9 @@
 + (void)getCurrentUserChatsWithSuccess:(void (^)(NSArray *chats))success
                                failure:(void (^)(NSError *error))failure;
 
-+ (void)getChatWithKey:(NSString *)key
-               success:(void (^) (NSDictionary *chat))success
-               failure:(void (^) (NSError *error))failure;
+//+ (void)getChatWithKey:(NSString *)key
+//               success:(void (^) (NSDictionary *chat))success
+//               failure:(void (^) (NSError *error))failure;
 
 + (void)getParkingSpotFromChat:(PMChat *)chat
                        success:(void (^)(PMParkingSpot *parkingSpot))success
