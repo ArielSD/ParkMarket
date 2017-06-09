@@ -28,6 +28,7 @@
                 confirmPassword:(NSString *)confirmPassword
                         failure:(void (^)(NSDictionary *error))failure;
 
+#warning This needs to be refactored with a success block
 + (void)loginUserWithEmail:(NSString *)email
                   password:(NSString *)password
                    failure:(void (^)(NSDictionary *error))failure;

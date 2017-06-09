@@ -75,12 +75,16 @@
                                                                    @"message" : message};
                                  failure(errorDictionary);
                              }
+                             
+                             else {
+                                 failure(nil);
+                             }
                          }];
 }
 
 #pragma mark - Posting Spots
 
-#warning Refactor this to two separate methods
+#warning Refactor this to two separate methods?
 + (void)postParkingSpotWithLatitude:(NSString *)latitude longitute:(NSString *)longitude carModel:(NSString *)carModel {
     
     // Posting a spot to the 'parkingSpots' node
