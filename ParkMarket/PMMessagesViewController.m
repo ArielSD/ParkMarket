@@ -57,11 +57,11 @@
     if (self) {
         _messages = [NSMutableArray new];
         _chatID = chat.id;
-        _receiverID = chat.receiver;
+        _receiverID = chat.receiverID;
         _parkingSpot = chat.parkingSpot;
         self.senderId = [FIRAuth auth].currentUser.uid;
         self.senderDisplayName = @"senderDisplayName";
-        self.title = @"Title";
+        self.title = chat.receiverFirstName;
         
         [self configureNavigationItems];
     }

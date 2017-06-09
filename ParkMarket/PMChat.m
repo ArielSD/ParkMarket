@@ -15,7 +15,8 @@
     PMChat *chat = [PMChat new];
     chat.messages = [NSMutableArray new];
     chat.id = id;
-    chat.receiver = dictionary[@"receiver"];
+    chat.receiverID = dictionary[@"receiverID"];
+    chat.receiverFirstName = dictionary[@"receiverFirstName"];
     NSDictionary *messagesDictionary = dictionary[@"messages"];
     
     for (NSString *key in messagesDictionary) {

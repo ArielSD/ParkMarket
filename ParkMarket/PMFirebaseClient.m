@@ -191,8 +191,11 @@
                                          FIRDatabaseReference *currentUserAllChatsReference = [currentUserReference child:@"chats"];
                                          FIRDatabaseReference *currentUserCurrentChatReference = [currentUserAllChatsReference child:messagesViewController.chatID];
                                          
-                                         FIRDatabaseReference *currentUserCurrentChatReceiverReference = [currentUserCurrentChatReference child:@"receiver"];
+                                         FIRDatabaseReference *currentUserCurrentChatReceiverReference = [currentUserCurrentChatReference child:@"receiverID"];
                                          [currentUserCurrentChatReceiverReference setValue:messagesViewController.receiverID];
+                                         
+                                         FIRDatabaseReference *currentUserCurrentChatReceiverNameReference = [currentUserCurrentChatReference child:@"receiverFirstName"];
+                                         [currentUserCurrentChatReceiverNameReference setValue:firstName];
                                          
                                          FIRDatabaseReference *currentChatParkingSpotReference = [currentUserCurrentChatReference child:@"parking spot"];
                                          [currentChatParkingSpotReference setValue:messagesViewController.parkingSpot.identifier];
@@ -216,8 +219,11 @@
                                          FIRDatabaseReference *messageReceiverAllChatsReference = [messageReceiverReference child:@"chats"];
                                          FIRDatabaseReference *messageReceiverCurrentChatReference = [messageReceiverAllChatsReference child:messagesViewController.chatID];
                                          
-                                         FIRDatabaseReference *messageReceiverCurrentChatCorrespondentReference = [messageReceiverCurrentChatReference child:@"receiver"];
+                                         FIRDatabaseReference *messageReceiverCurrentChatCorrespondentReference = [messageReceiverCurrentChatReference child:@"receiverID"];
                                          [messageReceiverCurrentChatCorrespondentReference setValue:messagesViewController.senderId];
+                                         
+                                         FIRDatabaseReference *messageReceiverCurrentChatCorrespondentFirstNameReference = [messageReceiverCurrentChatReference child:@"receiverFirstName"];
+                                         [messageReceiverCurrentChatCorrespondentFirstNameReference setValue:firstName];
                                          
                                          FIRDatabaseReference *currentChatParkingSpotReference = [messageReceiverCurrentChatReference child:@"parking spot"];
                                          [currentChatParkingSpotReference setValue:messagesViewController.parkingSpot.identifier];
@@ -255,8 +261,8 @@
                               }];
 }
 
-+ (void)getCurrentUserChats:(void (^)(NSArray *chats))success
-                    failure:(void (^)(NSError *error))failure {
++ (void)getCurrentUserChatsWithSuccess:(void (^)(NSArray *chats))success
+                               failure:(void (^)(NSError *error))failure {
     FIRDatabaseReference *rootReference = [[FIRDatabase database] reference];
     FIRDatabaseReference *usersReference = [rootReference child:@"users"];
     FIRDatabaseReference *currentUserReference = [usersReference child:[FIRAuth auth].currentUser.uid];

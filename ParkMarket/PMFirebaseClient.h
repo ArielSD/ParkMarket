@@ -59,8 +59,8 @@
 
 + (void)observeNewMessagesInViewController:(PMMessagesViewController *)messagesViewController;
 
-+ (void)getCurrentUserChats:(void (^)(NSArray *chats))success
-                    failure:(void (^)(NSError *error))failure;
++ (void)getCurrentUserChatsWithSuccess:(void (^)(NSArray *chats))success
+                               failure:(void (^)(NSError *error))failure;
 
 + (void)getChatWithKey:(NSString *)key
                success:(void (^) (NSDictionary *chat))success

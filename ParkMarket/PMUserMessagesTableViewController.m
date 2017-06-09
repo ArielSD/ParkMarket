@@ -65,7 +65,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userMessageTableViewCell" forIndexPath:indexPath];
     PMChat *chat = self.chats[indexPath.row];
-    cell.textLabel.text = chat.id;
+    cell.textLabel.text = chat.receiverFirstName;
     return cell;
 }
 
@@ -77,13 +77,13 @@
 #pragma mark - Network Call
 
 - (void)getCurrentUserChats {
-    [PMFirebaseClient getCurrentUserChats:^(NSArray *chats) {
+    [PMFirebaseClient getCurrentUserChatsWithSuccess:^(NSArray *chats) {
         self.chats = chats;
         [self.tableView reloadData];
     }
-                                  failure:^(NSError *error) {
-                                      NSLog(@"Error: %@", error);
-                                  }];
+                                             failure:^(NSError *error) {
+                                                 NSLog(@"Error: %@", error);
+                                             }];
 }
 
 #pragma mark - Responder Methods
