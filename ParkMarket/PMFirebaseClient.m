@@ -191,6 +191,9 @@
                                          FIRDatabaseReference *currentUserAllChatsReference = [currentUserReference child:@"chats"];
                                          FIRDatabaseReference *currentUserCurrentChatReference = [currentUserAllChatsReference child:messagesViewController.chatID];
                                          
+                                         FIRDatabaseReference *currentUserCurrentChatReceiverReference = [currentUserCurrentChatReference child:@"receiver"];
+                                         [currentUserCurrentChatReceiverReference setValue:messagesViewController.receiverID];
+                                         
                                          FIRDatabaseReference *currentChatParkingSpotReference = [currentUserCurrentChatReference child:@"parking spot"];
                                          [currentChatParkingSpotReference setValue:messagesViewController.parkingSpot.identifier];
                                          
@@ -212,6 +215,9 @@
                                          FIRDatabaseReference *messageReceiverReference = [usersReference child:messagesViewController.receiverID];
                                          FIRDatabaseReference *messageReceiverAllChatsReference = [messageReceiverReference child:@"chats"];
                                          FIRDatabaseReference *messageReceiverCurrentChatReference = [messageReceiverAllChatsReference child:messagesViewController.chatID];
+                                         
+                                         FIRDatabaseReference *messageReceiverCurrentChatCorrespondentReference = [messageReceiverCurrentChatReference child:@"receiver"];
+                                         [messageReceiverCurrentChatCorrespondentReference setValue:messagesViewController.senderId];
                                          
                                          FIRDatabaseReference *currentChatParkingSpotReference = [messageReceiverCurrentChatReference child:@"parking spot"];
                                          [currentChatParkingSpotReference setValue:messagesViewController.parkingSpot.identifier];
